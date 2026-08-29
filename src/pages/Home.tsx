@@ -1,13 +1,5 @@
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight,
-  ArrowUpRight,
-  BadgeCheck,
-  Building2,
-  Clock,
-  GraduationCap,
-  Wallet,
-} from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BadgeCheck, Building2, Clock, Wallet } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
@@ -57,9 +49,12 @@ export default function Home() {
     <>
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
-      {/* Hero panel with floating summary cards, mirroring a dashboard surface. */}
-      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-20">
-        <div className="panel relative overflow-hidden px-4 pt-10 pb-0 sm:px-7 sm:pt-12 lg:px-12 lg:pt-16">
+      {/*
+        One hero: copy and photograph side by side, the three summary cards
+        forming its base. Sized to fit a laptop viewport without scrolling.
+      */}
+      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-16">
+        <div className="panel relative overflow-hidden px-4 pt-9 pb-5 sm:px-7 sm:pt-11 lg:px-10 lg:pt-12 lg:pb-8">
           {/* Faint guide lines — structure, not decoration. */}
           <div
             aria-hidden="true"
@@ -68,119 +63,119 @@ export default function Home() {
               backgroundImage:
                 'linear-gradient(to right, var(--color-line) 1px, transparent 1px), linear-gradient(to bottom, var(--color-line) 1px, transparent 1px)',
               backgroundSize: '96px 96px',
-              maskImage: 'radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 100%)',
+              maskImage: 'radial-gradient(70% 70% at 30% 40%, #000 30%, transparent 100%)',
             }}
           />
-          <span className="chip absolute top-10 left-6 hidden lg:grid" aria-hidden="true">
-            <GraduationCap size={19} />
-          </span>
-          <span className="chip absolute top-10 right-6 hidden lg:grid" aria-hidden="true">
-            <BadgeCheck size={19} />
-          </span>
 
-          <div className="relative mx-auto max-w-3xl text-center">
-            <Reveal>
-              <span className="badge">
-                <span className="dot bg-gold" /> Trusted by 10,000+ graduates
-              </span>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="t-hero mt-5">
-                Finish Your Degree,
-                <br />
-                Restart Your Career
-              </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="t-body mx-auto mt-4 max-w-xl text-muted">
-                Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
-                attendance, admission confirmed within 48 hours.
-              </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-                <Link to="/contact" className="btn btn-primary">
-                  Book a free consultation
-                </Link>
-                <Link to="/courses" className="btn btn-ghost">
-                  Explore programs
-                </Link>
+          <div className="relative grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="text-center lg:col-span-6 lg:text-left">
+              <Reveal>
+                <span className="badge">
+                  <span className="dot bg-gold" /> Trusted by 10,000+ graduates
+                </span>
+              </Reveal>
+              <Reveal delay={80}>
+                <h1 className="t-hero mt-4">
+                  Finish Your Degree,
+                  <br />
+                  Restart Your Career
+                </h1>
+              </Reveal>
+              <Reveal delay={160}>
+                <p className="t-body mx-auto mt-4 max-w-xl text-muted lg:mx-0">
+                  Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
+                  attendance, admission confirmed within 48 hours.
+                </p>
+              </Reveal>
+              <Reveal delay={240}>
+                <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
+                  <Link to="/contact" className="btn btn-primary">
+                    Book a free consultation
+                  </Link>
+                  <Link to="/courses" className="btn btn-ghost">
+                    Explore programs
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+
+            {/*
+              The photograph bleeds into the panel's top-right corner; its
+              inner edges are feathered so it dissolves into the surface
+              rather than sitting on it as a separate block.
+            */}
+            <Reveal delay={200} className="lg:col-span-6">
+              <div
+                className="-mx-4 sm:-mx-7 lg:-mt-12 lg:-mr-10 lg:-mb-8 lg:ml-0"
+                style={{
+                  maskImage:
+                    'linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%), linear-gradient(to right, transparent 0%, #000 24%)',
+                  WebkitMaskImage:
+                    'linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%), linear-gradient(to right, transparent 0%, #000 24%)',
+                  maskComposite: 'intersect',
+                  WebkitMaskComposite: 'source-in',
+                }}
+              >
+                <Photo
+                  name="hero-1"
+                  ratio="16/9"
+                  rounded="none"
+                  priority
+                  className="max-h-[180px] sm:max-h-[260px] lg:max-h-[430px]"
+                />
               </div>
             </Reveal>
           </div>
 
-          {/*
-            The photograph bleeds to the panel edges and its top edge is
-            feathered into the panel, so the image reads as part of the
-            surface rather than a block pasted below it.
-          */}
-          <div className="relative mt-5 -mb-px sm:mt-6 lg:mt-8">
-            <div
-              className="-mx-4 sm:-mx-7 lg:-mx-12"
-              style={{
-                maskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
-              }}
-            >
-              <Photo
-                name="hero-1"
-                ratio="16/6"
-                rounded="none"
-                priority
-                className="max-h-[260px] min-h-44 sm:max-h-[320px] lg:max-h-[380px]"
-              />
-            </div>
+          {/* The cards form the base of the hero. */}
+          <div className="relative mt-6 grid gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-8">
+            <Reveal delay={80}>
+              <div className="card card-hover card-p h-full">
+                <div className="flex items-start justify-between gap-3">
+                  <h2 className="t-h3 font-display font-medium">Partner universities</h2>
+                  <ArrowUpRight size={18} className="text-muted" aria-hidden="true" />
+                </div>
+                <p className="mt-3 text-base text-muted md:text-sm">
+                  Degrees awarded by three recognized institutions in India and the UK.
+                </p>
+                <div className="mt-4 flex -space-x-2">
+                  {universities.map((u) => (
+                    <span
+                      key={u.initials}
+                      className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
+                    >
+                      {u.initials}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
 
-            {/* Cards straddle the image edge. */}
-            <div className="relative -mt-14 grid gap-3 pb-5 sm:-mt-20 sm:grid-cols-3 sm:gap-4 lg:-mt-24 lg:pb-8">
-              <Reveal delay={80}>
-                <div className="card card-hover card-p h-full">
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="t-h3 font-display font-medium">Partner universities</h2>
-                    <ArrowUpRight size={18} className="text-muted" aria-hidden="true" />
-                  </div>
-                  <p className="mt-4 text-base text-muted md:text-sm">
-                    Degrees awarded by three recognized institutions in India and the UK.
+            <Reveal delay={160}>
+              <div className="card card-hover card-p flex h-full flex-col justify-center text-center">
+                <p className="t-h3 font-display font-medium">Graduates placed</p>
+                <p className="mt-2 font-display text-4xl font-medium text-navy">10,000+</p>
+                <p className="mt-1 text-base text-muted md:text-sm">since {site.established}</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <div className="card card-hover card-p flex h-full flex-col justify-between">
+                <div>
+                  <p className="t-h3 font-display font-medium">Counseling, free</p>
+                  <p className="mt-2 text-base text-muted md:text-sm">
+                    Talk to an academic counselor. {site.officeHours}.
                   </p>
-                  <div className="mt-5 flex -space-x-2">
-                    {universities.map((u) => (
-                      <span
-                        key={u.initials}
-                        className="grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
-                      >
-                        {u.initials}
-                      </span>
-                    ))}
-                  </div>
                 </div>
-              </Reveal>
-
-              <Reveal delay={160}>
-                <div className="card card-hover card-p h-full text-center">
-                  <p className="t-h3 font-display font-medium">Graduates placed</p>
-                  <p className="mt-4 font-display text-4xl font-medium text-navy">10,000+</p>
-                  <p className="mt-2 text-base text-muted md:text-sm">since {site.established}</p>
-                </div>
-              </Reveal>
-
-              <Reveal delay={240}>
-                <div className="card card-hover card-p flex h-full flex-col justify-between">
-                  <div>
-                    <p className="t-h3 font-display font-medium">Counseling, free</p>
-                    <p className="mt-3 text-base text-muted md:text-sm">
-                      Talk to an academic counselor. {site.officeHours}.
-                    </p>
-                  </div>
-                  <a
-                    href={`tel:${site.phoneHref}`}
-                    className="action mt-5 text-sm font-medium text-navy"
-                  >
-                    {site.phone}
-                    <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
-                  </a>
-                </div>
-              </Reveal>
-            </div>
+                <a
+                  href={`tel:${site.phoneHref}`}
+                  className="action mt-3 text-sm font-medium text-navy"
+                >
+                  {site.phone}
+                  <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
+                </a>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
