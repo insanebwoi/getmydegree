@@ -39,6 +39,9 @@ shadows. Tokens live in `src/index.css`:
 
 ### Responsive scale
 
+Content spans the full viewport up to a **1440px** container (`.shell`), with 2–2.5rem gutters on
+large screens; beyond 1440px it centres rather than stretching line lengths indefinitely.
+
 Type and section spacing are **fluid** (`clamp()` in `src/index.css`: `.t-hero`, `.t-h1`,
 `.t-h2`, `.t-h3`, `.t-stat`, `.section-y`, `.card-p`), so every width from 320px to 1920px lands
 on a sensible size rather than jumping at breakpoints. Body copy is 16px on mobile and 14px from

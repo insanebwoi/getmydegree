@@ -59,7 +59,7 @@ export default function Home() {
 
       {/* Hero panel with floating summary cards, mirroring a dashboard surface. */}
       <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-20">
-        <div className="panel relative overflow-hidden px-4 pt-11 pb-0 sm:px-7 sm:pt-14 lg:px-10 lg:pt-20">
+        <div className="panel relative overflow-hidden px-4 pt-10 pb-0 sm:px-7 sm:pt-12 lg:px-12 lg:pt-16">
           {/* Faint guide lines — structure, not decoration. */}
           <div
             aria-hidden="true"
@@ -114,19 +114,25 @@ export default function Home() {
             feathered into the panel, so the image reads as part of the
             surface rather than a block pasted below it.
           */}
-          <div className="relative mt-10 -mb-px sm:mt-12 lg:mt-16">
+          <div className="relative mt-5 -mb-px sm:mt-6 lg:mt-8">
             <div
-              className="-mx-4 sm:-mx-7 lg:-mx-10"
+              className="-mx-4 sm:-mx-7 lg:-mx-12"
               style={{
-                maskImage: 'linear-gradient(to bottom, transparent 0%, #000 42%)',
-                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 42%)',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
               }}
             >
-              <Photo name="hero-1" ratio="16/6" rounded="none" priority className="min-h-52" />
+              <Photo
+                name="hero-1"
+                ratio="16/6"
+                rounded="none"
+                priority
+                className="max-h-[260px] min-h-44 sm:max-h-[320px] lg:max-h-[380px]"
+              />
             </div>
 
             {/* Cards straddle the image edge. */}
-            <div className="relative -mt-14 grid gap-3 pb-5 sm:-mt-20 sm:grid-cols-3 sm:gap-4 lg:-mt-28 lg:pb-8">
+            <div className="relative -mt-14 grid gap-3 pb-5 sm:-mt-20 sm:grid-cols-3 sm:gap-4 lg:-mt-24 lg:pb-8">
               <Reveal delay={80}>
                 <div className="card card-hover card-p h-full">
                   <div className="flex items-start justify-between gap-3">
