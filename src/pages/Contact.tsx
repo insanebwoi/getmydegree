@@ -1,60 +1,75 @@
-import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react'
-import { Seo } from '../components/Seo'
-import { pageMeta } from '../data/meta'
-import { contactSchema } from '../data/schema'
-import { Reveal } from '../components/Reveal'
-import { PageHero } from '../components/PageHero'
-import { centers, courses, site } from '../data/site'
+import { useState, type FormEvent } from "react";
+import { CheckCircle2, Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Seo } from "../components/Seo";
+import { pageMeta } from "../data/meta";
+import { contactSchema } from "../data/schema";
+import { Reveal } from "../components/Reveal";
+import { PageHero } from "../components/PageHero";
+import { Photo } from "../components/Photo";
+import { centers, courses, site } from "../data/site";
 
-type Errors = Partial<Record<'name' | 'phone' | 'email' | 'program', string>>
+type Errors = Partial<Record<"name" | "phone" | "email" | "program", string>>;
 
 const field =
-  'mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition-colors placeholder:text-muted/55 focus:border-navy'
-const labelCls = 'text-sm font-medium'
+  "mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition-colors placeholder:text-muted/55 focus:border-navy";
+const labelCls = "text-sm font-medium";
 
 export default function Contact() {
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
-  const [errors, setErrors] = useState<Errors>({})
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [errors, setErrors] = useState<Errors>({});
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-    const form = event.currentTarget
-    const data = new FormData(form)
-    const name = String(data.get('name') ?? '').trim()
-    const phone = String(data.get('phone') ?? '').trim()
-    const email = String(data.get('email') ?? '').trim()
-    const program = String(data.get('program') ?? '')
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+    const name = String(data.get("name") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
+    const email = String(data.get("email") ?? "").trim();
+    const program = String(data.get("program") ?? "");
 
-    const next: Errors = {}
-    if (name.length < 2) next.name = 'Enter your full name.'
-    if (!/^[+\d][\d\s-]{8,15}$/.test(phone)) next.phone = 'Enter a phone number we can reach you on.'
-    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email)) next.email = 'Enter an email address.'
-    if (!program) next.program = 'Choose the program you want to discuss.'
+    const next: Errors = {};
+    if (name.length < 2) next.name = "Enter your full name.";
+    if (!/^[+\d][\d\s-]{8,15}$/.test(phone))
+      next.phone = "Enter a phone number we can reach you on.";
+    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email))
+      next.email = "Enter an email address.";
+    if (!program) next.program = "Choose the program you want to discuss.";
 
-    setErrors(next)
+    setErrors(next);
     if (Object.keys(next).length > 0) {
-      form.querySelector<HTMLElement>(`[name="${Object.keys(next)[0]}"]`)?.focus()
-      return
+      form
+        .querySelector<HTMLElement>(`[name="${Object.keys(next)[0]}"]`)
+        ?.focus();
+      return;
     }
 
-    setStatus('sending')
+    setStatus("sending");
     // TODO: replace with the real endpoint (Formspree / Web3Forms / own API).
     window.setTimeout(() => {
-      setStatus('sent')
-      form.reset()
-    }, 700)
+      setStatus("sent");
+      form.reset();
+    }, 700);
   }
 
   const quick = [
-    { Icon: Mail, label: 'Email', value: site.email, href: `mailto:${site.email}` },
-    { Icon: Phone, label: 'Phone', value: site.phone, href: `tel:${site.phoneHref}` },
-    { Icon: Clock, label: 'Office hours', value: site.officeHours },
-  ]
+    {
+      Icon: Mail,
+      label: "Email",
+      value: site.email,
+      href: `mailto:${site.email}`,
+    },
+    {
+      Icon: Phone,
+      label: "Phone",
+      value: site.phone,
+      href: `tel:${site.phoneHref}`,
+    },
+    { Icon: Clock, label: "Office hours", value: site.officeHours },
+  ];
 
   return (
     <>
-      <Seo {...pageMeta['/contact']} schema={contactSchema} />
+      <Seo {...pageMeta["/contact"]} schema={contactSchema} />
 
       <PageHero
         badge="Get in touch"
@@ -62,15 +77,18 @@ export default function Contact() {
         intro="Tell us what you completed and where you stopped. We will come back with the programs you are eligible for, what they cost and how long they take."
       />
 
-      <section className="shell grid gap-4 pb-16 lg:grid-cols-12 lg:pb-24">
+      <section className="shell grid gap-4 pb-12 sm:pb-16 lg:grid-cols-12 lg:pb-24">
         <Reveal className="lg:col-span-7">
-          <div className="card h-full p-7 lg:p-9">
-            <h2 className="font-display text-2xl font-medium">Book free counseling</h2>
-            <p className="mt-2 text-sm text-muted">
-              Fill in your details and our team will get back to you within one working day.
+          <div className="card card-p h-full sm:p-7 lg:p-9">
+            <h2 className="t-h2 font-display font-medium">
+              Book free counseling
+            </h2>
+            <p className="mt-2 text-base text-muted md:text-sm">
+              Fill in your details and our team will get back to you within one
+              working day.
             </p>
 
-            {status === 'sent' ? (
+            {status === "sent" ? (
               <div
                 role="status"
                 className="mt-8 flex flex-col items-center rounded-[var(--radius-card)] bg-navy-50 px-6 py-12 text-center"
@@ -78,21 +96,34 @@ export default function Contact() {
                 <span className="grid h-14 w-14 place-items-center rounded-full bg-gold text-navy-950">
                   <CheckCircle2 size={26} aria-hidden="true" />
                 </span>
-                <h3 className="mt-5 font-display text-xl font-medium">Request received</h3>
-                <p className="mt-2 max-w-sm text-sm text-muted">
-                  A counselor will call you within one working day, between 9am and 7pm. If it is
-                  urgent, ring{' '}
-                  <a href={`tel:${site.phoneHref}`} className="font-medium text-navy underline">
+                <h3 className="t-h3 mt-5 font-display font-medium">
+                  Request received
+                </h3>
+                <p className="mt-2 max-w-sm text-base text-muted md:text-sm">
+                  A counselor will call you within one working day, between 9am
+                  and 7pm. If it is urgent, ring{" "}
+                  <a
+                    href={`tel:${site.phoneHref}`}
+                    className="font-medium text-navy underline"
+                  >
                     {site.phone}
                   </a>
                   .
                 </p>
-                <button type="button" onClick={() => setStatus('idle')} className="btn btn-ghost mt-7">
+                <button
+                  type="button"
+                  onClick={() => setStatus("idle")}
+                  className="btn btn-ghost mt-7"
+                >
                   Send another request
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate className="mt-7 grid gap-5 sm:grid-cols-2">
+              <form
+                onSubmit={handleSubmit}
+                noValidate
+                className="mt-7 grid gap-5 sm:grid-cols-2"
+              >
                 <div>
                   <label htmlFor="name" className={labelCls}>
                     Full name
@@ -104,7 +135,7 @@ export default function Contact() {
                     autoComplete="name"
                     placeholder="Your name"
                     aria-invalid={Boolean(errors.name)}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    aria-describedby={errors.name ? "name-error" : undefined}
                     className={field}
                   />
                   {errors.name && (
@@ -125,7 +156,7 @@ export default function Contact() {
                     autoComplete="tel"
                     placeholder="+91 98765 43210"
                     aria-invalid={Boolean(errors.phone)}
-                    aria-describedby={errors.phone ? 'phone-error' : undefined}
+                    aria-describedby={errors.phone ? "phone-error" : undefined}
                     className={field}
                   />
                   {errors.phone && (
@@ -146,7 +177,7 @@ export default function Contact() {
                     autoComplete="email"
                     placeholder="you@example.com"
                     aria-invalid={Boolean(errors.email)}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                     className={field}
                   />
                   {errors.email && (
@@ -165,7 +196,9 @@ export default function Contact() {
                     name="program"
                     defaultValue=""
                     aria-invalid={Boolean(errors.program)}
-                    aria-describedby={errors.program ? 'program-error' : undefined}
+                    aria-describedby={
+                      errors.program ? "program-error" : undefined
+                    }
                     className={field}
                   >
                     <option value="" disabled>
@@ -173,7 +206,7 @@ export default function Contact() {
                     </option>
                     <optgroup label="Undergraduate">
                       {courses
-                        .filter((c) => c.level === 'UG')
+                        .filter((c) => c.level === "UG")
                         .map((c) => (
                           <option key={c.code} value={c.code}>
                             {c.code} — {c.field}
@@ -182,7 +215,7 @@ export default function Contact() {
                     </optgroup>
                     <optgroup label="Postgraduate">
                       {courses
-                        .filter((c) => c.level === 'PG')
+                        .filter((c) => c.level === "PG")
                         .map((c) => (
                           <option key={c.code} value={c.code}>
                             {c.code} — {c.field}
@@ -203,7 +236,8 @@ export default function Contact() {
 
                 <div className="sm:col-span-2">
                   <label htmlFor="message" className={labelCls}>
-                    Where you stopped <span className="text-muted">(optional)</span>
+                    Where you stopped{" "}
+                    <span className="text-muted">(optional)</span>
                   </label>
                   <textarea
                     id="message"
@@ -216,10 +250,10 @@ export default function Contact() {
 
                 <button
                   type="submit"
-                  disabled={status === 'sending'}
+                  disabled={status === "sending"}
                   className="btn btn-primary disabled:opacity-60 sm:col-span-2 sm:justify-self-start"
                 >
-                  {status === 'sending' ? 'Sending…' : 'Submit request'}
+                  {status === "sending" ? "Sending…" : "Submit request"}
                 </button>
               </form>
             )}
@@ -228,9 +262,9 @@ export default function Contact() {
 
         <div className="grid content-start gap-4 lg:col-span-5">
           <Reveal delay={100}>
-            <div className="card p-7">
-              <h2 className="font-display text-xl font-medium">Quick connect</h2>
-              <p className="mt-2 text-sm text-muted">
+            <div className="card card-p">
+              <h2 className="t-h3 font-display font-medium">Quick connect</h2>
+              <p className="mt-2 text-base text-muted md:text-sm">
                 Prefer to talk? Reach us directly through any of these.
               </p>
               <ul className="mt-6 grid gap-4">
@@ -240,13 +274,18 @@ export default function Contact() {
                       <Icon size={17} aria-hidden="true" />
                     </span>
                     <span>
-                      <span className="block text-xs text-muted">{label}</span>
+                      <span className="block text-sm text-muted">{label}</span>
                       {href ? (
-                        <a href={href} className="action text-sm font-medium break-all hover:text-navy">
+                        <a
+                          href={href}
+                          className="action text-sm font-medium break-all hover:text-navy"
+                        >
                           {value}
                         </a>
                       ) : (
-                        <span className="text-sm font-medium">{value}</span>
+                        <span className="text-base font-medium md:text-sm">
+                          {value}
+                        </span>
                       )}
                     </span>
                   </li>
@@ -256,17 +295,29 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={180}>
-            <div className="card bg-navy-950 p-7 text-white">
-              <h2 className="font-display text-xl font-medium">Visit our centers</h2>
+            <Photo name="contact-1" ratio="16/10" />
+          </Reveal>
+
+          <Reveal delay={240}>
+            <div className="card card-p bg-navy-950 text-white">
+              <h2 className="t-h3 font-display font-medium">
+                Visit our centers
+              </h2>
               <ul className="mt-6 grid gap-6">
                 {centers.map((c) => (
                   <li key={c.city}>
                     <address className="not-italic">
                       <p className="flex items-center gap-2 font-display font-medium">
-                        <MapPin size={15} className="text-gold" aria-hidden="true" />
+                        <MapPin
+                          size={15}
+                          className="text-gold"
+                          aria-hidden="true"
+                        />
                         {c.city}
                       </p>
-                      <p className="mt-2 leading-relaxed text-white/60 md:text-sm">{c.address}</p>
+                      <p className="mt-2 text-base leading-relaxed text-white/60 md:text-sm">
+                        {c.address}
+                      </p>
                       <a
                         href={`tel:${c.phoneHref}`}
                         className="action text-sm font-medium text-gold hover:underline"
@@ -282,5 +333,5 @@ export default function Contact() {
         </div>
       </section>
     </>
-  )
+  );
 }

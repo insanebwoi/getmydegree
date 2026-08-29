@@ -37,8 +37,22 @@ shadows. Tokens live in `src/index.css`:
 - Reusable classes: `.panel`, `.card` / `.card-hover`, `.badge`, `.btn-primary` / `.btn-gold` /
   `.btn-ghost`, `.chip`, `.dot`, `.action` (44px touch target)
 
-Photography slots use `<Photo>`; until real images exist it renders a soft placeholder naming the
-shot that belongs there. Pass `src` to swap in a real file.
+### Responsive scale
+
+Type and section spacing are **fluid** (`clamp()` in `src/index.css`: `.t-hero`, `.t-h1`,
+`.t-h2`, `.t-h3`, `.t-stat`, `.section-y`, `.card-p`), so every width from 320px to 1920px lands
+on a sensible size rather than jumping at breakpoints. Body copy is 16px on mobile and 14px from
+`md` up. Verified clean at 320 / 375 / 414 / 768 / 1024 / 1440 / 1920.
+
+## Images
+
+All photography is registered in **`src/data/images.ts`** and rendered through `<Photo name="…" />`.
+Slots: `hero-1`, `hero-2`, `about-1`, `about-2`, `about-3`, `courses-1`, `courses-2`, `contact-1`.
+
+Each currently points at a labelled placeholder in `public/images/` that states the intended
+subject and the recommended dimensions. **To use a real photo:** drop the file into
+`public/images/` and change that slot's `src` — e.g. `src: '/images/hero-1.jpg'`. Nothing else
+changes; cropping, aspect ratio and lazy-loading are handled by the layout.
 
 ## SEO
 

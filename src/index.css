@@ -28,10 +28,12 @@
   --color-wash: #f4f5f8;
 
   --radius-card: 1.25rem;
-  --radius-panel: 2rem;
+  --radius-panel: 1.5rem;
 
-  --shadow-soft: 0 1px 2px rgba(14, 21, 38, 0.04), 0 8px 24px -12px rgba(14, 21, 38, 0.1);
-  --shadow-lift: 0 2px 4px rgba(14, 21, 38, 0.05), 0 18px 40px -18px rgba(14, 21, 38, 0.18);
+  --shadow-soft:
+    0 1px 2px rgba(14, 21, 38, 0.04), 0 8px 24px -12px rgba(14, 21, 38, 0.1);
+  --shadow-lift:
+    0 2px 4px rgba(14, 21, 38, 0.05), 0 18px 40px -18px rgba(14, 21, 38, 0.18);
 }
 
 @layer base {
@@ -47,7 +49,10 @@
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 {
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: var(--font-display);
     font-weight: 500;
     letter-spacing: -0.025em;
@@ -59,9 +64,22 @@
     outline-offset: 3px;
     border-radius: 0.5rem;
   }
-  ::selection { background: var(--color-gold); color: var(--color-navy-950); }
-  button, [role="button"], a, label, select, summary { cursor: pointer; }
-  :disabled, [aria-disabled="true"] { cursor: not-allowed; }
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-navy-950);
+  }
+  button,
+  [role="button"],
+  a,
+  label,
+  select,
+  summary {
+    cursor: pointer;
+  }
+  :disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
 }
 
 @layer components {
@@ -69,9 +87,55 @@
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 0.875rem;
   }
-  @media (min-width: 768px) { .shell { padding-inline: 1.5rem; } }
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 1.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .shell {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  /*
+    Fluid type: one continuous scale from 320px to 1440px, so every device
+    lands on a sensible size instead of jumping at breakpoints. Body copy
+    never drops below 16px on mobile.
+  */
+  .t-hero {
+    font-size: clamp(1.875rem, 1.16rem + 3.55vw, 3.75rem);
+  }
+  .t-h1 {
+    font-size: clamp(1.75rem, 1.19rem + 2.8vw, 3rem);
+  }
+  .t-h2 {
+    font-size: clamp(1.5rem, 1.09rem + 2.05vw, 2.5rem);
+  }
+  .t-h3 {
+    font-size: clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem);
+  }
+  .t-stat {
+    font-size: clamp(1.875rem, 1.45rem + 2.1vw, 3rem);
+  }
+  .t-body {
+    font-size: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);
+    line-height: 1.65;
+  }
+  .t-small {
+    font-size: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);
+    line-height: 1.6;
+  }
+
+  /* Section rhythm scales with the viewport too. */
+  .section-y {
+    padding-block: clamp(3rem, 2rem + 5vw, 6rem);
+  }
+  .card-p {
+    padding: clamp(1.125rem, 0.9rem + 1vw, 1.75rem);
+  }
 
   /* Pill label that sits above a section title. */
   .badge {
@@ -81,7 +145,7 @@
     border: 1px solid var(--color-line);
     background: #fff;
     border-radius: 999px;
-    padding: 0.4375rem 0.9375rem;
+    padding: 0.375rem 0.8125rem;
     font-size: 0.8125rem;
     font-weight: 500;
     color: var(--color-muted);
@@ -99,7 +163,10 @@
     box-shadow: var(--shadow-soft);
   }
   .card-hover {
-    transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+    transition:
+      transform 240ms ease,
+      box-shadow 240ms ease,
+      border-color 240ms ease;
   }
   .card-hover:hover {
     transform: translateY(-3px);
@@ -118,36 +185,61 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 2.875rem;
-    padding: 0.8125rem 1.5rem;
+    min-height: 2.75rem;
+    padding: 0.75rem 1.375rem;
     border-radius: 999px;
     border: 1px solid transparent;
     font-family: var(--font-display);
     font-size: 0.9375rem;
     font-weight: 500;
     line-height: 1;
-    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease,
+    transition:
+      background-color 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
       transform 220ms ease;
   }
-  .btn:hover { transform: translateY(-1px); }
-  .btn-primary { background: var(--color-navy); color: #fff; }
-  .btn-primary:hover { background: var(--color-navy-700); }
-  .btn-gold { background: var(--color-gold); color: var(--color-navy-950); }
-  .btn-gold:hover { background: var(--color-gold-300); }
-  .btn-ghost { background: #fff; border-color: var(--color-line); color: var(--color-ink); }
-  .btn-ghost:hover { border-color: var(--color-navy-200); background: var(--color-navy-50); }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn-primary {
+    background: var(--color-navy);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-navy-700);
+  }
+  .btn-gold {
+    background: var(--color-gold);
+    color: var(--color-navy-950);
+  }
+  .btn-gold:hover {
+    background: var(--color-gold-300);
+  }
+  .btn-ghost {
+    background: #fff;
+    border-color: var(--color-line);
+    color: var(--color-ink);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-navy-200);
+    background: var(--color-navy-50);
+  }
   .btn-ghost-dark {
     border-color: rgba(255, 255, 255, 0.25);
     color: #fff;
   }
-  .btn-ghost-dark:hover { background: #fff; color: var(--color-navy-950); }
+  .btn-ghost-dark:hover {
+    background: #fff;
+    color: var(--color-navy-950);
+  }
 
   /* Small square icon chip, used for floating hero accents and list markers. */
   .chip {
     display: grid;
     place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
     border-radius: 0.75rem;
     border: 1px solid var(--color-line);
     background: #fff;
@@ -178,10 +270,22 @@
     transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
 }
-.js .reveal.is-visible { opacity: 1; transform: none; }
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .js .reveal { opacity: 1; transform: none; transition: none; }
-  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html {
+    scroll-behavior: auto;
+  }
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

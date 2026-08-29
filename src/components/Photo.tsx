@@ -1,36 +1,43 @@
+import { images, type ImageName } from "../data/images";
+
 type Props = {
-  /** Drop a real image at this path in /public to replace the placeholder. */
-  src?: string
-  alt: string
-  caption: string
-  className?: string
-}
+  name: ImageName;
+  className?: string;
+  /** Aspect ratio applied to the frame, e.g. "4/3". Omit to fill the parent. */
+  ratio?: string;
+  /** Above-the-fold images should load eagerly. */
+  priority?: boolean;
+  rounded?: "card" | "panel";
+};
 
 /**
- * Rounded image frame. Until real photography exists it renders a soft
- * navy wash with a caption naming the shot that belongs here.
+ * Rounded image frame. The source comes from the single registry in
+ * `src/data/images.ts`, so swapping a placeholder for a real photograph is a
+ * one-line change.
  */
-export function Photo({ src, alt, caption, className = '' }: Props) {
-  if (src) {
-    return (
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        className={`h-full w-full rounded-[var(--radius-card)] object-cover ${className}`}
-      />
-    )
-  }
+export function Photo({
+  name,
+  className = "",
+  ratio,
+  priority = false,
+  rounded = "card",
+}: Props) {
+  const image = images[name];
   return (
-    <div
-      role="img"
-      aria-label={alt}
-      className={`flex min-h-64 items-end rounded-[var(--radius-card)] border border-line bg-[linear-gradient(150deg,var(--color-navy-50),var(--color-navy-100)_55%,var(--color-gold-100))] p-6 ${className}`}
-    >
-      <span className="rounded-full bg-white/85 px-3.5 py-1.5 text-xs font-medium text-navy backdrop-blur-sm">
-        {caption}
-      </span>
-    </div>
-  )
+    <img
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading={priority ? "eager" : "lazy"}
+      decoding={priority ? "sync" : "async"}
+      fetchPriority={priority ? "high" : "auto"}
+      style={ratio ? { aspectRatio: ratio } : undefined}
+      className={`h-full w-full bg-navy-50 object-cover ${
+        rounded === "panel"
+          ? "rounded-[var(--radius-panel)]"
+          : "rounded-[var(--radius-card)]"
+      } ${className}`}
+    />
+  );
 }

@@ -60,8 +60,8 @@ export default function Home() {
       <Seo {...pageMeta["/"]} schema={homeSchema} />
 
       {/* Hero panel with floating summary cards, mirroring a dashboard surface. */}
-      <section className="shell pt-2 pb-16 lg:pb-24">
-        <div className="panel relative overflow-hidden px-5 pt-14 pb-8 sm:px-8 lg:pt-20 lg:px-10 lg:pb-10">
+      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-20">
+        <div className="panel relative overflow-hidden px-4 pt-11 pb-5 sm:px-7 sm:pt-14 lg:px-10 lg:pt-20 lg:pb-8">
           {/* Faint guide lines — structure, not decoration. */}
           <div
             aria-hidden="true"
@@ -94,21 +94,21 @@ export default function Home() {
               </span>
             </Reveal>
             <Reveal delay={80}>
-              <h1 className="mt-6 text-[2.25rem] leading-[1.08] sm:text-5xl lg:text-6xl">
+              <h1 className="t-hero mt-5">
                 Finish Your Degree,
                 <br />
                 Restart Your Career
               </h1>
             </Reveal>
             <Reveal delay={160}>
-              <p className="mx-auto mt-6 max-w-xl leading-relaxed text-muted">
+              <p className="t-body mx-auto mt-4 max-w-xl text-muted">
                 Complete a UGC recognized UG or PG degree around your job — no
                 entrance exam, no attendance, admission confirmed within 48
                 hours.
               </p>
             </Reveal>
             <Reveal delay={240}>
-              <div className="mt-9 flex flex-wrap justify-center gap-3">
+              <div className="mt-7 flex flex-wrap justify-center gap-2.5">
                 <Link to="/contact" className="btn btn-primary">
                   Book a free consultation
                 </Link>
@@ -120,11 +120,11 @@ export default function Home() {
           </div>
 
           {/* Summary cards sit on the panel, sharing its surface. */}
-          <div className="relative mt-14 grid gap-4 sm:grid-cols-3 lg:mt-20">
+          <div className="relative mt-10 grid gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-14">
             <Reveal delay={80}>
-              <div className="card card-hover h-full p-6">
+              <div className="card card-hover card-p h-full">
                 <div className="flex items-start justify-between gap-3">
-                  <h2 className="font-display text-lg font-medium">
+                  <h2 className="t-h3 font-display font-medium">
                     Partner universities
                   </h2>
                   <ArrowUpRight
@@ -133,7 +133,7 @@ export default function Home() {
                     aria-hidden="true"
                   />
                 </div>
-                <p className="mt-4 text-sm text-muted">
+                <p className="mt-4 text-base text-muted md:text-sm">
                   Degrees awarded by three recognized institutions in India and
                   the UK.
                 </p>
@@ -151,26 +151,26 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={160}>
-              <div className="card card-hover h-full p-6 text-center">
-                <p className="font-display text-lg font-medium">
+              <div className="card card-hover card-p h-full text-center">
+                <p className="t-h3 font-display font-medium">
                   Graduates placed
                 </p>
                 <p className="mt-4 font-display text-4xl font-medium text-navy">
                   10,000+
                 </p>
-                <p className="mt-2 text-sm text-muted">
+                <p className="mt-2 text-base text-muted md:text-sm">
                   since {site.established}
                 </p>
               </div>
             </Reveal>
 
             <Reveal delay={240}>
-              <div className="card card-hover flex h-full flex-col justify-between p-6">
+              <div className="card card-hover card-p flex h-full flex-col justify-between">
                 <div>
-                  <p className="font-display text-lg font-medium">
+                  <p className="t-h3 font-display font-medium">
                     Counseling, free
                   </p>
-                  <p className="mt-3 text-sm text-muted">
+                  <p className="mt-3 text-base text-muted md:text-sm">
                     Talk to an academic counselor. {site.officeHours}.
                   </p>
                 </div>
@@ -187,20 +187,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Awarding bodies, in the position the reference gives its logo strip. */}
-      <div className="shell pb-16 lg:pb-20">
+      {/* Banner image, full width of the grid. */}
+      <div className="shell pb-10 sm:pb-14 lg:pb-20">
         <Reveal>
-          <p className="text-center text-sm text-muted">
+          <Photo name="hero-1" ratio="16/7" priority rounded="panel" />
+        </Reveal>
+      </div>
+
+      {/* Awarding bodies, in the position the reference gives its logo strip. */}
+      <div className="shell pb-12 lg:pb-20">
+        <Reveal>
+          <p className="text-center text-base text-muted md:text-sm">
             Degrees awarded by recognized universities in India and the United
             Kingdom
           </p>
           <ul className="mt-7 grid gap-4 sm:grid-cols-3">
             {universities.map((u) => (
               <li key={u.name} className="card px-5 py-4 text-center">
-                <span className="font-display text-lg font-medium">
-                  {u.name}
-                </span>
-                <span className="mt-1 block text-xs text-muted">
+                <span className="t-h3 font-display font-medium">{u.name}</span>
+                <span className="mt-1 block text-sm text-muted">
                   {u.location}
                 </span>
               </li>
@@ -218,22 +223,21 @@ export default function Home() {
         <div className="grid gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
             <Photo
-              alt="A counselor meeting a student at the Thrissur centre"
-              caption="Photo: counseling session"
-              className="h-full min-h-72"
+              name="hero-2"
+              className="min-h-60 sm:min-h-72 lg:min-h-full"
             />
           </Reveal>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-5">
             {perks.map((p, i) => (
               <Reveal key={p.title} delay={i * 70}>
-                <div className="card card-hover h-full p-6">
+                <div className="card card-hover card-p h-full">
                   <span className="chip">
                     <p.Icon size={19} aria-hidden="true" />
                   </span>
-                  <h3 className="mt-5 font-display text-lg font-medium">
+                  <h3 className="mt-5 t-h3 font-display font-medium">
                     {p.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
+                  <p className="mt-2 text-base leading-relaxed text-muted md:text-sm">
                     {p.body}
                   </p>
                 </div>
@@ -242,7 +246,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-14 lg:mt-16">
+        <div className="mt-12 lg:mt-16">
           <Stats items={stats} />
         </div>
       </Section>
@@ -257,17 +261,17 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
             {featured.map((c, i) => (
               <Reveal key={c.code} delay={i * 70}>
-                <article className="card card-hover flex h-full flex-col p-6">
+                <article className="card card-hover card-p flex h-full flex-col">
                   <div className="flex items-center justify-between">
                     <span className="font-display text-2xl font-medium text-navy">
                       {c.code}
                     </span>
                     <span className="badge">{c.years}</span>
                   </div>
-                  <h3 className="mt-4 font-display text-lg font-medium">
+                  <h3 className="mt-4 t-h3 font-display font-medium">
                     {c.name}
                   </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+                  <p className="mt-2 flex-1 text-base leading-relaxed text-muted md:text-sm">
                     {c.body}
                   </p>
                   <Link
@@ -287,13 +291,13 @@ export default function Home() {
           </div>
 
           <Reveal delay={120} className="lg:col-span-4">
-            <div className="card flex h-full flex-col justify-between bg-navy-950 p-8 text-white">
+            <div className="card card-p flex h-full flex-col justify-between bg-navy-950 text-white">
               <div>
                 <span className="badge badge-dark">All programs</span>
                 <h3 className="mt-5 font-display text-2xl font-medium">
                   Five undergraduate and four postgraduate degrees
                 </h3>
-                <p className="mt-4 leading-relaxed text-white/65 md:text-sm">
+                <p className="mt-4 text-base leading-relaxed text-white/65 md:text-sm">
                   Every one is UGC recognized and assessed continuously — there
                   is no final examination hall to sit in.
                 </p>
@@ -316,14 +320,14 @@ export default function Home() {
           <div className="grid gap-3 lg:col-span-7">
             {paths.map((p, i) => (
               <Reveal key={p.situation} delay={i * 70}>
-                <div className="card card-hover p-5 lg:p-6">
+                <div className="card card-hover card-p">
                   <div className="flex items-start gap-3">
                     <span className="dot mt-2" aria-hidden="true" />
                     <div>
-                      <h3 className="font-display text-lg font-medium">
+                      <h3 className="t-h3 font-display font-medium">
                         {p.situation}
                       </h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                      <p className="mt-1.5 text-base leading-relaxed text-muted md:text-sm">
                         {p.body}
                       </p>
                     </div>
@@ -336,11 +340,7 @@ export default function Home() {
             ))}
           </div>
           <Reveal delay={140} className="lg:col-span-5">
-            <Photo
-              alt="A working professional studying in the evening"
-              caption="Photo: studying after work"
-              className="min-h-80"
-            />
+            <Photo name="about-2" ratio="4/3" className="lg:h-full" />
           </Reveal>
         </div>
       </Section>
@@ -353,7 +353,7 @@ export default function Home() {
         <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {admissionSteps.map((s, i) => (
             <Reveal key={s.step} delay={i * 80} as="li">
-              <div className="card card-hover h-full p-6">
+              <div className="card card-hover card-p h-full">
                 <div className="flex items-center justify-between">
                   <span className="grid h-9 w-9 place-items-center rounded-full bg-navy-50 font-display text-sm font-medium text-navy">
                     {s.step}
@@ -362,10 +362,10 @@ export default function Home() {
                     {s.when}
                   </span>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-medium">
+                <h3 className="mt-5 t-h3 font-display font-medium">
                   {s.title}
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
+                <p className="mt-2 text-base leading-relaxed text-muted md:text-sm">
                   {s.body}
                 </p>
               </div>
@@ -381,7 +381,7 @@ export default function Home() {
       >
         <div className="grid gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
-            <div className="card h-full p-7 lg:p-9">
+            <div className="card card-p h-full sm:p-7 lg:p-9">
               <p className="leading-relaxed text-muted">
                 Twelve to eighteen months, monthly intakes, dissertation
                 included. Delivered online and payable in instalments.
@@ -400,8 +400,8 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal delay={120} className="lg:col-span-5">
-            <div className="card h-full p-7 lg:p-9">
-              <h3 className="font-display text-lg font-medium">Fees</h3>
+            <div className="card card-p h-full sm:p-7 lg:p-9">
+              <h3 className="t-h3 font-display font-medium">Fees</h3>
               <table className="mt-5 w-full text-left">
                 <caption className="sr-only">
                   Programme fees in US dollars
@@ -422,7 +422,7 @@ export default function Home() {
                   ))}
                 </tbody>
               </table>
-              <p className="mt-5 text-sm text-muted">
+              <p className="mt-5 text-base text-muted md:text-sm">
                 Instalment plans on every program. No interest, no processing
                 fee.
               </p>
@@ -436,8 +436,8 @@ export default function Home() {
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 70}>
-              <figure className="card card-hover flex h-full flex-col p-6">
-                <blockquote className="flex-1 leading-relaxed md:text-sm">
+              <figure className="card card-hover card-p flex h-full flex-col">
+                <blockquote className="flex-1 text-base leading-relaxed md:text-sm">
                   “{t.quote}”
                 </blockquote>
                 <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
@@ -456,18 +456,18 @@ export default function Home() {
       </Section>
 
       {/* Closing CTA */}
-      <section className="shell pb-16 lg:pb-24">
+      <section className="shell pb-12 sm:pb-16 lg:pb-24">
         <Reveal>
-          <div className="rounded-[var(--radius-panel)] bg-navy px-6 py-14 text-center text-white lg:px-12 lg:py-20">
+          <div className="rounded-[var(--radius-panel)] bg-navy px-5 py-12 text-center text-white sm:px-8 lg:px-12 lg:py-20">
             <span className="badge badge-dark">Free consultation</span>
-            <h2 className="mx-auto mt-5 max-w-2xl text-3xl sm:text-4xl lg:text-[2.75rem]">
+            <h2 className="t-h1 mx-auto mt-4 max-w-2xl">
               Twenty minutes is enough to know whether this works for you
             </h2>
-            <p className="mx-auto mt-4 max-w-lg text-white/70">
+            <p className="t-body mx-auto mt-4 max-w-lg text-white/70">
               Tell us what you completed and where you stopped. We will map the
               rest.
             </p>
-            <div className="mt-9 flex flex-wrap justify-center gap-3">
+            <div className="mt-7 flex flex-wrap justify-center gap-2.5">
               <Link to="/contact" className="btn btn-gold">
                 Book a free consultation
               </Link>
