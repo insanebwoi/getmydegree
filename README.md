@@ -1,32 +1,60 @@
-# React + TypeScript + Vite
+# GetMyDegree Institutions
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Marketing site for GetMyDegree Institutions — React 19 + TypeScript + Vite 8, styled with
+Tailwind v4, prerendered to static HTML for SEO.
 
-Currently, two official plugins are available:
+## Commands
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Dev server with HMR |
+| `npm run build` | Typecheck, build, then **prerender every route to static HTML** |
+| `npm run build:spa` | Client-only build (no prerender) |
+| `npm run preview` | Serve the built `dist/` locally |
+| `npm run lint` | Oxlint |
 
-## React Compiler
+## Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```
+src/
+  data/site.ts      all site copy — edit text here, not in the pages
+  data/meta.ts      per-route <title>/description/canonical
+  data/schema.ts    JSON-LD, one export per route
+  components/       Layout, Navbar, Footer, Seo, Reveal, Marquee, SectionHeading
+  pages/            Home, About, Courses, Contact, NotFound
+  entry-server.tsx  SSR entry used only by the prerender step
+prerender.mjs       renders each route to dist/<route>.html + dist/<route>/index.html
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Theme
+
+Defined as Tailwind v4 tokens in `src/index.css`:
+
+- `navy` `#013a94` (plus `navy-50…950`) — primary surface, headings, footer
+- `gold` `#fbcd41` (plus `gold-300/600/700`) — CTAs, badges, accents (kept to ~5% of the page)
+
+## SEO
+
+- Every route is prerendered: real `<h1>`, body copy, per-page title/description/canonical,
+  Open Graph, Twitter card and JSON-LD in the static `<head>` — no JS execution needed.
+- `public/robots.txt` and `public/sitemap.xml` list the four public routes.
+- Scroll-reveal animation is gated on a `.js` class, so content stays visible without JS.
+
+**Before going live**, update `site.url` in `src/data/site.ts` and the domain in
+`public/robots.txt` / `public/sitemap.xml` if the site is not served from `getmydegree.in`.
+
+## Brand assets
+
+`public/logo.svg` (dark-on-light), `public/logo-light.svg` (footer/dark backgrounds) and
+`public/favicon.svg` are **placeholders**. Replace the files at those paths with the real
+artwork — no code changes needed.
+
+## Contact form
+
+`src/pages/Contact.tsx` validates client-side and shows the success state, but the submit
+handler is a stub (see the `TODO`). Wire it to Formspree, Web3Forms or your own endpoint.
+
+## Deploy
+
+Static host, publish directory `dist/`. `public/_redirects` (Netlify) and `vercel.json`
+are included; for nginx, `try_files $uri $uri/index.html /index.html;`.

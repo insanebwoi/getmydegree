@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" width="260" height="48" role="img" aria-label="GetMyDegree Institutions">
+  <rect x="0" y="4" width="40" height="40" rx="11" fill="#013a94"/>
+  <path d="M20 14l11 5-11 5-11-5 11-5z" fill="#fbcd41"/>
+  <path d="M13 22.2V28c0 2.2 3.1 4 7 4s7-1.8 7-4v-5.8l-7 3.2-7-3.2z" fill="#fff"/>
+  <path d="M30.6 20v7" stroke="#fbcd41" stroke-width="1.6" stroke-linecap="round"/>
+  <text x="50" y="27" font-family="'Plus Jakarta Sans',Segoe UI,system-ui,sans-serif" font-size="19" font-weight="800" fill="#013a94" letter-spacing="-0.5">GetMy<tspan fill="#fbcd41">Degree</tspan></text>
+  <text x="51" y="39" font-family="'Plus Jakarta Sans',Segoe UI,system-ui,sans-serif" font-size="8.2" font-weight="600" fill="#5a6478" letter-spacing="3.2">INSTITUTIONS</text>
+</svg>
