@@ -26,12 +26,19 @@ src/
 prerender.mjs       renders each route to dist/<route>.html + dist/<route>/index.html
 ```
 
-## Theme
+## Design system
 
-Defined as Tailwind v4 tokens in `src/index.css`:
+Soft card system (bento-style): neutral `--color-wash` page, white cards, 20–32px radii, quiet
+shadows. Tokens live in `src/index.css`:
 
-- `navy` `#013a94` (plus `navy-50…950`) — primary surface, headings, footer
-- `gold` `#fbcd41` (plus `gold-300/600/700`) — CTAs, badges, accents (kept to ~5% of the page)
+- `navy` `#013a94` (plus `navy-50…950`) — primary buttons, active nav, dark panels, footer
+- `gold` `#fbcd41` — the single highlight: badge dots, dark-panel CTAs, footer accents
+- Type: **Outfit** for headings, **Work Sans** for body
+- Reusable classes: `.panel`, `.card` / `.card-hover`, `.badge`, `.btn-primary` / `.btn-gold` /
+  `.btn-ghost`, `.chip`, `.dot`, `.action` (44px touch target)
+
+Photography slots use `<Photo>`; until real images exist it renders a soft placeholder naming the
+shot that belongs there. Pass `src` to swap in a real file.
 
 ## SEO
 

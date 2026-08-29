@@ -161,18 +161,19 @@ export type Course = {
   field: string
   body: string
   level: 'UG' | 'PG'
+  years: string
 }
 
 export const courses: Course[] = [
-  { code: 'B.Com', name: 'Bachelor of Commerce', field: 'Finance & Accounting', body: 'Build expertise in financial reporting, taxation, and accounting practices.', level: 'UG' },
-  { code: 'BBA', name: 'Bachelor of Business Administration', field: 'Business & Management', body: 'Master business strategy, operations, and modern management principles.', level: 'UG' },
-  { code: 'BCA', name: 'Bachelor of Computer Applications', field: 'IT & Software Development', body: 'Develop programming, systems, and software engineering skills.', level: 'UG' },
-  { code: 'BA', name: 'Bachelor of Arts', field: 'Humanities & Communication', body: 'Sharpen critical thinking, writing, and communication abilities.', level: 'UG' },
-  { code: 'B.Sc', name: 'Bachelor of Science', field: 'Science & Technology', body: 'Pursue specializations across science and emerging technology fields.', level: 'UG' },
-  { code: 'MBA', name: 'Master of Business Administration', field: 'Leadership & Strategy', body: 'Advanced management for senior roles and strategic decision-making.', level: 'PG' },
-  { code: 'MCA', name: 'Master of Computer Applications', field: 'Advanced IT & Programming', body: 'Deep technical mastery for senior software and architecture roles.', level: 'PG' },
-  { code: 'M.Com', name: 'Master of Commerce', field: 'Finance & Analytics', body: 'Specialized commerce with a strong analytics foundation.', level: 'PG' },
-  { code: 'MSW', name: 'Master of Social Work', field: 'Social Work & Development', body: 'Drive change in community development and social services.', level: 'PG' },
+  { code: 'B.Com', name: 'Bachelor of Commerce', field: 'Finance & Accounting', body: 'Build expertise in financial reporting, taxation, and accounting practices.', level: 'UG', years: '3 years' },
+  { code: 'BBA', name: 'Bachelor of Business Administration', field: 'Business & Management', body: 'Master business strategy, operations, and modern management principles.', level: 'UG', years: '3 years' },
+  { code: 'BCA', name: 'Bachelor of Computer Applications', field: 'IT & Software Development', body: 'Develop programming, systems, and software engineering skills.', level: 'UG', years: '3 years' },
+  { code: 'BA', name: 'Bachelor of Arts', field: 'Humanities & Communication', body: 'Sharpen critical thinking, writing, and communication abilities.', level: 'UG', years: '3 years' },
+  { code: 'B.Sc', name: 'Bachelor of Science', field: 'Science & Technology', body: 'Pursue specializations across science and emerging technology fields.', level: 'UG', years: '3 years' },
+  { code: 'MBA', name: 'Master of Business Administration', field: 'Leadership & Strategy', body: 'Advanced management for senior roles and strategic decision-making.', level: 'PG', years: '2 years' },
+  { code: 'MCA', name: 'Master of Computer Applications', field: 'Advanced IT & Programming', body: 'Deep technical mastery for senior software and architecture roles.', level: 'PG', years: '2 years' },
+  { code: 'M.Com', name: 'Master of Commerce', field: 'Finance & Analytics', body: 'Specialized commerce with a strong analytics foundation.', level: 'PG', years: '2 years' },
+  { code: 'MSW', name: 'Master of Social Work', field: 'Social Work & Development', body: 'Drive change in community development and social services.', level: 'PG', years: '2 years' },
 ]
 
 export const eligibility = [
@@ -187,4 +188,56 @@ export const courseHighlights = [
   'Career Growth & Promotions',
   'Higher Studies (India & Abroad)',
   'Migration & Attestation Support',
+]
+
+/** The one true sequence on the site: what actually happens, in order. */
+export const admissionSteps = [
+  {
+    step: '01',
+    title: 'Talk to a counselor',
+    body: 'A 20-minute call. We map your existing credits, your gap years and your goal to the right program.',
+    when: 'Day 0',
+  },
+  {
+    step: '02',
+    title: 'Submit documents',
+    body: 'Marksheets, ID and photographs. We verify eligibility and confirm credit transfer where it applies.',
+    when: 'Day 1',
+  },
+  {
+    step: '03',
+    title: 'Enrolment confirmed',
+    body: 'The university issues your enrolment number. Fees can be split into monthly instalments from here.',
+    when: 'Within 48 hours',
+  },
+  {
+    step: '04',
+    title: 'Study and graduate',
+    body: 'Learn at your own pace around work. Assessment is continuous — no sit-down examination hall.',
+    when: '2–3 years',
+  },
+]
+
+/** Situation → path. Not a sequence, so it carries no numbering. */
+export const paths = [
+  {
+    situation: 'You dropped out',
+    answer: 'Credit transfer',
+    body: 'Completed semesters are carried across, so you resume rather than restart.',
+  },
+  {
+    situation: 'You are working full time',
+    answer: 'Study around the job',
+    body: 'No attendance requirement and no fixed class hours. Your employer never has to know.',
+  },
+  {
+    situation: 'You have hit a ceiling',
+    answer: 'A recognized degree',
+    body: 'The qualification most promotion and salary bands are gated on, completed alongside the job.',
+  },
+  {
+    situation: 'You are sitting for government exams',
+    answer: 'UPSC and PSC eligible',
+    body: 'Degrees from UGC recognized universities, valid for every major competitive examination.',
+  },
 ]
