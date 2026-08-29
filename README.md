@@ -49,8 +49,12 @@ on a sensible size rather than jumping at breakpoints. Body copy is 16px on mobi
 All photography is registered in **`src/data/images.ts`** and rendered through `<Photo name="…" />`.
 Slots: `hero-1`, `hero-2`, `about-1`, `about-2`, `about-3`, `courses-1`, `courses-2`, `contact-1`.
 
-Each currently points at a labelled placeholder in `public/images/` that states the intended
-subject and the recommended dimensions. **To use a real photo:** drop the file into
+`hero-1` is set into the hero panel itself: it bleeds to the panel edges, its top edge is
+feathered into the surface with a gradient mask, and the three summary cards straddle it — so the
+photograph reads as part of the section rather than a banner stacked below it.
+
+Each slot currently points at a labelled placeholder in `public/images/`, drawn at that slot's own
+aspect ratio, stating the intended subject and the recommended dimensions. **To use a real photo:** drop the file into
 `public/images/` and change that slot's `src` — e.g. `src: '/images/hero-1.jpg'`. Nothing else
 changes; cropping, aspect ratio and lazy-loading are handled by the layout.
 

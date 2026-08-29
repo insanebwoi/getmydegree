@@ -49,10 +49,19 @@ export const heroTicker = [
 ]
 
 export const features = [
-  { title: 'No Exam, No Hassle', body: 'Skip the stress of traditional exams with our flexible assessment model.' },
-  { title: 'Start in 48 Hours', body: 'Get admitted and begin your degree journey within two days.' },
+  {
+    title: 'No Exam, No Hassle',
+    body: 'Skip the stress of traditional exams with our flexible assessment model.',
+  },
+  {
+    title: 'Start in 48 Hours',
+    body: 'Get admitted and begin your degree journey within two days.',
+  },
   { title: 'Flexible EMI Options', body: 'Affordable monthly payments that fit any budget.' },
-  { title: 'UGC Recognized', body: 'Degrees valid for government jobs, promotions, and higher studies.' },
+  {
+    title: 'UGC Recognized',
+    body: 'Degrees valid for government jobs, promotions, and higher studies.',
+  },
 ]
 
 export const universities = [
@@ -120,10 +129,26 @@ export const pricing = [
 ]
 
 export const testimonials = [
-  { name: 'Vishnu P K', role: 'Alumni', quote: 'Completing my degree was the best decision. The support and guidance were excellent.' },
-  { name: 'Sarangi Sajith', role: 'Alumni', quote: 'My journey was truly transformative. I gained confidence and real-world skills.' },
-  { name: 'Muhammed Shibil', role: 'Alumni', quote: 'A great learning experience with strong career support throughout.' },
-  { name: 'Fathima', role: 'Alumni', quote: 'Flexible learning helped me achieve my goals with confidence and clarity.' },
+  {
+    name: 'Vishnu P K',
+    role: 'Alumni',
+    quote: 'Completing my degree was the best decision. The support and guidance were excellent.',
+  },
+  {
+    name: 'Sarangi Sajith',
+    role: 'Alumni',
+    quote: 'My journey was truly transformative. I gained confidence and real-world skills.',
+  },
+  {
+    name: 'Muhammed Shibil',
+    role: 'Alumni',
+    quote: 'A great learning experience with strong career support throughout.',
+  },
+  {
+    name: 'Fathima',
+    role: 'Alumni',
+    quote: 'Flexible learning helped me achieve my goals with confidence and clarity.',
+  },
 ]
 
 export const accreditations = [
@@ -142,11 +167,31 @@ export const stats = [
 ]
 
 export const trustPoints = [
-  { no: '01', title: 'UGC Recognized Programs', body: 'Every program we offer is delivered through a recognized university partner.' },
-  { no: '02', title: 'Fast Admission Process', body: 'Documentation, verification and enrolment completed within 48 hours.' },
-  { no: '03', title: 'Affordable Fees', body: 'Transparent pricing with monthly EMI plans and no hidden charges.' },
-  { no: '04', title: 'Dedicated Support', body: 'A personal academic counselor stays with you from admission to graduation.' },
-  { no: '05', title: 'Flexible Study Options', body: 'Study online, at your own pace, around your job and family commitments.' },
+  {
+    no: '01',
+    title: 'UGC Recognized Programs',
+    body: 'Every program we offer is delivered through a recognized university partner.',
+  },
+  {
+    no: '02',
+    title: 'Fast Admission Process',
+    body: 'Documentation, verification and enrolment completed within 48 hours.',
+  },
+  {
+    no: '03',
+    title: 'Affordable Fees',
+    body: 'Transparent pricing with monthly EMI plans and no hidden charges.',
+  },
+  {
+    no: '04',
+    title: 'Dedicated Support',
+    body: 'A personal academic counselor stays with you from admission to graduation.',
+  },
+  {
+    no: '05',
+    title: 'Flexible Study Options',
+    body: 'Study online, at your own pace, around your job and family commitments.',
+  },
 ]
 
 export const validity = [
@@ -165,15 +210,78 @@ export type Course = {
 }
 
 export const courses: Course[] = [
-  { code: 'B.Com', name: 'Bachelor of Commerce', field: 'Finance & Accounting', body: 'Build expertise in financial reporting, taxation, and accounting practices.', level: 'UG', years: '3 years' },
-  { code: 'BBA', name: 'Bachelor of Business Administration', field: 'Business & Management', body: 'Master business strategy, operations, and modern management principles.', level: 'UG', years: '3 years' },
-  { code: 'BCA', name: 'Bachelor of Computer Applications', field: 'IT & Software Development', body: 'Develop programming, systems, and software engineering skills.', level: 'UG', years: '3 years' },
-  { code: 'BA', name: 'Bachelor of Arts', field: 'Humanities & Communication', body: 'Sharpen critical thinking, writing, and communication abilities.', level: 'UG', years: '3 years' },
-  { code: 'B.Sc', name: 'Bachelor of Science', field: 'Science & Technology', body: 'Pursue specializations across science and emerging technology fields.', level: 'UG', years: '3 years' },
-  { code: 'MBA', name: 'Master of Business Administration', field: 'Leadership & Strategy', body: 'Advanced management for senior roles and strategic decision-making.', level: 'PG', years: '2 years' },
-  { code: 'MCA', name: 'Master of Computer Applications', field: 'Advanced IT & Programming', body: 'Deep technical mastery for senior software and architecture roles.', level: 'PG', years: '2 years' },
-  { code: 'M.Com', name: 'Master of Commerce', field: 'Finance & Analytics', body: 'Specialized commerce with a strong analytics foundation.', level: 'PG', years: '2 years' },
-  { code: 'MSW', name: 'Master of Social Work', field: 'Social Work & Development', body: 'Drive change in community development and social services.', level: 'PG', years: '2 years' },
+  {
+    code: 'B.Com',
+    name: 'Bachelor of Commerce',
+    field: 'Finance & Accounting',
+    body: 'Build expertise in financial reporting, taxation, and accounting practices.',
+    level: 'UG',
+    years: '3 years',
+  },
+  {
+    code: 'BBA',
+    name: 'Bachelor of Business Administration',
+    field: 'Business & Management',
+    body: 'Master business strategy, operations, and modern management principles.',
+    level: 'UG',
+    years: '3 years',
+  },
+  {
+    code: 'BCA',
+    name: 'Bachelor of Computer Applications',
+    field: 'IT & Software Development',
+    body: 'Develop programming, systems, and software engineering skills.',
+    level: 'UG',
+    years: '3 years',
+  },
+  {
+    code: 'BA',
+    name: 'Bachelor of Arts',
+    field: 'Humanities & Communication',
+    body: 'Sharpen critical thinking, writing, and communication abilities.',
+    level: 'UG',
+    years: '3 years',
+  },
+  {
+    code: 'B.Sc',
+    name: 'Bachelor of Science',
+    field: 'Science & Technology',
+    body: 'Pursue specializations across science and emerging technology fields.',
+    level: 'UG',
+    years: '3 years',
+  },
+  {
+    code: 'MBA',
+    name: 'Master of Business Administration',
+    field: 'Leadership & Strategy',
+    body: 'Advanced management for senior roles and strategic decision-making.',
+    level: 'PG',
+    years: '2 years',
+  },
+  {
+    code: 'MCA',
+    name: 'Master of Computer Applications',
+    field: 'Advanced IT & Programming',
+    body: 'Deep technical mastery for senior software and architecture roles.',
+    level: 'PG',
+    years: '2 years',
+  },
+  {
+    code: 'M.Com',
+    name: 'Master of Commerce',
+    field: 'Finance & Analytics',
+    body: 'Specialized commerce with a strong analytics foundation.',
+    level: 'PG',
+    years: '2 years',
+  },
+  {
+    code: 'MSW',
+    name: 'Master of Social Work',
+    field: 'Social Work & Development',
+    body: 'Drive change in community development and social services.',
+    level: 'PG',
+    years: '2 years',
+  },
 ]
 
 export const eligibility = [

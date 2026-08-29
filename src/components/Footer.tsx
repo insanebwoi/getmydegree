@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail } from "lucide-react";
-import { centers, nav, site } from "../data/site";
-import { FacebookIcon, TwitterIcon, YoutubeIcon } from "./SocialIcons";
+import { Link } from 'react-router-dom'
+import { MapPin, Phone, Mail } from 'lucide-react'
+import { centers, nav, site } from '../data/site'
+import { FacebookIcon, TwitterIcon, YoutubeIcon } from './SocialIcons'
 
 const socials = [
-  { label: "Facebook", href: site.social.facebook, Icon: FacebookIcon },
-  { label: "Twitter", href: site.social.twitter, Icon: TwitterIcon },
-  { label: "YouTube", href: site.social.youtube, Icon: YoutubeIcon },
-];
+  { label: 'Facebook', href: site.social.facebook, Icon: FacebookIcon },
+  { label: 'Twitter', href: site.social.twitter, Icon: TwitterIcon },
+  { label: 'YouTube', href: site.social.youtube, Icon: YoutubeIcon },
+]
 
 export function Footer() {
   return (
@@ -24,9 +24,8 @@ export function Footer() {
                 className="h-7 w-auto sm:h-8"
               />
               <p className="mt-5 max-w-xs text-base leading-relaxed text-white/60 md:text-sm">
-                Flexible, recognized education for people continuing, restarting
-                or upgrading their studies. Established {site.established} in
-                Kerala.
+                Flexible, recognized education for people continuing, restarting or upgrading their
+                studies. Established {site.established} in Kerala.
               </p>
               <div className="mt-7 flex gap-2">
                 {socials.map(({ label, href, Icon }) => (
@@ -48,11 +47,7 @@ export function Footer() {
               <address key={center.city} className="not-italic lg:col-span-3">
                 <h2 className="t-h3 font-display font-medium">{center.city}</h2>
                 <p className="mt-4 flex gap-2.5 text-base leading-relaxed text-white/60 md:text-sm">
-                  <MapPin
-                    size={16}
-                    className="mt-1 shrink-0 text-gold"
-                    aria-hidden="true"
-                  />
+                  <MapPin size={16} className="mt-1 shrink-0 text-gold" aria-hidden="true" />
                   {center.address}
                 </p>
                 <a
@@ -70,10 +65,7 @@ export function Footer() {
               <ul className="mt-3">
                 {nav.map((item) => (
                   <li key={item.to}>
-                    <Link
-                      to={item.to}
-                      className="action text-white/60 hover:text-gold md:text-sm"
-                    >
+                    <Link to={item.to} className="action text-white/60 hover:text-gold md:text-sm">
                       {item.label}
                     </Link>
                   </li>
@@ -98,5 +90,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

@@ -14,7 +14,11 @@ const server = await import(pathToFileURL(resolve(root, 'dist-ssr/entry-server.j
 const { render, prerenderPaths, pageMeta, pageSchemas, fullTitle, canonical } = server
 
 const escape = (value) =>
-  String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+  String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
 
 function headFor(path) {
   const meta = pageMeta[path]
@@ -53,9 +57,7 @@ for (const path of prerenderPaths) {
   // whose SPA fallback would otherwise shadow it) resolve `/about` to, while
   // `about/index.html` is what directory-style hosts resolve.
   const targets =
-    path === '/'
-      ? ['dist/index.html']
-      : [`dist${path}.html`, `dist${path}/index.html`]
+    path === '/' ? ['dist/index.html'] : [`dist${path}.html`, `dist${path}/index.html`]
 
   for (const target of targets) {
     const file = resolve(root, target)

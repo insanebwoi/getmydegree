@@ -1,12 +1,12 @@
-import type { ReactNode } from "react";
-import { Reveal } from "./Reveal";
+import type { ReactNode } from 'react'
+import { Reveal } from './Reveal'
 
 type Props = {
-  badge: string;
-  title: ReactNode;
-  intro: ReactNode;
-  children?: ReactNode;
-};
+  badge: string
+  title: ReactNode
+  intro: ReactNode
+  children?: ReactNode
+}
 
 /** Shared inner-page hero: the same panel treatment as the home page. */
 export function PageHero({ badge, title, intro, children }: Props) {
@@ -17,13 +17,9 @@ export function PageHero({ badge, title, intro, children }: Props) {
           <span className="badge">{badge}</span>
           <h1 className="t-h1 mt-4">{title}</h1>
           <p className="t-body mx-auto mt-4 max-w-xl text-muted">{intro}</p>
-          {children && (
-            <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {children}
-            </div>
-          )}
+          {children && <div className="mt-7 flex flex-wrap justify-center gap-2.5">{children}</div>}
         </Reveal>
       </div>
     </section>
-  );
+  )
 }

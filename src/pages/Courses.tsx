@@ -1,39 +1,28 @@
-import { Link } from "react-router-dom";
-import { ArrowRight, BadgeCheck, Check } from "lucide-react";
-import { Seo } from "../components/Seo";
-import { pageMeta } from "../data/meta";
-import { coursesSchema } from "../data/schema";
-import { Reveal } from "../components/Reveal";
-import { Photo } from "../components/Photo";
-import { Section } from "../components/Section";
-import { PageHero } from "../components/PageHero";
-import {
-  courseHighlights,
-  courses,
-  eligibility,
-  type Course,
-} from "../data/site";
+import { Link } from 'react-router-dom'
+import { ArrowRight, BadgeCheck, Check } from 'lucide-react'
+import { Seo } from '../components/Seo'
+import { pageMeta } from '../data/meta'
+import { coursesSchema } from '../data/schema'
+import { Reveal } from '../components/Reveal'
+import { Photo } from '../components/Photo'
+import { Section } from '../components/Section'
+import { PageHero } from '../components/PageHero'
+import { courseHighlights, courses, eligibility, type Course } from '../data/site'
 
-const ug = courses.filter((c) => c.level === "UG");
-const pg = courses.filter((c) => c.level === "PG");
+const ug = courses.filter((c) => c.level === 'UG')
+const pg = courses.filter((c) => c.level === 'PG')
 
 function CourseCard({ course, delay }: { course: Course; delay: number }) {
   return (
     <Reveal delay={delay}>
       <article className="card card-hover card-p flex h-full flex-col">
         <div className="flex items-center justify-between">
-          <span className="font-display text-2xl font-medium text-navy">
-            {course.code}
-          </span>
+          <span className="font-display text-2xl font-medium text-navy">{course.code}</span>
           <span className="badge">{course.years}</span>
         </div>
         <h3 className="t-h3 mt-4 font-display font-medium">{course.name}</h3>
-        <p className="mt-1 text-base font-medium text-gold-700 md:text-sm">
-          {course.field}
-        </p>
-        <p className="mt-3 flex-1 text-base leading-relaxed text-muted md:text-sm">
-          {course.body}
-        </p>
+        <p className="mt-1 text-base font-medium text-gold-700 md:text-sm">{course.field}</p>
+        <p className="mt-3 flex-1 text-base leading-relaxed text-muted md:text-sm">{course.body}</p>
         <div className="mt-5 flex items-center justify-between border-t border-line pt-5">
           <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted">
             <BadgeCheck size={14} className="text-navy" aria-hidden="true" />
@@ -50,13 +39,13 @@ function CourseCard({ course, delay }: { course: Course; delay: number }) {
         </div>
       </article>
     </Reveal>
-  );
+  )
 }
 
 export default function Courses() {
   return (
     <>
-      <Seo {...pageMeta["/courses"]} schema={coursesSchema} />
+      <Seo {...pageMeta['/courses']} schema={coursesSchema} />
 
       <PageHero
         badge="Popular courses"
@@ -97,11 +86,7 @@ export default function Courses() {
       >
         <div className="grid gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
-            <Photo
-              name="courses-2"
-              ratio="4/3"
-              className="lg:aspect-auto lg:h-full"
-            />
+            <Photo name="courses-2" ratio="4/3" className="lg:aspect-auto lg:h-full" />
           </Reveal>
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
             {eligibility.map((e, i) => (
@@ -112,15 +97,9 @@ export default function Courses() {
                     {e.points.map((p) => (
                       <li key={p} className="flex items-center gap-3">
                         <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
-                          <Check
-                            size={14}
-                            strokeWidth={2.5}
-                            aria-hidden="true"
-                          />
+                          <Check size={14} strokeWidth={2.5} aria-hidden="true" />
                         </span>
-                        <span className="t-h3 font-display font-medium">
-                          {p}
-                        </span>
+                        <span className="t-h3 font-display font-medium">{p}</span>
                       </li>
                     ))}
                   </ul>
@@ -131,11 +110,7 @@ export default function Courses() {
         </div>
       </Section>
 
-      <Section
-        dark
-        badge="Course highlights"
-        title="Built to deliver real outcomes"
-      >
+      <Section dark badge="Course highlights" title="Built to deliver real outcomes">
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {courseHighlights.map((h, i) => (
             <Reveal key={h} delay={i * 60} as="li">
@@ -156,8 +131,7 @@ export default function Courses() {
             <div className="max-w-xl">
               <h2 className="t-h2">Not sure which program suits you?</h2>
               <p className="t-body mt-3 text-muted">
-                Our academic counselors will help you choose based on your goals
-                and background.
+                Our academic counselors will help you choose based on your goals and background.
               </p>
             </div>
             <Link to="/contact" className="btn btn-primary shrink-0">
@@ -167,5 +141,5 @@ export default function Courses() {
         </Reveal>
       </section>
     </>
-  );
+  )
 }
