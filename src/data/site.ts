@@ -23,6 +23,7 @@ export const nav = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Courses', to: '/courses' },
+  { label: 'Blog', to: '/blog' },
   { label: 'Contact', to: '/contact' },
 ]
 

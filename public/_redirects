@@ -1,3 +1,2 @@
-# Netlify: prerendered files win; anything unmatched falls back to the SPA shell
-# so the client router can render the 404 page.
-/*  /index.html  404
+# Netlify: prerendered files win; anything unmatched gets the real 404 document.
+/*  /404.html  404

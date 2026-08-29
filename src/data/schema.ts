@@ -1,4 +1,6 @@
 import { centers, courses, site } from './site'
+import { posts, postsByDate } from './posts'
+import { images } from './images'
 
 /** JSON-LD structured data, one export per route. */
 
@@ -85,4 +87,50 @@ export const contactSchema: object = {
       closes: '19:00',
     },
   })),
+}
+
+export const blogSchema: object = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  '@id': `${site.url}/blog`,
+  name: `${site.name} Blog`,
+  description:
+    'Guidance on UGC recognition, credit transfer, studying while working and degree costs.',
+  publisher: { '@id': `${site.url}/#organization` },
+  blogPost: postsByDate.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { '@type': 'Organization', name: post.author },
+    url: `${site.url}/blog/${post.slug}`,
+  })),
+}
+
+/** Article schema for one post, used by the detail page and the prerenderer. */
+export function postSchema(slug: string): object | undefined {
+  const post = posts.find((p) => p.slug === slug)
+  if (!post) return undefined
+  const url = `${site.url}/blog/${post.slug}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': url,
+    headline: post.title,
+    description: post.excerpt,
+    articleSection: post.category,
+    datePublished: post.date,
+    dateModified: post.date,
+    wordCount: post.body.reduce(
+      (n, block) =>
+        n +
+        ('text' in block ? block.text : block.items.join(' ')).split(/\s+/).length,
+      0,
+    ),
+    image: `${site.url}${images[post.image].src}`,
+    author: { '@type': 'Organization', name: post.author },
+    publisher: { '@id': `${site.url}/#organization` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    isPartOf: { '@id': `${site.url}/blog` },
+  }
 }

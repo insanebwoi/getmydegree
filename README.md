@@ -21,9 +21,11 @@ src/
   data/meta.ts      per-route <title>/description/canonical
   data/schema.ts    JSON-LD, one export per route
   components/       Layout, Navbar, Footer, Seo, Reveal, Marquee, SectionHeading
-  pages/            Home, About, Courses, Contact, NotFound
+  data/posts.ts     blog articles — typed content blocks, no markdown parser
+  pages/            Home, About, Courses, Blog, BlogPost, Contact, NotFound
   entry-server.tsx  SSR entry used only by the prerender step
-prerender.mjs       renders each route to dist/<route>.html + dist/<route>/index.html
+prerender.mjs       renders each route to dist/<route>.html + dist/<route>/index.html,
+                    plus dist/404.html and a generated dist/sitemap.xml
 ```
 
 ## Design system
@@ -65,7 +67,10 @@ changes; cropping, aspect ratio and lazy-loading are handled by the layout.
 
 - Every route is prerendered: real `<h1>`, body copy, per-page title/description/canonical,
   Open Graph, Twitter card and JSON-LD in the static `<head>` — no JS execution needed.
-- `public/robots.txt` and `public/sitemap.xml` list the four public routes.
+- `public/robots.txt` is static; **`sitemap.xml` is generated at build** from the same route list
+  that drives prerendering, so a new blog post can never be missing from it.
+- A real `dist/404.html` is prerendered, so unknown URLs get matching markup rather than the home
+  page's HTML (which React would otherwise discard and re-render).
 - Scroll-reveal animation is gated on a `.js` class, so content stays visible without JS.
 
 **Before going live**, update `site.url` in `src/data/site.ts` and the domain in
@@ -76,6 +81,16 @@ changes; cropping, aspect ratio and lazy-loading are handled by the layout.
 `public/logo.svg` (dark-on-light), `public/logo-light.svg` (footer/dark backgrounds) and
 `public/favicon.svg` are **placeholders**. Replace the files at those paths with the real
 artwork — no code changes needed.
+
+## Blog
+
+Articles live in **`src/data/posts.ts`**. Each post is a typed object — slug, title, excerpt,
+category, date, author, reading time, image slot — and its body is a list of typed blocks
+(`p`, `h2`, `list`, `quote`), so there is no markdown parser and no HTML strings to sanitise.
+
+To add a post, append one object to `posts`. Everything else follows automatically: the listing
+page, the `/blog/<slug>` route, the prerendered HTML, the `BlogPosting` JSON-LD, the sitemap
+entry, and the related-articles strip on other posts.
 
 ## Contact form
 
