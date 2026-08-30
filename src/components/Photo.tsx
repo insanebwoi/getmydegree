@@ -1,7 +1,10 @@
 import { images, type ImageName } from '../data/images'
 
 type Props = {
-  name: ImageName
+  /** A registry slot, or pass `src`/`alt` for content-owned images. */
+  name?: ImageName
+  src?: string
+  alt?: string
   className?: string
   /** Aspect ratio applied to the frame, e.g. "4/3". Omit to fill the parent. */
   ratio?: string
@@ -15,8 +18,22 @@ type Props = {
  * `src/data/images.ts`, so swapping a placeholder for a real photograph is a
  * one-line change.
  */
-export function Photo({ name, className = '', ratio, priority = false, rounded = 'card' }: Props) {
-  const image = images[name]
+export function Photo({
+  name,
+  src,
+  alt,
+  className = '',
+  ratio,
+  priority = false,
+  rounded = 'card',
+}: Props) {
+  const registered = name ? images[name] : undefined
+  const image = {
+    src: src ?? registered?.src ?? '',
+    alt: alt ?? registered?.alt ?? '',
+    width: registered?.width ?? 1600,
+    height: registered?.height ?? 900,
+  }
   return (
     <img
       src={image.src}

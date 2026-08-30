@@ -84,13 +84,43 @@ artwork — no code changes needed.
 
 ## Blog
 
-Articles live in **`src/data/posts.ts`**. Each post is a typed object — slug, title, excerpt,
-category, date, author, reading time, image slot — and its body is a list of typed blocks
-(`p`, `h2`, `list`, `quote`), so there is no markdown parser and no HTML strings to sanitise.
+Articles are **markdown files in `src/content/posts/`** — one file per post, the filename is the
+slug. Frontmatter carries the metadata:
 
-To add a post, append one object to `posts`. Everything else follows automatically: the listing
-page, the `/blog/<slug>` route, the prerendered HTML, the `BlogPosting` JSON-LD, the sitemap
-entry, and the related-articles strip on other posts.
+```markdown
+---
+title: "How to get your migration certificate"
+excerpt: "One sentence — used as the meta description and the listing excerpt."
+category: Admissions
+date: 2026-09-02
+author: "GetMyDegree Academic Team"
+cover: /images/blog/how-to-get-your-migration-certificate.svg
+---
+
+Body in ordinary markdown. Headings, lists, quotes, links, bold.
+```
+
+Add a file and everything follows: the listing card, the `/blog/<slug>` route, reading time
+(computed from word count), the prerendered HTML, `BlogPosting` JSON-LD, the sitemap entry, and
+the related-articles sidebar on other posts. Covers follow the convention
+`public/images/blog/<slug>.svg|jpg`.
+
+### How it scales
+
+Markdown is compiled at build time by a small Vite plugin, so **no parser reaches the browser**.
+`foo.md?meta` yields only the frontmatter and `foo.md` only the compiled body — deliberately
+separate module ids, because a single module exporting both would drag every article body into
+the main bundle. The result:
+
+- the main bundle contains **no article text** at any post count;
+- each article is its own ~2KB chunk, fetched only when that article is opened;
+- `src/main.tsx` preloads the current article's chunk *before* hydrating, so the first client
+  render matches the prerendered HTML;
+- `src/data/postBodies.ssr.ts` (server-only) seeds every body for prerendering.
+
+The listing has search (also reachable as `/blog?q=…`, and from the search box in each article's
+sidebar), category filters that scroll horizontally when they outgrow the row, and a load-more
+pager at `PAGE_SIZE` per page.
 
 ## Contact form
 

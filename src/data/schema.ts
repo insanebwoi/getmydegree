@@ -1,6 +1,5 @@
 import { centers, courses, site } from './site'
 import { posts, postsByDate } from './posts'
-import { images } from './images'
 
 /** JSON-LD structured data, one export per route. */
 
@@ -121,13 +120,8 @@ export function postSchema(slug: string): object | undefined {
     articleSection: post.category,
     datePublished: post.date,
     dateModified: post.date,
-    wordCount: post.body.reduce(
-      (n, block) =>
-        n +
-        ('text' in block ? block.text : block.items.join(' ')).split(/\s+/).length,
-      0,
-    ),
-    image: `${site.url}${images[post.image].src}`,
+    timeRequired: `PT${post.readingMinutes}M`,
+    image: `${site.url}${post.cover}`,
     author: { '@type': 'Organization', name: post.author },
     publisher: { '@id': `${site.url}/#organization` },
     mainEntityOfPage: { '@type': 'WebPage', '@id': url },

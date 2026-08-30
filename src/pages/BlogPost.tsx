@@ -1,46 +1,38 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { postSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
-import { formatDate, getPost, postsByDate, type Block } from '../data/posts'
+import { BlogSearch } from '../components/BlogSearch'
+import { formatDate, getBody, getPost, loadBody, relatedPosts } from '../data/posts'
 import NotFound from './NotFound'
-
-function Body({ block }: { block: Block }) {
-  switch (block.type) {
-    case 'h2':
-      return <h2 className="t-h2 mt-12 font-display font-medium first:mt-0">{block.text}</h2>
-    case 'list':
-      return (
-        <ul className="mt-6 grid gap-3">
-          {block.items.map((item) => (
-            <li key={item} className="flex gap-3">
-              <span className="dot mt-2.5" aria-hidden="true" />
-              <span className="t-body text-muted">{item}</span>
-            </li>
-          ))}
-        </ul>
-      )
-    case 'quote':
-      return (
-        <blockquote className="mt-8 border-l-2 border-gold pl-5 font-display text-xl leading-snug lg:text-2xl">
-          {block.text}
-        </blockquote>
-      )
-    default:
-      return <p className="t-body mt-5 text-muted">{block.text}</p>
-  }
-}
 
 export default function BlogPost() {
   const { slug } = useParams()
   const post = slug ? getPost(slug) : undefined
 
+  // Bodies live in their own chunk. It is preloaded before hydration, so this
+  // is already populated on first render; the effect only covers client-side
+  // navigation from the listing.
+  const [body, setBody] = useState(() => (slug ? getBody(slug) : undefined))
+
+  useEffect(() => {
+    if (!slug || body) return
+    let live = true
+    loadBody(slug).then((html) => {
+      if (live) setBody(html)
+    })
+    return () => {
+      live = false
+    }
+  }, [slug, body])
+
   // An unknown slug is a 404, not an empty article.
   if (!post) return <NotFound />
 
-  const related = postsByDate.filter((p) => p.slug !== post.slug).slice(0, 3)
+  const related = relatedPosts(post.slug)
 
   return (
     <>
@@ -62,8 +54,8 @@ export default function BlogPost() {
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
                 <span className="badge">{post.category}</span>
                 <span className="text-base text-muted md:text-sm">
-                  <time dateTime={post.date}>{formatDate(post.date)}</time> ·{' '}
-                  {post.readingMinutes} min read
+                  <time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readingMinutes}{' '}
+                  min read
                 </span>
               </div>
               <h1 className="t-h1 mt-5">{post.title}</h1>
@@ -73,61 +65,103 @@ export default function BlogPost() {
           </div>
         </section>
 
-        <div className="shell pb-10 lg:pb-14">
-          <Reveal>
-            <Photo name={post.image} ratio="16/7" rounded="panel" priority />
-          </Reveal>
-        </div>
-
         <div className="shell pb-16 lg:pb-24">
-          <Reveal className="mx-auto max-w-[68ch]">
-            {post.body.map((block, i) => (
-              <Body key={i} block={block} />
-            ))}
-          </Reveal>
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+            {/*
+              The article sits on its own white surface, like every other block
+              on the site, rather than directly on the page wash. Its children
+              share one measure so the cover, text and CTA align.
+            */}
+            <div className="lg:col-span-8">
+              <div className="panel card-p sm:p-8 lg:p-10 [&>*]:mx-auto [&>*]:max-w-[68ch]">
+                <Reveal>
+                  <Photo src={post.cover} alt={post.title} ratio="16/9" priority />
+                </Reveal>
 
-          <Reveal delay={80} className="mx-auto mt-14 max-w-[68ch]">
-            <div className="card card-p flex flex-col gap-5 bg-navy-950 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
-              <div>
-                <h2 className="t-h3 font-display font-medium">
-                  Want this checked for your own case?
-                </h2>
-                <p className="mt-2 text-base text-white/65 md:text-sm">
-                  Send us your marksheets and we will tell you exactly where you stand.
-                </p>
+                {body ? (
+                  <div
+                    className="prose mt-9"
+                    // Content is authored in this repo and compiled at build time.
+                    dangerouslySetInnerHTML={{ __html: body }}
+                  />
+                ) : (
+                  <div className="mt-9" aria-busy="true">
+                    <span className="sr-only">Loading article…</span>
+                    {[92, 100, 84, 96, 70].map((w, i) => (
+                      <div
+                        key={i}
+                        className="mt-4 h-4 animate-pulse rounded bg-line"
+                        style={{ width: `${w}%` }}
+                      />
+                    ))}
+                  </div>
+                )}
+
+                <Reveal delay={80} className="mt-11">
+                  <div className="card card-p flex flex-col gap-5 bg-navy-950 text-white sm:flex-row sm:items-center sm:justify-between sm:p-7">
+                    <div>
+                      <h2 className="t-h3 font-display font-medium">
+                        Want this checked for your own case?
+                      </h2>
+                      <p className="mt-2 text-base text-white/65 md:text-sm">
+                        Send us your marksheets and we will tell you exactly where you stand.
+                      </p>
+                    </div>
+                    <Link to="/contact" className="btn btn-gold shrink-0">
+                      Book a free consultation
+                    </Link>
+                  </div>
+                </Reveal>
               </div>
-              <Link to="/contact" className="btn btn-gold shrink-0">
-                Book a free consultation
-              </Link>
             </div>
-          </Reveal>
+
+            {/* Related reading, in its own panel alongside the article */}
+            <aside className="lg:col-span-4">
+              <div className="panel p-4 sm:p-5 lg:sticky lg:top-28">
+                <h2 className="font-display text-lg font-medium">More from the blog</h2>
+                <ul className="mt-4 grid gap-1.5">
+                  {related.map((p, i) => (
+                    <Reveal key={p.slug} delay={i * 70} as="li">
+                      <Link
+                        to={`/blog/${p.slug}`}
+                        className="flex gap-3 rounded-2xl p-2 transition-colors hover:bg-wash"
+                      >
+                        {/* Decorative: the title sits right beside it. */}
+                        <span className="w-16 shrink-0">
+                          <Photo src={p.cover} alt="" ratio="1/1" />
+                        </span>
+                        <span className="flex min-w-0 flex-1 flex-col justify-center">
+                          <span className="text-xs font-medium text-gold-700">{p.category}</span>
+                          <span className="mt-0.5 font-display text-sm leading-snug font-medium">
+                            {p.title}
+                          </span>
+                          <span className="mt-0.5 text-xs text-muted">
+                            {p.readingMinutes} min read
+                          </span>
+                        </span>
+                      </Link>
+                    </Reveal>
+                  ))}
+                </ul>
+
+                <Link
+                  to="/blog"
+                  className="action mt-2 border-t border-line pt-3 text-sm font-medium text-navy"
+                >
+                  All articles
+                  <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
+                </Link>
+
+                {/* Search from the article; the query is carried to the listing. */}
+                <div className="mt-4 border-t border-line pt-4">
+                  <p className="text-base font-medium md:text-sm">Search the blog</p>
+                  <BlogSearch className="mt-3" placeholder="Search articles…" />
+                </div>
+              </div>
+            </aside>
+          </div>
         </div>
       </article>
-
-      <section className="shell pb-16 lg:pb-24">
-        <Reveal>
-          <h2 className="t-h2 font-display font-medium">More from the blog</h2>
-        </Reveal>
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {related.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 70}>
-              <article className="card card-hover h-full overflow-hidden">
-                <Link to={`/blog/${p.slug}`} className="flex h-full flex-col">
-                  <Photo name={p.image} ratio="16/9" rounded="none" />
-                  <div className="card-p flex flex-1 flex-col">
-                    <span className="badge self-start">{p.category}</span>
-                    <h3 className="t-h3 mt-3 font-display font-medium">{p.title}</h3>
-                    <span className="action mt-4 text-sm font-medium text-navy">
-                      Read the article
-                      <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
-                    </span>
-                  </div>
-                </Link>
-              </article>
-            </Reveal>
-          ))}
-        </div>
-      </section>
     </>
   )
 }
