@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
@@ -6,7 +6,8 @@ import { contactSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
-import { centers, courses, site } from '../data/site'
+import { useSearchParams } from 'react-router-dom'
+import { centers, courses, site, startingPoints } from '../data/site'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'program', string>>
 
@@ -17,6 +18,16 @@ const labelCls = 'text-sm font-medium'
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [errors, setErrors] = useState<Errors>({})
+  const [message, setMessage] = useState('')
+  const [params] = useSearchParams()
+
+  // Someone who answered "where did you stop?" on the home page arrives with
+  // that context; fill it in so they do not type it again. Applied after mount
+  // so the first render still matches the prerendered HTML.
+  useEffect(() => {
+    const start = startingPoints.find((point) => point.id === params.get('start'))
+    if (start) setMessage(start.message)
+  }, [params])
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -45,6 +56,7 @@ export default function Contact() {
     window.setTimeout(() => {
       setStatus('sent')
       form.reset()
+      setMessage('')
     }, 700)
   }
 
@@ -225,6 +237,8 @@ export default function Contact() {
                     id="message"
                     name="message"
                     rows={4}
+                    value={message}
+                    onChange={(event) => setMessage(event.target.value)}
                     placeholder="For example: completed two years of B.Com in 2019, working since."
                     className={`${field} resize-y`}
                   />

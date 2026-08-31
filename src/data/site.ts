@@ -350,3 +350,55 @@ export const paths = [
     body: 'Degrees from UGC recognized universities, valid for every major competitive examination.',
   },
 ]
+
+/**
+ * The question a counselor asks first. Each answer maps to a documented route,
+ * so the hero can tell someone what is left before they speak to anyone.
+ */
+export type StartingPoint = {
+  id: string
+  /** Chip label — short enough to scan. */
+  label: string
+  /** Headline of the answer panel. */
+  title: string
+  body: string
+  /** Two or three facts, shown as small chips under the answer. */
+  facts: string[]
+  /** Pre-filled into the counseling form when they carry on. */
+  message: string
+}
+
+export const startingPoints: StartingPoint[] = [
+  {
+    id: '12th-pass',
+    label: 'I finished 12th',
+    title: 'Start a three-year UG degree, with no entrance exam',
+    body: 'A 12th pass from a recognized board is the whole eligibility list. A gap of a year or more is expected, not penalised — most of our UG intake has one.',
+    facts: ['5 UG programs', '3 years', 'Admission in 48 hours'],
+    message: 'I finished 12th and want to start a UG degree.',
+  },
+  {
+    id: 'left-ug',
+    label: 'I left a UG degree',
+    title: 'Resume it — the semesters you passed still count',
+    body: 'Completed semesters from a UGC recognized university carry credit value. We map what you passed against the receiving programme, so you continue with advanced standing instead of repeating the first year.',
+    facts: ['Credit transfer', 'Often 1 year left', 'Marksheets needed'],
+    message: 'I started a UG degree and stopped partway. I would like my credits assessed.',
+  },
+  {
+    id: 'have-ug',
+    label: 'I have a UG degree',
+    title: 'Move up to a PG degree while you keep working',
+    body: 'A bachelor’s degree and a year’s gap is all a PG programme asks for. Four postgraduate degrees, assessed continuously — there is no examination hall to sit in.',
+    facts: ['4 PG programs', '2 years', 'Monthly instalments'],
+    message: 'I have a UG degree and want to enrol in a PG programme.',
+  },
+  {
+    id: 'unsure',
+    label: 'I am not sure',
+    title: 'Send us what you have and we will work it out',
+    body: 'Marksheets, a certificate, or just the year you stopped. A counselor maps it against what our partner universities accept and comes back with the options — free, and usually within a day.',
+    facts: ['Free assessment', '20-minute call', 'No obligation'],
+    message: 'I am not sure what I am eligible for. I would like an assessment.',
+  },
+]

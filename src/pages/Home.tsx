@@ -1,14 +1,6 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight,
-  ArrowUpRight,
-  BadgeCheck,
-  Building2,
-  Check,
-  Clock,
-  Phone,
-  Wallet,
-} from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BadgeCheck, Building2, Clock, Wallet } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
@@ -23,6 +15,7 @@ import {
   paths,
   pricing,
   site,
+  startingPoints,
   stats,
   testimonials,
   universities,
@@ -54,19 +47,21 @@ const perks = [
 ]
 
 export default function Home() {
+  const [choice, setChoice] = useState<string | null>(null)
+  const selected = startingPoints.find((p) => p.id === choice) ?? null
+
   return (
     <>
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
       {/*
-        One hero: proof, promise, action and photograph in a single view.
-        Social proof leads because it is the strongest thing this business has
-        — 10,000 finished degrees — and the guidance is to place it above the
-        fold, before the ask.
+        The hero asks the question a counselor asks first. Choosing an answer
+        replaces the default cards with the route for that situation, and
+        carries it into the counseling form — so the page does a little of the
+        qualifying work before anyone picks up the phone.
       */}
       <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-16">
         <div className="panel relative overflow-hidden px-4 pt-9 pb-5 sm:px-7 sm:pt-11 lg:px-10 lg:pt-12 lg:pb-8">
-          {/* Faint guide lines — structure, not decoration. */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-[0.55]"
@@ -80,7 +75,6 @@ export default function Home() {
 
           <div className="relative grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
             <div className="text-center lg:col-span-6 lg:text-left">
-              {/* Named alumni, not a faceless counter. */}
               <Reveal>
                 <div className="flex items-center justify-center gap-2.5 lg:justify-start">
                   <ul className="flex -space-x-1.5 sm:-space-x-2">
@@ -103,52 +97,46 @@ export default function Home() {
 
               <Reveal delay={60}>
                 <h1 className="t-hero mt-4 sm:mt-5">
-                  Finish your degree.
-                  <br />
-                  <span className="mark">Restart your career.</span>
+                  Where did you <span className="mark">stop?</span>
                 </h1>
               </Reveal>
 
               <Reveal delay={120}>
                 <p className="mx-auto mt-4 max-w-lg text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:mx-0 lg:text-[1.0625rem]">
-                  A UGC recognized UG or PG degree, completed around your job — no entrance exam and
-                  no attendance, with admission confirmed in 48 hours.
+                  Tell us where you left off and we will tell you what is left to finish — a UGC
+                  recognized degree, completed around your job.
                 </p>
               </Reveal>
 
+              {/* The question, as four answers. */}
               <Reveal delay={180}>
-                <div className="mt-6 flex flex-col items-center gap-2.5 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
-                  <Link to="/contact" className="btn btn-primary">
-                    Book a free consultation
-                  </Link>
-                  <a href={`tel:${site.phoneHref}`} className="btn btn-ghost">
-                    <Phone size={15} aria-hidden="true" />
-                    {site.phone}
-                  </a>
+                <div
+                  role="group"
+                  aria-label="Where did you stop?"
+                  className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start"
+                >
+                  {startingPoints.map((point) => {
+                    const isActive = point.id === selected?.id
+                    return (
+                      <button
+                        key={point.id}
+                        type="button"
+                        aria-pressed={isActive}
+                        onClick={() => setChoice(isActive ? null : point.id)}
+                        className={`badge min-h-11 text-sm transition-colors ${
+                          isActive
+                            ? 'border-navy bg-navy text-white'
+                            : 'hover:border-navy-200 hover:text-ink'
+                        }`}
+                      >
+                        {point.label}
+                      </button>
+                    )
+                  })}
                 </div>
-              </Reveal>
-
-              {/* The three objections people actually raise, answered inline. */}
-              <Reveal delay={240}>
-                <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:mt-6 sm:gap-x-5 lg:justify-start">
-                  {['No entrance exam', 'No attendance', 'Monthly instalments'].map((point) => (
-                    <li
-                      key={point}
-                      className="flex items-center gap-1.5 text-[0.8125rem] text-muted sm:gap-2 sm:text-sm"
-                    >
-                      <Check size={14} strokeWidth={3} className="text-navy" aria-hidden="true" />
-                      {point}
-                    </li>
-                  ))}
-                </ul>
               </Reveal>
             </div>
 
-            {/*
-              On small screens the photograph leads: it fills the top of the
-              panel and fades down into the copy. From lg it moves to the right
-              and bleeds into the panel's top-right corner instead.
-            */}
             <Reveal delay={140} className="relative order-first lg:order-none lg:col-span-6">
               <div className="hero-media -mx-4 -mt-9 sm:-mx-7 sm:-mt-11 lg:mx-0 lg:-mt-12 lg:-mr-10 lg:-mb-8">
                 <Photo
@@ -160,7 +148,6 @@ export default function Home() {
                 />
               </div>
 
-              {/* One fact, floated on the image, where the eye lands. */}
               <div className="float-chip absolute right-4 bottom-2 hidden items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5 lg:flex">
                 <span className="grid h-8 w-8 place-items-center rounded-full bg-gold text-navy-950">
                   <Clock size={16} aria-hidden="true" />
@@ -170,82 +157,132 @@ export default function Home() {
             </Reveal>
           </div>
 
-          {/* The cards form the base of the hero. */}
-          <div className="relative mt-6 grid gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-8">
-            <Reveal delay={60}>
-              <Link
-                to="/courses"
-                className="card card-hover card-p flex h-full flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="t-h3 font-display font-medium">Awarded by universities</h2>
-                    <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden="true" />
+          {/*
+            Base of the hero: the answer to whichever chip is selected, or the
+            three standing facts when nothing is. The default state is what
+            gets prerendered, so crawlers and no-JS visitors see the cards.
+          */}
+          <div className="relative mt-6 lg:mt-8">
+            {selected ? (
+              <div role="status" className="card card-p bg-navy-950 text-white sm:p-8">
+                <div className="grid gap-6 lg:grid-cols-12 lg:items-center">
+                  <div className="lg:col-span-8">
+                    <p className="text-sm text-gold">{selected.label}</p>
+                    <h2 className="t-h3 mt-2 font-display font-medium text-white">
+                      {selected.title}
+                    </h2>
+                    <p className="mt-3 max-w-2xl text-base leading-relaxed text-white/70 md:text-sm">
+                      {selected.body}
+                    </p>
+                    <ul className="mt-4 flex flex-wrap gap-2">
+                      {selected.facts.map((fact) => (
+                        <li key={fact} className="badge badge-dark text-xs">
+                          {fact}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="mt-2 text-base text-muted md:text-sm">
-                    Your certificate is issued by a recognized university, not by us.
-                  </p>
-                </div>
-                <div className="mt-4 flex items-center gap-3">
-                  <ul className="flex -space-x-2">
-                    {universities.map((u) => (
-                      <li
-                        key={u.initials}
-                        className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
-                      >
-                        {u.initials}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className="text-sm text-muted">India &amp; the UK</span>
-                </div>
-              </Link>
-            </Reveal>
 
-            <Reveal delay={120}>
-              <Link
-                to="/courses"
-                className="card card-hover card-p flex h-full flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-3">
-                    <h2 className="t-h3 font-display font-medium">Nine UG &amp; PG programs</h2>
-                    <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden="true" />
-                  </div>
-                  <p className="mt-2 text-base text-muted md:text-sm">
-                    Commerce, management, technology, humanities and social work.
-                  </p>
-                </div>
-                <ul className="mt-4 flex flex-wrap gap-1.5">
-                  {['B.Com', 'BBA', 'BCA', 'MBA', 'MCA', '+4'].map((code) => (
-                    <li
-                      key={code}
-                      className="rounded-full border border-line px-2.5 py-1 text-xs font-medium text-navy"
+                  <div className="flex flex-col gap-2.5 lg:col-span-4 lg:items-end">
+                    <Link to={`/contact?start=${selected.id}`} className="btn btn-gold">
+                      Book a free consultation
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setChoice(null)}
+                      className="action text-sm font-medium text-white/70 hover:text-white"
                     >
-                      {code}
-                    </li>
-                  ))}
-                </ul>
-              </Link>
-            </Reveal>
-
-            <Reveal delay={180}>
-              <div className="card card-hover card-p flex h-full flex-col justify-between">
-                <div>
-                  <h2 className="t-h3 font-display font-medium">Free counseling</h2>
-                  <p className="mt-2 text-base text-muted md:text-sm">
-                    Twenty minutes with an academic counselor. {site.officeHours}.
-                  </p>
+                      Choose a different answer
+                    </button>
+                  </div>
                 </div>
-                <a
-                  href={`tel:${site.phoneHref}`}
-                  className="action mt-4 text-sm font-medium text-navy"
-                >
-                  {site.phone}
-                  <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
-                </a>
               </div>
-            </Reveal>
+            ) : (
+              <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
+                <Reveal delay={60}>
+                  <Link
+                    to="/courses"
+                    className="card card-hover card-p flex h-full flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-3">
+                        <h2 className="t-h3 font-display font-medium">Awarded by universities</h2>
+                        <ArrowUpRight
+                          size={18}
+                          className="shrink-0 text-muted"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <p className="mt-2 text-base text-muted md:text-sm">
+                        Your certificate is issued by a recognized university, not by us.
+                      </p>
+                    </div>
+                    <div className="mt-4 flex items-center gap-3">
+                      <ul className="flex -space-x-2">
+                        {universities.map((u) => (
+                          <li
+                            key={u.initials}
+                            className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
+                          >
+                            {u.initials}
+                          </li>
+                        ))}
+                      </ul>
+                      <span className="text-sm text-muted">India &amp; the UK</span>
+                    </div>
+                  </Link>
+                </Reveal>
+
+                <Reveal delay={120}>
+                  <Link
+                    to="/courses"
+                    className="card card-hover card-p flex h-full flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-3">
+                        <h2 className="t-h3 font-display font-medium">Nine UG &amp; PG programs</h2>
+                        <ArrowUpRight
+                          size={18}
+                          className="shrink-0 text-muted"
+                          aria-hidden="true"
+                        />
+                      </div>
+                      <p className="mt-2 text-base text-muted md:text-sm">
+                        Commerce, management, technology, humanities and social work.
+                      </p>
+                    </div>
+                    <ul className="mt-4 flex flex-wrap gap-1.5">
+                      {['B.Com', 'BBA', 'BCA', 'MBA', 'MCA', '+4'].map((code) => (
+                        <li
+                          key={code}
+                          className="rounded-full border border-line px-2.5 py-1 text-xs font-medium text-navy"
+                        >
+                          {code}
+                        </li>
+                      ))}
+                    </ul>
+                  </Link>
+                </Reveal>
+
+                <Reveal delay={180}>
+                  <div className="card card-hover card-p flex h-full flex-col justify-between">
+                    <div>
+                      <h2 className="t-h3 font-display font-medium">Free counseling</h2>
+                      <p className="mt-2 text-base text-muted md:text-sm">
+                        Twenty minutes with an academic counselor. {site.officeHours}.
+                      </p>
+                    </div>
+                    <a
+                      href={`tel:${site.phoneHref}`}
+                      className="action mt-4 text-sm font-medium text-navy"
+                    >
+                      {site.phone}
+                      <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
+                    </a>
+                  </div>
+                </Reveal>
+              </div>
+            )}
           </div>
         </div>
       </section>
