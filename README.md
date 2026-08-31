@@ -82,6 +82,35 @@ changes; cropping, aspect ratio and lazy-loading are handled by the layout.
 `public/favicon.svg` are **placeholders**. Replace the files at those paths with the real
 artwork — no code changes needed.
 
+## Photographs
+
+Every image is a named slot. **Drop a file named after the slot into `public/images/` and it is
+used automatically** — no code change, no path to edit:
+
+```
+public/images/hero-1.jpg        replaces the hero-1 placeholder
+public/images/about-2.png       replaces about-2
+public/images/blog/<slug>.jpg   the cover for that article
+```
+
+Resolution order is `.avif`, `.webp`, `.jpg`, `.jpeg`, `.png`, `.svg`, so a real photograph always
+beats the `.svg` placeholder. You can delete the placeholder or leave it — it is ignored once a
+real file exists. Adding a file during `npm run dev` reloads the page.
+
+Each placeholder frame is labelled with the slot name and the size it expects. Recommended:
+
+| Slot | Used for | Size |
+| --- | --- | --- |
+| `hero-1` | home hero, blends into the panel | 1600×600, landscape |
+| `hero-2` | counseling session, home about block | 1200×1200, square-ish |
+| `about-1`, `about-2`, `about-3` | about page and home | 1200×900 / 1680×720 |
+| `courses-1`, `courses-2` | courses page | 1680×720 / 1200×900 |
+| `contact-1` | contact page | 1200×750 |
+| `blog/<slug>` | article cover | 1600×900 |
+
+Export at roughly 2× the displayed width (1600–2000px is plenty), quality ~80. Images are
+`loading="lazy"` and `object-cover`, so exact aspect ratios do not matter — the layout crops.
+
 ## Blog
 
 Articles are **markdown files in `src/content/posts/`** — one file per post, the filename is the

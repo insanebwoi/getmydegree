@@ -1,8 +1,64 @@
+import { readdirSync } from 'node:fs'
+import { extname, join, basename } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import matter from 'gray-matter'
 import { marked } from 'marked'
+
+/**
+ * Maps an image's base name to whatever file actually exists for it, so a
+ * placeholder can be replaced by dropping `hero-1.jpg` into public/images
+ * with no code change. Real photography wins over the .svg placeholder.
+ */
+const FORMAT_PRIORITY = ['.avif', '.webp', '.jpg', '.jpeg', '.png', '.svg']
+
+function scanImages(dir: string, urlPrefix: string, out: Record<string, string>) {
+  let entries: string[]
+  try {
+    entries = readdirSync(dir)
+  } catch {
+    return
+  }
+  for (const entry of entries) {
+    const ext = extname(entry).toLowerCase()
+    const rank = FORMAT_PRIORITY.indexOf(ext)
+    if (rank === -1) continue
+    const name = basename(entry, ext)
+    const existing = out[name]
+    if (existing && FORMAT_PRIORITY.indexOf(extname(existing).toLowerCase()) <= rank) continue
+    out[name] = `${urlPrefix}/${entry}`
+  }
+}
+
+function imageManifest(): Plugin {
+  const virtualId = 'virtual:image-manifest'
+  const resolvedId = '\0' + virtualId
+  const build = () => {
+    const manifest: Record<string, string> = {}
+    scanImages(join(process.cwd(), 'public/images'), '/images', manifest)
+    scanImages(join(process.cwd(), 'public/images/blog'), '/images/blog', manifest)
+    return manifest
+  }
+  return {
+    name: 'image-manifest',
+    resolveId: (id) => (id === virtualId ? resolvedId : undefined),
+    load: (id) =>
+      id === resolvedId ? `export const imageManifest = ${JSON.stringify(build())};` : undefined,
+    // Picking up a newly added photograph should not need a restart.
+    configureServer(server) {
+      server.watcher.add(join(process.cwd(), 'public/images'))
+      const reload = (file: string) => {
+        if (!file.includes('/public/images/')) return
+        const mod = server.moduleGraph.getModuleById(resolvedId)
+        if (mod) server.moduleGraph.invalidateModule(mod)
+        server.ws.send({ type: 'full-reload' })
+      }
+      server.watcher.on('add', reload)
+      server.watcher.on('unlink', reload)
+    },
+  }
+}
 
 /**
  * Compiles `.md` posts at build time. The markdown parser stays in the build and
@@ -36,5 +92,5 @@ function markdownPosts(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss(), markdownPosts()],
+  plugins: [react(), tailwindcss(), markdownPosts(), imageManifest()],
 })

@@ -1,13 +1,15 @@
 /**
  * Every photograph on the site, in one place.
  *
- * Each slot points at a placeholder in `public/images/`. To use a real photo,
- * drop the file into `public/images/` and change the `src` here — e.g.
- * `src: '/images/hero-1.jpg'`. Nothing else needs to change; sizes and
- * cropping are handled by the layout.
+ * To use a real photo, drop a file named after the slot into `public/images/`
+ * — `hero-1.jpg`, `about-2.png`, `courses-1.webp`. The build resolves each slot
+ * to whichever file exists, preferring real formats over the .svg placeholder,
+ * so no code change is needed. Cropping is handled by the layout.
  */
+import { imageManifest } from 'virtual:image-manifest'
 
 export type ImageSlot = {
+  /** Placeholder path; overridden by any real file of the same base name. */
   src: string
   alt: string
   /** Intended subject, shown on the placeholder frame. */
@@ -16,7 +18,7 @@ export type ImageSlot = {
   height: number
 }
 
-export const images = {
+const declared = {
   'hero-1': {
     src: '/images/hero-1.svg',
     alt: 'Graduates of GetMyDegree Institutions on campus',
@@ -75,4 +77,16 @@ export const images = {
   },
 } satisfies Record<string, ImageSlot>
 
-export type ImageName = keyof typeof images
+export type ImageName = keyof typeof declared
+
+/** Resolves a slot to the file that actually exists for it. */
+export function imageSrc(name: string, fallback: string) {
+  return imageManifest[name] ?? fallback
+}
+
+export const images = Object.fromEntries(
+  Object.entries(declared).map(([name, slot]) => [
+    name,
+    { ...slot, src: imageSrc(name, slot.src) },
+  ]),
+) as typeof declared

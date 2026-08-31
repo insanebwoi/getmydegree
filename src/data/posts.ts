@@ -8,6 +8,8 @@
  * the static HTML must contain the full article.
  */
 
+import { imageSrc } from './images'
+
 const metaModules = import.meta.glob('../content/posts/*.md', {
   eager: true,
   query: '?meta',
@@ -35,7 +37,8 @@ const slugOf = (path: string) => path.replace(/^.*\/(.+)\.md(\?.*)?$/, '$1')
 export const posts: Post[] = Object.entries(metaModules)
   .map(([path, meta]) => {
     const slug = slugOf(path)
-    return { ...meta, slug, cover: meta.cover ?? `/images/blog/${slug}.svg` }
+    // A cover is whatever file exists at public/images/blog/<slug>.*
+    return { ...meta, slug, cover: imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`) }
   })
   .sort((a, b) => b.date.localeCompare(a.date))
 
