@@ -1,5 +1,14 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ArrowUpRight, BadgeCheck, Building2, Clock, Wallet } from 'lucide-react'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BadgeCheck,
+  Building2,
+  Check,
+  Clock,
+  Phone,
+  Wallet,
+} from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
@@ -50,8 +59,10 @@ export default function Home() {
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
       {/*
-        One hero: copy and photograph side by side, the three summary cards
-        forming its base. Sized to fit a laptop viewport without scrolling.
+        One hero: proof, promise, action and photograph in a single view.
+        Social proof leads because it is the strongest thing this business has
+        — 10,000 finished degrees — and the guidance is to place it above the
+        fold, before the ask.
       */}
       <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-16">
         <div className="panel relative overflow-hidden px-4 pt-9 pb-5 sm:px-7 sm:pt-11 lg:px-10 lg:pt-12 lg:pb-8">
@@ -69,44 +80,77 @@ export default function Home() {
 
           <div className="relative grid items-center gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-10">
             <div className="text-center lg:col-span-6 lg:text-left">
+              {/* Named alumni, not a faceless counter. */}
               <Reveal>
-                <span className="badge">
-                  <span className="dot bg-gold" /> Trusted by 10,000+ graduates
-                </span>
+                <div className="flex items-center justify-center gap-2.5 lg:justify-start">
+                  <ul className="flex -space-x-1.5 sm:-space-x-2">
+                    {testimonials.map((t) => (
+                      <li
+                        key={t.name}
+                        className="grid h-7 w-7 place-items-center rounded-full border-2 border-white bg-navy-50 font-display text-[0.6875rem] font-medium text-navy sm:h-8 sm:w-8 sm:text-xs"
+                        aria-hidden="true"
+                      >
+                        {t.name.charAt(0)}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-[0.8125rem] whitespace-nowrap text-muted sm:text-sm">
+                    <strong className="font-medium text-ink">10,000+ graduates</strong> since{' '}
+                    {site.established}
+                  </p>
+                </div>
               </Reveal>
-              <Reveal delay={80}>
-                <h1 className="t-hero mt-3 sm:mt-4">
-                  Finish Your Degree,
+
+              <Reveal delay={60}>
+                <h1 className="t-hero mt-4 sm:mt-5">
+                  Finish your degree.
                   <br />
-                  Restart Your Career
+                  <span className="mark">Restart your career.</span>
                 </h1>
               </Reveal>
-              <Reveal delay={160}>
-                <p className="mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-muted sm:mt-4 sm:text-base lg:mx-0 lg:text-[1.0625rem]">
-                  Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
-                  attendance, admission confirmed within 48 hours.
+
+              <Reveal delay={120}>
+                <p className="mx-auto mt-4 max-w-lg text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:mx-0 lg:text-[1.0625rem]">
+                  A UGC recognized UG or PG degree, completed around your job — no entrance exam and
+                  no attendance, with admission confirmed in 48 hours.
                 </p>
               </Reveal>
-              <Reveal delay={240}>
-                <div className="mt-5 flex flex-col items-center gap-2.5 sm:mt-6 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
+
+              <Reveal delay={180}>
+                <div className="mt-6 flex flex-col items-center gap-2.5 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
                   <Link to="/contact" className="btn btn-primary">
                     Book a free consultation
                   </Link>
-                  <Link to="/courses" className="btn btn-ghost">
-                    Explore programs
-                  </Link>
+                  <a href={`tel:${site.phoneHref}`} className="btn btn-ghost">
+                    <Phone size={15} aria-hidden="true" />
+                    {site.phone}
+                  </a>
                 </div>
+              </Reveal>
+
+              {/* The three objections people actually raise, answered inline. */}
+              <Reveal delay={240}>
+                <ul className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 sm:mt-6 sm:gap-x-5 lg:justify-start">
+                  {['No entrance exam', 'No attendance', 'Monthly instalments'].map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-center gap-1.5 text-[0.8125rem] text-muted sm:gap-2 sm:text-sm"
+                    >
+                      <Check size={14} strokeWidth={3} className="text-navy" aria-hidden="true" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </Reveal>
             </div>
 
             {/*
               On small screens the photograph leads: it fills the top of the
               panel and fades down into the copy. From lg it moves to the right
-              and bleeds into the panel's top-right corner instead. The two mask
-              directions live in `.hero-media`, since they change by breakpoint.
+              and bleeds into the panel's top-right corner instead.
             */}
-            <Reveal delay={200} className="order-first lg:order-none lg:col-span-6">
-              <div className="hero-media -mx-4 -mt-10 sm:-mx-7 sm:-mt-12 lg:mx-0 lg:-mt-12 lg:-mr-12 lg:-mb-8">
+            <Reveal delay={140} className="relative order-first lg:order-none lg:col-span-6">
+              <div className="hero-media -mx-4 -mt-9 sm:-mx-7 sm:-mt-11 lg:mx-0 lg:-mt-12 lg:-mr-10 lg:-mb-8">
                 <Photo
                   name="hero-1"
                   ratio="16/9"
@@ -115,52 +159,87 @@ export default function Home() {
                   className="max-h-[150px] sm:max-h-[230px] lg:max-h-[430px]"
                 />
               </div>
+
+              {/* One fact, floated on the image, where the eye lands. */}
+              <div className="float-chip absolute right-4 bottom-2 hidden items-center gap-2.5 rounded-full py-2 pr-4 pl-2.5 lg:flex">
+                <span className="grid h-8 w-8 place-items-center rounded-full bg-gold text-navy-950">
+                  <Clock size={16} aria-hidden="true" />
+                </span>
+                <span className="text-sm font-medium">Admitted in 48 hours</span>
+              </div>
             </Reveal>
           </div>
 
           {/* The cards form the base of the hero. */}
           <div className="relative mt-6 grid gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-8">
-            <Reveal delay={80}>
-              <div className="card card-hover card-p h-full">
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="t-h3 font-display font-medium">Partner universities</h2>
-                  <ArrowUpRight size={18} className="text-muted" aria-hidden="true" />
+            <Reveal delay={60}>
+              <Link
+                to="/courses"
+                className="card card-hover card-p flex h-full flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h2 className="t-h3 font-display font-medium">Awarded by universities</h2>
+                    <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden="true" />
+                  </div>
+                  <p className="mt-2 text-base text-muted md:text-sm">
+                    Your certificate is issued by a recognized university, not by us.
+                  </p>
                 </div>
-                <p className="mt-3 text-base text-muted md:text-sm">
-                  Degrees awarded by three recognized institutions in India and the UK.
-                </p>
-                <div className="mt-4 flex -space-x-2">
-                  {universities.map((u) => (
-                    <span
-                      key={u.initials}
-                      className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
+                <div className="mt-4 flex items-center gap-3">
+                  <ul className="flex -space-x-2">
+                    {universities.map((u) => (
+                      <li
+                        key={u.initials}
+                        className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
+                      >
+                        {u.initials}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="text-sm text-muted">India &amp; the UK</span>
+                </div>
+              </Link>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <Link
+                to="/courses"
+                className="card card-hover card-p flex h-full flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-start justify-between gap-3">
+                    <h2 className="t-h3 font-display font-medium">Nine UG &amp; PG programs</h2>
+                    <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden="true" />
+                  </div>
+                  <p className="mt-2 text-base text-muted md:text-sm">
+                    Commerce, management, technology, humanities and social work.
+                  </p>
+                </div>
+                <ul className="mt-4 flex flex-wrap gap-1.5">
+                  {['B.Com', 'BBA', 'BCA', 'MBA', 'MCA', '+4'].map((code) => (
+                    <li
+                      key={code}
+                      className="rounded-full border border-line px-2.5 py-1 text-xs font-medium text-navy"
                     >
-                      {u.initials}
-                    </span>
+                      {code}
+                    </li>
                   ))}
-                </div>
-              </div>
+                </ul>
+              </Link>
             </Reveal>
 
-            <Reveal delay={160}>
-              <div className="card card-hover card-p flex h-full flex-col justify-center text-center">
-                <p className="t-h3 font-display font-medium">Graduates placed</p>
-                <p className="mt-2 font-display text-4xl font-medium text-navy">10,000+</p>
-                <p className="mt-1 text-base text-muted md:text-sm">since {site.established}</p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={240}>
+            <Reveal delay={180}>
               <div className="card card-hover card-p flex h-full flex-col justify-between">
                 <div>
-                  <p className="t-h3 font-display font-medium">Counseling, free</p>
+                  <h2 className="t-h3 font-display font-medium">Free counseling</h2>
                   <p className="mt-2 text-base text-muted md:text-sm">
-                    Talk to an academic counselor. {site.officeHours}.
+                    Twenty minutes with an academic counselor. {site.officeHours}.
                   </p>
                 </div>
                 <a
                   href={`tel:${site.phoneHref}`}
-                  className="action mt-3 text-sm font-medium text-navy"
+                  className="action mt-4 text-sm font-medium text-navy"
                 >
                   {site.phone}
                   <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
