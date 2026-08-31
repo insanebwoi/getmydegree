@@ -100,28 +100,19 @@ export default function Home() {
             </div>
 
             {/*
-              The photograph bleeds into the panel's top-right corner; its
-              inner edges are feathered so it dissolves into the surface
-              rather than sitting on it as a separate block.
+              On small screens the photograph leads: it fills the top of the
+              panel and fades down into the copy. From lg it moves to the right
+              and bleeds into the panel's top-right corner instead. The two mask
+              directions live in `.hero-media`, since they change by breakpoint.
             */}
-            <Reveal delay={200} className="lg:col-span-6">
-              <div
-                className="-mx-4 sm:-mx-7 lg:-mt-12 lg:-mr-10 lg:-mb-8 lg:ml-0"
-                style={{
-                  maskImage:
-                    'linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%), linear-gradient(to right, transparent 0%, #000 24%)',
-                  WebkitMaskImage:
-                    'linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%), linear-gradient(to right, transparent 0%, #000 24%)',
-                  maskComposite: 'intersect',
-                  WebkitMaskComposite: 'source-in',
-                }}
-              >
+            <Reveal delay={200} className="order-first lg:order-none lg:col-span-6">
+              <div className="hero-media -mx-4 -mt-10 sm:-mx-7 sm:-mt-12 lg:mx-0 lg:-mt-12 lg:-mr-12 lg:-mb-8">
                 <Photo
                   name="hero-1"
                   ratio="16/9"
                   rounded="none"
                   priority
-                  className="max-h-[180px] sm:max-h-[260px] lg:max-h-[430px]"
+                  className="max-h-[150px] sm:max-h-[230px] lg:max-h-[430px]"
                 />
               </div>
             </Reveal>

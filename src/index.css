@@ -364,6 +364,28 @@
     scroll-snap-align: start;
   }
 
+  /*
+    Hero photograph. On small screens it sits flush to the top of the panel and
+    fades downward into the copy; from lg it bleeds off the top-right corner and
+    is feathered on the edges that meet the panel.
+  */
+  .hero-media {
+    -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 58%, transparent 100%);
+  }
+  @media (min-width: 1024px) {
+    .hero-media {
+      -webkit-mask-image:
+        linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%),
+        linear-gradient(to right, transparent 0%, #000 24%);
+      mask-image:
+        linear-gradient(to bottom, transparent 0%, #000 18%, #000 80%, transparent 100%),
+        linear-gradient(to right, transparent 0%, #000 24%);
+      -webkit-mask-composite: source-in;
+      mask-composite: intersect;
+    }
+  }
+
   .action {
     display: inline-flex;
     align-items: center;
