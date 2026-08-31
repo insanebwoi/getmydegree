@@ -4,9 +4,8 @@ import {
   ArrowUpRight,
   BadgeCheck,
   Building2,
-  Check,
   Clock,
-  Phone,
+  GraduationCap,
   Wallet,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
@@ -58,189 +57,128 @@ export default function Home() {
     <>
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
-      {/*
-        Immersive hero: the photograph fills the panel and a navy scrim carries
-        the type over it. The scrim is heaviest where the words sit and clears
-        toward the right so the graduates stay visible — the picture is the
-        argument, so it gets the whole surface rather than a column.
-      */}
-      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-16">
-        <div className="relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line">
-          <Photo
-            name="hero-1"
-            rounded="none"
-            priority
-            className="absolute inset-0 -z-20 h-full w-full object-[50%_22%] lg:object-center"
-          />
-
-          {/*
-            Two scrims. The first darkens the side the words sit on; the second
-            guarantees a dark band along the base, because the fact strip runs
-            the full width and the photograph is bright on the right.
-          */}
+      {/* Hero panel with floating summary cards, mirroring a dashboard surface. */}
+      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-20">
+        <div className="panel relative overflow-hidden px-4 pt-11 pb-5 sm:px-7 sm:pt-14 lg:px-10 lg:pt-20 lg:pb-8">
+          {/* Faint guide lines — structure, not decoration. */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(5,18,41,0.97)_0%,rgba(5,18,41,0.93)_46%,rgba(5,18,41,0.66)_72%,rgba(5,18,41,0.4)_100%)] lg:bg-[linear-gradient(100deg,rgba(5,18,41,0.97)_0%,rgba(5,18,41,0.94)_36%,rgba(5,18,41,0.8)_56%,rgba(5,18,41,0.42)_80%,rgba(5,18,41,0.28)_100%)]"
+            className="pointer-events-none absolute inset-0 opacity-[0.55]"
+            style={{
+              backgroundImage:
+                'linear-gradient(to right, var(--color-line) 1px, transparent 1px), linear-gradient(to bottom, var(--color-line) 1px, transparent 1px)',
+              backgroundSize: '96px 96px',
+              maskImage: 'radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 100%)',
+            }}
           />
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-[linear-gradient(to_top,rgba(5,18,41,0.94)_0%,rgba(5,18,41,0.72)_45%,transparent_100%)]"
-          />
+          <span className="chip absolute top-10 left-6 hidden lg:grid" aria-hidden="true">
+            <GraduationCap size={19} />
+          </span>
+          <span className="chip absolute top-10 right-6 hidden lg:grid" aria-hidden="true">
+            <BadgeCheck size={19} />
+          </span>
 
-          <div className="relative px-5 pt-28 pb-8 sm:px-8 sm:pt-40 lg:px-12 lg:pt-16 lg:pb-12">
-            <div className="max-w-xl lg:max-w-2xl">
-              <Reveal>
-                <div className="flex items-center gap-2.5">
-                  <ul className="flex -space-x-1.5 sm:-space-x-2">
-                    {testimonials.map((t) => (
-                      <li
-                        key={t.name}
-                        className="grid h-7 w-7 place-items-center rounded-full border-2 border-navy-950 bg-white/15 font-display text-[0.6875rem] font-medium text-white backdrop-blur-sm sm:h-8 sm:w-8 sm:text-xs"
-                        aria-hidden="true"
-                      >
-                        {t.name.charAt(0)}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-[0.8125rem] text-white/75 sm:text-sm">
-                    <strong className="font-medium text-white">10,000+ graduates</strong> since{' '}
-                    {site.established}
+          <div className="relative mx-auto max-w-3xl text-center">
+            <Reveal>
+              <span className="badge">
+                <span className="dot bg-gold" /> Trusted by 10,000+ graduates
+              </span>
+            </Reveal>
+            <Reveal delay={80}>
+              <h1 className="t-hero mt-5">
+                Finish Your Degree,
+                <br />
+                Restart Your Career
+              </h1>
+            </Reveal>
+            <Reveal delay={160}>
+              <p className="t-body mx-auto mt-4 max-w-xl text-muted">
+                Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
+                attendance, admission confirmed within 48 hours.
+              </p>
+            </Reveal>
+            <Reveal delay={240}>
+              <div className="mt-7 flex flex-wrap justify-center gap-2.5">
+                <Link to="/contact" className="btn btn-primary">
+                  Book a free consultation
+                </Link>
+                <Link to="/courses" className="btn btn-ghost">
+                  Explore programs
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Summary cards sit on the panel, sharing its surface. */}
+          <div className="relative mt-10 grid gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-14">
+            <Reveal delay={80}>
+              <div className="card card-hover card-p h-full">
+                <div className="flex items-start justify-between gap-3">
+                  <h2 className="t-h3 font-display font-medium">Partner universities</h2>
+                  <ArrowUpRight size={18} className="text-muted" aria-hidden="true" />
+                </div>
+                <p className="mt-4 text-base text-muted md:text-sm">
+                  Degrees awarded by three recognized institutions in India and the UK.
+                </p>
+                <div className="mt-5 flex -space-x-2">
+                  {universities.map((u) => (
+                    <span
+                      key={u.initials}
+                      className="grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
+                    >
+                      {u.initials}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={160}>
+              <div className="card card-hover card-p h-full text-center">
+                <p className="t-h3 font-display font-medium">Graduates placed</p>
+                <p className="mt-4 font-display text-4xl font-medium text-navy">10,000+</p>
+                <p className="mt-2 text-base text-muted md:text-sm">since {site.established}</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <div className="card card-hover card-p flex h-full flex-col justify-between">
+                <div>
+                  <p className="t-h3 font-display font-medium">Counseling, free</p>
+                  <p className="mt-3 text-base text-muted md:text-sm">
+                    Talk to an academic counselor. {site.officeHours}.
                   </p>
                 </div>
-              </Reveal>
-
-              <Reveal delay={60}>
-                <h1 className="t-hero mt-4 text-white sm:mt-5">
-                  Finish your degree.
-                  <br />
-                  <span className="mark-dark">Restart your career.</span>
-                </h1>
-              </Reveal>
-
-              <Reveal delay={120}>
-                <p className="mt-4 max-w-lg text-[0.9375rem] leading-relaxed text-white/80 sm:text-base lg:text-[1.0625rem]">
-                  A UGC recognized UG or PG degree, completed around your job — no entrance exam and
-                  no attendance, with admission confirmed in 48 hours.
-                </p>
-              </Reveal>
-
-              <Reveal delay={180}>
-                <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
-                  <Link to="/contact" className="btn btn-gold">
-                    Book a free consultation
-                  </Link>
-                  <a href={`tel:${site.phoneHref}`} className="btn btn-glass">
-                    <Phone size={15} aria-hidden="true" />
-                    {site.phone}
-                  </a>
-                </div>
-              </Reveal>
-            </div>
-
-            {/* Three facts, set as a rule-separated strip along the base. */}
-            <Reveal delay={240}>
-              <dl className="mt-8 grid gap-x-8 gap-y-4 border-t border-white/15 pt-5 sm:grid-cols-3 lg:mt-14 lg:gap-y-5 lg:pt-6">
-                {[
-                  ['No entrance exam', 'Continuous assessment, no examination hall.'],
-                  ['Admitted in 48 hours', 'Documents verified, enrolment confirmed.'],
-                  ['Monthly instalments', 'No interest and no processing fee.'],
-                ].map(([term, detail]) => (
-                  <div key={term} className="flex gap-3">
-                    <Check
-                      size={16}
-                      strokeWidth={3}
-                      className="mt-1 shrink-0 text-gold"
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <dt className="font-display font-medium text-white">{term}</dt>
-                      <dd className="mt-0.5 text-sm text-white/65">{detail}</dd>
-                    </div>
-                  </div>
-                ))}
-              </dl>
+                <a
+                  href={`tel:${site.phoneHref}`}
+                  className="action mt-5 text-sm font-medium text-navy"
+                >
+                  {site.phone}
+                  <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
+                </a>
+              </div>
             </Reveal>
           </div>
         </div>
-
-        {/* The three standing facts, overlapping the panel's lower edge. */}
-        <div className="relative z-10 mx-1 -mt-6 grid gap-3 sm:mx-4 sm:grid-cols-3 sm:gap-4 lg:mx-8 lg:-mt-10">
-          <Reveal delay={60}>
-            <Link
-              to="/courses"
-              className="card card-hover card-p flex h-full flex-col justify-between shadow-[var(--shadow-lift)]"
-            >
-              <div>
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="t-h3 font-display font-medium">Awarded by universities</h2>
-                  <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden="true" />
-                </div>
-                <p className="mt-2 text-base text-muted md:text-sm">
-                  Your certificate is issued by a recognized university, not by us.
-                </p>
-              </div>
-              <div className="mt-4 flex items-center gap-3">
-                <ul className="flex -space-x-2">
-                  {universities.map((u) => (
-                    <li
-                      key={u.initials}
-                      className="grid h-9 w-9 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
-                    >
-                      {u.initials}
-                    </li>
-                  ))}
-                </ul>
-                <span className="text-sm text-muted">India &amp; the UK</span>
-              </div>
-            </Link>
-          </Reveal>
-
-          <Reveal delay={120}>
-            <Link
-              to="/courses"
-              className="card card-hover card-p flex h-full flex-col justify-between shadow-[var(--shadow-lift)]"
-            >
-              <div>
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="t-h3 font-display font-medium">Nine UG &amp; PG programs</h2>
-                  <ArrowUpRight size={18} className="shrink-0 text-muted" aria-hidden="true" />
-                </div>
-                <p className="mt-2 text-base text-muted md:text-sm">
-                  Commerce, management, technology, humanities and social work.
-                </p>
-              </div>
-              <ul className="mt-4 flex flex-wrap gap-1.5">
-                {['B.Com', 'BBA', 'BCA', 'MBA', 'MCA', '+4'].map((code) => (
-                  <li
-                    key={code}
-                    className="rounded-full border border-line px-2.5 py-1 text-xs font-medium text-navy"
-                  >
-                    {code}
-                  </li>
-                ))}
-              </ul>
-            </Link>
-          </Reveal>
-
-          <Reveal delay={180}>
-            <div className="card card-hover card-p flex h-full flex-col justify-between shadow-[var(--shadow-lift)]">
-              <div>
-                <h2 className="t-h3 font-display font-medium">Free counseling</h2>
-                <p className="mt-2 text-base text-muted md:text-sm">
-                  Twenty minutes with an academic counselor. {site.officeHours}.
-                </p>
-              </div>
-              <a
-                href={`tel:${site.phoneHref}`}
-                className="action mt-4 text-sm font-medium text-navy"
-              >
-                {site.phone}
-                <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
-              </a>
-            </div>
-          </Reveal>
-        </div>
       </section>
+
+      {/*
+        Banner image. Constrained rather than full-bleed: the current
+        photograph is 612px wide, and stretching it across 1376px makes it
+        visibly soft. Widen this back to the full grid once a photograph of
+        at least 2000px is in place.
+      */}
+      <div className="shell pb-10 sm:pb-14 lg:pb-20">
+        <Reveal>
+          <Photo
+            name="hero-1"
+            ratio="16/7"
+            priority
+            rounded="panel"
+            className="mx-auto max-w-3xl"
+          />
+        </Reveal>
+      </div>
 
       {/* Awarding bodies, in the position the reference gives its logo strip. */}
       <div className="shell pb-12 lg:pb-20">

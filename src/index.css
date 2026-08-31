@@ -402,27 +402,6 @@
     padding-bottom: 0.04em;
   }
 
-  /* Marker for use on a dark surface — thinner, so the white type stays clear. */
-  .mark-dark {
-    background-image: linear-gradient(var(--color-gold), var(--color-gold));
-    background-repeat: no-repeat;
-    background-position: 0 100%;
-    background-size: 100% 0.12em;
-    padding-bottom: 0.04em;
-  }
-
-  .btn-glass {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.35);
-    color: #fff;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-  .btn-glass:hover {
-    background: #fff;
-    color: var(--color-navy-950);
-  }
-
   /* Small proof chip that floats over the hero photograph. */
   .float-chip {
     background: rgba(255, 255, 255, 0.92);
