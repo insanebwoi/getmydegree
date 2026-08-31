@@ -75,20 +75,20 @@ export default function Home() {
                 </span>
               </Reveal>
               <Reveal delay={80}>
-                <h1 className="t-hero mt-4">
+                <h1 className="t-hero mt-3 sm:mt-4">
                   Finish Your Degree,
                   <br />
                   Restart Your Career
                 </h1>
               </Reveal>
               <Reveal delay={160}>
-                <p className="t-body mx-auto mt-4 max-w-xl text-muted lg:mx-0">
+                <p className="mx-auto mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-muted sm:mt-4 sm:text-base lg:mx-0 lg:text-[1.0625rem]">
                   Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
                   attendance, admission confirmed within 48 hours.
                 </p>
               </Reveal>
               <Reveal delay={240}>
-                <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-center lg:justify-start">
+                <div className="mt-5 flex flex-col items-center gap-2.5 sm:mt-6 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
                   <Link to="/contact" className="btn btn-primary">
                     Book a free consultation
                   </Link>

@@ -106,26 +106,27 @@
   /*
     Fluid type: one continuous scale from 320px to 1440px, so every device
     lands on a sensible size instead of jumping at breakpoints. Body copy
-    never drops below 16px on mobile.
+    holds at 16px on phones, where anything smaller is hard to read.
   */
   .t-hero {
-    font-size: clamp(1.875rem, 1.16rem + 3.55vw, 3.75rem);
+    font-size: clamp(1.625rem, 0.95rem + 3.4vw, 4.25rem);
+    line-height: 1.08;
   }
   .t-h1 {
-    font-size: clamp(1.75rem, 1.19rem + 2.8vw, 3rem);
+    font-size: clamp(1.75rem, 1.12rem + 3.15vw, 3.375rem);
   }
   .t-h2 {
-    font-size: clamp(1.5rem, 1.09rem + 2.05vw, 2.5rem);
+    font-size: clamp(1.5rem, 1.05rem + 2.25vw, 2.75rem);
   }
   .t-h3 {
-    font-size: clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem);
+    font-size: clamp(1.0625rem, 0.96rem + 0.5vw, 1.375rem);
   }
   .t-stat {
-    font-size: clamp(1.875rem, 1.45rem + 2.1vw, 3rem);
+    font-size: clamp(1.875rem, 1.37rem + 2.4vw, 3.5rem);
   }
   .t-body {
-    font-size: clamp(1rem, 0.98rem + 0.1vw, 1.0625rem);
-    line-height: 1.65;
+    font-size: clamp(1rem, 0.95rem + 0.24vw, 1.1875rem);
+    line-height: 1.6;
   }
   .t-small {
     font-size: clamp(0.9375rem, 0.92rem + 0.1vw, 1rem);
@@ -134,10 +135,10 @@
 
   /* Section rhythm scales with the viewport too. */
   .section-y {
-    padding-block: clamp(3rem, 2rem + 5vw, 6rem);
+    padding-block: clamp(3rem, 2rem + 5vw, 6.5rem);
   }
   .card-p {
-    padding: clamp(1.125rem, 0.9rem + 1vw, 1.75rem);
+    padding: clamp(1.125rem, 0.85rem + 1.25vw, 2rem);
   }
 
   /* Pill label that sits above a section title. */
@@ -189,11 +190,11 @@
     justify-content: center;
     gap: 0.5rem;
     min-height: 2.75rem;
-    padding: 0.75rem 1.375rem;
+    padding: 0.6875rem 1.125rem;
+    font-size: 0.875rem;
     border-radius: 999px;
     border: 1px solid transparent;
     font-family: var(--font-display);
-    font-size: 0.9375rem;
     font-weight: 500;
     line-height: 1;
     transition:
@@ -201,6 +202,12 @@
       color 220ms ease,
       border-color 220ms ease,
       transform 220ms ease;
+  }
+  @media (min-width: 640px) {
+    .btn {
+      padding: 0.75rem 1.375rem;
+      font-size: 0.9375rem;
+    }
   }
   .btn:hover {
     transform: translateY(-1px);
