@@ -125,7 +125,7 @@ export function HeroVisual() {
     <div ref={frame} className="group relative h-full w-full">
       <div
         ref={track}
-        className="parallax enter-image relative h-full w-full overflow-hidden rounded-[1.75rem]"
+        className="parallax enter-image relative h-full w-full overflow-hidden rounded-b-[1.75rem] lg:rounded-t-none lg:rounded-r-none lg:rounded-bl-[2rem] lg:rounded-tl-[2rem]"
         style={{ ['--enter-delay' as string]: '320ms' }}
       >
         {/*
@@ -156,7 +156,7 @@ export function HeroVisual() {
         {/* A light wash on the inner edge, so the frame meets the page softly. */}
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-1/4 bg-[linear-gradient(to_right,rgba(255,255,255,0.55),transparent)]"
+          className="absolute inset-y-0 left-0 w-1/3 bg-[linear-gradient(to_right,rgba(255,255,255,0.72),rgba(255,255,255,0.12)_60%,transparent)]"
         />
 
         {/* Progress and control, quiet until wanted. */}
@@ -190,7 +190,7 @@ export function HeroVisual() {
       */}
       <div
         ref={proof}
-        className="parallax enter absolute -bottom-4 -left-4 rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)] sm:-bottom-5 sm:-left-6 lg:-right-5 lg:bottom-8 lg:left-auto"
+        className="parallax enter absolute bottom-5 left-4 rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)] sm:bottom-7 sm:left-6 lg:bottom-10 lg:left-8"
         style={{ ['--enter-delay' as string]: '620ms' }}
       >
         <span className="absolute -top-4 left-5 grid h-9 w-9 place-items-center rounded-full bg-white text-navy shadow-[0_6px_16px_-8px_rgba(5,18,41,0.5)]">

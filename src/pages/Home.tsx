@@ -67,10 +67,10 @@ export default function Home() {
       */}
       <section className="shell -mt-1 pb-10 sm:pb-14 lg:pb-16">
         <div className="hero-screen hero-light relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line">
-          <div className="grid flex-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="lg:col-span-6">
+          <div className="grid flex-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="flex flex-col justify-center lg:col-span-6">
               <p
-                className="enter inline-flex items-center gap-2 rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
+                className="enter inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
                 style={{ ['--enter-delay' as string]: '60ms' }}
               >
                 <span className="h-2 w-2 rounded-full bg-gold" aria-hidden="true" />
@@ -123,10 +123,14 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="lg:col-span-6">
-              <div className="h-[clamp(240px,38vh,320px)] pt-2 sm:h-[clamp(280px,40vh,360px)] lg:h-[clamp(340px,56vh,480px)] lg:pt-0 lg:pl-6">
-                <HeroVisual />
-              </div>
+            {/*
+              The photograph bleeds to the panel's edges rather than sitting in
+              a padded box: it reaches the top, right and bottom of the hero and
+              is only rounded on the inner corners, so the picture reads as the
+              hero's right half rather than an inset picture.
+            */}
+            <div className="-mx-[var(--hero-pad)] -mb-[var(--hero-pad-y)] h-[clamp(260px,40vh,340px)] lg:col-span-6 lg:mx-0 lg:-mt-[var(--hero-pad-y)] lg:-mr-[var(--hero-pad)] lg:mb-0 lg:h-auto lg:pl-4">
+              <HeroVisual />
             </div>
           </div>
 
