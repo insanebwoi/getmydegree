@@ -6,7 +6,7 @@ import { homeSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Section } from '../components/Section'
 import { Photo } from '../components/Photo'
-import { HeroPortrait } from '../components/HeroPortrait'
+import { HeroVisual } from '../components/HeroVisual'
 import { Stats } from '../components/Stats'
 import {
   admissionSteps,
@@ -51,21 +51,21 @@ export default function Home() {
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
       {/*
-        Editorial hero. An asymmetric 58/42 split on an ivory surface: the
-        headline dominates, the photograph carries the feeling, and a single
-        floating statistic does the proof. Everything else — partner
-        institutions, counseling — sits quietly on a rule beneath, so nothing
-        competes with the heading.
+        One composed screen: the hero claims the viewport minus the navbar and
+        divides it between the editorial split and the trust bar, so the
+        headline, both actions, the photograph and the credibility strip are
+        all visible without scrolling on a laptop.
       */}
-      <section className="shell pt-1 pb-12 sm:pb-16 lg:pb-20">
-        <div className="hero-surface overflow-hidden rounded-[var(--radius-panel)] border border-line px-5 pt-10 pb-10 sm:px-8 sm:pt-14 lg:min-h-[680px] lg:px-14 lg:pt-12 lg:pb-12">
-          <div className="relative grid items-center gap-9 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-7">
+      <section className="shell pb-10 sm:pb-14 lg:pb-16">
+        <div className="hero-surface hero-screen overflow-hidden rounded-[var(--radius-panel)] border border-line">
+          {/* Editorial split — takes the height the trust bar does not need. */}
+          <div className="grid flex-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-6 xl:col-span-6">
               <p
-                className="enter flex items-center gap-2.5 text-[0.8125rem] font-medium tracking-[0.14em] text-muted uppercase"
+                className="enter inline-flex items-center gap-2 rounded-full border border-navy/12 bg-white/70 py-1.5 pr-4 pl-2.5 text-[0.8125rem] font-medium text-ink"
                 style={{ ['--enter-delay' as string]: '60ms' }}
               >
-                <span className="h-px w-8 bg-navy/35" aria-hidden="true" />
+                <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
                 Trusted by 10,000+ graduates
               </p>
 
@@ -79,7 +79,7 @@ export default function Home() {
               </h1>
 
               <p
-                className="enter mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted lg:text-lg"
+                className="enter mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:text-[1.0625rem]"
                 style={{ ['--enter-delay' as string]: '240ms' }}
               >
                 Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
@@ -87,81 +87,88 @@ export default function Home() {
               </p>
 
               <div
-                className="enter mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4"
+                className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
                 style={{ ['--enter-delay' as string]: '340ms' }}
               >
-                <Link to="/contact" className="btn btn-arrow btn-primary w-full sm:w-auto">
+                <Link to="/contact" className="btn btn-arrow btn-primary justify-center">
                   Book a free consultation
                   <ArrowRight size={16} aria-hidden="true" />
                 </Link>
-                <Link to="/courses" className="btn btn-quiet w-full sm:w-auto">
+                <Link to="/courses" className="btn btn-quiet btn-arrow justify-center">
                   Explore programs
+                  <ArrowRight size={15} aria-hidden="true" />
                 </Link>
               </div>
             </div>
 
-            <div className="lg:col-span-5">
-              <HeroPortrait />
+            {/*
+              The photograph bleeds to the panel's right and bottom edges. It is
+              pulled out of the padded flow so it can reach them, and given a
+              height that follows the hero rather than a fixed aspect ratio.
+            */}
+            <div className="lg:col-span-6 xl:col-span-6">
+              <div className="-mx-[clamp(1.25rem,4vw,3.5rem)] -mb-[clamp(1.25rem,3.2vh,2.75rem)] h-[clamp(260px,42vh,340px)] pl-8 lg:mx-0 lg:mb-0 lg:-mr-[clamp(1.25rem,4vw,3.5rem)] lg:h-[clamp(360px,62vh,560px)] lg:pl-0">
+                <HeroVisual />
+              </div>
             </div>
           </div>
 
-          {/*
-            Credibility strip. Institution names are set as wordmarks — real
-            logos belong here, so `logo` in src/data/site.ts takes an SVG path
-            and this swaps to an <img> the moment one exists.
-          */}
-          <div
-            className="enter mt-12 border-t border-navy/10 pt-7 lg:mt-14"
-            style={{ ['--enter-delay' as string]: '520ms' }}
-          >
-            <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
-              <div className="lg:col-span-4">
-                <h2 className="text-[0.8125rem] font-medium tracking-[0.14em] text-muted uppercase">
+          {/* Trust bar: three areas on one rule, inside the first screen. */}
+          <div className="enter mt-8 lg:mt-6" style={{ ['--enter-delay' as string]: '760ms' }}>
+            <div className="hero-trust grid gap-5 rounded-[1.25rem] border border-line bg-white/80 px-5 py-5 shadow-[var(--shadow-soft)] backdrop-blur-sm sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0 lg:py-4">
+              {/* Partner universities */}
+              <div className="lg:col-span-6 lg:pr-8">
+                <h2 className="text-[0.6875rem] font-medium tracking-[0.16em] text-muted uppercase">
                   Partner universities
                 </h2>
-                <p className="mt-3 max-w-xs text-[0.9375rem] leading-relaxed text-muted">
+                <ul className="mt-2.5 flex flex-wrap items-center gap-x-6 gap-y-2">
+                  {universities.map((u) => (
+                    <li key={u.name}>
+                      {u.logo ? (
+                        <img
+                          src={u.logo}
+                          alt={u.name}
+                          loading="lazy"
+                          className="h-6 w-auto opacity-70 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0"
+                        />
+                      ) : (
+                        <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink">
+                          {u.name}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-2 text-xs text-muted">
                   Degrees awarded by three recognized institutions in India and the UK.
                 </p>
               </div>
 
-              <ul className="grid gap-6 sm:grid-cols-3 lg:col-span-8 lg:gap-8">
-                {universities.map((u) => (
-                  <li key={u.name}>
-                    {u.logo ? (
-                      <img
-                        src={u.logo}
-                        alt={u.name}
-                        loading="lazy"
-                        className="h-8 w-auto opacity-70 grayscale transition-opacity hover:opacity-100"
-                      />
-                    ) : (
-                      <span className="font-display text-[1.0625rem] leading-tight font-medium text-ink">
-                        {u.name}
-                      </span>
-                    )}
-                    <span className="mt-1 block text-xs tracking-wide text-muted">
-                      {u.location}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {/* Graduates placed */}
+              <div className="border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
+                <p className="font-display text-2xl leading-none font-semibold text-navy">
+                  10,000+
+                </p>
+                <p className="mt-1.5 text-sm font-medium">Graduates placed</p>
+                <p className="text-xs text-muted">since 2021</p>
+              </div>
 
-            {/* Micro-conversion: quiet by design, one line, one number. */}
-            <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-navy/10 pt-5 text-[0.9375rem]">
-              <span className="grid h-8 w-8 place-items-center rounded-full bg-navy/8 text-navy">
-                <Phone size={15} aria-hidden="true" />
-              </span>
-              <span className="font-medium">Counseling, free</span>
-              <span className="text-muted">
-                Talk to an academic counselor. Mon–Sat · 9am to 7pm.
-              </span>
-              <a
-                href={`tel:${site.phoneHref}`}
-                className="action font-medium text-navy underline-offset-4 hover:underline"
-              >
-                {site.phone}
-              </a>
+              {/* Counseling */}
+              <div className="border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+                <p className="flex items-center gap-2 text-sm font-medium">
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-navy/8 text-navy">
+                    <Phone size={13} aria-hidden="true" />
+                  </span>
+                  Counseling, free
+                </p>
+                <a
+                  href={`tel:${site.phoneHref}`}
+                  className="action mt-1 font-display text-[1.0625rem] font-medium text-navy underline-offset-4 hover:underline"
+                >
+                  {site.phone}
+                </a>
+                <p className="text-xs text-muted">Mon–Sat · 9am to 7pm</p>
+              </div>
             </div>
           </div>
         </div>

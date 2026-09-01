@@ -433,12 +433,54 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  /* Editorial hero type: one continuous ramp, 40px on a phone to 78px at 1440. */
+  /*
+    Full-screen hero. The navbar is sticky and its height changes by
+    breakpoint, so --nav-h carries that number and the hero claims the rest of
+    the viewport. svh (not vh) so mobile browser chrome does not push the trust
+    bar off-screen.
+  */
+  .hero-screen {
+    --nav-h: 76px;
+    min-height: calc(100svh - var(--nav-h));
+    display: flex;
+    flex-direction: column;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+    padding-block: clamp(1.25rem, 3.2vh, 2.75rem);
+  }
+  @media (min-width: 640px) {
+    .hero-screen { --nav-h: 80px; }
+  }
+  @media (min-width: 1024px) {
+    .hero-screen { --nav-h: 96px; }
+  }
+
+  /* Editorial hero type: scales with width, then again with height. */
   .t-editorial {
-    font-size: clamp(2.5rem, 1.35rem + 5.1vw, 4.875rem);
-    line-height: 0.98;
+    /* Capped at 4rem: the shell stops growing at 1440px, so past that the
+       column stops growing too and a viewport-driven size would wrap. */
+    font-size: clamp(2.375rem, 0.6rem + 4.4vw, 4rem);
+    line-height: 1;
     letter-spacing: -0.035em;
     font-weight: 600;
+  }
+  /*
+    Short laptops are the real constraint — 1366x768 and 1280x720 have the
+    width for a big headline but not the height, so the scale steps down on
+    height as well as width.
+  */
+  @media (min-width: 1024px) and (max-height: 860px) {
+    .t-editorial { font-size: clamp(2.5rem, 0.5rem + 3.9vw, 3.75rem); }
+  }
+  @media (min-width: 1024px) and (max-height: 760px) {
+    .t-editorial { font-size: clamp(2.25rem, 0.5rem + 3.4vw, 3.25rem); }
+    .hero-screen {
+      padding-block: clamp(0.75rem, 1.8vh, 1.25rem);
+      padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+    }
+    /* The trust bar loses a little height before the headline loses more size. */
+    .hero-trust {
+      padding-block: 0.875rem;
+    }
   }
 
   /*
