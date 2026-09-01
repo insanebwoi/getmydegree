@@ -474,6 +474,8 @@
   */
   .hero-screen {
     --nav-h: 72px;
+    /* Height of the photograph band on small screens. */
+    --hero-band: clamp(220px, 32vh, 300px);
     /* One variable for the inset, so the photograph's bleed can never disagree
        with the padding — that mismatch is what caused overflow at 1280x720. */
     --hero-pad: clamp(1.25rem, 3.4vw, 3rem);
@@ -636,13 +638,18 @@
     from the fade line to the right edge, rather than milky across the whole
     frame.
   */
+  /*
+    On a phone the photograph leads in its own band, so the veil only has to
+    blend the band's lower edge into the white below it. Stretching the picture
+    over the full hero height instead cropped it to a narrow vertical slice —
+    all sky, no subject.
+  */
   .hero-veil {
     background: linear-gradient(
       to bottom,
-      #fff 0%,
-      #fff 52%,
-      rgba(255, 255, 255, 0.86) 66%,
-      rgba(255, 255, 255, 0) 84%
+      rgba(255, 255, 255, 0) 62%,
+      rgba(255, 255, 255, 0.72) 84%,
+      #fff 100%
     );
   }
   @media (min-width: 1024px) {

@@ -122,7 +122,10 @@ export function HeroVisual() {
   const active = animated ? index : 0
 
   return (
-    <div ref={frame} className="group absolute inset-0 -z-10">
+    <div
+      ref={frame}
+      className="group absolute inset-x-0 top-0 -z-10 h-[var(--hero-band)] lg:inset-0 lg:h-auto"
+    >
       <div
         ref={track}
         className="parallax enter-image absolute inset-0 overflow-hidden"
@@ -147,7 +150,7 @@ export function HeroVisual() {
                 loading="eager"
                 decoding={i === 0 ? 'sync' : 'async'}
                 fetchPriority={i === 0 ? 'high' : 'low'}
-                className="h-full w-full object-cover object-[58%_22%] lg:object-[62%_20%]"
+                className="h-full w-full object-cover object-[50%_38%] lg:object-[62%_20%]"
               />
             </div>
           ))}

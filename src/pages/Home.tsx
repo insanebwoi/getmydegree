@@ -70,7 +70,7 @@ export default function Home() {
         <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line bg-white">
           <HeroVisual />
           <div className="grid flex-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="flex flex-col justify-center lg:col-span-6">
+            <div className="flex flex-col justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)-1rem)] lg:col-span-6 lg:pt-0">
               <p
                 className="enter inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
                 style={{ ['--enter-delay' as string]: '60ms' }}
