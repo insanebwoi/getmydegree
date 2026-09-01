@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { GraduationCap, Pause, Play } from 'lucide-react'
+import { Pause, Play } from 'lucide-react'
 import { images, type ImageName } from '../data/images'
 
 /** The hero set, in order. Replace the files; this list does not change. */
@@ -122,11 +122,11 @@ export function HeroVisual() {
   const active = animated ? index : 0
 
   return (
-    <div ref={frame} className="group relative h-full w-full">
+    <div ref={frame} className="group absolute inset-0 -z-10">
       <div
         ref={track}
-        className="parallax enter-image relative h-full w-full overflow-hidden rounded-b-[1.75rem] lg:rounded-t-none lg:rounded-r-none lg:rounded-bl-[2rem] lg:rounded-tl-[2rem]"
-        style={{ ['--enter-delay' as string]: '320ms' }}
+        className="parallax enter-image absolute inset-0 overflow-hidden"
+        style={{ ['--enter-delay' as string]: '0ms' }}
       >
         {/*
           One region, one description — the frames are three moments of the same
@@ -147,17 +147,14 @@ export function HeroVisual() {
                 loading="eager"
                 decoding={i === 0 ? 'sync' : 'async'}
                 fetchPriority={i === 0 ? 'high' : 'low'}
-                className="h-full w-full object-cover object-[55%_24%]"
+                className="h-full w-full object-cover object-[58%_22%] lg:object-[62%_20%]"
               />
             </div>
           ))}
         </div>
 
-        {/* A light wash on the inner edge, so the frame meets the page softly. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-1/3 bg-[linear-gradient(to_right,rgba(255,255,255,0.72),rgba(255,255,255,0.12)_60%,transparent)]"
-        />
+        {/* The veil carries the type: white where the words are, clearing right. */}
+        <div aria-hidden="true" className="hero-veil absolute inset-0" />
 
         {/* Progress and control, quiet until wanted. */}
         {animated && (
@@ -181,27 +178,6 @@ export function HeroVisual() {
             </button>
           </div>
         )}
-      </div>
-
-      {/*
-        The proof card, sitting on the frame's lower corner: navy so it reads
-        as brand rather than as another white panel, with the number carrying
-        the weight.
-      */}
-      <div
-        ref={proof}
-        className="parallax enter absolute bottom-5 left-4 rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)] sm:bottom-7 sm:left-6 lg:bottom-10 lg:left-8"
-        style={{ ['--enter-delay' as string]: '620ms' }}
-      >
-        <span className="absolute -top-4 left-5 grid h-9 w-9 place-items-center rounded-full bg-white text-navy shadow-[0_6px_16px_-8px_rgba(5,18,41,0.5)]">
-          <GraduationCap size={18} aria-hidden="true" />
-        </span>
-        <p className="mt-2 font-display text-[1.625rem] leading-none font-semibold">10,000+</p>
-        <p className="mt-1.5 text-[0.8125rem] leading-snug text-white/85">
-          Graduates placed
-          <br />
-          since 2021
-        </p>
       </div>
     </div>
   )

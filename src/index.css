@@ -630,6 +630,36 @@
     }
   }
 
+  /*
+    Light scrim over a full-bleed photograph. White where the words are,
+    clearing to the right so the picture shows — the inverse of a dark hero,
+    and the reason the design stays bright with the image behind everything.
+  */
+  .hero-veil {
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.95) 45%,
+      rgba(255, 255, 255, 0.88) 72%,
+      rgba(255, 255, 255, 0.8) 100%
+    );
+  }
+  @media (min-width: 1024px) {
+    .hero-veil {
+      background:
+        linear-gradient(
+          100deg,
+          rgba(255, 255, 255, 0.99) 0%,
+          rgba(255, 255, 255, 0.985) 38%,
+          rgba(255, 255, 255, 0.93) 52%,
+          rgba(255, 255, 255, 0.58) 70%,
+          rgba(255, 255, 255, 0.26) 86%,
+          rgba(255, 255, 255, 0.16) 100%
+        ),
+        linear-gradient(to top, rgba(255, 255, 255, 0.55) 0%, transparent 40%);
+    }
+  }
+
   /* Light hero ground: white, lifting to a pale blue behind the photograph. */
   .hero-light {
     background:

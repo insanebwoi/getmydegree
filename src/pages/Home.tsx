@@ -5,6 +5,7 @@ import {
   Building2,
   Check,
   Clock,
+  GraduationCap,
   Headphones,
   Users,
   Wallet,
@@ -66,7 +67,8 @@ export default function Home() {
         else.
       */}
       <section className="shell -mt-1 pb-10 sm:pb-14 lg:pb-16">
-        <div className="hero-screen hero-light relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line">
+        <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line bg-white">
+          <HeroVisual />
           <div className="grid flex-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
             <div className="flex flex-col justify-center lg:col-span-6">
               <p
@@ -124,13 +126,25 @@ export default function Home() {
             </div>
 
             {/*
-              The photograph bleeds to the panel's edges rather than sitting in
-              a padded box: it reaches the top, right and bottom of the hero and
-              is only rounded on the inner corners, so the picture reads as the
-              hero's right half rather than an inset picture.
+              The photograph is behind everything now, so this column carries
+              only the proof card — placed over the picture, where the eye lands
+              after the headline.
             */}
-            <div className="-mx-[var(--hero-pad)] -mb-[var(--hero-pad-y)] h-[clamp(260px,40vh,340px)] lg:col-span-6 lg:mx-0 lg:-mt-[var(--hero-pad-y)] lg:-mr-[var(--hero-pad)] lg:mb-0 lg:h-auto lg:pl-4">
-              <HeroVisual />
+            <div className="flex items-end justify-start lg:col-span-6 lg:justify-end lg:pb-6">
+              <div
+                className="enter rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)]"
+                style={{ ['--enter-delay' as string]: '620ms' }}
+              >
+                <span className="mb-2 grid h-9 w-9 place-items-center rounded-full bg-white/15 text-white">
+                  <GraduationCap size={18} aria-hidden="true" />
+                </span>
+                <p className="font-display text-[1.625rem] leading-none font-semibold">10,000+</p>
+                <p className="mt-1.5 text-[0.8125rem] leading-snug text-white/85">
+                  Graduates placed
+                  <br />
+                  since 2021
+                </p>
+              </div>
             </div>
           </div>
 
