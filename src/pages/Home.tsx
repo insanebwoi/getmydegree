@@ -1,5 +1,14 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, BadgeCheck, Building2, Clock, Phone, Wallet } from 'lucide-react'
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  Check,
+  Clock,
+  Headphones,
+  Users,
+  Wallet,
+} from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
@@ -51,137 +60,133 @@ export default function Home() {
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
       {/*
-        Full-bleed hero: the photographs fill the screen and the words sit on
-        them. A scrim carries the type — heaviest where the copy is, clearing
-        to the right so the picture stays legible — and a hairline drawn inside
-        the edge frames the whole thing.
+        Light hero: copy left, photograph right, and the credibility strip as a
+        white bar across the base. Brand blue carries the second line, the stat
+        card and the primary action; gold marks the three checks and nothing
+        else.
       */}
       <section className="shell -mt-1 pb-10 sm:pb-14 lg:pb-16">
-        <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)]">
-          <HeroVisual />
-          <div aria-hidden="true" className="hero-stroke z-10 hidden sm:block" />
+        <div className="hero-screen hero-light relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line">
+          <div className="grid flex-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-6">
+              <p
+                className="enter inline-flex items-center gap-2 rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
+                style={{ ['--enter-delay' as string]: '60ms' }}
+              >
+                <span className="h-2 w-2 rounded-full bg-gold" aria-hidden="true" />
+                Trusted by 10,000+ graduates
+              </p>
 
-          <div className="relative z-10 flex flex-1 flex-col">
-            <div className="flex flex-1 items-center">
-              <div className="max-w-xl py-6 lg:max-w-2xl">
-                <p
-                  className="enter inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-white backdrop-blur-sm"
-                  style={{ ['--enter-delay' as string]: '60ms' }}
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-                  Trusted by 10,000+ graduates
-                </p>
+              <h1
+                className="enter t-editorial mt-5 text-ink"
+                style={{ ['--enter-delay' as string]: '140ms' }}
+              >
+                Finish Your Degree,
+                <br />
+                <span className="text-navy">Restart Your Career</span>
+              </h1>
 
-                <h1
-                  className="enter t-editorial mt-5 text-white"
-                  style={{ ['--enter-delay' as string]: '140ms' }}
-                >
-                  Finish Your Degree,
-                  <br />
-                  <span className="text-gold">Restart Your Career</span>
-                </h1>
+              <p
+                className="enter mt-5 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:text-[1.0625rem]"
+                style={{ ['--enter-delay' as string]: '240ms' }}
+              >
+                Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
+                attendance, admission confirmed within 48 hours.
+              </p>
 
-                <p
-                  className="enter mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-white/75 sm:text-base lg:text-[1.0625rem]"
-                  style={{ ['--enter-delay' as string]: '240ms' }}
-                >
-                  Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
-                  attendance, admission confirmed within 48 hours.
-                </p>
+              <ul
+                className="enter mt-5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-[0.8125rem] font-medium text-ink sm:text-sm"
+                style={{ ['--enter-delay' as string]: '300ms' }}
+              >
+                {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map((point) => (
+                  <li key={point} className="flex items-center gap-2">
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gold text-navy-950">
+                      <Check size={12} strokeWidth={3.5} aria-hidden="true" />
+                    </span>
+                    {point}
+                  </li>
+                ))}
+              </ul>
 
-                <ul
-                  className="enter mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-white/70 sm:text-sm"
-                  style={{ ['--enter-delay' as string]: '300ms' }}
-                >
-                  {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map(
-                    (point, i) => (
-                      <li key={point} className="flex items-center gap-3">
-                        {i > 0 && (
-                          <span className="h-1 w-1 rounded-full bg-white/35" aria-hidden="true" />
-                        )}
-                        {point}
-                      </li>
-                    ),
-                  )}
-                </ul>
-
-                <div
-                  className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
-                  style={{ ['--enter-delay' as string]: '360ms' }}
-                >
-                  <Link to="/contact" className="btn btn-arrow btn-gold justify-center">
-                    Book a free consultation
-                    <ArrowRight size={16} aria-hidden="true" />
-                  </Link>
-                  <Link to="/courses" className="btn btn-arrow btn-glass justify-center">
-                    Explore programs
-                    <ArrowRight size={15} aria-hidden="true" />
-                  </Link>
-                </div>
-
-                <p
-                  className="enter mt-3.5 text-xs text-white/60"
-                  style={{ ['--enter-delay' as string]: '420ms' }}
-                >
-                  Free guidance · No obligation
-                </p>
+              <div
+                className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
+                style={{ ['--enter-delay' as string]: '360ms' }}
+              >
+                <Link to="/contact" className="btn btn-arrow btn-primary justify-center">
+                  Book a free consultation
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+                <Link to="/courses" className="btn btn-arrow btn-outline-navy justify-center">
+                  Explore programs
+                  <ArrowRight size={15} aria-hidden="true" />
+                </Link>
               </div>
             </div>
 
-            {/* Trust bar sits on the photograph, still inside the first screen. */}
-            <div>
-              <div
-                className="enter hero-trust grid gap-5 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-md sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0"
-                style={{ ['--enter-delay' as string]: '760ms' }}
-              >
-                <div className="lg:col-span-6 lg:pr-8">
-                  <h2 className="text-[0.6875rem] font-medium tracking-[0.16em] text-white/55 uppercase">
-                    Partner universities
-                  </h2>
-                  <ul className="mt-2.5 flex flex-wrap items-center gap-x-7 gap-y-2">
-                    {universities.map((u) => (
-                      <li key={u.name}>
-                        {u.logo ? (
-                          <img
-                            src={u.logo}
-                            alt={u.name}
-                            loading="lazy"
-                            className="h-6 w-auto opacity-80 brightness-0 invert transition hover:opacity-100"
-                          />
-                        ) : (
-                          <span className="font-display text-[0.9375rem] leading-tight font-medium text-white">
-                            {u.name}
-                          </span>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="mt-2 text-xs text-white/55">
-                    Recognized institutions in India and the UK.
-                  </p>
-                </div>
+            <div className="lg:col-span-6">
+              <div className="h-[clamp(240px,38vh,320px)] pt-2 sm:h-[clamp(280px,40vh,360px)] lg:h-[clamp(340px,56vh,480px)] lg:pt-0 lg:pl-6">
+                <HeroVisual />
+              </div>
+            </div>
+          </div>
 
-                <div className="border-t border-white/15 pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
-                  <p className="font-display text-[1.375rem] leading-none font-semibold text-gold">
+          {/* Credibility: institutions, the number, and a way to talk to someone. */}
+          <div className="enter mt-8 lg:mt-6" style={{ ['--enter-delay' as string]: '760ms' }}>
+            <div className="hero-trust grid gap-5 rounded-2xl border border-line bg-white px-5 py-4 shadow-[var(--shadow-soft)] sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
+              <div className="lg:col-span-6 lg:pr-8">
+                <h2 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
+                  Partner universities
+                </h2>
+                <ul className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-3">
+                  {universities.map((u) => (
+                    <li key={u.name}>
+                      {u.logo ? (
+                        <img
+                          src={u.logo}
+                          alt={u.name}
+                          loading="lazy"
+                          className="h-8 w-auto opacity-80 transition hover:opacity-100"
+                        />
+                      ) : (
+                        <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink">
+                          {u.name}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-2.5 text-xs text-muted">
+                  Degrees awarded by three recognized institutions in India and the UK.
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3 border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
+                  <Users size={19} aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block font-display text-[1.375rem] leading-none font-semibold text-navy">
                     10,000+
-                  </p>
-                  <p className="mt-1.5 text-sm font-medium text-white">Graduates placed</p>
-                  <p className="text-xs text-white/55">since 2021</p>
-                </div>
+                  </span>
+                  <span className="mt-1 block text-sm font-medium">Graduates placed</span>
+                  <span className="block text-xs text-muted">since 2021</span>
+                </span>
+              </div>
 
-                <div className="border-t border-white/15 pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-                  <p className="text-[0.6875rem] font-medium tracking-[0.16em] text-white/55 uppercase">
-                    Counseling, free
-                  </p>
+              <div className="flex items-center gap-3 border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
+                  <Headphones size={19} aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block text-sm font-medium">Counseling, free</span>
                   <a
                     href={`tel:${site.phoneHref}`}
-                    className="action mt-1.5 gap-2 font-display text-[1.0625rem] font-medium text-white underline-offset-4 hover:text-gold hover:underline"
+                    className="action font-display text-[1.0625rem] font-semibold text-navy underline-offset-4 hover:underline"
                   >
-                    <Phone size={14} aria-hidden="true" />
                     {site.phone}
                   </a>
-                  <p className="text-xs text-white/55">Mon–Sat · 9am to 7pm</p>
-                </div>
+                  <span className="block text-xs text-muted">Mon–Sat · 9am to 7pm</span>
+                </span>
               </div>
             </div>
           </div>

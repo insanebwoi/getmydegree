@@ -486,10 +486,14 @@
     padding-block: var(--hero-pad-y);
   }
   @media (min-width: 640px) {
-    .hero-screen { --nav-h: 76px; }
+    .hero-screen {
+      --nav-h: 76px;
+    }
   }
   @media (min-width: 1024px) {
-    .hero-screen { --nav-h: 88px; }
+    .hero-screen {
+      --nav-h: 88px;
+    }
   }
 
   /* Editorial hero type: scales with width, then again with height. */
@@ -507,10 +511,14 @@
     height as well as width.
   */
   @media (min-width: 1024px) and (max-height: 860px) {
-    .t-editorial { font-size: clamp(2.5rem, 0.5rem + 3.9vw, 3.625rem); }
+    .t-editorial {
+      font-size: clamp(2.5rem, 0.5rem + 3.9vw, 3.625rem);
+    }
   }
   @media (min-width: 1024px) and (max-height: 760px) {
-    .t-editorial { font-size: clamp(2.25rem, 0.5rem + 3.4vw, 3.125rem); }
+    .t-editorial {
+      font-size: clamp(2.25rem, 0.5rem + 3.4vw, 3.125rem);
+    }
     .hero-screen {
       --hero-pad: clamp(1.25rem, 3vw, 2.5rem);
       --hero-pad-y: clamp(0.75rem, 1.8vh, 1.25rem);
@@ -533,12 +541,24 @@
 
   /* Load choreography: eyebrow, heading, copy, actions, then the photograph. */
   @keyframes rise {
-    from { opacity: 0; transform: translate3d(0, 14px, 0); }
-    to { opacity: 1; transform: none; }
+    from {
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
   @keyframes settle {
-    from { opacity: 0; transform: scale(1.04); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
   .js .enter {
     opacity: 0;
@@ -608,6 +628,24 @@
         ),
         linear-gradient(to top, rgba(5, 18, 41, 0.75) 0%, transparent 45%);
     }
+  }
+
+  /* Light hero ground: white, lifting to a pale blue behind the photograph. */
+  .hero-light {
+    background:
+      radial-gradient(70% 80% at 82% 30%, rgba(1, 58, 148, 0.09), transparent 68%),
+      linear-gradient(180deg, #ffffff 0%, #f7f9fd 100%);
+  }
+
+  /* Outlined counterpart to the primary action. */
+  .btn-outline-navy {
+    background: #fff;
+    border-color: rgba(1, 58, 148, 0.35);
+    color: var(--color-navy);
+  }
+  .btn-outline-navy:hover {
+    border-color: var(--color-navy);
+    background: var(--color-navy-50);
   }
 
   /* A hairline drawn inside the hero — an editorial frame, not a border. */

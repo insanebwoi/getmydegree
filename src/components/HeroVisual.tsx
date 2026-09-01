@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Pause, Play } from 'lucide-react'
+import { GraduationCap, Pause, Play } from 'lucide-react'
 import { images, type ImageName } from '../data/images'
 
 /** The hero set, in order. Replace the files; this list does not change. */
@@ -122,11 +122,11 @@ export function HeroVisual() {
   const active = animated ? index : 0
 
   return (
-    <div ref={frame} className="group absolute inset-0 -z-10">
+    <div ref={frame} className="group relative h-full w-full">
       <div
         ref={track}
-        className="parallax enter-image absolute inset-0 overflow-hidden"
-        style={{ ['--enter-delay' as string]: '0ms' }}
+        className="parallax enter-image relative h-full w-full overflow-hidden rounded-[1.75rem]"
+        style={{ ['--enter-delay' as string]: '320ms' }}
       >
         {/*
           One region, one description — the frames are three moments of the same
@@ -147,18 +147,21 @@ export function HeroVisual() {
                 loading="eager"
                 decoding={i === 0 ? 'sync' : 'async'}
                 fetchPriority={i === 0 ? 'high' : 'low'}
-                className="h-full w-full object-cover object-[62%_28%] lg:object-[68%_26%]"
+                className="h-full w-full object-cover object-[55%_24%]"
               />
             </div>
           ))}
         </div>
 
-        {/* Scrim: the words sit on the photograph, so it has to carry them. */}
-        <div aria-hidden="true" className="hero-scrim absolute inset-0" />
+        {/* A light wash on the inner edge, so the frame meets the page softly. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-1/4 bg-[linear-gradient(to_right,rgba(255,255,255,0.55),transparent)]"
+        />
 
         {/* Progress and control, quiet until wanted. */}
         {animated && (
-          <div className="absolute top-5 right-5 z-20 flex items-center gap-3 lg:top-7 lg:right-8">
+          <div className="absolute top-4 right-4 z-20 flex items-center gap-3">
             <div className="flex items-center gap-1.5" aria-hidden="true">
               {(mountRest ? FRAMES : FRAMES.slice(0, 1)).map((name, i) => (
                 <span key={name} className="hero-pip" data-active={i === active} />
@@ -168,7 +171,7 @@ export function HeroVisual() {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? 'Resume the image sequence' : 'Pause the image sequence'}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/40 bg-white/25 text-white opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 hover:bg-white/40 focus-visible:opacity-100"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/70 text-ink opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 hover:bg-white focus-visible:opacity-100"
             >
               {paused ? (
                 <Play size={14} aria-hidden="true" />
@@ -178,6 +181,27 @@ export function HeroVisual() {
             </button>
           </div>
         )}
+      </div>
+
+      {/*
+        The proof card, sitting on the frame's lower corner: navy so it reads
+        as brand rather than as another white panel, with the number carrying
+        the weight.
+      */}
+      <div
+        ref={proof}
+        className="parallax enter absolute -bottom-4 -left-4 rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)] sm:-bottom-5 sm:-left-6 lg:-right-5 lg:bottom-8 lg:left-auto"
+        style={{ ['--enter-delay' as string]: '620ms' }}
+      >
+        <span className="absolute -top-4 left-5 grid h-9 w-9 place-items-center rounded-full bg-white text-navy shadow-[0_6px_16px_-8px_rgba(5,18,41,0.5)]">
+          <GraduationCap size={18} aria-hidden="true" />
+        </span>
+        <p className="mt-2 font-display text-[1.625rem] leading-none font-semibold">10,000+</p>
+        <p className="mt-1.5 text-[0.8125rem] leading-snug text-white/85">
+          Graduates placed
+          <br />
+          since 2021
+        </p>
       </div>
     </div>
   )
