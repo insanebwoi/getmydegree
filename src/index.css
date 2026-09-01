@@ -631,32 +631,30 @@
   }
 
   /*
-    Light scrim over a full-bleed photograph. White where the words are,
-    clearing to the right so the picture shows — the inverse of a dark hero,
-    and the reason the design stays bright with the image behind everything.
+    No wash over the photograph. The copy sits on a solid white field that
+    ends in a short fade, so the picture itself is untouched — full contrast
+    from the fade line to the right edge, rather than milky across the whole
+    frame.
   */
   .hero-veil {
     background: linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.97) 0%,
-      rgba(255, 255, 255, 0.95) 45%,
-      rgba(255, 255, 255, 0.88) 72%,
-      rgba(255, 255, 255, 0.8) 100%
+      #fff 0%,
+      #fff 52%,
+      rgba(255, 255, 255, 0.86) 66%,
+      rgba(255, 255, 255, 0) 84%
     );
   }
   @media (min-width: 1024px) {
     .hero-veil {
-      background:
-        linear-gradient(
-          100deg,
-          rgba(255, 255, 255, 0.99) 0%,
-          rgba(255, 255, 255, 0.985) 38%,
-          rgba(255, 255, 255, 0.93) 52%,
-          rgba(255, 255, 255, 0.58) 70%,
-          rgba(255, 255, 255, 0.26) 86%,
-          rgba(255, 255, 255, 0.16) 100%
-        ),
-        linear-gradient(to top, rgba(255, 255, 255, 0.55) 0%, transparent 40%);
+      background: linear-gradient(
+        100deg,
+        #fff 0%,
+        #fff 44%,
+        rgba(255, 255, 255, 0.92) 52%,
+        rgba(255, 255, 255, 0.45) 60%,
+        rgba(255, 255, 255, 0) 68%
+      );
     }
   }
 
