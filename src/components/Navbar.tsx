@@ -15,9 +15,9 @@ export function Navbar() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-50 bg-wash/85 pt-2 pb-2 backdrop-blur-md lg:pt-4">
+    <header className="sticky top-0 z-50 pt-2 pb-2 backdrop-blur-md lg:pt-3">
       <div className="shell">
-        <div className="panel flex h-15 items-center justify-between gap-3 px-3 shadow-[var(--shadow-soft)] sm:h-16 sm:px-4 lg:h-18 lg:px-6">
+        <div className="flex h-14 items-center justify-between gap-3 rounded-full border border-line/70 bg-white/80 px-3 sm:h-15 sm:px-4 lg:h-17 lg:px-6">
           <Link to="/" aria-label={`${site.name} — home`} className="action shrink-0">
             <img
               src="/logo.svg"

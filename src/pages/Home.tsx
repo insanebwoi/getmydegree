@@ -51,26 +51,25 @@ export default function Home() {
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
       {/*
-        One composed screen: the hero claims the viewport minus the navbar and
-        divides it between the editorial split and the trust bar, so the
-        headline, both actions, the photograph and the credibility strip are
-        all visible without scrolling on a laptop.
+        One composed screen, not a stack of cards: the hero is a full-bleed
+        warm band rather than a bordered panel, so the only rounded objects are
+        the photograph, the proof card and the trust bar. Everything else is
+        held by type, spacing and alignment.
       */}
-      <section className="shell pb-10 sm:pb-14 lg:pb-16">
-        <div className="hero-surface hero-screen overflow-hidden rounded-[var(--radius-panel)] border border-line">
-          {/* Editorial split — takes the height the trust bar does not need. */}
-          <div className="grid flex-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="lg:col-span-6 xl:col-span-6">
+      <section className="hero-surface -mt-2 lg:-mt-4">
+        <div className="shell hero-screen">
+          <div className="grid flex-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+            <div className="lg:col-span-6">
               <p
-                className="enter inline-flex items-center gap-2 rounded-full border border-navy/12 bg-white/70 py-1.5 pr-4 pl-2.5 text-[0.8125rem] font-medium text-ink"
+                className="enter inline-flex items-center gap-2 text-[0.8125rem] font-medium tracking-[0.02em] text-muted"
                 style={{ ['--enter-delay' as string]: '60ms' }}
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+                <span className="h-1.5 w-1.5 rounded-full bg-navy" aria-hidden="true" />
                 Trusted by 10,000+ graduates
               </p>
 
               <h1
-                className="enter t-editorial mt-5 text-ink"
+                className="enter t-editorial mt-4 text-ink"
                 style={{ ['--enter-delay' as string]: '140ms' }}
               >
                 Finish Your Degree,
@@ -79,49 +78,67 @@ export default function Home() {
               </h1>
 
               <p
-                className="enter mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:text-[1.0625rem]"
+                className="enter mt-5 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:text-[1.0625rem]"
                 style={{ ['--enter-delay' as string]: '240ms' }}
               >
                 Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
                 attendance, admission confirmed within 48 hours.
               </p>
 
+              {/* The three objections, pulled out of the paragraph for scanning. */}
+              <ul
+                className="enter mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-muted sm:text-sm"
+                style={{ ['--enter-delay' as string]: '300ms' }}
+              >
+                {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map(
+                  (point, i) => (
+                    <li key={point} className="flex items-center gap-3">
+                      {i > 0 && (
+                        <span className="h-1 w-1 rounded-full bg-muted/40" aria-hidden="true" />
+                      )}
+                      {point}
+                    </li>
+                  ),
+                )}
+              </ul>
+
               <div
                 className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
-                style={{ ['--enter-delay' as string]: '340ms' }}
+                style={{ ['--enter-delay' as string]: '360ms' }}
               >
                 <Link to="/contact" className="btn btn-arrow btn-primary justify-center">
                   Book a free consultation
                   <ArrowRight size={16} aria-hidden="true" />
                 </Link>
-                <Link to="/courses" className="btn btn-quiet btn-arrow justify-center">
+                <Link to="/courses" className="btn btn-text justify-center">
                   Explore programs
                   <ArrowRight size={15} aria-hidden="true" />
                 </Link>
               </div>
+
+              <p
+                className="enter mt-3.5 text-xs text-muted"
+                style={{ ['--enter-delay' as string]: '420ms' }}
+              >
+                Free guidance · No obligation
+              </p>
             </div>
 
-            {/*
-              The photograph bleeds to the panel's right and bottom edges. It is
-              pulled out of the padded flow so it can reach them, and given a
-              height that follows the hero rather than a fixed aspect ratio.
-            */}
-            <div className="lg:col-span-6 xl:col-span-6">
-              <div className="-mx-[clamp(1.25rem,4vw,3.5rem)] -mb-[clamp(1.25rem,3.2vh,2.75rem)] h-[clamp(260px,42vh,340px)] pl-8 lg:mx-0 lg:mb-0 lg:-mr-[clamp(1.25rem,4vw,3.5rem)] lg:h-[clamp(360px,62vh,560px)] lg:pl-0">
+            <div className="lg:col-span-6">
+              <div className="-mx-[var(--hero-pad)] -mb-[var(--hero-pad-y)] h-[clamp(260px,42vh,340px)] pl-6 lg:mx-0 lg:mb-0 lg:-mr-[var(--hero-pad)] lg:h-[clamp(360px,60vh,540px)] lg:pl-4">
                 <HeroVisual />
               </div>
             </div>
           </div>
 
-          {/* Trust bar: three areas on one rule, inside the first screen. */}
+          {/* Trust bar: three areas, one rule, inside the first screen. */}
           <div className="enter mt-8 lg:mt-6" style={{ ['--enter-delay' as string]: '760ms' }}>
-            <div className="hero-trust grid gap-5 rounded-[1.25rem] border border-line bg-white/80 px-5 py-5 shadow-[var(--shadow-soft)] backdrop-blur-sm sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0 lg:py-4">
-              {/* Partner universities */}
+            <div className="hero-trust grid gap-5 rounded-2xl border border-line bg-white/70 px-5 py-4 backdrop-blur-sm sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
               <div className="lg:col-span-6 lg:pr-8">
                 <h2 className="text-[0.6875rem] font-medium tracking-[0.16em] text-muted uppercase">
                   Partner universities
                 </h2>
-                <ul className="mt-2.5 flex flex-wrap items-center gap-x-6 gap-y-2">
+                <ul className="mt-2.5 flex flex-wrap items-center gap-x-7 gap-y-2">
                   {universities.map((u) => (
                     <li key={u.name}>
                       {u.logo ? (
@@ -129,10 +146,10 @@ export default function Home() {
                           src={u.logo}
                           alt={u.name}
                           loading="lazy"
-                          className="h-6 w-auto opacity-70 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0"
+                          className="h-6 w-auto opacity-65 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0"
                         />
                       ) : (
-                        <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink">
+                        <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink/85">
                           {u.name}
                         </span>
                       )}
@@ -140,31 +157,27 @@ export default function Home() {
                   ))}
                 </ul>
                 <p className="mt-2 text-xs text-muted">
-                  Degrees awarded by three recognized institutions in India and the UK.
+                  Recognized institutions in India and the UK.
                 </p>
               </div>
 
-              {/* Graduates placed */}
               <div className="border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
-                <p className="font-display text-2xl leading-none font-semibold text-navy">
+                <p className="font-display text-[1.375rem] leading-none font-semibold text-navy">
                   10,000+
                 </p>
                 <p className="mt-1.5 text-sm font-medium">Graduates placed</p>
                 <p className="text-xs text-muted">since 2021</p>
               </div>
 
-              {/* Counseling */}
               <div className="border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-                <p className="flex items-center gap-2 text-sm font-medium">
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-navy/8 text-navy">
-                    <Phone size={13} aria-hidden="true" />
-                  </span>
+                <p className="text-[0.6875rem] font-medium tracking-[0.16em] text-muted uppercase">
                   Counseling, free
                 </p>
                 <a
                   href={`tel:${site.phoneHref}`}
-                  className="action mt-1 font-display text-[1.0625rem] font-medium text-navy underline-offset-4 hover:underline"
+                  className="action mt-1.5 gap-2 font-display text-[1.0625rem] font-medium text-navy underline-offset-4 hover:underline"
                 >
+                  <Phone size={14} aria-hidden="true" />
                   {site.phone}
                 </a>
                 <p className="text-xs text-muted">Mon–Sat · 9am to 7pm</p>

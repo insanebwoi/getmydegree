@@ -171,7 +171,7 @@ export function HeroVisual() {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? 'Resume the image sequence' : 'Pause the image sequence'}
-              className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/85 text-ink opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 focus-visible:opacity-100"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/40 bg-white/25 text-white opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 hover:bg-white/40 focus-visible:opacity-100"
             >
               {paused ? (
                 <Play size={14} aria-hidden="true" />
@@ -186,14 +186,12 @@ export function HeroVisual() {
       {/* The one floating element in the composition. */}
       <div
         ref={proof}
-        className="parallax enter absolute bottom-5 -left-3 rounded-2xl border border-line bg-white/92 px-4 py-3.5 shadow-[0_18px_44px_-26px_rgba(5,18,41,0.45)] backdrop-blur-md sm:bottom-7 sm:-left-5 sm:px-5 sm:py-4"
+        className="parallax enter absolute bottom-6 -left-3 rounded-[1.125rem] border border-line/80 bg-white/94 px-4 py-3 shadow-[0_14px_36px_-22px_rgba(5,18,41,0.4)] backdrop-blur-md sm:bottom-9 sm:-left-6"
         style={{ ['--enter-delay' as string]: '620ms' }}
       >
-        <p className="font-display text-[1.625rem] leading-none font-semibold text-navy sm:text-[1.75rem]">
-          10,000+
-        </p>
-        <p className="mt-1.5 text-sm font-medium">Graduates placed</p>
-        <p className="text-xs text-muted">since 2021</p>
+        <p className="font-display text-[1.5rem] leading-none font-semibold text-navy">10,000+</p>
+        <p className="mt-1 text-[0.8125rem] font-medium">Graduates placed</p>
+        <p className="text-[0.6875rem] text-muted">since 2021</p>
       </div>
     </div>
   )

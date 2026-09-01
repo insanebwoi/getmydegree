@@ -26,7 +26,7 @@
   --color-muted: #626b80;
   --color-line: #e8eaf0;
   --color-wash: #f4f5f8;
-  --color-ivory: #f7f6f2;
+  --color-ivory: #f8f8f5;
 
   --radius-card: 1.25rem;
   --radius-panel: 1.75rem;
@@ -227,6 +227,17 @@
   .btn-gold:hover {
     background: var(--color-gold-300);
   }
+  /* Quietest action: type and an arrow, no container. */
+  .btn-text {
+    background: transparent;
+    border-color: transparent;
+    color: var(--color-ink);
+    padding-inline: 0.5rem;
+  }
+  .btn-text:hover {
+    color: var(--color-navy);
+  }
+
   /* Secondary action: an outline that never competes with the primary. */
   .btn-quiet {
     background: transparent;
@@ -424,6 +435,14 @@
     background-color: var(--color-ivory);
     position: relative;
   }
+  /* A cool atmospheric lift behind the photograph — barely visible by design. */
+  .hero-surface::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(58% 62% at 78% 42%, rgba(1, 58, 148, 0.07), transparent 70%);
+  }
   .hero-surface::after {
     content: '';
     position: absolute;
@@ -440,28 +459,32 @@
     bar off-screen.
   */
   .hero-screen {
-    --nav-h: 76px;
+    --nav-h: 72px;
+    /* One variable for the inset, so the photograph's bleed can never disagree
+       with the padding — that mismatch is what caused overflow at 1280x720. */
+    --hero-pad: clamp(0.875rem, 4vw, 3.5rem);
+    --hero-pad-y: clamp(1.25rem, 3.2vh, 2.75rem);
     min-height: calc(100svh - var(--nav-h));
     display: flex;
     flex-direction: column;
-    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
-    padding-block: clamp(1.25rem, 3.2vh, 2.75rem);
+    padding-inline: var(--hero-pad);
+    padding-block: var(--hero-pad-y);
   }
   @media (min-width: 640px) {
-    .hero-screen { --nav-h: 80px; }
+    .hero-screen { --nav-h: 76px; }
   }
   @media (min-width: 1024px) {
-    .hero-screen { --nav-h: 96px; }
+    .hero-screen { --nav-h: 88px; }
   }
 
   /* Editorial hero type: scales with width, then again with height. */
   .t-editorial {
-    /* Capped at 4rem: the shell stops growing at 1440px, so past that the
+    /* Capped at 4.25rem: the shell stops growing at 1440px, so past that the
        column stops growing too and a viewport-driven size would wrap. */
-    font-size: clamp(2.375rem, 0.6rem + 4.4vw, 4rem);
-    line-height: 1;
-    letter-spacing: -0.035em;
-    font-weight: 600;
+    font-size: clamp(2.5rem, 0.55rem + 4.6vw, 4.25rem);
+    line-height: 0.98;
+    letter-spacing: -0.038em;
+    font-weight: 650;
   }
   /*
     Short laptops are the real constraint — 1366x768 and 1280x720 have the
@@ -469,13 +492,13 @@
     height as well as width.
   */
   @media (min-width: 1024px) and (max-height: 860px) {
-    .t-editorial { font-size: clamp(2.5rem, 0.5rem + 3.9vw, 3.75rem); }
+    .t-editorial { font-size: clamp(2.5rem, 0.5rem + 3.9vw, 3.625rem); }
   }
   @media (min-width: 1024px) and (max-height: 760px) {
-    .t-editorial { font-size: clamp(2.25rem, 0.5rem + 3.4vw, 3.25rem); }
+    .t-editorial { font-size: clamp(2.25rem, 0.5rem + 3.4vw, 3.125rem); }
     .hero-screen {
-      padding-block: clamp(0.75rem, 1.8vh, 1.25rem);
-      padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+      --hero-pad: clamp(1.25rem, 3vw, 2.5rem);
+      --hero-pad-y: clamp(0.75rem, 1.8vh, 1.25rem);
     }
     /* The trust bar loses a little height before the headline loses more size. */
     .hero-trust {
@@ -484,24 +507,12 @@
   }
 
   /*
-    Emphasis on the second line. Below 640px the phrase wraps, and a rule under
-    each fragment reads as a mistake — so the accent becomes colour there and
-    only becomes an underline once the phrase holds a single line.
+    Emphasis on the second line comes from the type itself — brand blue, no
+    decorative rule. The weight is inherited, so the two lines read as one
+    sentence with the second carrying the promise.
   */
   .rule-accent {
     color: var(--color-navy);
-  }
-  @media (min-width: 640px) {
-    .rule-accent {
-      color: inherit;
-      background-image: linear-gradient(var(--color-gold), var(--color-gold));
-      background-repeat: no-repeat;
-      background-position: 0 100%;
-      background-size: 100% 0.09em;
-      padding-bottom: 0.05em;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-    }
   }
 
   /* Load choreography: eyebrow, heading, copy, actions, then the photograph. */
@@ -549,16 +560,21 @@
   }
 
   /* Progress pips: three ticks, the active one filled. */
+  /* Sits over photography, so the pips are white with a shadow rather than
+     brand blue, which disappeared against a dark frame. */
   .hero-pip {
     height: 3px;
-    width: 18px;
+    width: 16px;
     border-radius: 999px;
-    background: rgba(5, 18, 41, 0.18);
-    transition: background-color 400ms ease, width 400ms ease;
+    background: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 1px 2px rgba(5, 18, 41, 0.25);
+    transition:
+      background-color 400ms ease,
+      width 400ms ease;
   }
   .hero-pip[data-active='true'] {
-    width: 30px;
-    background: var(--color-navy);
+    width: 26px;
+    background: #fff;
   }
 
   /* Pointer parallax — the offset is set by a rAF-throttled listener. */
