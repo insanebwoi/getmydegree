@@ -524,6 +524,43 @@
     animation-delay: var(--enter-delay, 0ms);
   }
 
+  /*
+    Hero image set. Frames are stacked; only opacity and transform animate, so
+    the crossfade stays on the compositor. The active frame drifts 4% over its
+    turn, which keeps a still photograph from feeling frozen.
+  */
+  .hero-frame {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    /* Decorative and stacked: a faded-out frame must not swallow the pointer. */
+    pointer-events: none;
+    transition: opacity 1200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hero-frame.is-active {
+    opacity: 1;
+  }
+  .hero-frame img {
+    transform: scale(1.045);
+    transition: transform 6000ms linear;
+  }
+  .hero-frame.is-active img {
+    transform: scale(1);
+  }
+
+  /* Progress pips: three ticks, the active one filled. */
+  .hero-pip {
+    height: 3px;
+    width: 18px;
+    border-radius: 999px;
+    background: rgba(5, 18, 41, 0.18);
+    transition: background-color 400ms ease, width 400ms ease;
+  }
+  .hero-pip[data-active='true'] {
+    width: 30px;
+    background: var(--color-navy);
+  }
+
   /* Pointer parallax — the offset is set by a rAF-throttled listener. */
   .parallax {
     transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -592,5 +629,11 @@
   .parallax {
     transform: none !important;
     transition: none !important;
+  }
+  /* No crossfade or drift: the first frame stands still. */
+  .hero-frame,
+  .hero-frame img {
+    transition: none !important;
+    transform: none !important;
   }
 }

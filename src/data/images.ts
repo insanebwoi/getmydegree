@@ -33,6 +33,20 @@ const declared = {
     width: 1200,
     height: 1500,
   },
+  'hero-portrait-2': {
+    src: '/images/hero-portrait-2.svg',
+    alt: '',
+    note: 'Hero set, 2 of 3 — studying after work',
+    width: 1200,
+    height: 1500,
+  },
+  'hero-portrait-3': {
+    src: '/images/hero-portrait-3.svg',
+    alt: '',
+    note: 'Hero set, 3 of 3 — collecting the degree',
+    width: 1200,
+    height: 1500,
+  },
   'hero-2': {
     src: '/images/hero-2.svg',
     alt: 'An academic counselor talking with a student',

@@ -103,6 +103,11 @@ Resolution order is `.avif`, `.webp`, `.jpg`, `.jpeg`, `.png`, `.svg`, so a real
 beats the `.svg` placeholder. You can delete the placeholder or leave it — it is ignored once a
 real file exists. Adding a file during `npm run dev` reloads the page.
 
+**The hero shows three images in sequence.** `hero-portrait`, `hero-portrait-2` and
+`hero-portrait-3` crossfade every five seconds — three moments of the same story (working,
+studying, graduating). Drop all three at `public/images/hero-portrait{,-2,-3}.jpg`; the set is
+listed in `FRAMES` in `src/components/HeroVisual.tsx` and needs no other change.
+
 **The hero portrait is the one image that carries the page.** `hero-portrait` expects an editorial
 photograph of a working professional aged 23–30 in smart casual clothing, in a contemporary
 interior with soft natural light — not a graduation-cap group shot. Drop it at
