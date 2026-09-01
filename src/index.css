@@ -26,6 +26,7 @@
   --color-muted: #626b80;
   --color-line: #e8eaf0;
   --color-wash: #f4f5f8;
+  --color-ivory: #f7f6f2;
 
   --radius-card: 1.25rem;
   --radius-panel: 1.75rem;
@@ -226,6 +227,17 @@
   .btn-gold:hover {
     background: var(--color-gold-300);
   }
+  /* Secondary action: an outline that never competes with the primary. */
+  .btn-quiet {
+    background: transparent;
+    border-color: rgba(1, 58, 148, 0.22);
+    color: var(--color-ink);
+  }
+  .btn-quiet:hover {
+    border-color: var(--color-navy);
+    background: rgba(1, 58, 148, 0.05);
+  }
+
   .btn-ghost {
     background: #fff;
     border-color: var(--color-line);
@@ -403,6 +415,87 @@
   }
 
   /* Small proof chip that floats over the hero photograph. */
+  /*
+    Hero surface: warm ivory with a barely-there grain. The noise is an inline
+    SVG rather than an image request, and sits at 3.5% opacity — enough to take
+    the plastic sheen off a flat fill, not enough to read as texture.
+  */
+  .hero-surface {
+    background-color: var(--color-ivory);
+    position: relative;
+  }
+  .hero-surface::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Editorial hero type: one continuous ramp, 40px on a phone to 78px at 1440. */
+  .t-editorial {
+    font-size: clamp(2.5rem, 1.35rem + 5.1vw, 4.875rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-weight: 600;
+  }
+
+  /*
+    Emphasis on the second line. Below 640px the phrase wraps, and a rule under
+    each fragment reads as a mistake — so the accent becomes colour there and
+    only becomes an underline once the phrase holds a single line.
+  */
+  .rule-accent {
+    color: var(--color-navy);
+  }
+  @media (min-width: 640px) {
+    .rule-accent {
+      color: inherit;
+      background-image: linear-gradient(var(--color-gold), var(--color-gold));
+      background-repeat: no-repeat;
+      background-position: 0 100%;
+      background-size: 100% 0.09em;
+      padding-bottom: 0.05em;
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+    }
+  }
+
+  /* Load choreography: eyebrow, heading, copy, actions, then the photograph. */
+  @keyframes rise {
+    from { opacity: 0; transform: translate3d(0, 14px, 0); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes settle {
+    from { opacity: 0; transform: scale(1.04); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .js .enter {
+    opacity: 0;
+    animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+  .js .enter-image {
+    opacity: 0;
+    animation: settle 1100ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+
+  /* Pointer parallax — the offset is set by a rAF-throttled listener. */
+  .parallax {
+    transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  /* Primary action: the arrow advances on hover. */
+  .btn-arrow svg {
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .btn-arrow:hover svg {
+    transform: translateX(4px);
+  }
+
   .float-chip {
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(8px);
@@ -443,5 +536,19 @@
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  /*
+    Explicit: the rule above only shortens animations, and these use
+    `forwards`, so they would otherwise snap to their end state.
+  */
+  .js .enter,
+  .js .enter-image {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+  .parallax {
+    transform: none !important;
+    transition: none !important;
   }
 }

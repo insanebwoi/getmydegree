@@ -82,6 +82,12 @@ changes; cropping, aspect ratio and lazy-loading are handled by the layout.
 `public/favicon.svg` are **placeholders**. Replace the files at those paths with the real
 artwork — no code changes needed.
 
+## Partner university logos
+
+The hero sets each institution's name as a wordmark. To use real artwork, add a `logo` path to that
+university in `src/data/site.ts` — e.g. `logo: '/images/logos/rtu.svg'` — and the hero renders it as
+a monochrome image instead. No placeholder logos are invented.
+
 ## Photographs
 
 Every image is a named slot. **Drop a file named after the slot into `public/images/` and it is
@@ -96,6 +102,11 @@ public/images/blog/<slug>.jpg   the cover for that article
 Resolution order is `.avif`, `.webp`, `.jpg`, `.jpeg`, `.png`, `.svg`, so a real photograph always
 beats the `.svg` placeholder. You can delete the placeholder or leave it — it is ignored once a
 real file exists. Adding a file during `npm run dev` reloads the page.
+
+**The hero portrait is the one image that carries the page.** `hero-portrait` expects an editorial
+photograph of a working professional aged 23–30 in smart casual clothing, in a contemporary
+interior with soft natural light — not a graduation-cap group shot. Drop it at
+`public/images/hero-portrait.jpg` (1200×1500 or larger, 4:5).
 
 Each placeholder frame is labelled with the slot name and the size it expects. Recommended:
 

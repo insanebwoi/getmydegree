@@ -65,7 +65,15 @@ export const features = [
   },
 ]
 
-export const universities = [
+/** `logo` takes a path such as '/images/logos/rtu.svg' once real artwork
+ *  exists; until then the hero sets the institution name as a wordmark. */
+export const universities: {
+  name: string
+  location: string
+  body: string
+  initials: string
+  logo?: string
+}[] = [
   {
     name: 'Rabindranath Tagore University',
     location: 'Madhya Pradesh, Bhopal',

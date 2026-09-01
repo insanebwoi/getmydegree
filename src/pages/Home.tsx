@@ -1,19 +1,12 @@
 import { Link } from 'react-router-dom'
-import {
-  ArrowRight,
-  ArrowUpRight,
-  BadgeCheck,
-  Building2,
-  Clock,
-  GraduationCap,
-  Wallet,
-} from 'lucide-react'
+import { ArrowRight, BadgeCheck, Building2, Clock, Phone, Wallet } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Section } from '../components/Section'
 import { Photo } from '../components/Photo'
+import { HeroPortrait } from '../components/HeroPortrait'
 import { Stats } from '../components/Stats'
 import {
   admissionSteps,
@@ -57,128 +50,122 @@ export default function Home() {
     <>
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
-      {/* Hero panel with floating summary cards, mirroring a dashboard surface. */}
-      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-20">
-        <div className="panel relative overflow-hidden px-4 pt-11 pb-5 sm:px-7 sm:pt-14 lg:px-10 lg:pt-20 lg:pb-8">
-          {/* Faint guide lines — structure, not decoration. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-[0.55]"
-            style={{
-              backgroundImage:
-                'linear-gradient(to right, var(--color-line) 1px, transparent 1px), linear-gradient(to bottom, var(--color-line) 1px, transparent 1px)',
-              backgroundSize: '96px 96px',
-              maskImage: 'radial-gradient(70% 60% at 50% 40%, #000 30%, transparent 100%)',
-            }}
-          />
-          <span className="chip absolute top-10 left-6 hidden lg:grid" aria-hidden="true">
-            <GraduationCap size={19} />
-          </span>
-          <span className="chip absolute top-10 right-6 hidden lg:grid" aria-hidden="true">
-            <BadgeCheck size={19} />
-          </span>
+      {/*
+        Editorial hero. An asymmetric 58/42 split on an ivory surface: the
+        headline dominates, the photograph carries the feeling, and a single
+        floating statistic does the proof. Everything else — partner
+        institutions, counseling — sits quietly on a rule beneath, so nothing
+        competes with the heading.
+      */}
+      <section className="shell pt-1 pb-12 sm:pb-16 lg:pb-20">
+        <div className="hero-surface overflow-hidden rounded-[var(--radius-panel)] border border-line px-5 pt-10 pb-10 sm:px-8 sm:pt-14 lg:min-h-[680px] lg:px-14 lg:pt-12 lg:pb-12">
+          <div className="relative grid items-center gap-9 lg:grid-cols-12 lg:gap-14">
+            <div className="lg:col-span-7">
+              <p
+                className="enter flex items-center gap-2.5 text-[0.8125rem] font-medium tracking-[0.14em] text-muted uppercase"
+                style={{ ['--enter-delay' as string]: '60ms' }}
+              >
+                <span className="h-px w-8 bg-navy/35" aria-hidden="true" />
+                Trusted by 10,000+ graduates
+              </p>
 
-          <div className="relative mx-auto max-w-3xl text-center">
-            <Reveal>
-              <span className="badge">
-                <span className="dot bg-gold" /> Trusted by 10,000+ graduates
-              </span>
-            </Reveal>
-            <Reveal delay={80}>
-              <h1 className="t-hero mt-5">
+              <h1
+                className="enter t-editorial mt-5 text-ink"
+                style={{ ['--enter-delay' as string]: '140ms' }}
+              >
                 Finish Your Degree,
                 <br />
-                Restart Your Career
+                <span className="rule-accent">Restart Your Career</span>
               </h1>
-            </Reveal>
-            <Reveal delay={160}>
-              <p className="t-body mx-auto mt-4 max-w-xl text-muted">
+
+              <p
+                className="enter mt-5 max-w-xl text-[1.0625rem] leading-relaxed text-muted lg:text-lg"
+                style={{ ['--enter-delay' as string]: '240ms' }}
+              >
                 Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
                 attendance, admission confirmed within 48 hours.
               </p>
-            </Reveal>
-            <Reveal delay={240}>
-              <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-                <Link to="/contact" className="btn btn-primary">
+
+              <div
+                className="enter mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4"
+                style={{ ['--enter-delay' as string]: '340ms' }}
+              >
+                <Link to="/contact" className="btn btn-arrow btn-primary w-full sm:w-auto">
                   Book a free consultation
+                  <ArrowRight size={16} aria-hidden="true" />
                 </Link>
-                <Link to="/courses" className="btn btn-ghost">
+                <Link to="/courses" className="btn btn-quiet w-full sm:w-auto">
                   Explore programs
                 </Link>
               </div>
-            </Reveal>
+            </div>
+
+            <div className="lg:col-span-5">
+              <HeroPortrait />
+            </div>
           </div>
 
-          {/* Summary cards sit on the panel, sharing its surface. */}
-          <div className="relative mt-10 grid gap-3 sm:grid-cols-3 sm:gap-4 lg:mt-14">
-            <Reveal delay={80}>
-              <div className="card card-hover card-p h-full">
-                <div className="flex items-start justify-between gap-3">
-                  <h2 className="t-h3 font-display font-medium">Partner universities</h2>
-                  <ArrowUpRight size={18} className="text-muted" aria-hidden="true" />
-                </div>
-                <p className="mt-4 text-base text-muted md:text-sm">
+          {/*
+            Credibility strip. Institution names are set as wordmarks — real
+            logos belong here, so `logo` in src/data/site.ts takes an SVG path
+            and this swaps to an <img> the moment one exists.
+          */}
+          <div
+            className="enter mt-12 border-t border-navy/10 pt-7 lg:mt-14"
+            style={{ ['--enter-delay' as string]: '520ms' }}
+          >
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12">
+              <div className="lg:col-span-4">
+                <h2 className="text-[0.8125rem] font-medium tracking-[0.14em] text-muted uppercase">
+                  Partner universities
+                </h2>
+                <p className="mt-3 max-w-xs text-[0.9375rem] leading-relaxed text-muted">
                   Degrees awarded by three recognized institutions in India and the UK.
                 </p>
-                <div className="mt-5 flex -space-x-2">
-                  {universities.map((u) => (
-                    <span
-                      key={u.initials}
-                      className="grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-navy-50 text-xs font-semibold text-navy"
-                    >
-                      {u.initials}
+              </div>
+
+              <ul className="grid gap-6 sm:grid-cols-3 lg:col-span-8 lg:gap-8">
+                {universities.map((u) => (
+                  <li key={u.name}>
+                    {u.logo ? (
+                      <img
+                        src={u.logo}
+                        alt={u.name}
+                        loading="lazy"
+                        className="h-8 w-auto opacity-70 grayscale transition-opacity hover:opacity-100"
+                      />
+                    ) : (
+                      <span className="font-display text-[1.0625rem] leading-tight font-medium text-ink">
+                        {u.name}
+                      </span>
+                    )}
+                    <span className="mt-1 block text-xs tracking-wide text-muted">
+                      {u.location}
                     </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-            <Reveal delay={160}>
-              <div className="card card-hover card-p h-full text-center">
-                <p className="t-h3 font-display font-medium">Graduates placed</p>
-                <p className="mt-4 font-display text-4xl font-medium text-navy">10,000+</p>
-                <p className="mt-2 text-base text-muted md:text-sm">since {site.established}</p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={240}>
-              <div className="card card-hover card-p flex h-full flex-col justify-between">
-                <div>
-                  <p className="t-h3 font-display font-medium">Counseling, free</p>
-                  <p className="mt-3 text-base text-muted md:text-sm">
-                    Talk to an academic counselor. {site.officeHours}.
-                  </p>
-                </div>
-                <a
-                  href={`tel:${site.phoneHref}`}
-                  className="action mt-5 text-sm font-medium text-navy"
-                >
-                  {site.phone}
-                  <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
-                </a>
-              </div>
-            </Reveal>
+            {/* Micro-conversion: quiet by design, one line, one number. */}
+            <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-navy/10 pt-5 text-[0.9375rem]">
+              <span className="grid h-8 w-8 place-items-center rounded-full bg-navy/8 text-navy">
+                <Phone size={15} aria-hidden="true" />
+              </span>
+              <span className="font-medium">Counseling, free</span>
+              <span className="text-muted">
+                Talk to an academic counselor. Mon–Sat · 9am to 7pm.
+              </span>
+              <a
+                href={`tel:${site.phoneHref}`}
+                className="action font-medium text-navy underline-offset-4 hover:underline"
+              >
+                {site.phone}
+              </a>
+            </div>
           </div>
         </div>
       </section>
-
-      {/*
-        Banner image. Constrained rather than full-bleed: the current
-        photograph is 612px wide, and stretching it across 1376px makes it
-        visibly soft. Widen this back to the full grid once a photograph of
-        at least 2000px is in place.
-      */}
-      <div className="shell pb-10 sm:pb-14 lg:pb-20">
-        <Reveal>
-          <Photo
-            name="hero-1"
-            ratio="16/7"
-            priority
-            rounded="panel"
-            className="mx-auto max-w-3xl"
-          />
-        </Reveal>
-      </div>
 
       {/* Awarding bodies, in the position the reference gives its logo strip. */}
       <div className="shell pb-12 lg:pb-20">

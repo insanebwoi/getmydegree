@@ -26,6 +26,13 @@ const declared = {
     width: 1600,
     height: 600,
   },
+  'hero-portrait': {
+    src: '/images/hero-portrait.svg',
+    alt: 'A working professional who completed their degree with GetMyDegree Institutions',
+    note: 'Editorial portrait — working professional, 23–30, smart casual',
+    width: 1200,
+    height: 1500,
+  },
   'hero-2': {
     src: '/images/hero-2.svg',
     alt: 'An academic counselor talking with a student',
