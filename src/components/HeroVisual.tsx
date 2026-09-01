@@ -122,11 +122,11 @@ export function HeroVisual() {
   const active = animated ? index : 0
 
   return (
-    <div ref={frame} className="group relative h-full w-full">
+    <div ref={frame} className="group absolute inset-0 -z-10">
       <div
         ref={track}
-        className="parallax enter-image relative h-full w-full overflow-hidden rounded-t-[2rem] rounded-br-[var(--radius-panel)] rounded-bl-[2rem] lg:rounded-tr-[var(--radius-panel)]"
-        style={{ ['--enter-delay' as string]: '380ms' }}
+        className="parallax enter-image absolute inset-0 overflow-hidden"
+        style={{ ['--enter-delay' as string]: '0ms' }}
       >
         {/*
           One region, one description — the frames are three moments of the same
@@ -147,21 +147,18 @@ export function HeroVisual() {
                 loading="eager"
                 decoding={i === 0 ? 'sync' : 'async'}
                 fetchPriority={i === 0 ? 'high' : 'low'}
-                className="h-full w-full object-cover object-[50%_22%] lg:object-[50%_18%]"
+                className="h-full w-full object-cover object-[62%_28%] lg:object-[68%_26%]"
               />
             </div>
           ))}
         </div>
 
-        {/* Atmospheric fade into the hero surface on the side facing the copy. */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-1/3 bg-[linear-gradient(to_right,var(--color-ivory),transparent)] lg:w-2/5"
-        />
+        {/* Scrim: the words sit on the photograph, so it has to carry them. */}
+        <div aria-hidden="true" className="hero-scrim absolute inset-0" />
 
         {/* Progress and control, quiet until wanted. */}
         {animated && (
-          <div className="absolute right-4 bottom-4 flex items-center gap-3">
+          <div className="absolute top-5 right-5 z-20 flex items-center gap-3 lg:top-7 lg:right-8">
             <div className="flex items-center gap-1.5" aria-hidden="true">
               {(mountRest ? FRAMES : FRAMES.slice(0, 1)).map((name, i) => (
                 <span key={name} className="hero-pip" data-active={i === active} />
@@ -181,17 +178,6 @@ export function HeroVisual() {
             </button>
           </div>
         )}
-      </div>
-
-      {/* The one floating element in the composition. */}
-      <div
-        ref={proof}
-        className="parallax enter absolute bottom-6 -left-3 rounded-[1.125rem] border border-line/80 bg-white/94 px-4 py-3 shadow-[0_14px_36px_-22px_rgba(5,18,41,0.4)] backdrop-blur-md sm:bottom-9 sm:-left-6"
-        style={{ ['--enter-delay' as string]: '620ms' }}
-      >
-        <p className="font-display text-[1.5rem] leading-none font-semibold text-navy">10,000+</p>
-        <p className="mt-1 text-[0.8125rem] font-medium">Graduates placed</p>
-        <p className="text-[0.6875rem] text-muted">since 2021</p>
       </div>
     </div>
   )

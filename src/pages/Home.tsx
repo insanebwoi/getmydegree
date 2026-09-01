@@ -51,136 +51,137 @@ export default function Home() {
       <Seo {...pageMeta['/']} schema={homeSchema} />
 
       {/*
-        One composed screen, not a stack of cards: the hero is a full-bleed
-        warm band rather than a bordered panel, so the only rounded objects are
-        the photograph, the proof card and the trust bar. Everything else is
-        held by type, spacing and alignment.
+        Full-bleed hero: the photographs fill the screen and the words sit on
+        them. A scrim carries the type — heaviest where the copy is, clearing
+        to the right so the picture stays legible — and a hairline drawn inside
+        the edge frames the whole thing.
       */}
-      <section className="hero-surface -mt-2 lg:-mt-4">
-        <div className="shell hero-screen">
-          <div className="grid flex-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-6">
-              <p
-                className="enter inline-flex items-center gap-2 text-[0.8125rem] font-medium tracking-[0.02em] text-muted"
-                style={{ ['--enter-delay' as string]: '60ms' }}
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-navy" aria-hidden="true" />
-                Trusted by 10,000+ graduates
-              </p>
+      <section className="shell -mt-1 pb-10 sm:pb-14 lg:pb-16">
+        <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)]">
+          <HeroVisual />
+          <div aria-hidden="true" className="hero-stroke z-10 hidden sm:block" />
 
-              <h1
-                className="enter t-editorial mt-4 text-ink"
-                style={{ ['--enter-delay' as string]: '140ms' }}
-              >
-                Finish Your Degree,
-                <br />
-                <span className="rule-accent">Restart Your Career</span>
-              </h1>
-
-              <p
-                className="enter mt-5 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:text-[1.0625rem]"
-                style={{ ['--enter-delay' as string]: '240ms' }}
-              >
-                Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
-                attendance, admission confirmed within 48 hours.
-              </p>
-
-              {/* The three objections, pulled out of the paragraph for scanning. */}
-              <ul
-                className="enter mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-muted sm:text-sm"
-                style={{ ['--enter-delay' as string]: '300ms' }}
-              >
-                {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map(
-                  (point, i) => (
-                    <li key={point} className="flex items-center gap-3">
-                      {i > 0 && (
-                        <span className="h-1 w-1 rounded-full bg-muted/40" aria-hidden="true" />
-                      )}
-                      {point}
-                    </li>
-                  ),
-                )}
-              </ul>
-
-              <div
-                className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
-                style={{ ['--enter-delay' as string]: '360ms' }}
-              >
-                <Link to="/contact" className="btn btn-arrow btn-primary justify-center">
-                  Book a free consultation
-                  <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-                <Link to="/courses" className="btn btn-text justify-center">
-                  Explore programs
-                  <ArrowRight size={15} aria-hidden="true" />
-                </Link>
-              </div>
-
-              <p
-                className="enter mt-3.5 text-xs text-muted"
-                style={{ ['--enter-delay' as string]: '420ms' }}
-              >
-                Free guidance · No obligation
-              </p>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="-mx-[var(--hero-pad)] -mb-[var(--hero-pad-y)] h-[clamp(260px,42vh,340px)] pl-6 lg:mx-0 lg:mb-0 lg:-mr-[var(--hero-pad)] lg:h-[clamp(360px,60vh,540px)] lg:pl-4">
-                <HeroVisual />
-              </div>
-            </div>
-          </div>
-
-          {/* Trust bar: three areas, one rule, inside the first screen. */}
-          <div className="enter mt-8 lg:mt-6" style={{ ['--enter-delay' as string]: '760ms' }}>
-            <div className="hero-trust grid gap-5 rounded-2xl border border-line bg-white/70 px-5 py-4 backdrop-blur-sm sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
-              <div className="lg:col-span-6 lg:pr-8">
-                <h2 className="text-[0.6875rem] font-medium tracking-[0.16em] text-muted uppercase">
-                  Partner universities
-                </h2>
-                <ul className="mt-2.5 flex flex-wrap items-center gap-x-7 gap-y-2">
-                  {universities.map((u) => (
-                    <li key={u.name}>
-                      {u.logo ? (
-                        <img
-                          src={u.logo}
-                          alt={u.name}
-                          loading="lazy"
-                          className="h-6 w-auto opacity-65 grayscale transition duration-200 hover:opacity-100 hover:grayscale-0"
-                        />
-                      ) : (
-                        <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink/85">
-                          {u.name}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-2 text-xs text-muted">
-                  Recognized institutions in India and the UK.
-                </p>
-              </div>
-
-              <div className="border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
-                <p className="font-display text-[1.375rem] leading-none font-semibold text-navy">
-                  10,000+
-                </p>
-                <p className="mt-1.5 text-sm font-medium">Graduates placed</p>
-                <p className="text-xs text-muted">since 2021</p>
-              </div>
-
-              <div className="border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-                <p className="text-[0.6875rem] font-medium tracking-[0.16em] text-muted uppercase">
-                  Counseling, free
-                </p>
-                <a
-                  href={`tel:${site.phoneHref}`}
-                  className="action mt-1.5 gap-2 font-display text-[1.0625rem] font-medium text-navy underline-offset-4 hover:underline"
+          <div className="relative z-10 flex flex-1 flex-col">
+            <div className="flex flex-1 items-center">
+              <div className="max-w-xl py-6 lg:max-w-2xl">
+                <p
+                  className="enter inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-white backdrop-blur-sm"
+                  style={{ ['--enter-delay' as string]: '60ms' }}
                 >
-                  <Phone size={14} aria-hidden="true" />
-                  {site.phone}
-                </a>
-                <p className="text-xs text-muted">Mon–Sat · 9am to 7pm</p>
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+                  Trusted by 10,000+ graduates
+                </p>
+
+                <h1
+                  className="enter t-editorial mt-5 text-white"
+                  style={{ ['--enter-delay' as string]: '140ms' }}
+                >
+                  Finish Your Degree,
+                  <br />
+                  <span className="text-gold">Restart Your Career</span>
+                </h1>
+
+                <p
+                  className="enter mt-5 max-w-lg text-[0.9375rem] leading-relaxed text-white/75 sm:text-base lg:text-[1.0625rem]"
+                  style={{ ['--enter-delay' as string]: '240ms' }}
+                >
+                  Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
+                  attendance, admission confirmed within 48 hours.
+                </p>
+
+                <ul
+                  className="enter mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8125rem] text-white/70 sm:text-sm"
+                  style={{ ['--enter-delay' as string]: '300ms' }}
+                >
+                  {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map(
+                    (point, i) => (
+                      <li key={point} className="flex items-center gap-3">
+                        {i > 0 && (
+                          <span className="h-1 w-1 rounded-full bg-white/35" aria-hidden="true" />
+                        )}
+                        {point}
+                      </li>
+                    ),
+                  )}
+                </ul>
+
+                <div
+                  className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
+                  style={{ ['--enter-delay' as string]: '360ms' }}
+                >
+                  <Link to="/contact" className="btn btn-arrow btn-gold justify-center">
+                    Book a free consultation
+                    <ArrowRight size={16} aria-hidden="true" />
+                  </Link>
+                  <Link to="/courses" className="btn btn-arrow btn-glass justify-center">
+                    Explore programs
+                    <ArrowRight size={15} aria-hidden="true" />
+                  </Link>
+                </div>
+
+                <p
+                  className="enter mt-3.5 text-xs text-white/60"
+                  style={{ ['--enter-delay' as string]: '420ms' }}
+                >
+                  Free guidance · No obligation
+                </p>
+              </div>
+            </div>
+
+            {/* Trust bar sits on the photograph, still inside the first screen. */}
+            <div>
+              <div
+                className="enter hero-trust grid gap-5 rounded-2xl border border-white/15 bg-white/10 px-5 py-4 backdrop-blur-md sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0"
+                style={{ ['--enter-delay' as string]: '760ms' }}
+              >
+                <div className="lg:col-span-6 lg:pr-8">
+                  <h2 className="text-[0.6875rem] font-medium tracking-[0.16em] text-white/55 uppercase">
+                    Partner universities
+                  </h2>
+                  <ul className="mt-2.5 flex flex-wrap items-center gap-x-7 gap-y-2">
+                    {universities.map((u) => (
+                      <li key={u.name}>
+                        {u.logo ? (
+                          <img
+                            src={u.logo}
+                            alt={u.name}
+                            loading="lazy"
+                            className="h-6 w-auto opacity-80 brightness-0 invert transition hover:opacity-100"
+                          />
+                        ) : (
+                          <span className="font-display text-[0.9375rem] leading-tight font-medium text-white">
+                            {u.name}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-2 text-xs text-white/55">
+                    Recognized institutions in India and the UK.
+                  </p>
+                </div>
+
+                <div className="border-t border-white/15 pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
+                  <p className="font-display text-[1.375rem] leading-none font-semibold text-gold">
+                    10,000+
+                  </p>
+                  <p className="mt-1.5 text-sm font-medium text-white">Graduates placed</p>
+                  <p className="text-xs text-white/55">since 2021</p>
+                </div>
+
+                <div className="border-t border-white/15 pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+                  <p className="text-[0.6875rem] font-medium tracking-[0.16em] text-white/55 uppercase">
+                    Counseling, free
+                  </p>
+                  <a
+                    href={`tel:${site.phoneHref}`}
+                    className="action mt-1.5 gap-2 font-display text-[1.0625rem] font-medium text-white underline-offset-4 hover:text-gold hover:underline"
+                  >
+                    <Phone size={14} aria-hidden="true" />
+                    {site.phone}
+                  </a>
+                  <p className="text-xs text-white/55">Mon–Sat · 9am to 7pm</p>
+                </div>
               </div>
             </div>
           </div>

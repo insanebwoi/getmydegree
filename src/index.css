@@ -227,6 +227,20 @@
   .btn-gold:hover {
     background: var(--color-gold-300);
   }
+  /* Secondary action on photography: legible without competing. */
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.32);
+    color: #fff;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: transparent;
+    color: var(--color-navy-950);
+  }
+
   /* Quietest action: type and an arrow, no container. */
   .btn-text {
     background: transparent;
@@ -462,9 +476,10 @@
     --nav-h: 72px;
     /* One variable for the inset, so the photograph's bleed can never disagree
        with the padding — that mismatch is what caused overflow at 1280x720. */
-    --hero-pad: clamp(0.875rem, 4vw, 3.5rem);
-    --hero-pad-y: clamp(1.25rem, 3.2vh, 2.75rem);
-    min-height: calc(100svh - var(--nav-h));
+    --hero-pad: clamp(1.25rem, 3.4vw, 3rem);
+    --hero-pad-y: clamp(1.25rem, 3vh, 2.5rem);
+    --hero-gap: 2.5rem;
+    min-height: calc(100svh - var(--nav-h) - var(--hero-gap, 2.5rem));
     display: flex;
     flex-direction: column;
     padding-inline: var(--hero-pad);
@@ -499,6 +514,7 @@
     .hero-screen {
       --hero-pad: clamp(1.25rem, 3vw, 2.5rem);
       --hero-pad-y: clamp(0.75rem, 1.8vh, 1.25rem);
+      --hero-gap: 1.75rem;
     }
     /* The trust bar loses a little height before the headline loses more size. */
     .hero-trust {
@@ -560,6 +576,49 @@
   }
 
   /* Progress pips: three ticks, the active one filled. */
+  /*
+    Full-bleed hero. Two scrims: one darkens the side the words sit on and
+    clears toward the right so the photograph stays visible, the second holds a
+    dark band along the base for the trust bar.
+  */
+  /*
+    On a phone the copy sits over the whole frame, including the bright sky at
+    the top, so the scrim stays heavy the whole way up. Verified against
+    rendered pixels rather than assumed.
+  */
+  .hero-scrim {
+    background: linear-gradient(
+      to top,
+      rgba(5, 18, 41, 0.96) 0%,
+      rgba(5, 18, 41, 0.93) 45%,
+      rgba(5, 18, 41, 0.88) 75%,
+      rgba(5, 18, 41, 0.8) 100%
+    );
+  }
+  @media (min-width: 1024px) {
+    .hero-scrim {
+      background:
+        linear-gradient(
+          100deg,
+          rgba(5, 18, 41, 0.96) 0%,
+          rgba(5, 18, 41, 0.92) 34%,
+          rgba(5, 18, 41, 0.72) 54%,
+          rgba(5, 18, 41, 0.34) 78%,
+          rgba(5, 18, 41, 0.22) 100%
+        ),
+        linear-gradient(to top, rgba(5, 18, 41, 0.75) 0%, transparent 45%);
+    }
+  }
+
+  /* A hairline drawn inside the hero — an editorial frame, not a border. */
+  .hero-stroke {
+    position: absolute;
+    inset: clamp(0.75rem, 1.6vw, 1.5rem);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 1.25rem;
+    pointer-events: none;
+  }
+
   /* Sits over photography, so the pips are white with a shadow rather than
      brand blue, which disappeared against a dark frame. */
   .hero-pip {
