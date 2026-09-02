@@ -353,7 +353,7 @@ export default function Home() {
           </div>
 
           <Reveal delay={120} className="lg:col-span-4">
-            <div className="card card-p flex h-full flex-col justify-between bg-navy-950 text-white">
+            <div className="card card-p flex h-full flex-col justify-center bg-navy-950 text-white">
               <div>
                 <span className="badge badge-dark">All programs</span>
                 <h3 className="mt-5 font-display text-2xl font-medium">
@@ -368,15 +368,22 @@ export default function Home() {
                   row with the programme cards, and a ratio-driven height
                   overflowed the row so the button sat on the picture.
                 */}
-                <div className="mt-6 h-36 overflow-hidden rounded-[var(--radius-card)] border border-white/10 sm:h-40">
-                  {/* Photo sets its own h-full, which wins over a height class
-                      on the element, so the wrapper carries the height. */}
+                {/*
+                  The action sits on the picture, so the card ends on the image
+                  rather than below it. A gradient at the foot keeps the button
+                  legible whatever the photograph is doing behind it.
+                */}
+                <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-[var(--radius-card)] border border-white/10">
                   <Photo name="hero-3" rounded="none" />
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(to_top,rgba(5,18,41,0.55),transparent)]"
+                  />
+                  <Link to="/courses" className="btn btn-gold absolute bottom-4 left-4">
+                    See all nine
+                  </Link>
                 </div>
               </div>
-              <Link to="/courses" className="btn btn-gold mt-8 self-start">
-                See all nine
-              </Link>
             </div>
           </Reveal>
         </div>

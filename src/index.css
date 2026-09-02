@@ -633,21 +633,28 @@
   }
 
   /* Hero copy crossfade matching the photograph transitions. */
+  /*
+    Text cannot crossfade the way a photograph can: two headlines part-opaque
+    over one another are simply unreadable. So the frames hand over instead of
+    overlapping — the outgoing one leaves in 260ms, and the incoming one waits
+    that long before it starts. Only one is legible at any moment.
+  */
   .hero-text-frame {
-    transition:
-      opacity 1200ms cubic-bezier(0.4, 0, 0.2, 1),
-      transform 1200ms cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: opacity, transform;
-  }
-  .hero-text-frame:not(.is-active) {
     opacity: 0;
-    transform: translate3d(0, 6px, 0);
+    transform: translate3d(0, 8px, 0);
     pointer-events: none;
+    transition:
+      opacity 260ms cubic-bezier(0.4, 0, 1, 1),
+      transform 260ms cubic-bezier(0.4, 0, 1, 1);
+    will-change: opacity, transform;
   }
   .hero-text-frame.is-active {
     opacity: 1;
     transform: translate3d(0, 0, 0);
     pointer-events: auto;
+    transition:
+      opacity 420ms cubic-bezier(0.22, 1, 0.36, 1) 260ms,
+      transform 420ms cubic-bezier(0.22, 1, 0.36, 1) 260ms;
   }
   @media (prefers-reduced-motion: reduce) {
     .hero-text-frame {
