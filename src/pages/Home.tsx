@@ -73,7 +73,7 @@ export default function Home() {
       <section className="shell -mt-1 pb-10 sm:pb-14 lg:pb-16">
         <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line bg-white">
           <HeroVisual onChange={setSlide} />
-          <div className="grid flex-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="grid flex-1 items-stretch gap-5 sm:gap-7 lg:grid-cols-12 lg:gap-10">
             <div className="flex flex-col justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)+0.5rem)] lg:col-span-7 lg:pt-3 xl:col-span-6">
               <p
                 className="enter mt-2 sm:mt-3 inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
@@ -114,11 +114,25 @@ export default function Home() {
                         aria-hidden={!isActive}
                         className={`hero-text-frame absolute inset-0 ${isActive ? 'is-active' : ''}`}
                       >
-                        <h1 className="t-editorial text-ink">
-                          {s.headline[0]}
-                          <br />
-                          <span className="text-navy">{s.headline[1]}</span>
-                        </h1>
+                        {/*
+                          Only the slide on screen is the document's heading.
+                          All three frames stay mounted so they can crossfade,
+                          but rendering three h1 elements would give the page
+                          three competing headings.
+                        */}
+                        {isActive ? (
+                          <h1 className="t-editorial text-ink">
+                            {s.headline[0]}
+                            <br />
+                            <span className="text-navy">{s.headline[1]}</span>
+                          </h1>
+                        ) : (
+                          <div className="t-editorial text-ink">
+                            {s.headline[0]}
+                            <br />
+                            <span className="text-navy">{s.headline[1]}</span>
+                          </div>
+                        )}
                         <p className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
                           {s.body}
                         </p>
@@ -162,7 +176,7 @@ export default function Home() {
               only the proof card — placed over the picture, where the eye lands
               after the headline.
             */}
-            <div className="flex items-end justify-start lg:col-span-5 lg:justify-end lg:pb-6 xl:col-span-6">
+            <div className="hidden items-end justify-start lg:col-span-5 lg:flex lg:justify-end lg:pb-6 xl:col-span-6">
               <div
                 className="enter rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)]"
                 style={{ ['--enter-delay' as string]: '620ms' }}
@@ -181,9 +195,12 @@ export default function Home() {
           </div>
 
           {/* Credibility: institutions, the number, and a way to talk to someone. */}
-          <div className="enter mt-8 lg:mt-6" style={{ ['--enter-delay' as string]: '760ms' }}>
-            <div className="hero-trust grid gap-5 rounded-2xl border border-line bg-white px-5 py-4 shadow-[var(--shadow-soft)] sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
-              <div className="lg:col-span-6 lg:pr-8">
+          <div
+            className="enter mt-5 sm:mt-7 lg:mt-6"
+            style={{ ['--enter-delay' as string]: '760ms' }}
+          >
+            <div className="hero-trust grid gap-4 rounded-2xl border border-line bg-white px-4 py-4 shadow-[var(--shadow-soft)] sm:grid-cols-2 sm:gap-x-6 sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
+              <div className="sm:col-span-2 lg:col-span-6 lg:pr-8">
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
                   <h2 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
                     Partner universities
@@ -212,11 +229,12 @@ export default function Home() {
                   ))}
                 </ul>
                 <p className="mt-2.5 text-xs text-muted">
-                  Central and State Government universities in India and recognized UK institutions — all 100% UGC, AICTE & NAAC approved.
+                  Central and State Government universities in India and recognized UK institutions
+                  — all 100% UGC, AICTE & NAAC approved.
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:px-8 lg:pt-0">
+              <div className="flex items-center gap-3 border-t border-line pt-4 sm:border-t-0 sm:pt-0 lg:col-span-3 lg:border-l lg:px-8">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
                   <Users size={19} aria-hidden="true" />
                 </span>
@@ -229,7 +247,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <div className="flex items-center gap-3 border-t border-line pt-4 lg:col-span-3 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+              <div className="flex items-center gap-3 border-t border-line pt-4 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-6 lg:col-span-3 lg:pl-8">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
                   <Headphones size={19} aria-hidden="true" />
                 </span>
@@ -291,7 +309,9 @@ export default function Home() {
                   <span className="chip">
                     <p.Icon size={16} aria-hidden="true" />
                   </span>
-                  <h3 className="mt-3 text-[0.9375rem] font-display font-semibold leading-snug">{p.title}</h3>
+                  <h3 className="mt-3 text-[0.9375rem] font-display font-semibold leading-snug">
+                    {p.title}
+                  </h3>
                   <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted">{p.body}</p>
                 </div>
               </Reveal>

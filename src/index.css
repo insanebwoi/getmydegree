@@ -136,7 +136,7 @@
 
   /* Section rhythm scales with the viewport too. */
   .section-y {
-    padding-block: clamp(3rem, 2rem + 5vw, 6.5rem);
+    padding-block: clamp(2.25rem, 1.5rem + 3.2vw, 4.5rem);
   }
   .card-p {
     padding: clamp(1.125rem, 0.85rem + 1.25vw, 2rem);
