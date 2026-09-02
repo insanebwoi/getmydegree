@@ -363,6 +363,16 @@ export default function Home() {
                   Every one is UGC recognized and assessed continuously — there is no final
                   examination hall to sit in.
                 </p>
+                {/*
+                  A fixed height, not an aspect ratio: this card shares a grid
+                  row with the programme cards, and a ratio-driven height
+                  overflowed the row so the button sat on the picture.
+                */}
+                <div className="mt-6 h-36 overflow-hidden rounded-[var(--radius-card)] border border-white/10 sm:h-40">
+                  {/* Photo sets its own h-full, which wins over a height class
+                      on the element, so the wrapper carries the height. */}
+                  <Photo name="programs-1" rounded="none" />
+                </div>
               </div>
               <Link to="/courses" className="btn btn-gold mt-8 self-start">
                 See all nine
