@@ -1,7 +1,7 @@
 /**
  * Blog index, built from the markdown files in `src/content/posts`.
  *
- * Frontmatter is collected eagerly — it is small and every listing needs it.
+ * Frontmatter is collected eagerly   it is small and every listing needs it.
  * Article bodies are separate chunks, fetched only for the post being read, so
  * the main bundle stays the same size whether there are four posts or four
  * hundred. During prerendering `postBodies.ssr.ts` seeds every body, because
@@ -67,7 +67,7 @@ export function seedBodies(bodies: Record<string, string>) {
   for (const [slug, html] of Object.entries(bodies)) bodyCache.set(slug, html)
 }
 
-/** Synchronous body — populated during prerender, and after `loadBody` runs. */
+/** Synchronous body   populated during prerender, and after `loadBody` runs. */
 export function getBody(slug: string): string | undefined {
   return bodyCache.get(slug)
 }

@@ -11,7 +11,7 @@ Fee conversations in this sector are often vague, which is exactly why people ge
 
 ## The components
 
-- University tuition, charged per year or per semester — the largest component.
+- University tuition, charged per year or per semester   the largest component.
 
 - Registration and enrolment, charged once at admission.
 
@@ -24,10 +24,10 @@ When you are quoted a single number, ask which of the four it covers. A tuition-
 
 ## How the instalments work
 
-Our plans divide the annual fee across monthly payments for that academic year. There is no interest and no processing fee — the total across twelve months equals the fee paid upfront. The first instalment is due at enrolment and the rest fall on the same date each month.
+Our plans divide the annual fee across monthly payments for that academic year. There is no interest and no processing fee   the total across twelve months equals the fee paid upfront. The first instalment is due at enrolment and the rest fall on the same date each month.
 
 ## What we will not do
 
 We do not take payment before you have seen the university name, the programme, the DEB approval and the full fee in writing. If any provider asks you to pay to "block a seat" before showing you those, treat it as a warning rather than urgency.
 
-Ask us for a written breakdown for any programme on this site. You will get all four components, the instalment schedule, and what happens if you need to pause — before you commit to anything.
+Ask us for a written breakdown for any programme on this site. You will get all four components, the instalment schedule, and what happens if you need to pause   before you commit to anything.

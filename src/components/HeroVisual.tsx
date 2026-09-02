@@ -14,9 +14,13 @@ type Props = {
  * The hero photographs. Three frames crossfade on a six-second hold, and each
  * change is reported upward so the headline and copy move with the image.
  *
- * The picture is shown at full strength with nothing washed over it: a band
- * across the top on small screens, the whole hero from lg. The copy keeps its
- * own solid card, so legibility comes from a crisp edge rather than a fade.
+ * The picture is shown at full strength with nothing washed over it, filling
+ * the hero at every size. Legibility comes from the crop rather than a veil:
+ * the copy sits on the bright side of the frame, and the object-position is
+ * set per breakpoint — pushed as far toward the subject as the measured
+ * contrast allows. A narrow portrait crop of a landscape photograph cannot
+ * show both the people and a clean field for the words; a portrait-shaped
+ * image for small screens would give back both.
  *
  * Cycling stops when the tab is hidden or the hero scrolls away, and never
  * starts under prefers-reduced-motion, where the first slide simply stands. A
@@ -38,11 +42,22 @@ export function HeroVisual({ onChange }: Props) {
   }, [])
 
   useEffect(() => {
+    /*
+      The sequence runs from lg up only. On a phone it would cost data and
+      battery for a picture behind the copy, and the pause control it requires
+        motion that starts on its own needs one   is clutter at that size. No
+      motion, no control needed.
+    */
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const sync = () => setAnimated(!still.matches)
+    const wide = window.matchMedia('(min-width: 1024px)')
+    const sync = () => setAnimated(!still.matches && wide.matches)
     sync()
     still.addEventListener('change', sync)
-    return () => still.removeEventListener('change', sync)
+    wide.addEventListener('change', sync)
+    return () => {
+      still.removeEventListener('change', sync)
+      wide.removeEventListener('change', sync)
+    }
   }, [])
 
   useEffect(() => {
@@ -112,10 +127,7 @@ export function HeroVisual({ onChange }: Props) {
   const frames = mountRest ? heroSlides : heroSlides.slice(0, 1)
 
   return (
-    <div
-      ref={frame}
-      className="group absolute inset-x-0 top-0 -z-10 h-[var(--hero-band)] lg:inset-0 lg:h-auto"
-    >
+    <div ref={frame} className="group absolute inset-0 -z-10">
       <div ref={track} className="parallax enter-image absolute inset-0 overflow-hidden">
         <div
           role="img"
@@ -132,7 +144,7 @@ export function HeroVisual({ onChange }: Props) {
                 loading="eager"
                 decoding={i === 0 ? 'sync' : 'async'}
                 fetchPriority={i === 0 ? 'high' : 'low'}
-                className="h-full w-full object-cover object-[50%_38%] lg:object-[62%_20%]"
+                className="h-full w-full object-cover object-[38%_45%] sm:object-[32%_45%] lg:object-[62%_20%]"
               />
             </div>
           ))}

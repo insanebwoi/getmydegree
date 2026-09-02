@@ -7,8 +7,6 @@ import {
   Check,
   Clock,
   GraduationCap,
-  Headphones,
-  Users,
   Wallet,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
@@ -18,6 +16,7 @@ import { Reveal } from '../components/Reveal'
 import { Section } from '../components/Section'
 import { Photo } from '../components/Photo'
 import { HeroVisual } from '../components/HeroVisual'
+import { HeroTrust } from '../components/HeroTrust'
 import { Stats } from '../components/Stats'
 import {
   admissionSteps,
@@ -26,7 +25,6 @@ import {
   paths,
   pricing,
   heroSlides,
-  site,
   stats,
   testimonials,
   universities,
@@ -79,7 +77,10 @@ export default function Home() {
                 className="enter mt-2 sm:mt-3 inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
                 style={{ ['--enter-delay' as string]: '60ms' }}
               >
-                <span className="h-2 w-2 rounded-full bg-gold" aria-hidden="true" />
+                <span
+                  className="h-1.5 w-1.5 rounded-full bg-gold sm:h-2 sm:w-2"
+                  aria-hidden="true"
+                />
                 Trusted by 10,000+ graduates
               </p>
 
@@ -133,7 +134,7 @@ export default function Home() {
                             <span className="text-navy">{s.headline[1]}</span>
                           </div>
                         )}
-                        <p className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
+                        <p className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed text-ink sm:mt-3.5 sm:text-base lg:text-[1.0625rem] lg:text-muted">
                           {s.body}
                         </p>
                       </div>
@@ -143,13 +144,18 @@ export default function Home() {
               </div>
 
               <ul
-                className="enter mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-[0.8125rem] font-medium text-ink sm:mt-2.5 sm:text-sm"
+                className="enter mt-2 flex flex-wrap items-center gap-x-3.5 gap-y-1 text-[0.75rem] font-medium text-ink sm:mt-2.5 sm:gap-x-5 sm:text-sm"
                 style={{ ['--enter-delay' as string]: '300ms' }}
               >
                 {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map((point) => (
                   <li key={point} className="flex items-center gap-2">
-                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gold text-navy-950">
-                      <Check size={12} strokeWidth={3.5} aria-hidden="true" />
+                    <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-gold text-navy-950 sm:h-5 sm:w-5">
+                      <Check
+                        size={10}
+                        strokeWidth={3.5}
+                        className="sm:h-3 sm:w-3"
+                        aria-hidden="true"
+                      />
                     </span>
                     {point}
                   </li>
@@ -173,7 +179,7 @@ export default function Home() {
 
             {/*
               The photograph is behind everything now, so this column carries
-              only the proof card — placed over the picture, where the eye lands
+              only the proof card   placed over the picture, where the eye lands
               after the headline.
             */}
             <div className="hidden items-end justify-start lg:col-span-5 lg:flex lg:justify-end lg:pb-6 xl:col-span-6">
@@ -194,78 +200,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Credibility: institutions, the number, and a way to talk to someone. */}
+          {/* Credibility sits in the hero only where there is room for it. */}
           <div
-            className="enter mt-5 sm:mt-7 lg:mt-6"
+            className="enter mt-6 hidden lg:block"
             style={{ ['--enter-delay' as string]: '760ms' }}
           >
-            <div className="hero-trust grid gap-4 rounded-2xl border border-line bg-white px-4 py-4 shadow-[var(--shadow-soft)] sm:grid-cols-2 sm:gap-x-6 sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
-              <div className="sm:col-span-2 lg:col-span-6 lg:pr-8">
-                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                  <h2 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
-                    Partner universities
-                  </h2>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-navy-50 px-2 py-0.5 text-[0.6875rem] font-medium text-navy">
-                    <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-                    Central & State Gov · UGC · AICTE · NAAC Approved
-                  </span>
-                </div>
-                <ul className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-3">
-                  {universities.map((u) => (
-                    <li key={u.name}>
-                      {u.logo ? (
-                        <img
-                          src={u.logo}
-                          alt={u.name}
-                          loading="lazy"
-                          className="h-8 w-auto opacity-80 transition hover:opacity-100"
-                        />
-                      ) : (
-                        <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink">
-                          {u.name}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-2.5 text-xs text-muted">
-                  Central and State Government universities in India and recognized UK institutions
-                  — all 100% UGC, AICTE & NAAC approved.
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 border-t border-line pt-4 sm:border-t-0 sm:pt-0 lg:col-span-3 lg:border-l lg:px-8">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
-                  <Users size={19} aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block font-display text-[1.375rem] leading-none font-semibold text-navy">
-                    10,000+
-                  </span>
-                  <span className="mt-1 block text-sm font-medium">Graduates placed</span>
-                  <span className="block text-xs text-muted">since 2021</span>
-                </span>
-              </div>
-
-              <div className="flex items-center gap-3 border-t border-line pt-4 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-6 lg:col-span-3 lg:pl-8">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
-                  <Headphones size={19} aria-hidden="true" />
-                </span>
-                <span>
-                  <span className="block text-sm font-medium">Counseling, free</span>
-                  <a
-                    href={`tel:${site.phoneHref}`}
-                    className="action font-display text-[1.0625rem] font-semibold text-navy underline-offset-4 hover:underline"
-                  >
-                    {site.phone}
-                  </a>
-                  <span className="block text-xs text-muted">Mon–Sat · 9am to 7pm</span>
-                </span>
-              </div>
-            </div>
+            <HeroTrust />
           </div>
         </div>
       </section>
+
+      {/* Below the hero on phones and tablets, where it does not cost the
+          first screen. */}
+      <div className="shell -mt-4 pb-10 sm:pb-14 lg:hidden">
+        <HeroTrust />
+      </div>
 
       {/* Awarding bodies, in the position the reference gives its logo strip. */}
       <div className="shell pb-6 lg:pb-10">
@@ -296,7 +245,7 @@ export default function Home() {
       <Section
         badge="About"
         title="Education built around the life you already have"
-        intro="Since 2021 we have helped people who stopped studying — for work, for money, for family — return and finish a degree that employers and government bodies accept."
+        intro="Since 2021 we have helped people who stopped studying   for work, for money, for family   return and finish a degree that employers and government bodies accept."
       >
         <div className="grid gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
@@ -360,7 +309,7 @@ export default function Home() {
                   Five undergraduate and four postgraduate degrees
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-white/65 md:text-sm">
-                  Every one is UGC recognized and assessed continuously — there is no final
+                  Every one is UGC recognized and assessed continuously   there is no final
                   examination hall to sit in.
                 </p>
                 {/*

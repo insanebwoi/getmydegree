@@ -25,7 +25,7 @@ export const routes: RouteObject[] = [
   },
 ]
 
-/** Routes emitted as static HTML by the prerender step — every post included. */
+/** Routes emitted as static HTML by the prerender step   every post included. */
 export const prerenderPaths = [
   '/',
   '/about',

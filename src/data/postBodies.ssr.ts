@@ -4,7 +4,7 @@
  *
  * Imported solely by `entry-server.tsx`. Keeping the eager glob out of the
  * client module graph is what stops article text being bundled into the main
- * JavaScript chunk — Rollup will not tree-shake an eager `import.meta.glob`.
+ * JavaScript chunk   Rollup will not tree-shake an eager `import.meta.glob`.
  */
 import { seedBodies } from './posts'
 

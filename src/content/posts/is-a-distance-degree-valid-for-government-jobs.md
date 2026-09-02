@@ -7,11 +7,11 @@ author: "GetMyDegree Academic Team"
 cover: /images/blog/is-a-distance-degree-valid-for-government-jobs.svg
 ---
 
-This is the first question almost every applicant asks us, and it deserves a precise answer rather than a reassuring one. A degree earned through distance or online mode is treated on par with a regular degree for government recruitment — but only when two conditions are met.
+This is the first question almost every applicant asks us, and it deserves a precise answer rather than a reassuring one. A degree earned through distance or online mode is treated on par with a regular degree for government recruitment   but only when two conditions are met.
 
 ## The two conditions that actually matter
 
-- The university must be recognized by the University Grants Commission (UGC) — established by an Act of Parliament, a State Act, or notified as a deemed-to-be university.
+- The university must be recognized by the University Grants Commission (UGC)   established by an Act of Parliament, a State Act, or notified as a deemed-to-be university.
 
 - The specific programme must be approved for distance or online mode by the UGC Distance Education Bureau (DEB) for the academic year in which you enrol.
 

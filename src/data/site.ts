@@ -46,7 +46,7 @@ export const heroTicker = [
   'Finish Your Degree. Unlock Your Future.',
   'Restart Your Career Without Starting Over.',
   'No Exams. No Pressure. Just Progress.',
-  'From Dropout to Graduate — Your Comeback Starts Here.',
+  'From Dropout to Graduate   Your Comeback Starts Here.',
 ]
 
 export const features = [
@@ -74,25 +74,25 @@ export const universities: {
   initials: string
   logo?: string
 }[] = [
-  {
-    name: 'Rabindranath Tagore University',
-    location: 'Madhya Pradesh, Bhopal',
-    body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
-    initials: 'RTU',
-  },
-  {
-    name: 'PRIST Deemed University',
-    location: 'Tamil Nadu, India',
-    body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
-    initials: 'PU',
-  },
-  {
-    name: 'Marjon University',
-    location: 'Cornwall, United Kingdom',
-    body: 'UK government recognized university offering globally valid degrees.',
-    initials: 'MU',
-  },
-]
+    {
+      name: 'Rabindranath Tagore University',
+      location: 'Madhya Pradesh, Bhopal',
+      body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
+      initials: 'RTU',
+    },
+    {
+      name: 'PRIST Deemed University',
+      location: 'Tamil Nadu, India',
+      body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
+      initials: 'PU',
+    },
+    {
+      name: 'Marjon University',
+      location: 'Cornwall, United Kingdom',
+      body: 'UK government recognized university offering globally valid degrees.',
+      initials: 'MU',
+    },
+  ]
 
 export const solutions = [
   {
@@ -330,7 +330,7 @@ export const admissionSteps = [
   {
     step: '04',
     title: 'Study and graduate',
-    body: 'Learn at your own pace around work. Assessment is continuous — no sit-down examination hall.',
+    body: 'Learn at your own pace around work. Assessment is continuous   no sit-down examination hall.',
     when: '2–3 years',
   },
 ]
@@ -375,7 +375,7 @@ export const heroSlides: HeroSlide[] = [
   {
     image: 'hero-portrait',
     headline: ['Finish Your Degree,', 'Restart Your Career'],
-    body: 'Complete a UGC, AICTE & NAAC approved degree from Central and State universities around your job — no entrance exam, no attendance, admission confirmed within 48 hours.',
+    body: 'Complete a UGC, AICTE & NAAC approved degree from Central and State universities around your job   no entrance exam, no attendance, admission confirmed within 48 hours.',
   },
   {
     image: 'hero-portrait-2',
@@ -385,6 +385,6 @@ export const heroSlides: HeroSlide[] = [
   {
     image: 'hero-portrait-3',
     headline: ['A Degree That Counts', 'Where It Matters'],
-    body: 'Awarded by Central & State Government, UGC, AICTE and NAAC approved universities in India and the UK — valid for government roles, promotions and further study.',
+    body: 'Awarded by Central & State Government, UGC, AICTE and NAAC approved universities in India and the UK   valid for government roles, promotions and further study.',
   },
 ]

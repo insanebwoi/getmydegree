@@ -54,7 +54,7 @@ export const coursesSchema: object = {
     position: i + 1,
     item: {
       '@type': 'Course',
-      name: `${c.code} — ${c.name}`,
+      name: `${c.code}   ${c.name}`,
       description: c.body,
       educationalLevel: c.level === 'UG' ? 'Undergraduate' : 'Postgraduate',
       provider: { '@type': 'EducationalOrganization', name: site.name, url: site.url },
@@ -66,7 +66,7 @@ export const contactSchema: object = {
   '@context': 'https://schema.org',
   '@graph': centers.map((c) => ({
     '@type': 'LocalBusiness',
-    name: `${site.name} — ${c.city}`,
+    name: `${site.name}   ${c.city}`,
     url: `${site.url}/contact`,
     telephone: c.phoneHref,
     email: site.email,

@@ -18,7 +18,7 @@ export default function About() {
       <PageHero
         badge="About us"
         title="Your trusted partner for academic success"
-        intro={`${site.name} provides flexible, recognized education for people completing, restarting or upgrading their studies — built for the realities of modern life.`}
+        intro={`${site.name} provides flexible, recognized education for people completing, restarting or upgrading their studies   built for the realities of modern life.`}
       >
         <Link to="/contact" className="btn btn-primary">
           Talk to a counselor
@@ -35,7 +35,7 @@ export default function About() {
       <Section
         badge="Our mission"
         title="Education that fits your life, not the other way around"
-        intro="We understand every journey is different — restarting after a break, upgrading a qualification, or studying alongside a full-time job."
+        intro="We understand every journey is different   restarting after a break, upgrading a qualification, or studying alongside a full-time job."
       >
         <div className="grid gap-4 lg:grid-cols-12">
           <Reveal className="lg:col-span-6">

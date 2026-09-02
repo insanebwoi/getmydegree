@@ -2,7 +2,7 @@
  * Every photograph on the site, in one place.
  *
  * To use a real photo, drop a file named after the slot into `public/images/`
- * — `hero-1.jpg`, `about-2.png`, `courses-1.webp`. The build resolves each slot
+ *   `hero-1.jpg`, `about-2.png`, `courses-1.webp`. The build resolves each slot
  * to whichever file exists, preferring real formats over the .svg placeholder,
  * so no code change is needed. Cropping is handled by the layout.
  */
@@ -29,21 +29,21 @@ const declared = {
   'hero-portrait': {
     src: '/images/hero-portrait.svg',
     alt: 'A working professional who completed their degree with GetMyDegree Institutions',
-    note: 'Editorial portrait — working professional, 23–30, smart casual',
+    note: 'Editorial portrait   working professional, 23–30, smart casual',
     width: 1200,
     height: 1500,
   },
   'hero-portrait-2': {
     src: '/images/hero-portrait-2.svg',
     alt: '',
-    note: 'Hero set, 2 of 3 — studying after work',
+    note: 'Hero set, 2 of 3   studying after work',
     width: 1200,
     height: 1500,
   },
   'hero-portrait-3': {
     src: '/images/hero-portrait-3.svg',
     alt: '',
-    note: 'Hero set, 3 of 3 — collecting the degree',
+    note: 'Hero set, 3 of 3   collecting the degree',
     width: 1200,
     height: 1500,
   },

@@ -192,7 +192,7 @@ export default function Contact() {
                         .filter((c) => c.level === 'UG')
                         .map((c) => (
                           <option key={c.code} value={c.code}>
-                            {c.code} — {c.field}
+                            {c.code}   {c.field}
                           </option>
                         ))}
                     </optgroup>
@@ -201,7 +201,7 @@ export default function Contact() {
                         .filter((c) => c.level === 'PG')
                         .map((c) => (
                           <option key={c.code} value={c.code}>
-                            {c.code} — {c.field}
+                            {c.code}   {c.field}
                           </option>
                         ))}
                     </optgroup>

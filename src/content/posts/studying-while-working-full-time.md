@@ -7,7 +7,7 @@ author: "GetMyDegree Academic Team"
 cover: /images/blog/studying-while-working-full-time.svg
 ---
 
-Flexibility is the reason people choose this route and the reason some do not finish. When nothing is scheduled, nothing is protected — and the degree loses every negotiation against a deadline at work.
+Flexibility is the reason people choose this route and the reason some do not finish. When nothing is scheduled, nothing is protected   and the degree loses every negotiation against a deadline at work.
 
 ## Give the degree fixed hours
 
@@ -17,14 +17,14 @@ The students who complete on time treat study like a shift. Six to eight hours a
 
 - Write every submission date for the semester into your calendar the week the semester opens.
 
-- Set your own deadline five days before each real one — that gap absorbs the week work explodes.
+- Set your own deadline five days before each real one   that gap absorbs the week work explodes.
 
 - Break each assignment into reading, drafting and revising, and schedule those separately.
 
 
 ## Use the commute and the dead time
 
-Reading and lecture material work well in fragments — a bus ride, a lunch break, twenty minutes before bed. Save the continuous blocks for writing, which does not survive interruption. Students routinely cover most of their reading without ever sitting at a desk for it.
+Reading and lecture material work well in fragments   a bus ride, a lunch break, twenty minutes before bed. Save the continuous blocks for writing, which does not survive interruption. Students routinely cover most of their reading without ever sitting at a desk for it.
 
 ## Tell two people
 
@@ -32,6 +32,6 @@ Tell someone at home and someone at work that you are studying. The first protec
 
 ## Expect one bad month
 
-There will be a month where nothing gets done — an illness, a project, a wedding. It is not the end of the degree unless you treat it as one. Contact your counselor early, before a deadline is missed rather than after; extensions and rescheduled submissions are routine when asked for in time.
+There will be a month where nothing gets done   an illness, a project, a wedding. It is not the end of the degree unless you treat it as one. Contact your counselor early, before a deadline is missed rather than after; extensions and rescheduled submissions are routine when asked for in time.
 
 > The people who finish are not the ones with more free time. They are the ones who asked for help in week three instead of week ten.

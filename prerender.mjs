@@ -1,6 +1,6 @@
 /**
- * Static prerender: renders every public route to real HTML — body markup plus
- * per-page head tags and JSON-LD — so crawlers and social scrapers get content
+ * Static prerender: renders every public route to real HTML   body markup plus
+ * per-page head tags and JSON-LD   so crawlers and social scrapers get content
  * without executing JavaScript.
  * Runs after `vite build` (client) and `vite build --ssr` (server bundle).
  */
@@ -86,11 +86,11 @@ const changefreq = (path) => (path === '/' || path === '/blog' ? 'weekly' : 'mon
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${prerenderPaths
-  .map(
-    (path) =>
-      `  <url><loc>${canonical(metaFor(path))}</loc><changefreq>${changefreq(path)}</changefreq><priority>${priority(path)}</priority></url>`,
-  )
-  .join('\n')}
+    .map(
+      (path) =>
+        `  <url><loc>${canonical(metaFor(path))}</loc><changefreq>${changefreq(path)}</changefreq><priority>${priority(path)}</priority></url>`,
+    )
+    .join('\n')}
 </urlset>
 `
 writeFileSync(resolve(root, 'dist/sitemap.xml'), sitemap)

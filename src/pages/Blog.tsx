@@ -83,7 +83,7 @@ export default function Blog() {
       <PageHero
         badge="Blog"
         title="Straight answers about degrees, admissions and recognition"
-        intro="No sales copy. What we tell students on the phone, written down — so you can check it before you commit to anything."
+        intro="No sales copy. What we tell students on the phone, written down   so you can check it before you commit to anything."
       />
 
       {/* Search and categories share one row; the chips scroll when they outgrow it. */}
@@ -101,9 +101,8 @@ export default function Blog() {
                 type="button"
                 onClick={() => choose(null)}
                 aria-pressed={category === null}
-                className={`badge min-h-10 shrink-0 ${
-                  category === null ? 'border-navy bg-navy text-white' : ''
-                }`}
+                className={`badge min-h-10 shrink-0 ${category === null ? 'border-navy bg-navy text-white' : ''
+                  }`}
               >
                 All articles
               </button>
@@ -113,9 +112,8 @@ export default function Blog() {
                   type="button"
                   onClick={() => choose(name)}
                   aria-pressed={category === name}
-                  className={`badge min-h-10 shrink-0 ${
-                    category === name ? 'border-navy bg-navy text-white' : ''
-                  }`}
+                  className={`badge min-h-10 shrink-0 ${category === name ? 'border-navy bg-navy text-white' : ''
+                    }`}
                 >
                   {name}
                 </button>
@@ -128,9 +126,8 @@ export default function Blog() {
         <p role="status" className="mt-4 text-base text-muted md:text-sm">
           {filtered.length === 0
             ? 'No articles match that search.'
-            : `${filtered.length} article${filtered.length === 1 ? '' : 's'}${
-                query ? ` matching “${query.trim()}”` : ''
-              }`}
+            : `${filtered.length} article${filtered.length === 1 ? '' : 's'}${query ? ` matching “${query.trim()}”` : ''
+            }`}
         </p>
       </div>
 
@@ -173,7 +170,7 @@ export default function Blog() {
             <div className="panel card-p text-center sm:p-10">
               <h2 className="t-h3 font-display font-medium">Nothing matched that</h2>
               <p className="mt-2 text-base text-muted">
-                Try a different word, or ask us directly — we answer questions the blog has not
+                Try a different word, or ask us directly   we answer questions the blog has not
                 covered yet.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-2.5">

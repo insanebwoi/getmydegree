@@ -7,7 +7,7 @@ author: "GetMyDegree Academic Team"
 cover: /images/blog/credit-transfer-explained.svg
 ---
 
-A large share of the people who call us left a degree partway through — a job abroad came up, fees became impossible, a family situation changed. The assumption is that those completed semesters are gone. Usually they are not.
+A large share of the people who call us left a degree partway through   a job abroad came up, fees became impossible, a family situation changed. The assumption is that those completed semesters are gone. Usually they are not.
 
 ## What credit transfer means in practice
 
@@ -21,12 +21,12 @@ The practical effect: someone who finished two years of a three-year B.Com may c
 
 - Foundation and language papers, which map cleanly across most programmes.
 
-- Semesters completed within a reasonable window — most universities look for the last eight to ten years.
+- Semesters completed within a reasonable window   most universities look for the last eight to ten years.
 
 
 ## What usually does not
 
-- Backlog papers you never cleared — these have no credit value to transfer.
+- Backlog papers you never cleared   these have no credit value to transfer.
 
 - Study at an institution that was not recognized at the time you attended.
 

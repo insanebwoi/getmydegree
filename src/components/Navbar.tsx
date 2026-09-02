@@ -31,13 +31,12 @@ export function Navbar() {
     <header className="sticky top-0 z-50 pt-2 pb-2 lg:pt-3">
       <div className="shell">
         <div
-          className={`flex h-14 items-center justify-between gap-3 rounded-full px-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 sm:h-15 sm:px-4 lg:h-17 lg:px-6 ${
-            scrolled || open
+          className={`flex h-14 items-center justify-between gap-3 rounded-full px-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 sm:h-15 sm:px-4 lg:h-17 lg:px-6 ${scrolled || open
               ? 'border border-line/70 bg-white/85 shadow-[var(--shadow-soft)] backdrop-blur-md'
               : 'border border-transparent'
-          }`}
+            }`}
         >
-          <Link to="/" aria-label={`${site.name} — home`} className="action shrink-0">
+          <Link to="/" aria-label={`${site.name}   home`} className="action shrink-0">
             <img
               src="/logo.svg"
               alt={site.name}
@@ -54,8 +53,7 @@ export function Navbar() {
                 to={item.to}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `rounded-full px-4 py-2 text-[0.9375rem] font-medium transition-colors ${
-                    isActive ? 'bg-navy-50 text-navy' : 'text-muted hover:text-ink'
+                  `rounded-full px-4 py-2 text-[0.9375rem] font-medium transition-colors ${isActive ? 'bg-navy-50 text-navy' : 'text-muted hover:text-ink'
                   }`
                 }
               >
@@ -97,8 +95,7 @@ export function Navbar() {
                 end={item.to === '/'}
                 onClick={close}
                 className={({ isActive }) =>
-                  `rounded-2xl px-4 py-3.5 font-display text-lg font-medium ${
-                    isActive ? 'bg-navy-50 text-navy' : 'text-ink'
+                  `rounded-2xl px-4 py-3.5 font-display text-lg font-medium ${isActive ? 'bg-navy-50 text-navy' : 'text-ink'
                   }`
                 }
               >
