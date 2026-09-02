@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ArrowRight,
@@ -24,6 +25,7 @@ import {
   mbaModules,
   paths,
   pricing,
+  heroSlides,
   site,
   stats,
   testimonials,
@@ -56,6 +58,8 @@ const perks = [
 ]
 
 export default function Home() {
+  const [slide, setSlide] = useState(0)
+
   return (
     <>
       <Seo {...pageMeta['/']} schema={homeSchema} />
@@ -68,36 +72,64 @@ export default function Home() {
       */}
       <section className="shell -mt-1 pb-10 sm:pb-14 lg:pb-16">
         <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line bg-white">
-          <HeroVisual />
+          <HeroVisual onChange={setSlide} />
           <div className="grid flex-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
-            <div className="flex flex-col justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)-1rem)] lg:col-span-6 lg:pt-0">
+            <div className="flex flex-col justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)+0.5rem)] lg:col-span-7 lg:pt-3 xl:col-span-6">
               <p
-                className="enter inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
+                className="enter mt-2 sm:mt-3 inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
                 style={{ ['--enter-delay' as string]: '60ms' }}
               >
                 <span className="h-2 w-2 rounded-full bg-gold" aria-hidden="true" />
                 Trusted by 10,000+ graduates
               </p>
 
-              <h1
-                className="enter t-editorial mt-5 text-ink"
-                style={{ ['--enter-delay' as string]: '140ms' }}
-              >
-                Finish Your Degree,
-                <br />
-                <span className="text-navy">Restart Your Career</span>
-              </h1>
+              {/*
+                Headline and copy change with the photograph. Both sit in one
+                grid cell over an invisible sizer holding all three slides, so
+                the box is as tall as the longest and nothing below it moves
+                when the slide turns.
+              */}
+              <div className="relative mt-10 sm:mt-12 lg:mt-14">
+                <div aria-hidden="true" className="invisible grid">
+                  {heroSlides.map((s) => (
+                    <div key={s.image} className="[grid-area:1/1]">
+                      <div className="t-editorial">
+                        {s.headline[0]}
+                        <br />
+                        {s.headline[1]}
+                      </div>
+                      <div className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
+                        {s.body}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-              <p
-                className="enter mt-5 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:text-base lg:text-[1.0625rem]"
-                style={{ ['--enter-delay' as string]: '240ms' }}
-              >
-                Complete a UGC recognized UG or PG degree around your job — no entrance exam, no
-                attendance, admission confirmed within 48 hours.
-              </p>
+                <div className="absolute inset-0">
+                  {heroSlides.map((s, i) => {
+                    const isActive = i === slide
+                    return (
+                      <div
+                        key={s.image}
+                        aria-hidden={!isActive}
+                        className={`hero-text-frame absolute inset-0 ${isActive ? 'is-active' : ''}`}
+                      >
+                        <h1 className="t-editorial text-ink">
+                          {s.headline[0]}
+                          <br />
+                          <span className="text-navy">{s.headline[1]}</span>
+                        </h1>
+                        <p className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed text-muted sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
+                          {s.body}
+                        </p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
 
               <ul
-                className="enter mt-5 flex flex-wrap items-center gap-x-5 gap-y-2.5 text-[0.8125rem] font-medium text-ink sm:text-sm"
+                className="enter mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-[0.8125rem] font-medium text-ink sm:mt-2.5 sm:text-sm"
                 style={{ ['--enter-delay' as string]: '300ms' }}
               >
                 {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map((point) => (
@@ -111,7 +143,7 @@ export default function Home() {
               </ul>
 
               <div
-                className="enter mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center"
+                className="enter mt-3 flex flex-col items-stretch gap-3 sm:mt-3.5 sm:flex-row sm:items-center"
                 style={{ ['--enter-delay' as string]: '360ms' }}
               >
                 <Link to="/contact" className="btn btn-arrow btn-primary justify-center">
@@ -130,7 +162,7 @@ export default function Home() {
               only the proof card — placed over the picture, where the eye lands
               after the headline.
             */}
-            <div className="flex items-end justify-start lg:col-span-6 lg:justify-end lg:pb-6">
+            <div className="flex items-end justify-start lg:col-span-5 lg:justify-end lg:pb-6 xl:col-span-6">
               <div
                 className="enter rounded-2xl bg-navy px-5 py-4 text-white shadow-[0_20px_48px_-24px_rgba(1,58,148,0.65)]"
                 style={{ ['--enter-delay' as string]: '620ms' }}
@@ -152,9 +184,15 @@ export default function Home() {
           <div className="enter mt-8 lg:mt-6" style={{ ['--enter-delay' as string]: '760ms' }}>
             <div className="hero-trust grid gap-5 rounded-2xl border border-line bg-white px-5 py-4 shadow-[var(--shadow-soft)] sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
               <div className="lg:col-span-6 lg:pr-8">
-                <h2 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
-                  Partner universities
-                </h2>
+                <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                  <h2 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
+                    Partner universities
+                  </h2>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-navy-50 px-2 py-0.5 text-[0.6875rem] font-medium text-navy">
+                    <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+                    Central & State Gov · UGC · AICTE · NAAC Approved
+                  </span>
+                </div>
                 <ul className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-3">
                   {universities.map((u) => (
                     <li key={u.name}>
@@ -174,7 +212,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <p className="mt-2.5 text-xs text-muted">
-                  Degrees awarded by three recognized institutions in India and the UK.
+                  Central and State Government universities in India and recognized UK institutions — all 100% UGC, AICTE & NAAC approved.
                 </p>
               </div>
 
@@ -212,7 +250,7 @@ export default function Home() {
       </section>
 
       {/* Awarding bodies, in the position the reference gives its logo strip. */}
-      <div className="shell pb-12 lg:pb-20">
+      <div className="shell pb-6 lg:pb-10">
         <Reveal>
           <p className="text-center text-base text-muted md:text-sm">
             Degrees awarded by recognized universities in India and the United Kingdom
@@ -225,6 +263,14 @@ export default function Home() {
               </li>
             ))}
           </ul>
+          <div className="mt-5 flex flex-col items-center gap-1.5 text-center">
+            <p className="inline-flex items-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-navy">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              State &amp; Central Government Universities
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+            </p>
+            <p className="text-xs text-muted">3 year distance regular degree program.</p>
+          </div>
         </Reveal>
       </div>
 
@@ -238,15 +284,15 @@ export default function Home() {
           <Reveal className="lg:col-span-7">
             <Photo name="hero-2" className="min-h-60 sm:min-h-72 lg:min-h-full" />
           </Reveal>
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-5">
+          <div className="grid gap-3 sm:grid-cols-2 lg:col-span-5">
             {perks.map((p, i) => (
               <Reveal key={p.title} delay={i * 70}>
-                <div className="card card-hover card-p h-full">
+                <div className="card card-hover h-full px-4 py-3.5">
                   <span className="chip">
-                    <p.Icon size={19} aria-hidden="true" />
+                    <p.Icon size={16} aria-hidden="true" />
                   </span>
-                  <h3 className="mt-5 t-h3 font-display font-medium">{p.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-muted md:text-sm">{p.body}</p>
+                  <h3 className="mt-3 text-[0.9375rem] font-display font-semibold leading-snug">{p.title}</h3>
+                  <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted">{p.body}</p>
                 </div>
               </Reveal>
             ))}

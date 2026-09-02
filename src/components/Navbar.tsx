@@ -5,7 +5,20 @@ import { nav, site } from '../data/site'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const close = () => setOpen(false)
+
+  /*
+    The bar floats free over the hero. Once the page scrolls it picks up a
+    quiet backdrop, because from there it sits over arbitrary content and the
+    links have to stay readable.
+  */
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -15,16 +28,22 @@ export function Navbar() {
   }, [open])
 
   return (
-    <header className="sticky top-0 z-50 pt-2 pb-2 backdrop-blur-md lg:pt-3">
+    <header className="sticky top-0 z-50 pt-2 pb-2 lg:pt-3">
       <div className="shell">
-        <div className="flex h-14 items-center justify-between gap-3 rounded-full border border-line/70 bg-white/80 px-3 sm:h-15 sm:px-4 lg:h-17 lg:px-6">
+        <div
+          className={`flex h-14 items-center justify-between gap-3 rounded-full px-3 transition-[background-color,box-shadow,backdrop-filter] duration-300 sm:h-15 sm:px-4 lg:h-17 lg:px-6 ${
+            scrolled || open
+              ? 'border border-line/70 bg-white/85 shadow-[var(--shadow-soft)] backdrop-blur-md'
+              : 'border border-transparent'
+          }`}
+        >
           <Link to="/" aria-label={`${site.name} — home`} className="action shrink-0">
             <img
               src="/logo.svg"
               alt={site.name}
               width={180}
               height={34}
-              className="h-7 w-auto sm:h-8"
+              className="h-9 w-auto sm:h-10"
             />
           </Link>
 

@@ -1,46 +1,42 @@
 import { useEffect, useRef, useState } from 'react'
 import { Pause, Play } from 'lucide-react'
-import { images, type ImageName } from '../data/images'
+import { images } from '../data/images'
+import { heroSlides } from '../data/site'
 
-/** The hero set, in order. Replace the files; this list does not change. */
-const FRAMES: ImageName[] = ['hero-portrait', 'hero-portrait-2', 'hero-portrait-3']
-const HOLD = 5000
+const HOLD = 6000
+
+type Props = {
+  /** Reports the active slide so the copy can change with the picture. */
+  onChange?: (index: number) => void
+}
 
 /**
- * The hero photograph — three frames that crossfade — plus one floating proof
- * card.
+ * The hero photographs. Three frames crossfade on a six-second hold, and each
+ * change is reported upward so the headline and copy move with the image.
  *
- * The set advances every five seconds with a 1.2s crossfade, and each frame
- * drifts 4% over its turn so a still photograph does not feel frozen. Cycling
- * stops when the tab is hidden or the hero scrolls out of view, and never
- * starts at all under prefers-reduced-motion, where the first frame simply
- * stands.
+ * The picture is shown at full strength with nothing washed over it: a band
+ * across the top on small screens, the whole hero from lg. The copy keeps its
+ * own solid card, so legibility comes from a crisp edge rather than a fade.
  *
- * A pause control is provided because WCAG 2.2.2 requires one for motion that
- * starts automatically and runs for more than five seconds.
+ * Cycling stops when the tab is hidden or the hero scrolls away, and never
+ * starts under prefers-reduced-motion, where the first slide simply stands. A
+ * pause control is provided because WCAG 2.2.2 requires one for motion that
+ * starts on its own and runs past five seconds.
  */
-export function HeroVisual() {
+export function HeroVisual({ onChange }: Props) {
   const frame = useRef<HTMLDivElement>(null)
   const track = useRef<HTMLDivElement>(null)
-  const proof = useRef<HTMLDivElement>(null)
 
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [animated, setAnimated] = useState(false)
-  // The later frames are stacked in the viewport, so `loading="lazy"` will not
-  // defer them — they are mounted after first paint instead, which keeps the
-  // first frame's fetch uncontested.
   const [mountRest, setMountRest] = useState(false)
 
   useEffect(() => {
     const idle = window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 1200))
-    const id = idle(() => setMountRest(true))
-    return () => {
-      if (window.cancelIdleCallback && typeof id === 'number') window.cancelIdleCallback(id)
-    }
+    idle(() => setMountRest(true))
   }, [])
 
-  // Cycling is opt-in: it begins only after we know motion is welcome.
   useEffect(() => {
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const sync = () => setAnimated(!still.matches)
@@ -50,30 +46,24 @@ export function HeroVisual() {
   }, [])
 
   useEffect(() => {
+    onChange?.(animated ? index : 0)
+  }, [index, animated, onChange])
+
+  useEffect(() => {
     if (!animated || paused) return
     const el = frame.current
     if (!el) return
 
-    let timer: number | undefined
     let onScreen = true
+    const timer = window.setInterval(() => {
+      if (document.hidden || !onScreen) return
+      setIndex((i) => (i + 1) % heroSlides.length)
+    }, HOLD)
 
-    const start = () => {
-      window.clearInterval(timer)
-      timer = window.setInterval(() => {
-        if (document.hidden || !onScreen) return
-        setIndex((i) => (i + 1) % FRAMES.length)
-      }, HOLD)
-    }
-
-    // Off-screen or backgrounded work is wasted work.
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        onScreen = entry.isIntersecting
-      },
-      { threshold: 0.15 },
-    )
+    const observer = new IntersectionObserver(([entry]) => (onScreen = entry.isIntersecting), {
+      threshold: 0.15,
+    })
     observer.observe(el)
-    start()
 
     return () => {
       window.clearInterval(timer)
@@ -81,7 +71,7 @@ export function HeroVisual() {
     }
   }, [animated, paused])
 
-  // Pointer parallax: the image and the card separate slightly in depth.
+  // Pointer parallax: a few pixels of depth, fine pointers only.
   useEffect(() => {
     const el = frame.current
     if (!el) return
@@ -95,7 +85,6 @@ export function HeroVisual() {
     const apply = () => {
       queued = false
       if (track.current) track.current.style.transform = `translate3d(${x * 5}px, ${y * 4}px, 0)`
-      if (proof.current) proof.current.style.transform = `translate3d(${x * -8}px, ${y * -6}px, 0)`
     }
     const onMove = (event: PointerEvent) => {
       const box = el.getBoundingClientRect()
@@ -120,33 +109,26 @@ export function HeroVisual() {
   }, [])
 
   const active = animated ? index : 0
+  const frames = mountRest ? heroSlides : heroSlides.slice(0, 1)
 
   return (
     <div
       ref={frame}
       className="group absolute inset-x-0 top-0 -z-10 h-[var(--hero-band)] lg:inset-0 lg:h-auto"
     >
-      <div
-        ref={track}
-        className="parallax enter-image absolute inset-0 overflow-hidden"
-        style={{ ['--enter-delay' as string]: '0ms' }}
-      >
-        {/*
-          One region, one description — the frames are three moments of the same
-          story, so screen readers get a single label rather than three.
-        */}
+      <div ref={track} className="parallax enter-image absolute inset-0 overflow-hidden">
         <div
           role="img"
           aria-label="Graduates and working professionals who completed their degree with GetMyDegree Institutions"
           className="absolute inset-0"
         >
-          {(mountRest ? FRAMES : FRAMES.slice(0, 1)).map((name, i) => (
-            <div key={name} className={`hero-frame ${i === active ? 'is-active' : ''}`}>
+          {frames.map((slide, i) => (
+            <div key={slide.image} className={`hero-frame ${i === active ? 'is-active' : ''}`}>
               <img
-                src={images[name].src}
+                src={images[slide.image].src}
                 alt=""
-                width={images[name].width}
-                height={images[name].height}
+                width={images[slide.image].width}
+                height={images[slide.image].height}
                 loading="eager"
                 decoding={i === 0 ? 'sync' : 'async'}
                 fetchPriority={i === 0 ? 'high' : 'low'}
@@ -156,21 +138,17 @@ export function HeroVisual() {
           ))}
         </div>
 
-        {/* The veil carries the type: white where the words are, clearing right. */}
-        <div aria-hidden="true" className="hero-veil absolute inset-0" />
-
-        {/* Progress and control, quiet until wanted. */}
         {animated && (
           <div className="absolute top-4 right-4 z-20 flex items-center gap-3">
             <div className="flex items-center gap-1.5" aria-hidden="true">
-              {(mountRest ? FRAMES : FRAMES.slice(0, 1)).map((name, i) => (
-                <span key={name} className="hero-pip" data-active={i === active} />
+              {heroSlides.map((slide, i) => (
+                <span key={slide.image} className="hero-pip" data-active={i === active} />
               ))}
             </div>
             <button
               type="button"
               onClick={() => setPaused((p) => !p)}
-              aria-label={paused ? 'Resume the image sequence' : 'Pause the image sequence'}
+              aria-label={paused ? 'Resume the slide sequence' : 'Pause the slide sequence'}
               className="grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/70 text-ink opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 hover:bg-white focus-visible:opacity-100"
             >
               {paused ? (

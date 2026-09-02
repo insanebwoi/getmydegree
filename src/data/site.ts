@@ -358,3 +358,33 @@ export const paths = [
     body: 'Degrees from UGC recognized universities, valid for every major competitive examination.',
   },
 ]
+
+/**
+ * The hero runs as three slides. Each pairs a photograph with the promise that
+ * picture makes, so the words change with the image rather than sitting still
+ * over a slideshow. The first is what gets prerendered and what search engines
+ * and no-JS visitors see.
+ */
+export type HeroSlide = {
+  image: 'hero-portrait' | 'hero-portrait-2' | 'hero-portrait-3'
+  headline: [string, string]
+  body: string
+}
+
+export const heroSlides: HeroSlide[] = [
+  {
+    image: 'hero-portrait',
+    headline: ['Finish Your Degree,', 'Restart Your Career'],
+    body: 'Complete a UGC, AICTE & NAAC approved degree from Central and State universities around your job — no entrance exam, no attendance, admission confirmed within 48 hours.',
+  },
+  {
+    image: 'hero-portrait-2',
+    headline: ['Study Around Your Job,', 'Not Instead Of It'],
+    body: 'No attendance and no fixed class hours. Assessment is continuous, so the work fits into evenings and weekends at whatever pace your week allows.',
+  },
+  {
+    image: 'hero-portrait-3',
+    headline: ['A Degree That Counts', 'Where It Matters'],
+    body: 'Awarded by Central & State Government, UGC, AICTE and NAAC approved universities in India and the UK — valid for government roles, promotions and further study.',
+  },
+]

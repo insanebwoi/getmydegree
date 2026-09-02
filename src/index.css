@@ -475,11 +475,11 @@
   .hero-screen {
     --nav-h: 72px;
     /* Height of the photograph band on small screens. */
-    --hero-band: clamp(220px, 32vh, 300px);
+    --hero-band: clamp(168px, 23vh, 224px);
     /* One variable for the inset, so the photograph's bleed can never disagree
        with the padding — that mismatch is what caused overflow at 1280x720. */
     --hero-pad: clamp(1.25rem, 3.4vw, 3rem);
-    --hero-pad-y: clamp(1.25rem, 3vh, 2.5rem);
+    --hero-pad-y: clamp(1rem, 2.4vh, 2.5rem);
     --hero-gap: 2.5rem;
     min-height: calc(100svh - var(--nav-h) - var(--hero-gap, 2.5rem));
     display: flex;
@@ -502,7 +502,7 @@
   .t-editorial {
     /* Capped at 4.25rem: the shell stops growing at 1440px, so past that the
        column stops growing too and a viewport-driven size would wrap. */
-    font-size: clamp(2.5rem, 0.55rem + 4.6vw, 4.25rem);
+    font-size: clamp(2rem, 0.55rem + 4.6vw, 4.25rem);
     line-height: 0.98;
     letter-spacing: -0.038em;
     font-weight: 650;
@@ -632,40 +632,43 @@
     }
   }
 
-  /*
-    No wash over the photograph. The copy sits on a solid white field that
-    ends in a short fade, so the picture itself is untouched — full contrast
-    from the fade line to the right edge, rather than milky across the whole
-    frame.
-  */
-  /*
-    On a phone the photograph leads in its own band, so the veil only has to
-    blend the band's lower edge into the white below it. Stretching the picture
-    over the full hero height instead cropped it to a narrow vertical slice —
-    all sky, no subject.
-  */
-  .hero-veil {
-    background: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0) 62%,
-      rgba(255, 255, 255, 0.72) 84%,
-      #fff 100%
-    );
+  /* Hero copy crossfade matching the photograph transitions. */
+  .hero-text-frame {
+    transition:
+      opacity 1200ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 1200ms cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
   }
-  @media (min-width: 1024px) {
-    .hero-veil {
-      background: linear-gradient(
-        100deg,
-        #fff 0%,
-        #fff 44%,
-        rgba(255, 255, 255, 0.92) 52%,
-        rgba(255, 255, 255, 0.45) 60%,
-        rgba(255, 255, 255, 0) 68%
-      );
+  .hero-text-frame:not(.is-active) {
+    opacity: 0;
+    transform: translate3d(0, 6px, 0);
+    pointer-events: none;
+  }
+  .hero-text-frame.is-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    pointer-events: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-text-frame {
+      transition: none;
     }
   }
 
-  /* Light hero ground: white, lifting to a pale blue behind the photograph. */
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 6px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .slide-in {
+    animation: slide-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
   .hero-light {
     background:
       radial-gradient(70% 80% at 82% 30%, rgba(1, 58, 148, 0.09), transparent 68%),
