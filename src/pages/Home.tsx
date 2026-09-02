@@ -371,7 +371,7 @@ export default function Home() {
                 <div className="mt-6 h-36 overflow-hidden rounded-[var(--radius-card)] border border-white/10 sm:h-40">
                   {/* Photo sets its own h-full, which wins over a height class
                       on the element, so the wrapper carries the height. */}
-                  <Photo name="programs-1" rounded="none" />
+                  <Photo name="hero-3" rounded="none" />
                 </div>
               </div>
               <Link to="/courses" className="btn btn-gold mt-8 self-start">

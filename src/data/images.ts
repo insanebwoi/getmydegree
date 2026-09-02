@@ -47,11 +47,10 @@ const declared = {
     width: 1200,
     height: 1500,
   },
-  'programs-1': {
-    // Defaults to the study photograph; drop programs-1.jpg in to replace it.
-    src: '/images/hero-portrait-2.jpg',
-    alt: 'A student working through coursework at home',
-    note: 'Programmes card — studying around work',
+  'hero-3': {
+    src: '/images/hero-3.jpg',
+    alt: 'A student working through their degree alongside their job',
+    note: 'Programmes card',
     width: 1500,
     height: 844,
   },
