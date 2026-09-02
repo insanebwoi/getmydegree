@@ -69,7 +69,8 @@ const declared = {
     height: 900,
   },
   'about-2': {
-    src: '/images/about-2.svg',
+    // Defaults to the study photograph; drop about-2.jpg in to replace it.
+    src: '/images/hero-portrait-2.jpg',
     alt: 'A working professional studying in the evening',
     note: 'Studying after work',
     width: 1200,

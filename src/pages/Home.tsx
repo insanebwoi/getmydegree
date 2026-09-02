@@ -309,7 +309,7 @@ export default function Home() {
                   Five undergraduate and four postgraduate degrees
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-white/65 md:text-sm">
-                  Every one is UGC recognized and assessed continuously   there is no final
+                  Every one is UGC recognized and assessed continuously there is no final
                   examination hall to sit in.
                 </p>
                 {/*
@@ -344,27 +344,54 @@ export default function Home() {
         title="Four situations we solve every week"
         intro="Most people arrive with one of these. Each has a documented route to a finished degree."
       >
-        <div className="grid gap-4 lg:grid-cols-12 lg:items-center">
+        <div className="grid gap-4 lg:grid-cols-12 lg:items-stretch">
           <div className="grid gap-3 lg:col-span-7">
             {paths.map((p, i) => (
               <Reveal key={p.situation} delay={i * 70}>
-                <div className="card card-hover card-p">
-                  <div className="flex items-start gap-3">
-                    <span className="dot mt-2" aria-hidden="true" />
-                    <div>
-                      <h3 className="t-h3 font-display font-medium">{p.situation}</h3>
-                      <p className="mt-1.5 text-base leading-relaxed text-muted md:text-sm">
-                        {p.body}
-                      </p>
-                    </div>
-                    <span className="badge ml-auto hidden shrink-0 sm:inline-flex">{p.answer}</span>
-                  </div>
-                </div>
+                {/*
+                  The route is the answer to the situation, so it leads rather
+                  than trailing behind it — and it is no longer hidden on the
+                  screens where most of this audience reads. The whole card is
+                  the link, which costs no extra height.
+                */}
+                <Link
+                  to="/contact"
+                  className="card card-hover card-p group flex h-full items-start gap-4"
+                >
+                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-50 font-display text-sm font-medium text-navy transition-colors group-hover:bg-navy group-hover:text-white">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+                      <span className="t-h3 font-display font-medium text-ink">{p.situation}</span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-2.5 py-0.5 text-xs font-medium text-gold-700">
+                        {p.answer}
+                      </span>
+                    </span>
+                    <span className="mt-1.5 block text-base leading-relaxed text-muted md:text-sm">
+                      {p.body}
+                    </span>
+                  </span>
+                  <ArrowRight
+                    size={16}
+                    className="mt-1 hidden shrink-0 text-muted transition-transform group-hover:translate-x-1 group-hover:text-navy sm:block"
+                    aria-hidden="true"
+                  />
+                </Link>
               </Reveal>
             ))}
           </div>
+
           <Reveal delay={140} className="lg:col-span-5">
-            <Photo name="about-2" ratio="4/3" className="lg:h-full" />
+            <div className="relative h-full">
+              <Photo name="about-2" ratio="4/3" className="lg:aspect-auto lg:h-full" />
+              <div className="absolute right-4 bottom-4 left-4 rounded-2xl bg-white/92 px-4 py-3 backdrop-blur-md">
+                <p className="text-sm font-medium">Not sure which one you are?</p>
+                <p className="mt-0.5 text-xs text-muted">
+                  A counselor will map it in twenty minutes, free.
+                </p>
+              </div>
+            </div>
           </Reveal>
         </div>
       </Section>
