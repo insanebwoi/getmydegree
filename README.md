@@ -176,3 +176,4 @@ handler is a stub (see the `TODO`). Wire it to Formspree, Web3Forms or your own 
 
 Static host, publish directory `dist/`. `public/_redirects` (Netlify) and `vercel.json`
 are included; for nginx, `try_files $uri $uri/index.html /index.html;`.
+# getmydegree
