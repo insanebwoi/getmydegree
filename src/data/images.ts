@@ -131,6 +131,13 @@ const declared = {
     width: 1200,
     height: 750,
   },
+  'blog-banner': {
+    src: '/images/blog/blog-banner.png',
+    alt: 'Articles, degree advice, and admission guides at GetMyDegree',
+    note: 'Blog page header banner',
+    width: 1672,
+    height: 941,
+  },
 } satisfies Record<string, ImageSlot>
 
 export type ImageName = keyof typeof declared

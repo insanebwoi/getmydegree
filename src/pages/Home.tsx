@@ -21,6 +21,7 @@ import { HeroVisual } from '../components/HeroVisual'
 import { HeroTrust } from '../components/HeroTrust'
 import { Gallery } from '../components/Gallery'
 import { Stats } from '../components/Stats'
+import { ApplyDialog } from '../components/ApplyDialog'
 import {
   admissionSteps,
   courses,
@@ -31,6 +32,7 @@ import {
   stats,
   testimonials,
   universities,
+  type Course,
 } from '../data/site'
 
 const featured = courses.filter((c) => ['BBA', 'BCA', 'MBA', 'MCA'].includes(c.code))
@@ -60,10 +62,13 @@ const perks = [
 
 export default function Home() {
   const [slide, setSlide] = useState(0)
+  const [applying, setApplying] = useState<Course | null>(null)
 
   return (
     <>
       <Seo {...pageMeta['/']} schema={homeSchema} />
+
+      {applying && <ApplyDialog course={applying} onClose={() => setApplying(null)} />}
 
       {/*
         Light hero: copy left, photograph right, and the credibility strip as a
@@ -363,10 +368,15 @@ export default function Home() {
                   <p className="mt-2 flex-1 text-base leading-relaxed text-muted md:text-sm">
                     {c.body}
                   </p>
-                  <Link to="/courses" className="action mt-4 text-sm font-medium text-navy">
-                    Programme details
+                  <button
+                    type="button"
+                    onClick={() => setApplying(c)}
+                    className="action mt-4 inline-flex items-center text-sm font-medium text-navy cursor-pointer text-left hover:underline"
+                    aria-label={`Enquire about ${c.name}`}
+                  >
+                    <span>Enquire now</span>
                     <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
-                  </Link>
+                  </button>
                 </article>
               </Reveal>
             ))}

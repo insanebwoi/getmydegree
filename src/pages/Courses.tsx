@@ -52,7 +52,7 @@ function CourseCard({
       <button
         type="button"
         onClick={onApply}
-        aria-label={`Apply for ${course.name}`}
+        aria-label={`Enquire about ${course.name}`}
         className="group flex h-full w-full cursor-pointer flex-col rounded-2xl border border-line bg-white p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-[var(--shadow-soft)] sm:p-5"
       >
         <div className="flex items-baseline justify-between gap-3">
@@ -72,11 +72,14 @@ function CourseCard({
             <BadgeCheck size={13} className="text-navy" aria-hidden="true" />
             UGC recognized
           </span>
-          <ArrowRight
-            size={14}
-            className="text-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-navy"
-            aria-hidden="true"
-          />
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-navy group-hover:underline">
+            <span>Enquire</span>
+            <ArrowRight
+              size={13}
+              className="text-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-navy"
+              aria-hidden="true"
+            />
+          </span>
         </div>
       </button>
     </Reveal>
@@ -261,7 +264,7 @@ export default function Courses() {
           {/* The photograph carries the reassurance, so the panels stay short. */}
           <Reveal delay={140} className="lg:col-span-5">
             <div className="relative h-full">
-              <Photo name="courses-2" ratio="4/3" className="lg:aspect-auto lg:h-full" />
+              <Photo name="courses-2" ratio="16/9" className="lg:aspect-auto lg:h-full" />
               <div className="absolute right-4 bottom-4 left-4 rounded-2xl bg-white/92 p-4 backdrop-blur-md">
                 <p className="text-sm font-medium">Missing a marksheet?</p>
                 <p className="mt-1 text-xs leading-relaxed text-muted">

@@ -81,9 +81,10 @@ export default function Blog() {
       <Seo {...pageMeta['/blog']} schema={blogSchema} />
 
       <PageHero
-        badge="Blog"
+        image="blog-banner"
+        badge="Blog & Guides"
         title="Straight answers about degrees, admissions and recognition"
-        intro="No sales copy. What we tell students on the phone, written down   so you can check it before you commit to anything."
+        intro="No sales copy. What we tell students on the phone, written down — so you can check it before you commit to anything."
       />
 
       {/* Search and categories share one row; the chips scroll when they outgrow it. */}

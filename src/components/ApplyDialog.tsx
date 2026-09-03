@@ -17,6 +17,7 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
   const first = useRef<HTMLInputElement>(null)
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
+  const [waUrl, setWaUrl] = useState('')
 
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null
@@ -39,6 +40,7 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
     const name = String(data.get('name') ?? '').trim()
     const phone = String(data.get('phone') ?? '').trim()
     const email = String(data.get('email') ?? '').trim()
+    const question = String(data.get('question') ?? '').trim()
 
     const next: Errors = {}
     if (name.length < 2) next.name = 'Enter your full name.'
@@ -53,8 +55,26 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
     }
 
     setStatus('sending')
-    // TODO: replace with the real endpoint, as on the contact form.
-    window.setTimeout(() => setStatus('sent'), 700)
+
+    const lines = [
+      `🎓 *Course Enquiry: ${course.code}*`,
+      `*Program:* ${course.name}`,
+      `━━━━━━━━━━━━━━━━━━`,
+      `👤 *Name:* ${name}`,
+      `📞 *Phone:* ${phone}`,
+      email ? `✉️ *Email:* ${email}` : null,
+      question ? `📝 *Notes/Questions:* ${question}` : null,
+      `━━━━━━━━━━━━━━━━━━`,
+      `Sent via GetMyDegree Website`,
+    ].filter(Boolean)
+
+    const url = `https://wa.me/918606677828?text=${encodeURIComponent(lines.join('\n'))}`
+    setWaUrl(url)
+
+    window.setTimeout(() => {
+      setStatus('sent')
+      window.open(url, '_blank', 'noopener,noreferrer')
+    }, 600)
   }
 
   return (
@@ -63,12 +83,6 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
       aria-modal="true"
       aria-labelledby="apply-title"
       onClick={onClose}
-      /*
-        The overlay scrolls, not the page: on a short screen — a phone held
-        sideways is the case that broke — the card was taller than the viewport
-        and both its top and its submit button were unreachable. Now the card
-        can exceed the screen and the overlay carries it.
-      */
       className="fixed inset-0 z-100 overflow-y-auto overscroll-contain bg-navy-950/70 backdrop-blur-sm"
     >
       <div className="flex min-h-full items-end justify-center p-0 sm:items-center sm:p-6">
@@ -92,24 +106,36 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
 
           {status === 'sent' ? (
             <div role="status" className="py-6 text-center">
-              <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gold text-navy-950">
-                <CheckCircle2 size={26} aria-hidden="true" />
+              <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-600 text-white shadow-md">
+                <CheckCircle2 size={28} aria-hidden="true" />
               </span>
-              <h2 className="t-h3 mt-5 font-display font-medium">Application started</h2>
+              <h2 className="t-h3 mt-5 font-display font-medium text-ink">Enquiry sent!</h2>
               <p className="mt-2 text-base text-muted md:text-sm">
-                A counselor will call you within one working day about the {course.code}.
+                Redirecting to WhatsApp counselor chat. Our team will assist you with admission details for {course.code}.
               </p>
-              <button type="button" onClick={onClose} className="btn btn-ghost mt-6">
-                Close
-              </button>
+              <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-center">
+                {waUrl && (
+                  <a
+                    href={waUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white border-transparent"
+                  >
+                    <span>Open WhatsApp</span>
+                  </a>
+                )}
+                <button type="button" onClick={onClose} className="btn btn-ghost">
+                  Close
+                </button>
+              </div>
             </div>
           ) : (
             <>
               <span className="badge text-xs">{course.years} · UGC recognized</span>
               <h2 id="apply-title" className="t-h3 mt-2.5 pr-12 font-display font-medium">
-                Apply for {course.code}
+                Enquire about {course.code}
               </h2>
-              <p className="mt-1 text-sm text-muted">{course.name}</p>
+              <p className="mt-1 text-sm text-muted">{course.name} · Admission &amp; fee guidance</p>
 
               <form
                 onSubmit={onSubmit}
@@ -180,16 +206,29 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
                   )}
                 </div>
 
+                <div className="sm:col-span-2">
+                  <label htmlFor="apply-question" className="text-sm font-medium">
+                    Questions or notes <span className="text-muted">(optional)</span>
+                  </label>
+                  <input
+                    id="apply-question"
+                    name="question"
+                    type="text"
+                    placeholder="e.g. Credit transfer, fee EMI, syllabus"
+                    className={field}
+                  />
+                </div>
+
                 <button
                   type="submit"
                   disabled={status === 'sending'}
                   className="btn btn-arrow btn-primary mt-1 justify-center disabled:opacity-60 sm:col-span-2"
                 >
-                  {status === 'sending' ? 'Sending…' : 'Request a call'}
+                  {status === 'sending' ? 'Submitting enquiry…' : 'Submit enquiry'}
                   <ArrowRight size={16} aria-hidden="true" />
                 </button>
                 <p className="text-center text-xs text-muted sm:col-span-2">
-                  Free guidance · No obligation
+                  Free consultation · Zero obligation · 100% confidential
                 </p>
               </form>
             </>

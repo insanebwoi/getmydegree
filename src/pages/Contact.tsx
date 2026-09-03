@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Check, CheckCircle2, Clock, Mail, MapPin, Phone, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRight, Check, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Sparkles } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { contactSchema } from '../data/schema'
@@ -11,12 +11,13 @@ import { centers, courses, site, stats } from '../data/site'
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'program', string>>
 
 const field =
-  'mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition-all placeholder:text-muted/50 focus:border-navy focus:ring-2 focus:ring-navy/10'
-const labelCls = 'text-sm font-medium text-ink'
+  'mt-1.5 w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-sm outline-none transition-all placeholder:text-muted/50 focus:border-navy focus:ring-2 focus:ring-navy/10 sm:py-3'
+const labelCls = 'text-xs font-semibold uppercase tracking-wider text-ink/80'
 
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const [errors, setErrors] = useState<Errors>({})
+  const [waUrl, setWaUrl] = useState('')
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -26,13 +27,14 @@ export default function Contact() {
     const phone = String(data.get('phone') ?? '').trim()
     const email = String(data.get('email') ?? '').trim()
     const program = String(data.get('program') ?? '')
+    const message = String(data.get('message') ?? '').trim()
 
     const next: Errors = {}
     if (name.length < 2) next.name = 'Enter your full name.'
     if (!/^[+\d][\d\s-]{8,15}$/.test(phone))
-      next.phone = 'Enter a phone number we can reach you on.'
-    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email)) next.email = 'Enter an email address.'
-    if (!program) next.program = 'Choose the program you want to discuss.'
+      next.phone = 'Enter a valid phone number.'
+    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email)) next.email = 'Enter a valid email address.'
+    if (!program) next.program = 'Choose a degree program.'
 
     setErrors(next)
     if (Object.keys(next).length > 0) {
@@ -41,10 +43,27 @@ export default function Contact() {
     }
 
     setStatus('sending')
+
+    const lines = [
+      `🎓 *Academic Counseling Request*`,
+      `━━━━━━━━━━━━━━━━━━`,
+      `👤 *Name:* ${name}`,
+      `📞 *Phone:* ${phone}`,
+      `✉️ *Email:* ${email}`,
+      `📚 *Interested Program:* ${program}`,
+      message ? `📝 *Status / Notes:* ${message}` : null,
+      `━━━━━━━━━━━━━━━━━━`,
+      `Sent via GetMyDegree Website`,
+    ].filter(Boolean)
+
+    const url = `https://wa.me/918606677828?text=${encodeURIComponent(lines.join('\n'))}`
+    setWaUrl(url)
+
     window.setTimeout(() => {
       setStatus('sent')
+      window.open(url, '_blank', 'noopener,noreferrer')
       form.reset()
-    }, 700)
+    }, 600)
   }
 
   const quickChannels = [
@@ -127,269 +146,309 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Main Form & Centers Section */}
-      <section id="counseling-form" className="shell grid gap-6 pb-12 sm:pb-16 lg:grid-cols-12 lg:pb-24">
-        {/* Counseling Form */}
-        <Reveal className="lg:col-span-7">
-          <div className="card card-p h-full sm:p-7 lg:p-9">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-5">
+      {/* Main Form & Centers Section - Aligned with 0 Negative Space */}
+      <section id="counseling-form" className="shell pb-12 sm:pb-16 lg:pb-20">
+        <div className="grid items-stretch gap-6 lg:grid-cols-12">
+          {/* Counseling Form Column */}
+          <Reveal className="flex h-full flex-col lg:col-span-7">
+            <div className="card card-p flex h-full flex-col justify-between p-6 sm:p-7 lg:p-8">
               <div>
-                <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-navy">
-                  Free Consultation · 48h Admission
-                </span>
-                <h2 className="mt-1 text-xl font-display font-medium text-ink sm:text-2xl">
-                  Request academic guidance
-                </h2>
+                {/* Card Header */}
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-4">
+                  <div>
+                    <span className="text-[0.6875rem] font-bold uppercase tracking-[0.15em] text-navy">
+                      Free Consultation · 48h Admission
+                    </span>
+                    <h2 className="mt-1 font-display text-xl font-semibold text-ink sm:text-2xl">
+                      Request academic guidance
+                    </h2>
+                  </div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+                    <Sparkles size={13} aria-hidden="true" />
+                    Zero obligation
+                  </span>
+                </div>
+
+                {/* Reassurance Guarantees Strip */}
+                <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-medium text-muted">
+                  <span className="inline-flex items-center gap-1">
+                    <Check size={13} strokeWidth={2.5} className="text-emerald-600" />
+                    100% UGC Approved
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Check size={13} strokeWidth={2.5} className="text-emerald-600" />
+                    Continuous Assessment
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Check size={13} strokeWidth={2.5} className="text-emerald-600" />
+                    Confidential Guidance
+                  </span>
+                </div>
+
+                {status === 'sent' ? (
+                  <div
+                    role="status"
+                    className="mt-8 flex flex-col items-center rounded-2xl border border-emerald-200 bg-emerald-50/70 p-8 text-center"
+                  >
+                    <span className="grid h-14 w-14 place-items-center rounded-full bg-emerald-600 text-white shadow-md">
+                      <CheckCircle2 size={28} aria-hidden="true" />
+                    </span>
+                    <h3 className="mt-4 font-display text-xl font-medium text-ink">
+                      Request received &amp; redirecting!
+                    </h3>
+                    <p className="mt-2 max-w-md text-sm text-muted">
+                      Your enquiry has been prepared for WhatsApp. A counselor will connect with you with syllabus and fee details.
+                    </p>
+                    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                      {waUrl && (
+                        <a
+                          href={waUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-primary inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white border-transparent"
+                        >
+                          <MessageCircle size={16} />
+                          <span>Open WhatsApp Chat</span>
+                        </a>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => setStatus('idle')}
+                        className="btn btn-ghost"
+                      >
+                        Send another request
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} noValidate className="mt-5 grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label htmlFor="name" className={labelCls}>
+                        Full name <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        autoComplete="name"
+                        placeholder="e.g. Rahul Sharma"
+                        aria-invalid={Boolean(errors.name)}
+                        aria-describedby={errors.name ? 'name-error' : undefined}
+                        className={field}
+                      />
+                      {errors.name && (
+                        <p id="name-error" className="mt-1 text-xs text-red-600">
+                          {errors.name}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="phone" className={labelCls}>
+                        Phone number <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        autoComplete="tel"
+                        placeholder="+91 98765 43210"
+                        aria-invalid={Boolean(errors.phone)}
+                        aria-describedby={errors.phone ? 'phone-error' : undefined}
+                        className={field}
+                      />
+                      {errors.phone && (
+                        <p id="phone-error" className="mt-1 text-xs text-red-600">
+                          {errors.phone}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="email" className={labelCls}>
+                        Email address <span className="text-red-600">*</span>
+                      </label>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        placeholder="you@example.com"
+                        aria-invalid={Boolean(errors.email)}
+                        aria-describedby={errors.email ? 'email-error' : undefined}
+                        className={field}
+                      />
+                      {errors.email && (
+                        <p id="email-error" className="mt-1 text-xs text-red-600">
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="program" className={labelCls}>
+                        Interested program <span className="text-red-600">*</span>
+                      </label>
+                      <select
+                        id="program"
+                        name="program"
+                        defaultValue=""
+                        aria-invalid={Boolean(errors.program)}
+                        aria-describedby={errors.program ? 'program-error' : undefined}
+                        className={field}
+                      >
+                        <option value="" disabled>
+                          Choose a degree program
+                        </option>
+                        <optgroup label="Undergraduate Degrees (UG)">
+                          {courses
+                            .filter((c) => c.level === 'UG')
+                            .map((c) => (
+                              <option key={c.code} value={c.code}>
+                                {c.code} — {c.name}
+                              </option>
+                            ))}
+                        </optgroup>
+                        <optgroup label="Postgraduate Degrees (PG)">
+                          {courses
+                            .filter((c) => c.level === 'PG')
+                            .map((c) => (
+                              <option key={c.code} value={c.code}>
+                                {c.code} — {c.name}
+                              </option>
+                            ))}
+                        </optgroup>
+                        <option value="Triple Certification MBA (UK)">
+                          Triple certification MBA (UK)
+                        </option>
+                        <option value="Not sure yet">Not sure yet (Need counseling)</option>
+                      </select>
+                      {errors.program && (
+                        <p id="program-error" className="mt-1 text-xs text-red-600">
+                          {errors.program}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className="sm:col-span-2">
+                      <label htmlFor="message" className={labelCls}>
+                        Where you stopped or current status <span className="text-muted font-normal">(optional)</span>
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={2}
+                        placeholder="For example: completed two years of B.Com in 2020, working full-time since..."
+                        className={`${field} resize-none`}
+                      />
+                    </div>
+
+                    <div className="sm:col-span-2 pt-1">
+                      <button
+                        type="submit"
+                        disabled={status === 'sending'}
+                        className="btn btn-arrow btn-primary w-full justify-center sm:w-auto"
+                      >
+                        <span>{status === 'sending' ? 'Submitting request…' : 'Submit counseling request'}</span>
+                        <ArrowRight size={15} aria-hidden="true" />
+                      </button>
+                      <p className="mt-2.5 text-xs text-muted">
+                        By submitting, you agree to receive academic counseling information via call or WhatsApp.
+                      </p>
+                    </div>
+                  </form>
+                )}
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
-                <Sparkles size={13} aria-hidden="true" />
-                Zero obligation
-              </span>
-            </div>
 
-            {/* Reassurance Badges */}
-            <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted sm:gap-4">
-              <span className="inline-flex items-center gap-1">
-                <Check size={14} className="text-emerald-600" />
-                100% UGC Approved
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <Check size={14} className="text-emerald-600" />
-                Continuous Assessment
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <Check size={14} className="text-emerald-600" />
-                Confidential Guidance
-              </span>
-            </div>
-
-            {status === 'sent' ? (
-              <div
-                role="status"
-                className="mt-8 flex flex-col items-center rounded-[var(--radius-card)] border border-emerald-200 bg-emerald-50/60 px-6 py-12 text-center"
-              >
-                <span className="grid h-14 w-14 place-items-center rounded-full bg-emerald-600 text-white shadow-md">
-                  <CheckCircle2 size={28} aria-hidden="true" />
-                </span>
-                <h3 className="t-h3 mt-5 font-display font-medium text-ink">Request received successfully</h3>
-                <p className="mt-2 max-w-sm text-base text-muted md:text-sm">
-                  An academic counselor will call you within one working day ({site.officeHours}). For immediate assistance, call{' '}
-                  <a href={`tel:${site.phoneHref}`} className="font-semibold text-navy underline">
-                    {site.phone}
-                  </a>
-                  .
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setStatus('idle')}
-                  className="btn btn-ghost mt-7"
+              {/* Bottom Quick Help Bar */}
+              <div className="mt-6 border-t border-line/60 pt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
+                <span>Need urgent assistance?</span>
+                <a
+                  href={`https://wa.me/918606677828?text=${encodeURIComponent('Hello GetMyDegree, I would like urgent academic counseling assistance.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 font-semibold text-[#25D366] hover:underline"
                 >
-                  Send another request
-                </button>
+                  <MessageCircle size={14} />
+                  <span>Chat directly on WhatsApp: +91 86066 77828</span>
+                </a>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 sm:grid-cols-2">
-                <div>
-                  <label htmlFor="name" className={labelCls}>
-                    Full name <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    placeholder="e.g. Rahul Sharma"
-                    aria-invalid={Boolean(errors.name)}
-                    aria-describedby={errors.name ? 'name-error' : undefined}
-                    className={field}
-                  />
-                  {errors.name && (
-                    <p id="name-error" className="mt-1.5 text-xs text-red-600">
-                      {errors.name}
-                    </p>
-                  )}
+            </div>
+          </Reveal>
+
+          {/* Unified Regional Hubs & Visual Right Column - Seamless 0 Negative Space */}
+          <Reveal delay={120} className="flex h-full flex-col lg:col-span-5">
+            <div className="card flex h-full flex-col justify-between overflow-hidden bg-navy-950 text-white">
+              {/* Top Centers Section */}
+              <div className="p-6 sm:p-7">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="badge badge-dark">Regional Hubs</span>
+                  <span className="text-[0.6875rem] font-medium text-white/50">Walk-in verified</span>
                 </div>
+                <h2 className="mt-3 font-display text-xl font-medium sm:text-2xl text-white">
+                  Visit our counseling centers
+                </h2>
+                <p className="mt-1 text-xs text-white/70 sm:text-sm">
+                  Drop by in person for document verification and direct counseling.
+                </p>
 
-                <div>
-                  <label htmlFor="phone" className={labelCls}>
-                    Phone number <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    autoComplete="tel"
-                    placeholder="+91 98765 43210"
-                    aria-invalid={Boolean(errors.phone)}
-                    aria-describedby={errors.phone ? 'phone-error' : undefined}
-                    className={field}
-                  />
-                  {errors.phone && (
-                    <p id="phone-error" className="mt-1.5 text-xs text-red-600">
-                      {errors.phone}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="email" className={labelCls}>
-                    Email address <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    placeholder="you@example.com"
-                    aria-invalid={Boolean(errors.email)}
-                    aria-describedby={errors.email ? 'email-error' : undefined}
-                    className={field}
-                  />
-                  {errors.email && (
-                    <p id="email-error" className="mt-1.5 text-xs text-red-600">
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="program" className={labelCls}>
-                    Interested program <span className="text-red-600">*</span>
-                  </label>
-                  <select
-                    id="program"
-                    name="program"
-                    defaultValue=""
-                    aria-invalid={Boolean(errors.program)}
-                    aria-describedby={errors.program ? 'program-error' : undefined}
-                    className={field}
-                  >
-                    <option value="" disabled>
-                      Choose a degree program
-                    </option>
-                    <optgroup label="Undergraduate Degrees (UG)">
-                      {courses
-                        .filter((c) => c.level === 'UG')
-                        .map((c) => (
-                          <option key={c.code} value={c.code}>
-                            {c.code} — {c.name}
-                          </option>
-                        ))}
-                    </optgroup>
-                    <optgroup label="Postgraduate Degrees (PG)">
-                      {courses
-                        .filter((c) => c.level === 'PG')
-                        .map((c) => (
-                          <option key={c.code} value={c.code}>
-                            {c.code} — {c.name}
-                          </option>
-                        ))}
-                    </optgroup>
-                    <option value="Triple Certification MBA (UK)">
-                      Triple certification MBA (UK)
-                    </option>
-                    <option value="Not sure yet">Not sure yet (Need counseling)</option>
-                  </select>
-                  {errors.program && (
-                    <p id="program-error" className="mt-1.5 text-xs text-red-600">
-                      {errors.program}
-                    </p>
-                  )}
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label htmlFor="message" className={labelCls}>
-                    Where you stopped or current status <span className="text-muted">(optional)</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={3}
-                    placeholder="For example: completed two years of B.Com in 2020, working full-time since..."
-                    className={`${field} resize-y`}
-                  />
-                </div>
-
-                <div className="sm:col-span-2 pt-2">
-                  <button
-                    type="submit"
-                    disabled={status === 'sending'}
-                    className="btn btn-primary w-full sm:w-auto"
-                  >
-                    {status === 'sending' ? 'Sending request…' : 'Submit counseling request'}
-                  </button>
-                  <p className="mt-2.5 text-xs text-muted">
-                    By submitting, you agree to receive academic counseling information via call or WhatsApp.
-                  </p>
-                </div>
-              </form>
-            )}
-          </div>
-        </Reveal>
-
-        {/* Centers & Visual Right Column */}
-        <div className="grid content-start gap-4 lg:col-span-5">
-          {/* Centers Card */}
-          <Reveal delay={140}>
-            <div className="card card-p bg-navy-950 text-white">
-              <div className="flex items-center gap-2">
-                <span className="badge badge-dark">Regional Hubs</span>
-              </div>
-              <h2 className="mt-3 font-display text-xl font-medium sm:text-2xl">
-                Visit our counseling centers
-              </h2>
-              <p className="mt-1.5 text-xs text-white/65 sm:text-sm">
-                Drop by in person for document verification and direct counseling.
-              </p>
-
-              <div className="mt-6 space-y-5 border-t border-white/10 pt-5">
-                {centers.map((c) => (
-                  <div key={c.city} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                    <address className="not-italic">
+                {/* Centers List */}
+                <div className="mt-5 space-y-3">
+                  {centers.map((c) => (
+                    <div
+                      key={c.city}
+                      className="rounded-xl border border-white/10 bg-white/5 p-3.5 transition-colors hover:bg-white/8"
+                    >
                       <div className="flex items-center justify-between">
-                        <p className="flex items-center gap-2 font-display text-base font-semibold text-white">
-                          <MapPin size={16} className="text-gold" aria-hidden="true" />
+                        <p className="flex items-center gap-1.5 font-display text-sm font-semibold text-white sm:text-base">
+                          <MapPin size={15} className="text-gold shrink-0" aria-hidden="true" />
                           {c.city} Centre
                         </p>
                         <a
                           href={`tel:${c.phoneHref}`}
-                          className="action gap-1 text-xs font-semibold text-gold hover:underline"
+                          className="action inline-flex items-center gap-1 text-xs font-semibold text-gold hover:underline"
                         >
-                          <Phone size={12} />
-                          Call
+                          <Phone size={11} />
+                          <span>Call</span>
                         </a>
                       </div>
-                      <p className="mt-2 text-xs leading-relaxed text-white/70 sm:text-sm">
+                      <p className="mt-1 text-xs leading-relaxed text-white/75">
                         {c.address}
                       </p>
-                      <p className="mt-2 text-xs font-medium text-white/50">
-                        Ph: {c.phone}
+                      <p className="mt-1.5 text-[0.6875rem] font-medium text-white/50">
+                        Ph: <a href={`tel:${c.phoneHref}`} className="hover:text-white/80">{c.phone}</a>
                       </p>
-                    </address>
-                  </div>
-                ))}
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </Reveal>
 
-          {/* Center Visual / Counseling Photo */}
-          <Reveal delay={200}>
-            <div className="card overflow-hidden">
-              <Photo name="contact-1" ratio="16/9" rounded="none" className="h-full w-full object-cover" />
-            </div>
-          </Reveal>
+              {/* Center Visual Photograph */}
+              <div className="relative mx-6 mb-4 overflow-hidden rounded-xl border border-white/10 sm:mx-7">
+                <Photo
+                  name="contact-1"
+                  ratio="16/9"
+                  rounded="none"
+                  className="h-38 w-full object-cover sm:h-44"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 via-navy-950/50 to-transparent p-3 text-left">
+                  <p className="text-xs font-medium text-white">The GetMyDegree centre in Malappuram</p>
+                </div>
+              </div>
 
-          {/* Accreditation Quick Callout */}
-          <Reveal delay={260}>
-            <div className="card card-p flex items-center gap-3.5 bg-navy-50/60 p-4">
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-navy text-white">
-                <ShieldCheck size={20} aria-hidden="true" />
-              </span>
-              <div>
-                <p className="text-xs font-semibold text-navy">Accreditation Guarantee</p>
-                <p className="text-xs text-muted">
-                  All universities are UGC, AICTE & NAAC approved for government roles and higher study.
-                </p>
+              {/* Accreditation Guarantee Docked Strip */}
+              <div className="border-t border-white/10 bg-white/5 px-6 py-4 sm:px-7">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gold text-navy-950">
+                    <ShieldCheck size={18} aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="text-xs font-semibold text-white">Accreditation Guarantee</p>
+                    <p className="text-[0.75rem] text-white/70 leading-snug">
+                      All universities are UGC, AICTE &amp; NAAC approved for government roles and higher study.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
