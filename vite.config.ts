@@ -31,6 +31,23 @@ function scanImages(dir: string, urlPrefix: string, out: Record<string, string>)
   }
 }
 
+/**
+ * Everything in public/images/gallery, in filename order. Drop a picture in
+ * and it joins the gallery — no code change, and the dev server reloads.
+ */
+function scanGallery(dir: string) {
+  let entries: string[]
+  try {
+    entries = readdirSync(dir)
+  } catch {
+    return []
+  }
+  return entries
+    .filter((entry) => FORMAT_PRIORITY.includes(extname(entry).toLowerCase()))
+    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
+    .map((entry) => `/images/gallery/${entry}`)
+}
+
 function imageManifest(): Plugin {
   const virtualId = 'virtual:image-manifest'
   const resolvedId = '\0' + virtualId
@@ -44,7 +61,10 @@ function imageManifest(): Plugin {
     name: 'image-manifest',
     resolveId: (id) => (id === virtualId ? resolvedId : undefined),
     load: (id) =>
-      id === resolvedId ? `export const imageManifest = ${JSON.stringify(build())};` : undefined,
+      id === resolvedId
+        ? `export const imageManifest = ${JSON.stringify(build())};\n` +
+          `export const galleryImages = ${JSON.stringify(scanGallery(join(process.cwd(), 'public/images/gallery')))};`
+        : undefined,
     // Picking up a newly added photograph should not need a restart.
     configureServer(server) {
       server.watcher.add(join(process.cwd(), 'public/images'))

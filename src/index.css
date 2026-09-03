@@ -151,7 +151,7 @@
 
   /* Section rhythm scales with the viewport too. */
   .section-y {
-    padding-block: clamp(2.25rem, 1.5rem + 3.2vw, 4.5rem);
+    padding-block: clamp(1.5rem, 1rem + 2.2vw, 3.25rem);
   }
 
   .card-p {
@@ -741,6 +741,51 @@
 
   .slide-in {
     animation: slide-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /*
+    Gallery strip. The track holds the pictures twice and travels exactly half
+    its width, so the loop closes seamlessly. Without motion it is simply a row
+    the reader can scroll, and the edges fade so it reads as continuing rather
+    than being cut off.
+  */
+  .gallery-viewport {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .gallery-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  @media (min-width: 640px) {
+    .gallery-viewport {
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    }
+  }
+  .gallery-viewport.is-animated {
+    overflow-x: hidden;
+  }
+  .gallery-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+  }
+  @keyframes gallery-slide {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(calc(-50% - 0.5rem), 0, 0);
+    }
+  }
+  .is-animated .gallery-track {
+    animation: gallery-slide var(--gallery-duration, 40s) linear infinite;
+    will-change: transform;
+  }
+  .is-animated:hover .gallery-track,
+  .is-animated .gallery-track[data-paused='true'] {
+    animation-play-state: paused;
   }
 
   .hero-light {

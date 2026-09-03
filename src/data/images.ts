@@ -68,6 +68,13 @@ const declared = {
     width: 1200,
     height: 900,
   },
+  situations: {
+    src: '/images/situations.jpg',
+    alt: 'A working professional continuing their degree alongside their job',
+    note: 'Four situations section',
+    width: 1400,
+    height: 933,
+  },
   'about-2': {
     // Defaults to the study photograph; drop about-2.jpg in to replace it.
     src: '/images/hero-portrait-2.jpg',

@@ -17,6 +17,7 @@ import { Section } from '../components/Section'
 import { Photo } from '../components/Photo'
 import { HeroVisual } from '../components/HeroVisual'
 import { HeroTrust } from '../components/HeroTrust'
+import { Gallery } from '../components/Gallery'
 import { Stats } from '../components/Stats'
 import {
   admissionSteps,
@@ -210,6 +211,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/*
+        A sideways gallery straight under the hero. The pictures come from
+        public/images/gallery — drop one in and it appears here, in filename
+        order, with no code change.
+      */}
+      <section className="pt-2 pb-8 sm:pt-4 sm:pb-12 lg:pb-14">
+        <div className="shell">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <h2 className="t-h2 font-display font-medium">Building Leaders for Tomorrow</h2>
+            <p className="t-body mt-3 text-muted">
+              Where knowledge, skills, and success come together
+            </p>
+          </Reveal>
+        </div>
+        <Reveal delay={80} className="mt-8 lg:mt-10">
+          <Gallery />
+        </Reveal>
+      </section>
+
       {/* Below the hero on phones and tablets, where it does not cost the
           first screen. */}
       <div className="shell -mt-4 pb-10 sm:pb-14 lg:hidden">
@@ -384,7 +404,7 @@ export default function Home() {
 
           <Reveal delay={140} className="lg:col-span-5">
             <div className="relative h-full">
-              <Photo name="about-2" ratio="4/3" className="lg:aspect-auto lg:h-full" />
+              <Photo name="situations" ratio="4/3" className="lg:aspect-auto lg:h-full" />
               <div className="absolute right-4 bottom-4 left-4 rounded-2xl bg-white/92 px-4 py-3 backdrop-blur-md">
                 <p className="text-sm font-medium">Not sure which one you are?</p>
                 <p className="mt-0.5 text-xs text-muted">
