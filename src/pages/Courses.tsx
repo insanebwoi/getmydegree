@@ -199,31 +199,58 @@ export default function Courses() {
         title="Simple admissions, open to all backgrounds"
         intro="No entrance examination, no rigid attendance rules, no age limit. Career gaps are fully supported and credited."
       >
-        <div className="grid gap-4 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
-            <Photo name="courses-2" ratio="4/3" className="lg:aspect-auto lg:h-full" />
-          </Reveal>
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+        <div className="grid gap-4 lg:grid-cols-12 lg:items-stretch">
+          {/*
+            Each route reads as a short checklist with the level as its
+            heading, so the two can be compared line for line rather than
+            deciphered from two identical-looking panels.
+          */}
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:col-span-7">
             {eligibility.map((e, i) => (
-              <Reveal key={e.level} delay={i * 80} className="h-full">
-                <div className="card card-p h-full sm:p-7">
-                  <div className="flex items-center gap-2">
-                    <span className="badge">For {e.level.toLowerCase()}</span>
+              <Reveal key={e.level} delay={i * 70} className="h-full">
+                <div className="card flex h-full flex-col p-5 sm:p-6">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="font-display text-lg font-medium text-ink">{e.level}</h3>
+                    <span className="font-display text-2xl font-semibold text-navy-100">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
                   </div>
-                  <ul className="mt-6 space-y-3.5">
-                    {e.points.map((p) => (
-                      <li key={p} className="flex items-start gap-3">
-                        <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-navy-50 text-navy">
-                          <Check size={13} strokeWidth={2.5} aria-hidden="true" />
+                  <p className="mt-1 text-xs text-muted">
+                    {e.level === 'Undergraduate' ? 'Three-year degrees' : 'Two-year degrees'}
+                  </p>
+
+                  <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
+                    {e.points.map((point) => (
+                      <li key={point} className="flex items-start gap-2.5">
+                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-gold text-navy-950">
+                          <Check size={11} strokeWidth={3.5} aria-hidden="true" />
                         </span>
-                        <span className="text-sm font-medium text-ink">{p}</span>
+                        <span className="text-sm leading-snug font-medium text-ink">{point}</span>
                       </li>
                     ))}
                   </ul>
+
+                  <p className="mt-auto pt-5 text-xs text-muted">
+                    That is the whole list — no entrance test, no interview.
+                  </p>
                 </div>
               </Reveal>
             ))}
           </div>
+
+          {/* The photograph carries the reassurance, so the panels stay short. */}
+          <Reveal delay={140} className="lg:col-span-5">
+            <div className="relative h-full">
+              <Photo name="courses-2" ratio="4/3" className="lg:aspect-auto lg:h-full" />
+              <div className="absolute right-4 bottom-4 left-4 rounded-2xl bg-white/92 p-4 backdrop-blur-md">
+                <p className="text-sm font-medium">Missing a marksheet?</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted">
+                  A duplicate from your previous university is enough to start. We will tell you
+                  exactly what to ask them for.
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </Section>
 
