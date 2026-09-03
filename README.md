@@ -100,7 +100,14 @@ public/images/blog/<slug>.jpg   the cover for that article
 ```
 
 Resolution order is `.avif`, `.webp`, `.jpg`, `.jpeg`, `.png`, `.svg`, so a real photograph always
-beats the `.svg` placeholder. You can delete the placeholder or leave it   it is ignored once a
+beats the `.svg` placeholder — and a `.webp` beats the `.jpg` or `.png` beside it.
+
+**Photographs are stored as WebP.** Drop a JPEG or PNG in and it works, but convert it before
+committing; the format saved 94% on the last pass. One file at a time:
+
+```bash
+cwebp -q 82 -m 6 -resize 1600 0 photo.png -o photo.webp   # then delete the original
+``` You can delete the placeholder or leave it   it is ignored once a
 real file exists. Adding a file during `npm run dev` reloads the page.
 
 **The hero shows three images in sequence.** `hero-portrait`, `hero-portrait-2` and

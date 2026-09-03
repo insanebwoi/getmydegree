@@ -39,6 +39,10 @@ function scanImages(dir: string, urlPrefix: string, out: Record<string, string>)
 /**
  * Everything in public/images/gallery, in filename order. Drop a picture in
  * and it joins the gallery — no code change, and the dev server reloads.
+ *
+ * One entry per picture: a photograph left beside its own .webp would
+ * otherwise appear twice, once in each format. Names are encoded, since a
+ * filename may contain spaces.
  */
 function scanGallery(dir: string) {
   let entries: string[]
@@ -47,10 +51,19 @@ function scanGallery(dir: string) {
   } catch {
     return []
   }
-  return entries
-    .filter((entry) => FORMAT_PRIORITY.includes(extname(entry).toLowerCase()))
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((entry) => `/images/gallery/${entry}`)
+  const best = new Map<string, string>()
+  for (const entry of entries) {
+    const ext = extname(entry).toLowerCase()
+    const rank = FORMAT_PRIORITY.indexOf(ext)
+    if (rank === -1) continue
+    const name = basename(entry, extname(entry))
+    const held = best.get(name)
+    if (held && FORMAT_PRIORITY.indexOf(extname(held).toLowerCase()) <= rank) continue
+    best.set(name, entry)
+  }
+  return [...best.entries()]
+    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+    .map(([, file]) => `/images/gallery/${encodeURIComponent(file)}`)
 }
 
 function imageManifest(): Plugin {

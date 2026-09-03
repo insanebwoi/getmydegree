@@ -2,7 +2,7 @@
  * Every photograph on the site, in one place.
  *
  * To use a real photo, drop a file named after the slot into `public/images/`
- *   `hero-1.jpg`, `about-2.png`, `courses-1.webp`. The build resolves each slot
+ *   `hero-1.webp`, `about-2.jpg`, `courses-1.png`. The build resolves each slot
  * to whichever file exists, preferring real formats over the .svg placeholder,
  * so no code change is needed. Cropping is handled by the layout.
  */
@@ -19,120 +19,106 @@ export type ImageSlot = {
 }
 
 const declared = {
-  'hero-1': {
-    src: '/images/home/hero-1.svg',
-    alt: 'Graduates of GetMyDegree Institutions on campus',
-    note: 'Students on campus after graduation',
-    width: 1600,
-    height: 600,
-  },
   'hero-portrait': {
-    src: '/images/home/hero-portrait.jpg',
+    src: '/images/home/hero-portrait.webp',
     alt: 'A working professional who completed their degree with GetMyDegree Institutions',
     note: 'Editorial portrait — working professional, 23–30, smart casual',
     width: 1200,
     height: 1500,
   },
   'hero-portrait-2': {
-    src: '/images/home/hero-portrait-2.jpg',
+    src: '/images/home/hero-portrait-2.webp',
     alt: '',
     note: 'Hero set, 2 of 3 — studying after work',
     width: 1200,
     height: 1500,
   },
   'hero-portrait-3': {
-    src: '/images/home/hero-portrait-3.jpg',
+    src: '/images/home/hero-portrait-3.webp',
     alt: '',
     note: 'Hero set, 3 of 3 — collecting the degree',
     width: 1200,
     height: 1500,
   },
   'hero-3': {
-    src: '/images/home/hero-3.jpg',
+    src: '/images/home/hero-3.webp',
     alt: 'A student working through their degree alongside their job',
     note: 'Programmes card',
     width: 1500,
     height: 844,
   },
   'hero-2': {
-    src: '/images/home/hero-2.jpg',
+    src: '/images/home/hero-2.webp',
     alt: 'An academic counselor talking with a student',
     note: 'Counseling session',
     width: 1200,
     height: 1200,
   },
   'about-banner': {
-    src: '/images/about/about-banner.jpg',
+    src: '/images/about/about-banner.webp',
     alt: 'A counselor talking with a student at the Thrissur centre',
     note: 'About page header banner',
     width: 1500,
     height: 844,
   },
   'about-1': {
-    src: '/images/about/about-1.jpg',
+    src: '/images/about/about-1.webp',
     alt: 'The GetMyDegree centre in Thrissur',
     note: 'The Thrissur centre',
     width: 1200,
     height: 900,
   },
   situations: {
-    src: '/images/home/situations.jpg',
+    src: '/images/home/situations.webp',
     alt: 'A working professional continuing their degree alongside their job',
     note: 'Four situations section',
     width: 1400,
     height: 933,
   },
-  'about-2': {
-    src: '/images/about/about-2.jpg',
-    alt: 'A working professional studying in the evening',
-    note: 'Studying after work',
-    width: 1200,
-    height: 900,
-  },
   'about-3': {
-    src: '/images/about/about-3.jpg',
+    src: '/images/about/about-3.webp',
     alt: 'A graduate holding their degree certificate',
     note: 'Graduation day',
     width: 1680,
     height: 720,
   },
   'courses-banner': {
-    src: '/images/courses/courses-banner.jpg',
+    src: '/images/courses/courses-banner.webp',
     alt: 'Students pursuing university degrees with GetMyDegree',
     note: 'Courses page header banner',
     width: 1500,
     height: 844,
   },
   'courses-1': {
-    src: '/images/courses/courses-1.jpg',
+    src: '/images/courses/courses-1.webp',
     alt: 'A student attending a class session',
     note: 'Class session',
     width: 1680,
     height: 720,
   },
   'courses-2': {
-    src: '/images/courses/courses-2.jpg',
+    src: '/images/courses/courses-2.webp',
     alt: 'Marksheets and an enrolment letter on a desk',
     note: 'Enrolment documents',
     width: 1200,
     height: 900,
   },
   'contact-banner': {
-    src: '/images/contact/contact-banner.jpg',
+    src: '/images/contact/contact-banner.webp',
     alt: 'Academic counselors helping students at GetMyDegree',
     note: 'Contact page header banner',
     width: 1500,
     height: 844,
   },
   'contact-1': {
-    src: '/images/contact/contact-1.jpg',
+    src: '/images/contact/contact-1.webp',
     alt: 'The GetMyDegree centre in Malappuram',
     note: 'The Malappuram centre',
     width: 1200,
     height: 750,
   },
   'blog-banner': {
-    src: '/images/blog/blog-banner.png',
+    src: '/images/blog/blog-banner.webp',
     alt: 'Articles, degree advice, and admission guides at GetMyDegree',
     note: 'Blog page header banner',
     width: 1672,
