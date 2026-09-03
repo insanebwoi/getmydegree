@@ -785,6 +785,51 @@
     margin-right: 1rem;
   }
 
+  /*
+    A soft white wash behind a page header's words.
+
+    No backdrop-filter: a blur clips to its own box, and that rectangle was
+    visible over the photograph as a hard-edged square. Radial washes alone
+    have no edge to see — dense enough at the centre to carry the type, gone
+    well before the boundary, so the picture stays sharp everywhere else.
+  */
+  .page-brush {
+    background:
+      radial-gradient(
+        76% 66% at 50% 50%,
+        rgba(255, 255, 255, 0.995) 0%,
+        rgba(255, 255, 255, 0.985) 48%,
+        rgba(255, 255, 255, 0.82) 68%,
+        rgba(255, 255, 255, 0.4) 84%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      radial-gradient(
+        58% 50% at 50% 52%,
+        rgba(255, 255, 255, 0.98) 0%,
+        rgba(255, 255, 255, 0.7) 62%,
+        rgba(255, 255, 255, 0) 100%
+      );
+  }
+  @media (min-width: 640px) {
+    .page-brush {
+      background:
+        radial-gradient(
+          70% 62% at 50% 50%,
+          rgba(255, 255, 255, 0.99) 0%,
+          rgba(255, 255, 255, 0.975) 50%,
+          rgba(255, 255, 255, 0.78) 70%,
+          rgba(255, 255, 255, 0.34) 86%,
+          rgba(255, 255, 255, 0) 100%
+        ),
+        radial-gradient(
+          54% 46% at 50% 52%,
+          rgba(255, 255, 255, 0.96) 0%,
+          rgba(255, 255, 255, 0.6) 64%,
+          rgba(255, 255, 255, 0) 100%
+        );
+    }
+  }
+
   .hero-light {
     background:
       radial-gradient(70% 80% at 82% 30%, rgba(1, 58, 148, 0.09), transparent 68%),

@@ -1,18 +1,18 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-react'
+import { Check, CheckCircle2, Clock, Mail, MapPin, Phone, ShieldCheck, Sparkles } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { contactSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
-import { centers, courses, site } from '../data/site'
+import { centers, courses, site, stats } from '../data/site'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'program', string>>
 
 const field =
-  'mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition-colors placeholder:text-muted/55 focus:border-navy'
-const labelCls = 'text-sm font-medium'
+  'mt-2 w-full rounded-xl border border-line bg-white px-4 py-3 text-base outline-none transition-all placeholder:text-muted/50 focus:border-navy focus:ring-2 focus:ring-navy/10'
+const labelCls = 'text-sm font-medium text-ink'
 
 export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
@@ -41,27 +41,37 @@ export default function Contact() {
     }
 
     setStatus('sending')
-    // TODO: replace with the real endpoint (Formspree / Web3Forms / own API).
     window.setTimeout(() => {
       setStatus('sent')
       form.reset()
     }, 700)
   }
 
-  const quick = [
-    {
-      Icon: Mail,
-      label: 'Email',
-      value: site.email,
-      href: `mailto:${site.email}`,
-    },
+  const quickChannels = [
     {
       Icon: Phone,
-      label: 'Phone',
+      label: 'Call Direct',
       value: site.phone,
+      sub: 'Speak with an academic counselor',
       href: `tel:${site.phoneHref}`,
+      highlight: true,
     },
-    { Icon: Clock, label: 'Office hours', value: site.officeHours },
+    {
+      Icon: Mail,
+      label: 'Email Inquiries',
+      value: site.email,
+      sub: 'Official admission support',
+      href: `mailto:${site.email}`,
+      highlight: false,
+    },
+    {
+      Icon: Clock,
+      label: 'Counseling Hours',
+      value: site.officeHours,
+      sub: 'Monday to Saturday assistance',
+      href: undefined,
+      highlight: false,
+    },
   ]
 
   return (
@@ -69,32 +79,102 @@ export default function Contact() {
       <Seo {...pageMeta['/contact']} schema={contactSchema} />
 
       <PageHero
-        badge="Get in touch"
+        image="contact-banner"
+        badge="Contact us"
         title="Let's start your degree journey"
-        intro="Tell us what you completed and where you stopped. We will come back with the programs you are eligible for, what they cost and how long they take."
-      />
+        intro="Tell us where you stopped or what program you aspire to complete. Our academic counselors will verify your eligibility, course fees, and fast-track timeline within 24 hours."
+      >
+        <a href="#counseling-form" className="btn btn-primary">
+          Book free counseling
+        </a>
+        <a href={`tel:${site.phoneHref}`} className="btn btn-ghost">
+          Call {site.phone}
+        </a>
+      </PageHero>
 
-      <section className="shell grid gap-4 pb-12 sm:pb-16 lg:grid-cols-12 lg:pb-24">
+      {/* Quick Contact Cards */}
+      <div className="shell -mt-4 pb-8 sm:-mt-6 sm:pb-10 lg:pb-12">
+        <div className="grid gap-4 sm:grid-cols-3">
+          {quickChannels.map((q, i) => (
+            <Reveal key={q.label} delay={i * 70}>
+              <div
+                className={`card card-hover flex h-full items-start gap-4 p-5 ${
+                  q.highlight ? 'border-navy/20 bg-navy-50/50' : 'bg-white'
+                }`}
+              >
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy-100/70 text-navy">
+                  <q.Icon size={20} aria-hidden="true" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <span className="text-xs font-semibold tracking-wider text-muted uppercase">
+                    {q.label}
+                  </span>
+                  {q.href ? (
+                    <a
+                      href={q.href}
+                      className="action mt-0.5 block truncate text-base font-medium text-navy hover:underline"
+                    >
+                      {q.value}
+                    </a>
+                  ) : (
+                    <p className="mt-0.5 text-base font-medium text-ink">{q.value}</p>
+                  )}
+                  <p className="mt-1 text-xs text-muted">{q.sub}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Form & Centers Section */}
+      <section id="counseling-form" className="shell grid gap-6 pb-12 sm:pb-16 lg:grid-cols-12 lg:pb-24">
+        {/* Counseling Form */}
         <Reveal className="lg:col-span-7">
           <div className="card card-p h-full sm:p-7 lg:p-9">
-            <h2 className="t-h2 font-display font-medium">Book free counseling</h2>
-            <p className="mt-2 text-base text-muted md:text-sm">
-              Fill in your details and our team will get back to you within one working day.
-            </p>
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line pb-5">
+              <div>
+                <span className="text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-navy">
+                  Free Consultation · 48h Admission
+                </span>
+                <h2 className="mt-1 text-xl font-display font-medium text-ink sm:text-2xl">
+                  Request academic guidance
+                </h2>
+              </div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">
+                <Sparkles size={13} aria-hidden="true" />
+                Zero obligation
+              </span>
+            </div>
+
+            {/* Reassurance Badges */}
+            <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted sm:gap-4">
+              <span className="inline-flex items-center gap-1">
+                <Check size={14} className="text-emerald-600" />
+                100% UGC Approved
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Check size={14} className="text-emerald-600" />
+                Continuous Assessment
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Check size={14} className="text-emerald-600" />
+                Confidential Guidance
+              </span>
+            </div>
 
             {status === 'sent' ? (
               <div
                 role="status"
-                className="mt-8 flex flex-col items-center rounded-[var(--radius-card)] bg-navy-50 px-6 py-12 text-center"
+                className="mt-8 flex flex-col items-center rounded-[var(--radius-card)] border border-emerald-200 bg-emerald-50/60 px-6 py-12 text-center"
               >
-                <span className="grid h-14 w-14 place-items-center rounded-full bg-gold text-navy-950">
-                  <CheckCircle2 size={26} aria-hidden="true" />
+                <span className="grid h-14 w-14 place-items-center rounded-full bg-emerald-600 text-white shadow-md">
+                  <CheckCircle2 size={28} aria-hidden="true" />
                 </span>
-                <h3 className="t-h3 mt-5 font-display font-medium">Request received</h3>
+                <h3 className="t-h3 mt-5 font-display font-medium text-ink">Request received successfully</h3>
                 <p className="mt-2 max-w-sm text-base text-muted md:text-sm">
-                  A counselor will call you within one working day, between 9am and 7pm. If it is
-                  urgent, ring{' '}
-                  <a href={`tel:${site.phoneHref}`} className="font-medium text-navy underline">
+                  An academic counselor will call you within one working day ({site.officeHours}). For immediate assistance, call{' '}
+                  <a href={`tel:${site.phoneHref}`} className="font-semibold text-navy underline">
                     {site.phone}
                   </a>
                   .
@@ -108,23 +188,23 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate className="mt-7 grid gap-5 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} noValidate className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className={labelCls}>
-                    Full name
+                    Full name <span className="text-red-600">*</span>
                   </label>
                   <input
                     id="name"
                     name="name"
                     type="text"
                     autoComplete="name"
-                    placeholder="Your name"
+                    placeholder="e.g. Rahul Sharma"
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? 'name-error' : undefined}
                     className={field}
                   />
                   {errors.name && (
-                    <p id="name-error" className="mt-2 text-sm text-red-700">
+                    <p id="name-error" className="mt-1.5 text-xs text-red-600">
                       {errors.name}
                     </p>
                   )}
@@ -132,7 +212,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="phone" className={labelCls}>
-                    Phone
+                    Phone number <span className="text-red-600">*</span>
                   </label>
                   <input
                     id="phone"
@@ -145,7 +225,7 @@ export default function Contact() {
                     className={field}
                   />
                   {errors.phone && (
-                    <p id="phone-error" className="mt-2 text-sm text-red-700">
+                    <p id="phone-error" className="mt-1.5 text-xs text-red-600">
                       {errors.phone}
                     </p>
                   )}
@@ -153,7 +233,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="email" className={labelCls}>
-                    Email
+                    Email address <span className="text-red-600">*</span>
                   </label>
                   <input
                     id="email"
@@ -166,7 +246,7 @@ export default function Contact() {
                     className={field}
                   />
                   {errors.email && (
-                    <p id="email-error" className="mt-2 text-sm text-red-700">
+                    <p id="email-error" className="mt-1.5 text-xs text-red-600">
                       {errors.email}
                     </p>
                   )}
@@ -174,7 +254,7 @@ export default function Contact() {
 
                 <div>
                   <label htmlFor="program" className={labelCls}>
-                    Interested program
+                    Interested program <span className="text-red-600">*</span>
                   </label>
                   <select
                     id="program"
@@ -185,33 +265,33 @@ export default function Contact() {
                     className={field}
                   >
                     <option value="" disabled>
-                      Choose a program
+                      Choose a degree program
                     </option>
-                    <optgroup label="Undergraduate">
+                    <optgroup label="Undergraduate Degrees (UG)">
                       {courses
                         .filter((c) => c.level === 'UG')
                         .map((c) => (
                           <option key={c.code} value={c.code}>
-                            {c.code}   {c.field}
+                            {c.code} — {c.name}
                           </option>
                         ))}
                     </optgroup>
-                    <optgroup label="Postgraduate">
+                    <optgroup label="Postgraduate Degrees (PG)">
                       {courses
                         .filter((c) => c.level === 'PG')
                         .map((c) => (
                           <option key={c.code} value={c.code}>
-                            {c.code}   {c.field}
+                            {c.code} — {c.name}
                           </option>
                         ))}
                     </optgroup>
                     <option value="Triple Certification MBA (UK)">
                       Triple certification MBA (UK)
                     </option>
-                    <option value="Not sure yet">Not sure yet</option>
+                    <option value="Not sure yet">Not sure yet (Need counseling)</option>
                   </select>
                   {errors.program && (
-                    <p id="program-error" className="mt-2 text-sm text-red-700">
+                    <p id="program-error" className="mt-1.5 text-xs text-red-600">
                       {errors.program}
                     </p>
                   )}
@@ -219,93 +299,119 @@ export default function Contact() {
 
                 <div className="sm:col-span-2">
                   <label htmlFor="message" className={labelCls}>
-                    Where you stopped <span className="text-muted">(optional)</span>
+                    Where you stopped or current status <span className="text-muted">(optional)</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
-                    placeholder="For example: completed two years of B.Com in 2019, working since."
+                    rows={3}
+                    placeholder="For example: completed two years of B.Com in 2020, working full-time since..."
                     className={`${field} resize-y`}
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="btn btn-primary disabled:opacity-60 sm:col-span-2 sm:justify-self-start"
-                >
-                  {status === 'sending' ? 'Sending…' : 'Submit request'}
-                </button>
+                <div className="sm:col-span-2 pt-2">
+                  <button
+                    type="submit"
+                    disabled={status === 'sending'}
+                    className="btn btn-primary w-full sm:w-auto"
+                  >
+                    {status === 'sending' ? 'Sending request…' : 'Submit counseling request'}
+                  </button>
+                  <p className="mt-2.5 text-xs text-muted">
+                    By submitting, you agree to receive academic counseling information via call or WhatsApp.
+                  </p>
+                </div>
               </form>
             )}
           </div>
         </Reveal>
 
+        {/* Centers & Visual Right Column */}
         <div className="grid content-start gap-4 lg:col-span-5">
-          <Reveal delay={100}>
-            <div className="card card-p">
-              <h2 className="t-h3 font-display font-medium">Quick connect</h2>
-              <p className="mt-2 text-base text-muted md:text-sm">
-                Prefer to talk? Reach us directly through any of these.
+          {/* Centers Card */}
+          <Reveal delay={140}>
+            <div className="card card-p bg-navy-950 text-white">
+              <div className="flex items-center gap-2">
+                <span className="badge badge-dark">Regional Hubs</span>
+              </div>
+              <h2 className="mt-3 font-display text-xl font-medium sm:text-2xl">
+                Visit our counseling centers
+              </h2>
+              <p className="mt-1.5 text-xs text-white/65 sm:text-sm">
+                Drop by in person for document verification and direct counseling.
               </p>
-              <ul className="mt-6 grid gap-4">
-                {quick.map(({ Icon, label, value, href }) => (
-                  <li key={label} className="flex items-center gap-4">
-                    <span className="chip">
-                      <Icon size={17} aria-hidden="true" />
-                    </span>
-                    <span>
-                      <span className="block text-sm text-muted">{label}</span>
-                      {href ? (
+
+              <div className="mt-6 space-y-5 border-t border-white/10 pt-5">
+                {centers.map((c) => (
+                  <div key={c.city} className="rounded-xl border border-white/10 bg-white/5 p-4">
+                    <address className="not-italic">
+                      <div className="flex items-center justify-between">
+                        <p className="flex items-center gap-2 font-display text-base font-semibold text-white">
+                          <MapPin size={16} className="text-gold" aria-hidden="true" />
+                          {c.city} Centre
+                        </p>
                         <a
-                          href={href}
-                          className="action text-sm font-medium break-all hover:text-navy"
+                          href={`tel:${c.phoneHref}`}
+                          className="action gap-1 text-xs font-semibold text-gold hover:underline"
                         >
-                          {value}
+                          <Phone size={12} />
+                          Call
                         </a>
-                      ) : (
-                        <span className="text-base font-medium md:text-sm">{value}</span>
-                      )}
-                    </span>
-                  </li>
+                      </div>
+                      <p className="mt-2 text-xs leading-relaxed text-white/70 sm:text-sm">
+                        {c.address}
+                      </p>
+                      <p className="mt-2 text-xs font-medium text-white/50">
+                        Ph: {c.phone}
+                      </p>
+                    </address>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </Reveal>
 
-          <Reveal delay={180}>
-            <Photo name="contact-1" ratio="16/10" />
+          {/* Center Visual / Counseling Photo */}
+          <Reveal delay={200}>
+            <div className="card overflow-hidden">
+              <Photo name="contact-1" ratio="16/9" rounded="none" className="h-full w-full object-cover" />
+            </div>
           </Reveal>
 
-          <Reveal delay={240}>
-            <div className="card card-p bg-navy-950 text-white">
-              <h2 className="t-h3 font-display font-medium">Visit our centers</h2>
-              <ul className="mt-6 grid gap-6">
-                {centers.map((c) => (
-                  <li key={c.city}>
-                    <address className="not-italic">
-                      <p className="flex items-center gap-2 font-display font-medium">
-                        <MapPin size={15} className="text-gold" aria-hidden="true" />
-                        {c.city}
-                      </p>
-                      <p className="mt-2 text-base leading-relaxed text-white/60 md:text-sm">
-                        {c.address}
-                      </p>
-                      <a
-                        href={`tel:${c.phoneHref}`}
-                        className="action text-sm font-medium text-gold hover:underline"
-                      >
-                        {c.phone}
-                      </a>
-                    </address>
-                  </li>
-                ))}
-              </ul>
+          {/* Accreditation Quick Callout */}
+          <Reveal delay={260}>
+            <div className="card card-p flex items-center gap-3.5 bg-navy-50/60 p-4">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-navy text-white">
+                <ShieldCheck size={20} aria-hidden="true" />
+              </span>
+              <div>
+                <p className="text-xs font-semibold text-navy">Accreditation Guarantee</p>
+                <p className="text-xs text-muted">
+                  All universities are UGC, AICTE & NAAC approved for government roles and higher study.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
+
+      {/* Trust Numbers Strip */}
+      <div className="shell pb-12 sm:pb-16 lg:pb-20">
+        <Reveal>
+          <div className="card px-5 py-6 sm:px-8 sm:py-8">
+            <div className="grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
+              {stats.map((s) => (
+                <div key={s.label}>
+                  <p className="font-display text-2xl font-bold text-navy sm:text-3xl">{s.value}</p>
+                  <p className="mt-1 text-xs text-muted sm:text-sm">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
     </>
   )
 }
+

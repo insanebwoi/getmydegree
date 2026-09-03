@@ -14,20 +14,25 @@ import { marked } from 'marked'
 const FORMAT_PRIORITY = ['.avif', '.webp', '.jpg', '.jpeg', '.png', '.svg']
 
 function scanImages(dir: string, urlPrefix: string, out: Record<string, string>) {
-  let entries: string[]
+  let entries: import('node:fs').Dirent[]
   try {
-    entries = readdirSync(dir)
+    entries = readdirSync(dir, { withFileTypes: true })
   } catch {
     return
   }
   for (const entry of entries) {
-    const ext = extname(entry).toLowerCase()
+    if (entry.isDirectory()) {
+      if (entry.name === 'gallery') continue
+      scanImages(join(dir, entry.name), `${urlPrefix}/${entry.name}`, out)
+      continue
+    }
+    const ext = extname(entry.name).toLowerCase()
     const rank = FORMAT_PRIORITY.indexOf(ext)
     if (rank === -1) continue
-    const name = basename(entry, ext)
+    const name = basename(entry.name, ext)
     const existing = out[name]
     if (existing && FORMAT_PRIORITY.indexOf(extname(existing).toLowerCase()) <= rank) continue
-    out[name] = `${urlPrefix}/${entry}`
+    out[name] = `${urlPrefix}/${entry.name}`
   }
 }
 
@@ -54,7 +59,6 @@ function imageManifest(): Plugin {
   const build = () => {
     const manifest: Record<string, string> = {}
     scanImages(join(process.cwd(), 'public/images'), '/images', manifest)
-    scanImages(join(process.cwd(), 'public/images/blog'), '/images/blog', manifest)
     return manifest
   }
   return {

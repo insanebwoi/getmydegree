@@ -7,6 +7,8 @@ import {
   Check,
   Clock,
   GraduationCap,
+  MapPin,
+  ShieldCheck,
   Wallet,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
@@ -236,30 +238,79 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* Awarding bodies, in the position the reference gives its logo strip. */}
-      <div className="shell pb-6 lg:pb-10">
-        <Reveal>
-          <p className="text-center text-base text-muted md:text-sm">
-            Degrees awarded by recognized universities in India and the United Kingdom
+      {/* Awarding bodies & University Partners Section */}
+      <section className="shell pb-10 sm:pb-14 lg:pb-16">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <span className="badge">Accredited degree programs</span>
+          <h2 className="t-h1 mt-3">State &amp; Central Government Universities</h2>
+          <p className="t-body mt-2.5 text-navy font-medium sm:text-lg">
+            3-Year Distance &amp; Regular Degree Programs
           </p>
-          <ul className="mt-7 grid gap-4 sm:grid-cols-3">
-            {universities.map((u) => (
-              <li key={u.name} className="card px-5 py-4 text-center">
-                <span className="t-h3 font-display font-medium">{u.name}</span>
-                <span className="mt-1 block text-sm text-muted">{u.location}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-5 flex flex-col items-center gap-1.5 text-center">
-            <p className="inline-flex items-center gap-2 text-[0.8125rem] font-semibold uppercase tracking-[0.12em] text-navy">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-              State &amp; Central Government Universities
-              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-            </p>
-            <p className="text-xs text-muted">3 year distance regular degree program.</p>
-          </div>
+          <p className="mt-2 text-sm text-muted">
+            Degrees awarded by UGC, AICTE &amp; NAAC recognized universities in India and accredited institutions in the United Kingdom — 100% valid for government roles, promotions and higher education.
+          </p>
         </Reveal>
-      </div>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10">
+          {universities.map((u, i) => (
+            <Reveal key={u.name} delay={i * 70} className="h-full">
+              <div className="card card-hover card-p flex h-full flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy-50 font-display text-sm font-bold text-navy">
+                      {u.initials}
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[0.6875rem] font-medium text-emerald-700">
+                      <ShieldCheck size={12} />
+                      UGC Approved
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 font-display text-lg font-semibold text-ink sm:text-xl">
+                    {u.name}
+                  </h3>
+                  <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-muted">
+                    <MapPin size={13} className="text-gold-700 shrink-0" />
+                    {u.location}
+                  </p>
+                  <p className="mt-3 text-xs leading-relaxed text-muted sm:text-sm">
+                    {u.body}
+                  </p>
+                </div>
+
+                <div className="mt-5 border-t border-line pt-3.5 text-center">
+                  <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-navy">
+                    Valid for Govt Jobs · UPSC · PSC · Overseas
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Feature Highlights Strip & Explore CTA */}
+        <Reveal delay={140} className="mt-6 flex flex-col items-center gap-5 sm:mt-8">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 rounded-2xl border border-line bg-navy-50/50 px-5 py-3.5 text-center text-xs font-medium text-navy sm:text-sm">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              100% UGC, AICTE &amp; NAAC Approved
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              Continuous Assessment — No Exam Hall
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              Direct Admission Within 48 Hours
+            </span>
+          </div>
+
+          <Link to="/courses" className="btn btn-primary inline-flex items-center gap-2">
+            <span>Explore all programs</span>
+            <ArrowRight size={15} aria-hidden="true" />
+          </Link>
+        </Reveal>
+      </section>
 
       {/* About */}
       <Section
