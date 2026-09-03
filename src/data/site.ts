@@ -74,25 +74,25 @@ export const universities: {
   initials: string
   logo?: string
 }[] = [
-    {
-      name: 'Rabindranath Tagore University',
-      location: 'Madhya Pradesh, Bhopal',
-      body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
-      initials: 'RTU',
-    },
-    {
-      name: 'PRIST Deemed University',
-      location: 'Tamil Nadu, India',
-      body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
-      initials: 'PU',
-    },
-    {
-      name: 'Marjon University',
-      location: 'Cornwall, United Kingdom',
-      body: 'UK government recognized university offering globally valid degrees.',
-      initials: 'MU',
-    },
-  ]
+  {
+    name: 'Rabindranath Tagore University',
+    location: 'Madhya Pradesh, Bhopal',
+    body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
+    initials: 'RTU',
+  },
+  {
+    name: 'PRIST Deemed University',
+    location: 'Tamil Nadu, India',
+    body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
+    initials: 'PU',
+  },
+  {
+    name: 'Marjon University',
+    location: 'Cornwall, United Kingdom',
+    body: 'UK government recognized university offering globally valid degrees.',
+    initials: 'MU',
+  },
+]
 
 export const solutions = [
   {
@@ -298,13 +298,41 @@ export const eligibility = [
   { level: 'Postgraduate', points: ["Bachelor's Degree", 'Minimum 1-Year Gap'] },
 ]
 
-export const courseHighlights = [
-  'Complete 3-Year Degree Faster',
-  'Official Certificates Provided',
-  'Valid for Government Jobs',
-  'Career Growth & Promotions',
-  'Higher Studies (India & Abroad)',
-  'Migration & Attestation Support',
+/**
+ * What the degree does, each with the line that explains it. `icon` names the
+ * mark drawn beside it; the mapping lives with the section that renders them.
+ */
+export const courseHighlights: { icon: string; title: string; body: string }[] = [
+  {
+    icon: 'faster',
+    title: 'Complete 3-Year Degree Faster',
+    body: 'Credit transfer carries your completed semesters across, so you resume rather than restart.',
+  },
+  {
+    icon: 'certificate',
+    title: 'Official Certificates Provided',
+    body: 'Degree, consolidated marksheet and provisional certificate, issued by the university itself.',
+  },
+  {
+    icon: 'government',
+    title: 'Valid for Government Jobs',
+    body: 'Accepted for UPSC, PSC, SSC and state services, on the same footing as a regular degree.',
+  },
+  {
+    icon: 'growth',
+    title: 'Career Growth & Promotions',
+    body: 'The qualification most promotion and salary bands are gated on, completed alongside the job.',
+  },
+  {
+    icon: 'higher',
+    title: 'Higher Studies (India & Abroad)',
+    body: 'Accepted for master’s and doctoral admission at home and overseas.',
+  },
+  {
+    icon: 'attestation',
+    title: 'Migration & Attestation Support',
+    body: 'Migration certificates and attestation handled for you, whenever an employer asks.',
+  },
 ]
 
 /** The one true sequence on the site: what actually happens, in order. */

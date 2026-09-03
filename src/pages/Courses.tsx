@@ -1,6 +1,16 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowRight, BadgeCheck, Check } from 'lucide-react'
+import {
+  ArrowRight,
+  Award,
+  BadgeCheck,
+  Check,
+  FastForward,
+  GraduationCap,
+  Landmark,
+  Stamp,
+  TrendingUp,
+} from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { coursesSchema } from '../data/schema'
@@ -11,6 +21,16 @@ import { PageHero } from '../components/PageHero'
 import { BlogSearch } from '../components/BlogSearch'
 import { ApplyDialog } from '../components/ApplyDialog'
 import { courseHighlights, courses, eligibility, type Course } from '../data/site'
+
+/** The mark drawn beside each outcome. */
+const HIGHLIGHT_ICONS: Record<string, typeof Check> = {
+  faster: FastForward,
+  certificate: Award,
+  government: Landmark,
+  growth: TrendingUp,
+  higher: GraduationCap,
+  attestation: Stamp,
+}
 
 function CourseCard({
   course,
@@ -256,19 +276,28 @@ export default function Courses() {
 
       {/* Highlights & Accreditations */}
       <Section dark badge="Course highlights" title="Built to deliver legitimate career outcomes">
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {courseHighlights.map((h, i) => (
-            <Reveal key={h} delay={i * 60} as="li" className="h-full">
-              <div className="card-p flex h-full items-center gap-4 rounded-[var(--radius-card)] border border-white/12 bg-white/5">
-                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gold text-navy-950">
-                  <Check size={17} strokeWidth={2.5} aria-hidden="true" />
-                </span>
-                <span className="font-display text-sm font-medium text-white sm:text-base">
-                  {h}
-                </span>
-              </div>
-            </Reveal>
-          ))}
+        {/*
+          Six identical ticks said the same thing six times. Each outcome now
+          carries its own mark and the line that explains what it means, so the
+          section can be read rather than just counted.
+        */}
+        <ul className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+          {courseHighlights.map((h, i) => {
+            const Icon = HIGHLIGHT_ICONS[h.icon] ?? Check
+            return (
+              <Reveal key={h.title} delay={i * 60} as="li" className="h-full">
+                <div className="flex h-full flex-col rounded-[var(--radius-card)] border border-white/12 bg-white/5 p-5 transition-colors duration-200 hover:border-white/25 hover:bg-white/8">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold text-navy-950">
+                    <Icon size={18} strokeWidth={2.2} aria-hidden="true" />
+                  </span>
+                  <h3 className="mt-4 font-display text-[0.9375rem] leading-snug font-medium text-white sm:text-base">
+                    {h.title}
+                  </h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/60">{h.body}</p>
+                </div>
+              </Reveal>
+            )
+          })}
         </ul>
       </Section>
 
