@@ -152,6 +152,27 @@ export function Gallery() {
     window.addEventListener('pointerup', up)
   }
 
+  /*
+    Wheel and trackpad. A sideways gesture — or a wheel with shift held, the
+    long-standing convention for horizontal scrolling — moves the strip and is
+    consumed. A plain vertical wheel is left alone: hijacking it would trap the
+    page, and vertical scrolling already moves the strip anyway.
+  */
+  useEffect(() => {
+    const el = viewport.current
+    if (!el || !animated) return
+
+    const onWheel = (event: WheelEvent) => {
+      const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY)
+      if (!horizontal && !event.shiftKey) return
+      event.preventDefault()
+      dragOffset.current += horizontal ? event.deltaX : event.deltaY
+    }
+
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
+  }, [animated])
+
   /** A drag ends in a click; that click must not open a picture. */
   function onClickCapture(event: React.MouseEvent<HTMLDivElement>) {
     if (moved.current > DRAG_THRESHOLD) {
