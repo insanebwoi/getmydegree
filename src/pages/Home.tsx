@@ -211,6 +211,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Below the hero on phones and tablets, where it does not cost the
+          first screen. */}
+      <div className="shell -mt-4 pb-10 sm:pb-14 lg:hidden">
+        <HeroTrust />
+      </div>
+
       {/*
         A sideways gallery straight under the hero. The pictures come from
         public/images/gallery — drop one in and it appears here, in filename
@@ -229,12 +235,6 @@ export default function Home() {
           <Gallery />
         </Reveal>
       </section>
-
-      {/* Below the hero on phones and tablets, where it does not cost the
-          first screen. */}
-      <div className="shell -mt-4 pb-10 sm:pb-14 lg:hidden">
-        <HeroTrust />
-      </div>
 
       {/* Awarding bodies, in the position the reference gives its logo strip. */}
       <div className="shell pb-6 lg:pb-10">

@@ -335,7 +335,7 @@
   }
 
   /* Compiled markdown from src/content/posts. */
-  .prose>*+* {
+  .prose > * + * {
     margin-top: 1.25rem;
   }
 
@@ -367,8 +367,8 @@
     list-style: none;
   }
 
-  .prose ul>li,
-  .prose ol>li {
+  .prose ul > li,
+  .prose ol > li {
     position: relative;
     padding-left: 1.5rem;
     color: var(--color-muted);
@@ -376,7 +376,7 @@
     line-height: 1.7;
   }
 
-  .prose ul>li::before {
+  .prose ul > li::before {
     content: '';
     position: absolute;
     left: 0;
@@ -391,11 +391,11 @@
     counter-reset: step;
   }
 
-  .prose ol>li {
+  .prose ol > li {
     counter-increment: step;
   }
 
-  .prose ol>li::before {
+  .prose ol > li::before {
     content: counter(step) '.';
     position: absolute;
     left: 0;
@@ -453,7 +453,7 @@
     display: none;
   }
 
-  .chip-row>* {
+  .chip-row > * {
     scroll-snap-align: start;
   }
 
@@ -675,22 +675,26 @@
     rendered pixels rather than assumed.
   */
   .hero-scrim {
-    background: linear-gradient(to top,
-        rgba(5, 18, 41, 0.96) 0%,
-        rgba(5, 18, 41, 0.93) 45%,
-        rgba(5, 18, 41, 0.88) 75%,
-        rgba(5, 18, 41, 0.8) 100%);
+    background: linear-gradient(
+      to top,
+      rgba(5, 18, 41, 0.96) 0%,
+      rgba(5, 18, 41, 0.93) 45%,
+      rgba(5, 18, 41, 0.88) 75%,
+      rgba(5, 18, 41, 0.8) 100%
+    );
   }
 
   @media (min-width: 1024px) {
     .hero-scrim {
       background:
-        linear-gradient(100deg,
+        linear-gradient(
+          100deg,
           rgba(5, 18, 41, 0.96) 0%,
           rgba(5, 18, 41, 0.92) 34%,
           rgba(5, 18, 41, 0.72) 54%,
           rgba(5, 18, 41, 0.34) 78%,
-          rgba(5, 18, 41, 0.22) 100%),
+          rgba(5, 18, 41, 0.22) 100%
+        ),
         linear-gradient(to top, rgba(5, 18, 41, 0.75) 0%, transparent 45%);
     }
   }
@@ -766,26 +770,19 @@
   .gallery-viewport.is-animated {
     overflow-x: hidden;
   }
+  /* The offset is driven in one rAF loop, so drift and page scroll share it. */
   .gallery-track {
     display: flex;
-    gap: 1rem;
     width: max-content;
-  }
-  @keyframes gallery-slide {
-    from {
-      transform: translate3d(0, 0, 0);
-    }
-    to {
-      transform: translate3d(calc(-50% - 0.5rem), 0, 0);
-    }
+    gap: 1rem;
   }
   .is-animated .gallery-track {
-    animation: gallery-slide var(--gallery-duration, 40s) linear infinite;
     will-change: transform;
   }
-  .is-animated:hover .gallery-track,
-  .is-animated .gallery-track[data-paused='true'] {
-    animation-play-state: paused;
+  .gallery-set {
+    display: flex;
+    gap: 1rem;
+    margin-right: 1rem;
   }
 
   .hero-light {
