@@ -9,9 +9,18 @@ import { Photo } from '../components/Photo'
 import { Section } from '../components/Section'
 import { PageHero } from '../components/PageHero'
 import { BlogSearch } from '../components/BlogSearch'
+import { ApplyDialog } from '../components/ApplyDialog'
 import { courseHighlights, courses, eligibility, type Course } from '../data/site'
 
-function CourseCard({ course, delay }: { course: Course; delay: number }) {
+function CourseCard({
+  course,
+  delay,
+  onApply,
+}: {
+  course: Course
+  delay: number
+  onApply: () => void
+}) {
   return (
     <Reveal delay={delay} className="h-full">
       {/*
@@ -20,10 +29,11 @@ function CourseCard({ course, delay }: { course: Course; delay: number }) {
         beside the code. The whole tile is the link, so nothing has to be
         spent on a button.
       */}
-      <Link
-        to="/contact"
+      <button
+        type="button"
+        onClick={onApply}
         aria-label={`Apply for ${course.name}`}
-        className="group flex h-full flex-col rounded-2xl border border-line bg-white p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-[var(--shadow-soft)] sm:p-5"
+        className="group flex h-full w-full cursor-pointer flex-col rounded-2xl border border-line bg-white p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-[var(--shadow-soft)] sm:p-5"
       >
         <div className="flex items-baseline justify-between gap-3">
           <span className="font-display text-xl font-semibold tracking-tight text-navy sm:text-2xl">
@@ -48,7 +58,7 @@ function CourseCard({ course, delay }: { course: Course; delay: number }) {
             aria-hidden="true"
           />
         </div>
-      </Link>
+      </button>
     </Reveal>
   )
 }
@@ -56,6 +66,7 @@ function CourseCard({ course, delay }: { course: Course; delay: number }) {
 export default function Courses() {
   const [filter, setFilter] = useState<'ALL' | 'UG' | 'PG'>('ALL')
   const [query, setQuery] = useState('')
+  const [applying, setApplying] = useState<Course | null>(null)
 
   const ug = courses.filter((c) => c.level === 'UG')
   const pg = courses.filter((c) => c.level === 'PG')
@@ -75,6 +86,8 @@ export default function Courses() {
   return (
     <>
       <Seo {...pageMeta['/courses']} schema={coursesSchema} />
+
+      {applying && <ApplyDialog course={applying} onClose={() => setApplying(null)} />}
 
       <PageHero
         image="courses-banner"
@@ -155,7 +168,7 @@ export default function Courses() {
         {filtered.length > 0 ? (
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
             {filtered.map((c, i) => (
-              <CourseCard key={c.code} course={c} delay={i * 50} />
+              <CourseCard key={c.code} course={c} delay={i * 50} onApply={() => setApplying(c)} />
             ))}
           </div>
         ) : (
