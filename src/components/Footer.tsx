@@ -33,7 +33,7 @@ const link = 'action text-sm text-white/65 transition-colors hover:text-gold'
 
 export function Footer() {
   return (
-    <footer className="pb-4">
+    <footer className="pb-[calc(5.5rem+env(safe-area-inset-bottom))] sm:pb-4">
       <div className="shell">
         <div className="rounded-[var(--radius-panel)] bg-navy-950 px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-12 lg:py-14">
           <div className="grid gap-9 sm:grid-cols-2 sm:gap-10 lg:grid-cols-12 lg:gap-8">
