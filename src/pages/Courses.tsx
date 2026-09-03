@@ -42,7 +42,7 @@ function CourseCard({
   onApply: () => void
 }) {
   return (
-    <Reveal delay={delay} className="h-full">
+    <Reveal delay={delay} className="h-full min-w-0">
       {/*
         One tile, not a card of stacked panels: the code reads first, the
         degree names it, the field places it, and the duration sits quietly
@@ -62,12 +62,12 @@ function CourseCard({
           <span className="text-[0.6875rem] font-medium text-muted">{course.years}</span>
         </div>
 
-        <h3 className="mt-2.5 font-display text-[0.9375rem] leading-snug font-medium text-ink">
+        <h3 className="mt-2.5 font-display text-[0.9375rem] leading-snug font-medium text-ink hyphens-auto">
           {course.name}
         </h3>
         <p className="mt-1 text-xs leading-relaxed text-muted">{course.field}</p>
 
-        <div className="mt-auto flex items-center justify-between gap-2 pt-4">
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-x-2 gap-y-1 pt-4">
           <span className="inline-flex items-center gap-1 text-[0.6875rem] font-medium text-muted">
             <BadgeCheck size={13} className="text-navy" aria-hidden="true" />
             UGC recognized
@@ -138,7 +138,7 @@ export default function Courses() {
             />
 
             <div
-              className="chip-row flex gap-2 overflow-x-auto lg:flex-1"
+              className="chip-row flex min-w-0 gap-2 overflow-x-auto lg:flex-1"
               role="group"
               aria-label="Filter by program category"
             >
@@ -189,7 +189,7 @@ export default function Courses() {
       {/* Degree Programs Grid */}
       <section className="shell pb-12 sm:pb-16 lg:pb-20">
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
             {filtered.map((c, i) => (
               <CourseCard key={c.code} course={c} delay={i * 50} onApply={() => setApplying(c)} />
             ))}

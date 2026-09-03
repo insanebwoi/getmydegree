@@ -1,6 +1,16 @@
 import { Link } from 'react-router-dom'
-import { Clock, Mail, MapPin, Phone } from 'lucide-react'
-import { centers, courses, nav, site } from '../data/site'
+import {
+  Clock,
+  GraduationCap,
+  Home,
+  Info,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Newspaper,
+  Phone,
+} from 'lucide-react'
+import { centers, site } from '../data/site'
 import { FacebookIcon, TwitterIcon, YoutubeIcon } from './SocialIcons'
 
 const socials = [
@@ -10,6 +20,15 @@ const socials = [
 ]
 
 const heading = 'text-[0.6875rem] font-semibold tracking-[0.16em] text-white/45 uppercase'
+
+/** Each page with the reason to open it. */
+const PAGE_LINKS = [
+  { to: '/', label: 'Home', hint: 'How finishing your degree works', Icon: Home },
+  { to: '/about', label: 'About', hint: 'Who we are, and the record', Icon: Info },
+  { to: '/courses', label: 'Courses', hint: 'Nine UG and PG programmes', Icon: GraduationCap },
+  { to: '/blog', label: 'Blog', hint: 'Recognition, credit and fees explained', Icon: Newspaper },
+  { to: '/contact', label: 'Contact', hint: 'Book a free counseling call', Icon: MessageCircle },
+]
 const link = 'action text-sm text-white/65 transition-colors hover:text-gold'
 
 export function Footer() {
@@ -46,27 +65,30 @@ export function Footer() {
               </div>
             </div>
 
-            {/* The programmes themselves, which the footer never listed. */}
-            <nav aria-label="Programs" className="lg:col-span-3">
-              <h2 className={heading}>Programs</h2>
-              <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-0.5">
-                {courses.map((course) => (
-                  <li key={course.code}>
-                    <Link to="/courses" className={link}>
-                      {course.code}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <nav aria-label="Pages" className="lg:col-span-2">
-              <h2 className={heading}>Pages</h2>
-              <ul className="mt-4 grid gap-0.5">
-                {nav.map((item) => (
-                  <li key={item.to}>
-                    <Link to={item.to} className={link}>
-                      {item.label}
+            {/*
+              Each page says what it holds, so the column is a way in rather
+              than a list of words the reader has already seen in the navbar.
+            */}
+            <nav aria-label="Pages" className="sm:col-span-2 lg:col-span-5">
+              <h2 className={heading}>Explore</h2>
+              <ul className="mt-4 grid gap-1 sm:grid-cols-2">
+                {PAGE_LINKS.map((page) => (
+                  <li key={page.to}>
+                    <Link
+                      to={page.to}
+                      className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5"
+                    >
+                      <page.Icon
+                        size={16}
+                        className="mt-0.5 shrink-0 text-gold"
+                        aria-hidden="true"
+                      />
+                      <span className="min-w-0">
+                        <span className="block text-sm font-medium text-white">{page.label}</span>
+                        <span className="mt-0.5 block text-xs leading-snug text-white/50">
+                          {page.hint}
+                        </span>
+                      </span>
                     </Link>
                   </li>
                 ))}
