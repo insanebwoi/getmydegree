@@ -11,6 +11,8 @@ import {
   blogSchema,
   postSchema,
   courseSchema,
+  universitiesSchema,
+  universitySchema,
 } from './data/schema'
 
 /** Renders one route to HTML for the prerender step. */
@@ -30,6 +32,7 @@ const fixedSchemas: Record<string, object> = {
   '/courses': coursesSchema,
   '/blog': blogSchema,
   '/contact': contactSchema,
+  '/universities': universitiesSchema,
 }
 
 /** JSON-LD written into each prerendered page's <head>. */
@@ -37,6 +40,7 @@ export function schemaFor(path: string): object | undefined {
   const fixed = fixedSchemas[path]
   if (fixed) return fixed
   if (path.startsWith('/courses/')) return courseSchema(path.replace('/courses/', ''))
+  if (path.startsWith('/universities/')) return universitySchema(path.replace('/universities/', ''))
   return postSchema(path.replace(/^\/blog\//, ''))
 }
 

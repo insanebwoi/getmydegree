@@ -1,4 +1,4 @@
-import { centers, courses, site } from './site'
+import { centers, courses, site, universities } from './site'
 import { posts, postsByDate } from './posts'
 import { courseSlug, eligibilityFor, studyFormat } from './courses'
 
@@ -139,6 +139,54 @@ export function courseSchema(slug: string): object | undefined {
   )
 }
 
+export const universitiesSchema: object = graph(
+  {
+    '@type': 'CollectionPage',
+    '@id': `${site.url}/universities#webpage`,
+    url: `${site.url}/universities`,
+    name: 'Partner universities',
+    isPartOf: { '@id': WEBSITE },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: universities.map((u, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${site.url}/universities/${u.slug}`,
+        name: u.name,
+      })),
+    },
+  },
+  breadcrumb([{ name: 'Universities', path: '/universities' }]),
+)
+
+/** One partner university. Only what the site states about it: name, place,
+ *  and how it is constituted   no ratings, rankings, fees or founding dates. */
+export function universitySchema(slug: string): object | undefined {
+  const university = universities.find((u) => u.slug === slug)
+  if (!university) return undefined
+  const url = `${site.url}/universities/${slug}`
+  const [region, city] = university.location.split(',').map((part) => part.trim())
+  return graph(
+    {
+      '@type': 'CollegeOrUniversity',
+      '@id': `${url}#university`,
+      url,
+      name: university.name,
+      description: university.body,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: city ?? region,
+        addressRegion: region,
+        addressCountry: university.location.includes('Kingdom') ? 'GB' : 'IN',
+      },
+    },
+    breadcrumb([
+      { name: 'Universities', path: '/universities' },
+      { name: university.name, path: `/universities/${slug}` },
+    ]),
+  )
+}
+
 export const contactSchema: object = graph(
   {
     '@type': 'ContactPage',
@@ -221,7 +269,12 @@ export function postSchema(slug: string): object | undefined {
       mainEntityOfPage: { '@type': 'WebPage', '@id': url },
       isPartOf: { '@id': `${site.url}/blog#blog` },
     },
-    { '@type': 'Blog', '@id': `${site.url}/blog#blog`, url: `${site.url}/blog`, name: `${site.name} degree guides` },
+    {
+      '@type': 'Blog',
+      '@id': `${site.url}/blog#blog`,
+      url: `${site.url}/blog`,
+      name: `${site.name} degree guides`,
+    },
     breadcrumb([
       { name: 'Blog', path: '/blog' },
       { name: post.title, path: `/blog/${post.slug}` },

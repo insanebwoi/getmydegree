@@ -9,6 +9,7 @@ import {
   GraduationCap,
   MapPin,
   ShieldCheck,
+  University,
   Wallet,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
@@ -261,11 +262,11 @@ export default function Home() {
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10">
           {universities.map((u, i) => (
             <Reveal key={u.name} delay={i * 70} className="h-full">
-              <div className="card card-hover card-p flex h-full flex-col justify-between">
+              <div className="card card-hover card-p relative flex h-full flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy-50 font-display text-sm font-bold text-navy">
-                      {u.initials}
+                    <span className="grid h-10 w-10 place-items-center rounded-xl bg-navy-50 text-navy">
+                      <University size={19} aria-hidden="true" />
                     </span>
                     <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[0.6875rem] font-medium text-emerald-700">
                       <ShieldCheck size={12} />
@@ -274,7 +275,12 @@ export default function Home() {
                   </div>
 
                   <h3 className="mt-4 font-display text-lg font-semibold text-ink sm:text-xl">
-                    {u.name}
+                    <Link
+                      to={`/universities/${u.slug}`}
+                      className="after:absolute after:inset-0 hover:underline"
+                    >
+                      {u.name}
+                    </Link>
                   </h3>
                   <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-muted">
                     <MapPin size={13} className="text-gold-700 shrink-0" />
@@ -291,6 +297,13 @@ export default function Home() {
               </div>
             </Reveal>
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link to="/universities" className="action text-sm font-medium text-navy">
+            About our partner universities
+            <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
+          </Link>
         </div>
 
         {/* Feature Highlights Strip & Explore CTA */}

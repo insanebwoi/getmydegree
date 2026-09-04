@@ -1,6 +1,6 @@
 import { site } from './site'
 import { posts } from './posts'
-import { courses } from './site'
+import { courses, universities } from './site'
 import { courseSlug } from './courses'
 
 export type PageMeta = {
@@ -49,6 +49,12 @@ export const pageMeta: Record<string, PageMeta> = {
       'Plain guidance on credit transfer, degree recognition, government-job eligibility and course fees, from the GetMyDegree academic team.',
     path: '/blog',
   },
+  '/universities': {
+    title: 'Partner Universities — Where Your Degree Is Awarded',
+    description:
+      'The universities GetMyDegree places students into, in India and the United Kingdom. What each offers, where it is based, and how recognition is confirmed.',
+    path: '/universities',
+  },
   '/contact': {
     title: 'Book Free Degree Counselling — Thrissur & Malappuram',
     description:
@@ -70,6 +76,18 @@ export function metaFor(path: string): PageMeta {
       return {
         title: `${course.code} Degree Online — ${course.name}`,
         description: `${course.code} (${course.name}): a ${course.years} ${level.toLowerCase()} programme in ${course.field}, studied around full-time work. Eligibility, format and admission steps.`,
+        path,
+      }
+    }
+  }
+
+  if (path.startsWith('/universities/')) {
+    const slug = path.replace('/universities/', '')
+    const university = universities.find((u) => u.slug === slug)
+    if (university) {
+      return {
+        title: `${university.name} — ${university.type}`,
+        description: `${university.body} Based in ${university.location}. Check eligibility, programmes and the admission process with a GetMyDegree counsellor.`,
         path,
       }
     }

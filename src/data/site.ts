@@ -69,39 +69,69 @@ export const features = [
  *  exists; until then the hero sets the institution name as a wordmark. */
 export const universities: {
   name: string
+  /** URL segment for the university's own page. */
+  slug: string
   location: string
   body: string
-  initials: string
   logo?: string
   /* The line across the card's foot. UK institutions are outside the UGC and
      UPSC frame, so they carry their own claim rather than a borrowed one. */
   validity: string
   /* Same reason as validity: a UK university is not UGC approved. */
   badge: string
+  /** Institution type, as the university itself is constituted. */
+  type: string
+  /** What the university offers. Levels only   never a programme list we
+   *  cannot confirm is running in a given academic year. */
+  offers: string[]
+  /** Points a counsellor would make on the phone. Nothing here asserts a fee,
+   *  an intake date, a ranking or a placement figure. */
+  highlights: string[]
 }[] = [
   {
     name: 'Rabindranath Tagore University',
+    slug: 'rabindranath-tagore-university',
     location: 'Madhya Pradesh, Bhopal',
     body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
-    initials: 'RTU',
     badge: 'UGC Approved',
     validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+    type: 'State private university',
+    offers: ['Undergraduate degrees', 'Postgraduate degrees', 'Doctoral programmes'],
+    highlights: [
+      'Programmes across multiple disciplines, so a change of field at PG level is usually possible',
+      'Study without attendance requirements, around a full-time job',
+      'Credit transfer considered for semesters already completed elsewhere',
+    ],
   },
   {
     name: 'PRIST Deemed University',
+    slug: 'prist-deemed-university',
     location: 'Tamil Nadu, India',
     body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
-    initials: 'PU',
     badge: 'UGC Approved',
     validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+    type: 'Deemed-to-be university',
+    offers: ['Undergraduate degrees', 'Postgraduate degrees'],
+    highlights: [
+      'NAAC accredited, with an industry aligned curriculum',
+      'Suited to working professionals continuing an interrupted degree',
+      'Documentation and enrolment handled by your counsellor end to end',
+    ],
   },
   {
     name: 'Marjon University',
+    slug: 'marjon-university',
     location: 'Cornwall, United Kingdom',
     body: 'UK government recognized university offering globally valid degrees.',
-    initials: 'MU',
     badge: 'UK Recognized',
     validity: 'Globally Valid · UK Accredited · Career Ready',
+    type: 'UK university',
+    offers: ['Undergraduate degrees', 'Postgraduate degrees'],
+    highlights: [
+      'A UK government recognized award, held to UK quality assurance',
+      'An option for students who want a degree recognized outside India',
+      'Entry requirements and English language criteria are confirmed case by case',
+    ],
   },
 ]
 

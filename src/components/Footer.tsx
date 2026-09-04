@@ -5,6 +5,7 @@ import {
   GraduationCap,
   Home,
   Info,
+  Landmark,
   Mail,
   MapPin,
   MessageCircle,
@@ -27,6 +28,12 @@ const PAGE_LINKS = [
   { to: '/', label: 'Home', hint: 'How finishing your degree works', Icon: Home },
   { to: '/about', label: 'About', hint: 'Who we are, and the record', Icon: Info },
   { to: '/courses', label: 'Courses', hint: 'Nine UG and PG programmes', Icon: GraduationCap },
+  {
+    to: '/universities',
+    label: 'Universities',
+    hint: 'Who awards the degree',
+    Icon: Landmark,
+  },
   { to: '/blog', label: 'Blog', hint: 'Recognition, credit and fees explained', Icon: Newspaper },
   { to: '/contact', label: 'Contact', hint: 'Book a free counseling call', Icon: MessageCircle },
 ]

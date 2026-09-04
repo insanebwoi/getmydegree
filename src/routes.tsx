@@ -1,12 +1,14 @@
 import type { RouteObject } from 'react-router-dom'
 import { posts } from './data/posts'
-import { courses } from './data/site'
+import { courses, universities } from './data/site'
 import { courseSlug } from './data/courses'
 import { Layout } from './components/Layout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Courses from './pages/Courses'
 import Course from './pages/Course'
+import Universities from './pages/Universities'
+import UniversityPage from './pages/UniversityPage'
 import Contact from './pages/Contact'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -21,6 +23,8 @@ export const routes: RouteObject[] = [
       { path: 'about', element: <About /> },
       { path: 'courses', element: <Courses /> },
       { path: 'courses/:slug', element: <Course /> },
+      { path: 'universities', element: <Universities /> },
+      { path: 'universities/:slug', element: <UniversityPage /> },
       { path: 'blog', element: <Blog /> },
       { path: 'blog/:slug', element: <BlogPost /> },
       { path: 'contact', element: <Contact /> },
@@ -37,5 +41,7 @@ export const prerenderPaths = [
   '/blog',
   '/contact',
   ...courses.map((course) => `/courses/${courseSlug(course)}`),
+  '/universities',
+  ...universities.map((university) => `/universities/${university.slug}`),
   ...posts.map((post) => `/blog/${post.slug}`),
 ]
