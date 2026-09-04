@@ -89,13 +89,6 @@ const declared = {
     width: 1500,
     height: 844,
   },
-  'courses-1': {
-    src: '/images/courses/courses-1.webp',
-    alt: 'A student attending a class session',
-    note: 'Class session',
-    width: 1680,
-    height: 720,
-  },
   'courses-2': {
     src: '/images/courses/courses-2.webp',
     alt: 'Marksheets and an enrolment letter on a desk',

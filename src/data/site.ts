@@ -42,29 +42,6 @@ export const centers = [
   },
 ]
 
-export const heroTicker = [
-  'Finish Your Degree. Unlock Your Future.',
-  'Restart Your Career Without Starting Over.',
-  'No Exams. No Pressure. Just Progress.',
-  'From Dropout to Graduate   Your Comeback Starts Here.',
-]
-
-export const features = [
-  {
-    title: 'No Exam, No Hassle',
-    body: 'Skip the stress of traditional exams with our flexible assessment model.',
-  },
-  {
-    title: 'Start in 48 Hours',
-    body: 'Get admitted and begin your degree journey within two days.',
-  },
-  { title: 'Flexible EMI Options', body: 'Affordable monthly payments that fit any budget.' },
-  {
-    title: 'UGC Recognized',
-    body: 'Degrees valid for government jobs, promotions, and higher studies.',
-  },
-]
-
 /** `logo` takes a path such as '/images/logos/rtu.svg' once real artwork
  *  exists; until then the hero sets the institution name as a wordmark. */
 export const universities: {
@@ -135,33 +112,6 @@ export const universities: {
   },
 ]
 
-export const solutions = [
-  {
-    no: '01',
-    title: 'Dropped Out?',
-    body: 'Continue your education with our credit transfer system and pick up where you left off.',
-    cta: 'Start Again',
-  },
-  {
-    no: '02',
-    title: 'Working Professional?',
-    body: 'Upgrade your qualification without quitting your job or pausing your career.',
-    cta: 'Upgrade Now',
-  },
-  {
-    no: '03',
-    title: 'No Degree, No Growth?',
-    body: 'Unlock better opportunities and higher salaries with a recognized degree.',
-    cta: 'Get Your Degree',
-  },
-  {
-    no: '04',
-    title: 'Government Job Aspirant?',
-    body: 'Our degrees are valid for UPSC, PSC, and all major competitive examinations.',
-    cta: 'Learn More',
-  },
-]
-
 export const mbaModules = [
   'Strategic Management',
   'International Marketing',
@@ -199,14 +149,6 @@ export const testimonials = [
     role: 'Alumni',
     quote: 'Flexible learning helped me achieve my goals with confidence and clarity.',
   },
-]
-
-export const accreditations = [
-  'University Verified',
-  'Government Approved',
-  'UGC Approved',
-  'NAAC Accredited',
-  'AICTE Approved',
 ]
 
 export const stats = [
