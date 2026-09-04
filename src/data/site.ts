@@ -215,9 +215,15 @@ export const trustPoints = [
 ]
 
 export const validity = [
-  { title: 'Government Jobs', body: 'Valid for UPSC, PSC, SSC, and all state services.' },
-  { title: 'Private Sector', body: 'Recognized by leading employers across industries.' },
-  { title: 'Higher Education', body: 'Accepted for masters and doctoral programs worldwide.' },
+  {
+    title: 'Government Jobs',
+    body: 'Meets the graduate eligibility bar for UPSC, PSC and SSC recruitment.',
+  },
+  { title: 'Private Sector', body: 'A recognized qualification for roles that require a degree.' },
+  {
+    title: 'Higher Education',
+    body: 'Accepted for masters and doctoral admission, subject to each institution’s criteria.',
+  },
 ]
 
 export type Course = {
@@ -379,22 +385,26 @@ export const paths = [
   {
     situation: 'You dropped out',
     answer: 'Credit transfer',
+    to: '/blog/credit-transfer-explained',
     body: 'Completed semesters are carried across, so you resume rather than restart.',
   },
   {
     situation: 'You are working full time',
     answer: 'Study around the job',
+    to: '/blog/studying-while-working-full-time',
     body: 'No attendance requirement and no fixed class hours. Your employer never has to know.',
   },
   {
     situation: 'You have hit a ceiling',
     answer: 'A recognized degree',
+    to: '/courses',
     body: 'The qualification most promotion and salary bands are gated on, completed alongside the job.',
   },
   {
     situation: 'You are sitting for government exams',
     answer: 'UPSC and PSC eligible',
-    body: 'Degrees from UGC recognized universities, valid for every major competitive examination.',
+    to: '/blog/is-a-distance-degree-valid-for-government-jobs',
+    body: 'Degrees from UGC recognized universities. Eligibility for a given post follows that exam’s notification.',
   },
 ]
 

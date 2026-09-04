@@ -1,77 +1,162 @@
 import { centers, courses, site } from './site'
 import { posts, postsByDate } from './posts'
+import { courseSlug, eligibilityFor, studyFormat } from './courses'
 
-/** JSON-LD structured data, one export per route. */
+/**
+ * JSON-LD structured data. Every node is anchored with an @id so pages can
+ * reference the organization and website rather than restating them, and
+ * nothing here asserts a fact the site cannot support: no ratings, no reviews,
+ * no accreditation bodies, no fees, no graduate counts.
+ */
 
-export const homeSchema: object = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'EducationalOrganization',
-      '@id': `${site.url}/#organization`,
-      name: site.name,
-      url: site.url,
-      logo: `${site.url}/logo.svg`,
-      email: site.email,
-      telephone: site.phone,
-      foundingDate: String(site.established),
-      description: site.description,
-      sameAs: [site.social.facebook, site.social.twitter, site.social.youtube],
-      address: centers.map((c) => ({
-        '@type': 'PostalAddress',
-        streetAddress: c.address,
-        addressLocality: c.city,
-        addressRegion: 'Kerala',
-        addressCountry: 'IN',
-      })),
-    },
-    {
-      '@type': 'WebSite',
-      '@id': `${site.url}/#website`,
-      url: site.url,
-      name: site.name,
-      publisher: { '@id': `${site.url}/#organization` },
-    },
-  ],
-}
+const ORG = `${site.url}/#organization`
+const WEBSITE = `${site.url}/#website`
 
-export const aboutSchema: object = {
-  '@context': 'https://schema.org',
-  '@type': 'AboutPage',
-  name: `About ${site.name}`,
-  url: `${site.url}/about`,
-  description:
-    'Since 2021, GetMyDegree Institutions has helped 10,000+ students complete recognized UG and PG degrees through flexible learning pathways.',
-  mainEntity: { '@id': `${site.url}/#organization` },
-}
-
-export const coursesSchema: object = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'UG & PG Programs at GetMyDegree Institutions',
-  itemListElement: courses.map((c, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    item: {
-      '@type': 'Course',
-      name: `${c.code}   ${c.name}`,
-      description: c.body,
-      educationalLevel: c.level === 'UG' ? 'Undergraduate' : 'Postgraduate',
-      provider: { '@type': 'EducationalOrganization', name: site.name, url: site.url },
-    },
+const organization = {
+  '@type': 'EducationalOrganization',
+  '@id': ORG,
+  name: site.name,
+  alternateName: site.shortName,
+  url: site.url,
+  logo: { '@type': 'ImageObject', url: `${site.url}/logo.svg` },
+  image: `${site.url}/logo.svg`,
+  email: site.email,
+  telephone: site.phone,
+  foundingDate: String(site.established),
+  description: site.description,
+  areaServed: { '@type': 'Country', name: 'India' },
+  address: centers.map((c) => ({
+    '@type': 'PostalAddress',
+    streetAddress: c.address,
+    addressLocality: c.city,
+    addressRegion: 'Kerala',
+    addressCountry: 'IN',
   })),
 }
 
-export const contactSchema: object = {
-  '@context': 'https://schema.org',
-  '@graph': centers.map((c) => ({
+const website = {
+  '@type': 'WebSite',
+  '@id': WEBSITE,
+  url: site.url,
+  name: site.name,
+  inLanguage: 'en-IN',
+  publisher: { '@id': ORG },
+}
+
+/** Breadcrumbs for any page below the root. */
+export function breadcrumb(trail: { name: string; path: string }[]) {
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ name: 'Home', path: '/' }, ...trail].map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      item: `${site.url}${crumb.path === '/' ? '/' : crumb.path}`,
+    })),
+  }
+}
+
+/** Wraps page-specific nodes with the shared organization and website. */
+function graph(...nodes: object[]) {
+  return { '@context': 'https://schema.org', '@graph': [organization, website, ...nodes] }
+}
+
+export const homeSchema: object = graph({
+  '@type': 'WebPage',
+  '@id': `${site.url}/#webpage`,
+  url: `${site.url}/`,
+  name: site.name,
+  description: site.description,
+  isPartOf: { '@id': WEBSITE },
+  about: { '@id': ORG },
+})
+
+export const aboutSchema: object = graph(
+  {
+    '@type': 'AboutPage',
+    '@id': `${site.url}/about#webpage`,
+    url: `${site.url}/about`,
+    name: `About ${site.name}`,
+    description:
+      'How GetMyDegree Institutions guides students through UG and PG admissions, credit transfer and graduation.',
+    isPartOf: { '@id': WEBSITE },
+    mainEntity: { '@id': ORG },
+  },
+  breadcrumb([{ name: 'About', path: '/about' }]),
+)
+
+export const coursesSchema: object = graph(
+  {
+    '@type': 'CollectionPage',
+    '@id': `${site.url}/courses#webpage`,
+    url: `${site.url}/courses`,
+    name: 'UG & PG Degree Programmes',
+    isPartOf: { '@id': WEBSITE },
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: courses.map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `${site.url}/courses/${courseSlug(c)}`,
+        name: `${c.code} — ${c.name}`,
+      })),
+    },
+  },
+  breadcrumb([{ name: 'Courses', path: '/courses' }]),
+)
+
+/** One programme. Duration and level are real; recognition and fees are not
+ *  asserted, because they depend on the partner university and the year. */
+export function courseSchema(slug: string): object | undefined {
+  const course = courses.find((c) => courseSlug(c) === slug)
+  if (!course) return undefined
+  const url = `${site.url}/courses/${slug}`
+  const years = Number(course.years.match(/\d+/)?.[0] ?? 0)
+  return graph(
+    {
+      '@type': 'Course',
+      '@id': `${url}#course`,
+      url,
+      name: `${course.code} — ${course.name}`,
+      description: course.body,
+      educationalLevel: course.level === 'UG' ? 'Undergraduate' : 'Postgraduate',
+      educationalCredentialAwarded: course.name,
+      about: course.field,
+      inLanguage: 'en',
+      provider: { '@id': ORG },
+      coursePrerequisites: eligibilityFor(course),
+      hasCourseInstance: {
+        '@type': 'CourseInstance',
+        courseMode: 'online',
+        courseWorkload: `P${years}Y`,
+        description: studyFormat,
+      },
+    },
+    breadcrumb([
+      { name: 'Courses', path: '/courses' },
+      { name: course.code, path: `/courses/${slug}` },
+    ]),
+  )
+}
+
+export const contactSchema: object = graph(
+  {
+    '@type': 'ContactPage',
+    '@id': `${site.url}/contact#webpage`,
+    url: `${site.url}/contact`,
+    name: `Contact ${site.name}`,
+    isPartOf: { '@id': WEBSITE },
+    about: { '@id': ORG },
+  },
+  ...centers.map((c) => ({
     '@type': 'LocalBusiness',
-    name: `${site.name}   ${c.city}`,
+    '@id': `${site.url}/contact#${c.city.toLowerCase()}`,
+    name: `${site.name} — ${c.city}`,
     url: `${site.url}/contact`,
     telephone: c.phoneHref,
     email: site.email,
     image: `${site.url}/logo.svg`,
-    priceRange: '₹₹',
+    parentOrganization: { '@id': ORG },
     address: {
       '@type': 'PostalAddress',
       streetAddress: c.address,
@@ -86,45 +171,60 @@ export const contactSchema: object = {
       closes: '19:00',
     },
   })),
-}
+  breadcrumb([{ name: 'Contact', path: '/contact' }]),
+)
 
-export const blogSchema: object = {
-  '@context': 'https://schema.org',
-  '@type': 'Blog',
-  '@id': `${site.url}/blog`,
-  name: `${site.name} Blog`,
-  description:
-    'Guidance on UGC recognition, credit transfer, studying while working and degree costs.',
-  publisher: { '@id': `${site.url}/#organization` },
-  blogPost: postsByDate.map((post) => ({
-    '@type': 'BlogPosting',
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.date,
-    author: { '@type': 'Organization', name: post.author },
-    url: `${site.url}/blog/${post.slug}`,
-  })),
-}
+export const blogSchema: object = graph(
+  {
+    '@type': 'Blog',
+    '@id': `${site.url}/blog#blog`,
+    url: `${site.url}/blog`,
+    name: `${site.name} degree guides`,
+    description:
+      'Guidance on credit transfer, degree recognition, studying while working and course fees.',
+    isPartOf: { '@id': WEBSITE },
+    publisher: { '@id': ORG },
+    blogPost: postsByDate.map((post) => ({
+      '@type': 'BlogPosting',
+      '@id': `${site.url}/blog/${post.slug}#article`,
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      dateModified: post.updated ?? post.date,
+      author: { '@type': 'Organization', '@id': ORG, name: post.author },
+      url: `${site.url}/blog/${post.slug}`,
+    })),
+  },
+  breadcrumb([{ name: 'Blog', path: '/blog' }]),
+)
 
 /** Article schema for one post, used by the detail page and the prerenderer. */
 export function postSchema(slug: string): object | undefined {
   const post = posts.find((p) => p.slug === slug)
   if (!post) return undefined
   const url = `${site.url}/blog/${post.slug}`
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    '@id': url,
-    headline: post.title,
-    description: post.excerpt,
-    articleSection: post.category,
-    datePublished: post.date,
-    dateModified: post.date,
-    timeRequired: `PT${post.readingMinutes}M`,
-    image: `${site.url}${post.cover}`,
-    author: { '@type': 'Organization', name: post.author },
-    publisher: { '@id': `${site.url}/#organization` },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    isPartOf: { '@id': `${site.url}/blog` },
-  }
+  return graph(
+    {
+      '@type': 'BlogPosting',
+      '@id': `${url}#article`,
+      url,
+      headline: post.title,
+      description: post.excerpt,
+      articleSection: post.category,
+      datePublished: post.date,
+      dateModified: post.updated ?? post.date,
+      timeRequired: `PT${post.readingMinutes}M`,
+      image: `${site.url}${post.cover}`,
+      inLanguage: 'en-IN',
+      author: { '@type': 'Organization', '@id': ORG, name: post.author },
+      publisher: { '@id': ORG },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      isPartOf: { '@id': `${site.url}/blog#blog` },
+    },
+    { '@type': 'Blog', '@id': `${site.url}/blog#blog`, url: `${site.url}/blog`, name: `${site.name} degree guides` },
+    breadcrumb([
+      { name: 'Blog', path: '/blog' },
+      { name: post.title, path: `/blog/${post.slug}` },
+    ]),
+  )
 }

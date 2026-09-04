@@ -436,7 +436,7 @@ export default function Home() {
                   the link, which costs no extra height.
                 */}
                 <Link
-                  to="/contact"
+                  to={p.to}
                   className="card card-hover card-p group flex h-full items-start gap-4"
                 >
                   <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-50 font-display text-sm font-medium text-navy transition-colors group-hover:bg-navy group-hover:text-white">

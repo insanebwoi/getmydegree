@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Query-string variants of the blog listing are filtered views of the same
+# posts, so only the clean URL should be indexed.
+Disallow: /*?q=
+Disallow: /*?category=
+
 Sitemap: https://getmydegree.in/sitemap.xml

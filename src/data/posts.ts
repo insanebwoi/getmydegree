@@ -25,6 +25,8 @@ type PostMeta = {
   excerpt: string
   category: string
   date: string
+  /** Set in frontmatter when an article is revised; drives dateModified. */
+  updated?: string
   author: string
   cover?: string
   readingMinutes: number

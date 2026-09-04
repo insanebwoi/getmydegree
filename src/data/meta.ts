@@ -1,55 +1,117 @@
 import { site } from './site'
 import { posts } from './posts'
+import { courses } from './site'
+import { courseSlug } from './courses'
 
-export type PageMeta = { title: string; description: string; path: string }
+export type PageMeta = {
+  title: string
+  description: string
+  path: string
+  /** Absolute or root-relative image for OG/Twitter. Falls back to the site card. */
+  image?: string
+  /** og:type. Articles set 'article' so scrapers read the published dates. */
+  type?: 'website' | 'article'
+  /** Set on pages that must stay out of the index (404, thin filtered views). */
+  noindex?: boolean
+  /** Article-only, emitted as article:published_time / article:modified_time. */
+  publishedTime?: string
+  modifiedTime?: string
+  section?: string
+}
 
-/** Per-route head content. Shared by <Seo> at runtime and the prerender step. */
+/**
+ * Per-route head content. Titles lead with the search intent rather than the
+ * brand, since the brand is rarely the query   "Home | GetMyDegree" wins
+ * nothing. Each is unique, and each description is written to be the snippet.
+ */
 export const pageMeta: Record<string, PageMeta> = {
   '/': {
-    title: 'GetMyDegree Institutions   Complete Your UG & PG Degree in India',
-    description: site.description,
+    title: 'Complete Your UG or PG Degree While Working',
+    description:
+      'Finish an unfinished degree or start a new UG or PG programme around your job. Credit transfer for completed semesters, flexible study, free counselling.',
     path: '/',
   },
   '/about': {
-    title: 'About Us   Recognized, Flexible Degree Programs',
+    title: 'About Us — Degree Counselling Since 2021',
     description:
-      'Since 2021, GetMyDegree Institutions has helped 10,000+ students complete recognized UG and PG degrees through flexible, career-focused learning pathways.',
+      'Guiding students through UG and PG admissions since 2021, with centres in Thrissur and Malappuram. How we assess eligibility and transfer credits.',
     path: '/about',
   },
   '/courses': {
-    title: 'Courses   UGC Recognized UG & PG Degree Programs',
+    title: 'UG & PG Degree Programmes — B.Com, BBA, BCA, MBA, MCA',
     description:
-      'Explore UGC recognized UG and PG programs   B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW   built for working professionals and gap-year students.',
+      'Nine UG and PG programmes for working professionals: B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW. Compare duration, eligibility and study format.',
     path: '/courses',
   },
   '/blog': {
-    title: 'Blog   Guidance on degrees, admissions and recognition',
+    title: 'Degree Guides — Credit Transfer & Recognition',
     description:
-      'Plain guidance on UGC recognition, credit transfer, studying while working and what a degree costs, from the GetMyDegree academic team.',
+      'Plain guidance on credit transfer, degree recognition, government-job eligibility and course fees, from the GetMyDegree academic team.',
     path: '/blog',
   },
   '/contact': {
-    title: 'Contact   Book a Free Counseling Session',
+    title: 'Book Free Degree Counselling — Thrissur & Malappuram',
     description:
-      'Speak with GetMyDegree academic experts, request a brochure, or book a free counseling session. Centres in Thrissur and Malappuram, Kerala.',
+      'Talk to an academic counsellor about eligibility, credit transfer and programme options. Centres in Thrissur and Malappuram, Kerala.',
     path: '/contact',
   },
 }
 
-/** Head content for any prerendered path, including individual posts. */
+/** Head content for any prerendered path, including posts and course pages. */
 export function metaFor(path: string): PageMeta {
   const fixed = pageMeta[path]
   if (fixed) return fixed
+
+  if (path.startsWith('/courses/')) {
+    const slug = path.replace('/courses/', '')
+    const course = courses.find((c) => courseSlug(c) === slug)
+    if (course) {
+      const level = course.level === 'UG' ? 'Undergraduate' : 'Postgraduate'
+      return {
+        title: `${course.code} Degree Online — ${course.name}`,
+        description: `${course.code} (${course.name}): a ${course.years} ${level.toLowerCase()} programme in ${course.field}, studied around full-time work. Eligibility, format and admission steps.`,
+        path,
+      }
+    }
+  }
+
   const slug = path.replace(/^\/blog\//, '')
   const post = posts.find((p) => p.slug === slug)
-  if (post) return { title: post.title, description: post.excerpt, path }
-  return pageMeta['/']
+  if (post) {
+    return {
+      title: post.title,
+      description: post.excerpt,
+      path,
+      image: post.cover,
+      type: 'article',
+      publishedTime: post.date,
+      modifiedTime: post.updated ?? post.date,
+      section: post.category,
+    }
+  }
+
+  return { ...pageMeta['/'], path, noindex: true }
 }
 
+/**
+ * Titles already carrying the brand are left alone, so no page ends up saying
+ * "GetMyDegree" twice. Everything else gets the short brand suffix.
+ */
 export function fullTitle(meta: PageMeta) {
-  return meta.path === '/' ? meta.title : `${meta.title} | ${site.shortName}`
+  return meta.title.includes(site.shortName) ? meta.title : `${meta.title} | ${site.shortName}`
 }
 
+/** One canonical form: absolute, https, no trailing slash except the root. */
 export function canonical(meta: PageMeta) {
-  return `${site.url}${meta.path === '/' ? '/' : meta.path}`
+  return `${site.url}${meta.path === '/' ? '/' : meta.path.replace(/\/$/, '')}`
+}
+
+/**
+ * Absolute URL for an OG image. The default is the hero photograph   a real
+ * asset at 1500x844, close enough to 1.91:1 for every scraper   rather than a
+ * separately maintained card that would drift out of date.
+ */
+export function ogImage(meta: PageMeta) {
+  const path = meta.image ?? '/images/home/hero-portrait.webp'
+  return path.startsWith('http') ? path : `${site.url}${path}`
 }

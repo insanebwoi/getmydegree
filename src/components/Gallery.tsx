@@ -7,13 +7,15 @@ import { images } from '../data/images'
  * Until pictures are dropped into public/images/gallery, the strip runs on the
  * photographs the site already has, so the section is never an empty band.
  */
-const FALLBACK = [
-  images['hero-portrait'].src,
-  images['hero-2'].src,
-  images['hero-3'].src,
-  images['hero-portrait-3'].src,
-  images['hero-portrait-2'].src,
-]
+type GalleryImage = { src: string; width: number; height: number }
+
+const FALLBACK: GalleryImage[] = (
+  ['hero-portrait', 'hero-2', 'hero-3', 'hero-portrait-3', 'hero-portrait-2'] as const
+).map((name) => ({
+  src: images[name].src,
+  width: images[name].width,
+  height: images[name].height,
+}))
 
 const source = galleryImages.length > 0 ? galleryImages : FALLBACK
 
@@ -197,14 +199,14 @@ export function Gallery() {
         <div ref={track} className="gallery-track">
           {/* The measured set, then a second copy so the wrap is invisible. */}
           <ul ref={unit} className="gallery-set">
-            {set.map((src, i) => (
-              <Tile key={`a-${i}`} src={src} eager={i < 3} onOpen={() => setPreview(src)} />
+            {set.map((image, i) => (
+              <Tile key={`a-${i}`} image={image} eager={i < 3} onOpen={() => setPreview(image.src)} />
             ))}
           </ul>
           {animated && (
             <ul className="gallery-set" aria-hidden="true">
-              {set.map((src, i) => (
-                <Tile key={`b-${i}`} src={src} eager={false} onOpen={() => setPreview(src)} />
+              {set.map((image, i) => (
+                <Tile key={`b-${i}`} image={image} eager={false} onOpen={() => setPreview(image.src)} />
               ))}
             </ul>
           )}
@@ -279,7 +281,15 @@ function Preview({ src, onClose }: { src: string; onClose: () => void }) {
   )
 }
 
-function Tile({ src, eager, onOpen }: { src: string; eager: boolean; onOpen: () => void }) {
+function Tile({
+  image,
+  eager,
+  onOpen,
+}: {
+  image: GalleryImage
+  eager: boolean
+  onOpen: () => void
+}) {
   return (
     <li className="shrink-0">
       <button
@@ -288,12 +298,17 @@ function Tile({ src, eager, onOpen }: { src: string; eager: boolean; onOpen: () 
         aria-label="Open this photograph"
         className="block overflow-hidden rounded-2xl border border-line"
       >
+        {/* Intrinsic size ships with each tile, so the strip reserves its
+            width before the photograph decodes and nothing shifts. */}
         <img
-          src={src}
+          src={image.src}
           alt=""
+          width={image.width}
+          height={image.height}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           draggable={false}
+          style={{ aspectRatio: `${image.width} / ${image.height}` }}
           className="h-44 w-auto object-cover transition-transform duration-300 hover:scale-[1.03] sm:h-56 lg:h-64"
         />
       </button>

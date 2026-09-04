@@ -10,6 +10,7 @@ import {
   contactSchema,
   blogSchema,
   postSchema,
+  courseSchema,
 } from './data/schema'
 
 /** Renders one route to HTML for the prerender step. */
@@ -33,8 +34,11 @@ const fixedSchemas: Record<string, object> = {
 
 /** JSON-LD written into each prerendered page's <head>. */
 export function schemaFor(path: string): object | undefined {
-  return fixedSchemas[path] ?? postSchema(path.replace(/^\/blog\//, ''))
+  const fixed = fixedSchemas[path]
+  if (fixed) return fixed
+  if (path.startsWith('/courses/')) return courseSchema(path.replace('/courses/', ''))
+  return postSchema(path.replace(/^\/blog\//, ''))
 }
 
-export { metaFor, fullTitle, canonical } from './data/meta'
+export { metaFor, fullTitle, canonical, ogImage } from './data/meta'
 export { prerenderPaths } from './routes'

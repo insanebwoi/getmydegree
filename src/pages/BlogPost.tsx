@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Seo } from '../components/Seo'
+import { metaFor } from '../data/meta'
+import { courseSlug, guideCourses } from '../data/courses'
+import { courses } from '../data/site'
 import { postSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
@@ -33,15 +36,38 @@ export default function BlogPost() {
   if (!post) return <NotFound />
 
   const related = relatedPosts(post.slug)
+  // Programmes this guide should hand the reader next.
+  const clusterSpec = guideCourses[post.slug]
+  const cluster = clusterSpec && {
+    label: clusterSpec.label,
+    courses: clusterSpec.codes
+      .map((code) => courses.find((c) => c.code === code))
+      .filter((c): c is (typeof courses)[number] => Boolean(c)),
+  }
 
   return (
     <>
-      <Seo
-        title={post.title}
-        description={post.excerpt}
-        path={`/blog/${post.slug}`}
-        schema={postSchema(post.slug)}
-      />
+      <Seo {...metaFor(`/blog/${post.slug}`)} schema={postSchema(post.slug)} />
+
+      <nav aria-label="Breadcrumb" className="shell pt-6">
+        <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
+          <li>
+            <Link to="/" className="hover:text-navy">
+              Home
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li>
+            <Link to="/blog" className="hover:text-navy">
+              Blog
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page" className="line-clamp-1 font-medium text-ink">
+            {post.title}
+          </li>
+        </ol>
+      </nav>
 
       <article>
         <section className="shell pt-1 pb-8 lg:pb-12">
@@ -95,6 +121,31 @@ export default function BlogPost() {
                       />
                     ))}
                   </div>
+                )}
+
+                {cluster && cluster.courses.length > 0 && (
+                  <Reveal delay={60} className="mt-11">
+                    <div className="card card-p">
+                      <h2 className="t-h3">{cluster.label}</h2>
+                      <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                        {cluster.courses.map((c) => (
+                          <li key={c.code}>
+                            <Link
+                              to={`/courses/${courseSlug(c)}`}
+                              className="flex items-baseline gap-2 rounded-xl p-2 transition-colors hover:bg-wash"
+                            >
+                              <span className="font-display text-sm font-semibold text-navy">
+                                {c.code}
+                              </span>
+                              <span className="text-sm text-muted">
+                                {c.name} · {c.years}
+                              </span>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </Reveal>
                 )}
 
                 <Reveal delay={80} className="mt-11">

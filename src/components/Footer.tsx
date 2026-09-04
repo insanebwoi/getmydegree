@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { courseSlug } from '../data/courses'
 import {
   Clock,
   GraduationCap,
@@ -10,7 +11,7 @@ import {
   Newspaper,
   Phone,
 } from 'lucide-react'
-import { centers, site } from '../data/site'
+import { centers, courses, site } from '../data/site'
 import { FacebookIcon, TwitterIcon, YoutubeIcon } from './SocialIcons'
 
 const socials = [
@@ -89,6 +90,22 @@ export function Footer() {
                           {page.hint}
                         </span>
                       </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <nav aria-label="Degree programmes" className="sm:col-span-2 lg:col-span-12">
+              <h2 className={heading}>Degree programmes</h2>
+              <ul className="mt-4 flex flex-wrap gap-x-1 gap-y-1">
+                {courses.map((course) => (
+                  <li key={course.code}>
+                    <Link
+                      to={`/courses/${courseSlug(course)}`}
+                      className="block rounded-lg px-2.5 py-2 text-sm text-white/60 transition-colors hover:bg-white/5 hover:text-white"
+                    >
+                      {course.code} <span className="text-white/35">{course.name}</span>
                     </Link>
                   </li>
                 ))}

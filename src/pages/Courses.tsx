@@ -21,6 +21,7 @@ import { PageHero } from '../components/PageHero'
 import { BlogSearch } from '../components/BlogSearch'
 import { ApplyDialog } from '../components/ApplyDialog'
 import { courseHighlights, courses, eligibility, type Course } from '../data/site'
+import { courseSlug } from '../data/courses'
 
 /** The mark drawn beside each outcome. */
 const HIGHLIGHT_ICONS: Record<string, typeof Check> = {
@@ -42,19 +43,14 @@ function CourseCard({
   onApply: () => void
 }) {
   return (
-    <Reveal delay={delay} className="h-full min-w-0">
+    <Reveal delay={delay} className="relative h-full min-w-0">
       {/*
         One tile, not a card of stacked panels: the code reads first, the
         degree names it, the field places it, and the duration sits quietly
         beside the code. The whole tile is the link, so nothing has to be
         spent on a button.
       */}
-      <button
-        type="button"
-        onClick={onApply}
-        aria-label={`Enquire about ${course.name}`}
-        className="group flex h-full w-full cursor-pointer flex-col rounded-2xl border border-line bg-white p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-[var(--shadow-soft)] sm:p-5"
-      >
+      <div className="group flex h-full w-full flex-col rounded-2xl border border-line bg-white p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-[var(--shadow-soft)] sm:p-5">
         <div className="flex items-baseline justify-between gap-3">
           <span className="font-display text-xl font-semibold tracking-tight text-navy sm:text-2xl">
             {course.code}
@@ -62,8 +58,18 @@ function CourseCard({
           <span className="text-[0.6875rem] font-medium text-muted">{course.years}</span>
         </div>
 
+        {/*
+          The heading carries the link, so the programme page is reachable by
+          crawlers and by keyboard   the tile used to be a button that only
+          opened a dialog, which left the content with no URL of its own.
+        */}
         <h3 className="mt-2.5 font-display text-[0.9375rem] leading-snug font-medium text-ink hyphens-auto">
-          {course.name}
+          <Link
+            to={`/courses/${courseSlug(course)}`}
+            className="after:absolute after:inset-0 hover:underline"
+          >
+            {course.name}
+          </Link>
         </h3>
         <p className="mt-1 text-xs leading-relaxed text-muted">{course.field}</p>
 
@@ -72,16 +78,20 @@ function CourseCard({
             <BadgeCheck size={13} className="text-navy" aria-hidden="true" />
             UGC recognized
           </span>
-          <span className="inline-flex items-center gap-1 text-xs font-medium text-navy group-hover:underline">
-            <span>Enquire</span>
+          <button
+            type="button"
+            onClick={onApply}
+            className="relative z-10 inline-flex min-h-11 cursor-pointer items-center gap-1 text-xs font-medium text-navy hover:underline"
+          >
+            <span>Enquire about {course.code}</span>
             <ArrowRight
               size={13}
               className="text-muted transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-navy"
               aria-hidden="true"
             />
-          </span>
+          </button>
         </div>
-      </button>
+      </div>
     </Reveal>
   )
 }
