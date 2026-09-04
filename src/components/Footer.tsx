@@ -115,20 +115,20 @@ export function Footer() {
               className="sm:col-span-2 lg:order-last lg:col-span-12 lg:border-t lg:border-white/10 lg:pt-8"
             >
               <h2 className={heading}>Degree programmes</h2>
-              <ul className="mt-4 grid gap-x-6 gap-y-0.5 min-[360px]:grid-cols-2 lg:gap-x-10 xl:grid-cols-3 xl:gap-x-16">
+              <ul className="mt-4 grid grid-cols-5 gap-x-3 gap-y-0.5 sm:grid-cols-2 sm:gap-x-6 lg:gap-x-10 xl:grid-cols-3 xl:gap-x-16">
                 {courses.map((course) => (
                   <li key={course.code} className="min-w-0">
                     <Link
                       to={`/courses/${courseSlug(course)}`}
                       className="group flex min-w-0 items-baseline gap-2 rounded-lg py-1.5 text-sm transition-colors hover:text-gold"
                     >
-                      <span className="w-[3.25rem] shrink-0 font-medium text-white/85 group-hover:text-gold">
+                      <span className="shrink-0 font-medium text-white/85 group-hover:text-gold sm:w-[3.25rem]">
                         {course.code}
                       </span>
                       {/* Anchor text for crawlers at every width; the phone
                           hides it, where it would wrap and pull the two
                           columns out of step. */}
-                      <span className="hidden min-w-0 truncate text-white/45 group-hover:text-gold/80 sm:block">
+                      <span className="hidden min-w-0 truncate text-white/45 group-hover:text-gold/80 lg:block">
                         {course.name}
                       </span>
                     </Link>

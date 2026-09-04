@@ -6,7 +6,6 @@ import { metaFor } from '../data/meta'
 import { courseSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Section } from '../components/Section'
-import { PageHero } from '../components/PageHero'
 import { ApplyDialog } from '../components/ApplyDialog'
 import {
   admissionForCourse,
@@ -64,26 +63,52 @@ export default function Course() {
         </ol>
       </nav>
 
-      <PageHero
-        badge={`${level} programme`}
-        title={`${course.code} — ${course.name}`}
-        intro={course.body}
-      >
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <button
-            type="button"
-            onClick={() => setApplying(true)}
-            className="btn btn-arrow btn-primary justify-center"
-          >
-            Apply for {course.code}
-            <ArrowRight size={16} aria-hidden="true" />
-          </button>
-          <Link to="/contact" className="btn btn-arrow btn-outline-navy justify-center">
-            Ask about eligibility
-            <ArrowRight size={15} aria-hidden="true" />
-          </Link>
+      {/*
+        The banner is drawn, not photographed: brand washes over a masked
+        hairline grid, with the programme code set as its own mark. Nine
+        programme pages would otherwise mean nine more images to load and
+        maintain, for a block that carries no information a photograph could.
+      */}
+      <section className="shell pt-1 pb-10 sm:pb-14 lg:pb-16">
+        <div className="course-banner panel relative isolate overflow-hidden border-transparent px-4 py-12 text-center sm:px-8 sm:py-16 lg:py-20">
+          <div aria-hidden="true" className="course-grid absolute inset-0 -z-10" />
+
+          <Reveal className="relative mx-auto max-w-2xl">
+            <span className="badge text-ink/80">{level} programme</span>
+            <h1 className="t-h1 mt-4">
+              {course.code} <span className="text-navy">{course.name}</span>
+            </h1>
+            <p className="t-body mx-auto mt-4 max-w-xl text-ink/80">{course.body}</p>
+
+            {/* The three facts a reader checks before anything else. */}
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-medium text-ink/75 sm:text-sm">
+              {[course.years, course.field, 'No attendance'].map((fact) => (
+                <li
+                  key={fact}
+                  className="rounded-full border border-navy/10 bg-white/70 px-3 py-1.5 backdrop-blur-sm"
+                >
+                  {fact}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => setApplying(true)}
+                className="btn btn-arrow btn-primary justify-center"
+              >
+                Apply for {course.code}
+                <ArrowRight size={16} aria-hidden="true" />
+              </button>
+              <Link to="/contact" className="btn btn-arrow btn-outline-navy justify-center">
+                Ask about eligibility
+                <ArrowRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
+          </Reveal>
         </div>
-      </PageHero>
+      </section>
 
       <Section align="left" title={`What the ${course.code} covers`}>
         <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

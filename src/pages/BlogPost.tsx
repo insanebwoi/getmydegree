@@ -89,7 +89,7 @@ export default function BlogPost() {
             {/* The wash hugs the text block rather than the panel edge. */}
             <div
               aria-hidden="true"
-              className="page-brush absolute -inset-x-16 -inset-y-16 -z-10 sm:-inset-x-32 sm:-inset-y-24"
+              className="page-brush-soft absolute -inset-x-16 -inset-y-16 -z-10 sm:-inset-x-32 sm:-inset-y-24"
             />
 
             <Reveal className="relative mx-auto max-w-3xl text-center">
@@ -99,14 +99,14 @@ export default function BlogPost() {
               </Link>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
                 <span className="badge">{post.category}</span>
-                <span className="text-base text-muted md:text-sm">
+                <span className="text-base text-ink/75 md:text-sm">
                   <time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readingMinutes}{' '}
                   min read
                 </span>
               </div>
               <h1 className="t-h1 mt-5">{post.title}</h1>
-              <p className="t-body mx-auto mt-5 max-w-2xl text-muted">{post.excerpt}</p>
-              <p className="mt-6 text-base text-muted md:text-sm">By {post.author}</p>
+              <p className="t-body mx-auto mt-5 max-w-2xl text-ink/85">{post.excerpt}</p>
+              <p className="mt-6 text-base text-ink/75 md:text-sm">By {post.author}</p>
             </Reveal>
           </div>
         </section>
