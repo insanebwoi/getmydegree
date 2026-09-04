@@ -7,7 +7,7 @@ export const site = {
   tagline: 'Complete Your Degree. Restart Your Career.',
   description:
     'GetMyDegree Institutions offers flexible, UGC recognized UG & PG degree programs for working professionals, dropouts and gap-year students across India.',
-  email: 'hello@getmydegree.in',
+  email: 'getmydegreeedu@gmail.com',
   phone: '+91 86066 77828',
   phoneHref: '+918606677828',
   officeHours: 'Mon–Sat · 9am to 7pm',
@@ -65,52 +65,52 @@ export const universities: {
    *  an intake date, a ranking or a placement figure. */
   highlights: string[]
 }[] = [
-  {
-    name: 'Rabindranath Tagore University',
-    slug: 'rabindranath-tagore-university',
-    location: 'Madhya Pradesh, Bhopal',
-    body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
-    badge: 'UGC Approved',
-    validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
-    type: 'State private university',
-    offers: ['Undergraduate degrees', 'Postgraduate degrees', 'Doctoral programmes'],
-    highlights: [
-      'Programmes across multiple disciplines, so a change of field at PG level is usually possible',
-      'Study without attendance requirements, around a full-time job',
-      'Credit transfer considered for semesters already completed elsewhere',
-    ],
-  },
-  {
-    name: 'PRIST Deemed University',
-    slug: 'prist-deemed-university',
-    location: 'Tamil Nadu, India',
-    body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
-    badge: 'UGC Approved',
-    validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
-    type: 'Deemed-to-be university',
-    offers: ['Undergraduate degrees', 'Postgraduate degrees'],
-    highlights: [
-      'NAAC accredited, with an industry aligned curriculum',
-      'Suited to working professionals continuing an interrupted degree',
-      'Documentation and enrolment handled by your counsellor end to end',
-    ],
-  },
-  {
-    name: 'Marjon University',
-    slug: 'marjon-university',
-    location: 'Cornwall, United Kingdom',
-    body: 'UK government recognized university offering globally valid degrees.',
-    badge: 'UK Recognized',
-    validity: 'Globally Valid · UK Accredited · Career Ready',
-    type: 'UK university',
-    offers: ['Undergraduate degrees', 'Postgraduate degrees'],
-    highlights: [
-      'A UK government recognized award, held to UK quality assurance',
-      'An option for students who want a degree recognized outside India',
-      'Entry requirements and English language criteria are confirmed case by case',
-    ],
-  },
-]
+    {
+      name: 'Rabindranath Tagore University',
+      slug: 'rabindranath-tagore-university',
+      location: 'Madhya Pradesh, Bhopal',
+      body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
+      badge: 'UGC Approved',
+      validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+      type: 'State private university',
+      offers: ['Undergraduate degrees', 'Postgraduate degrees', 'Doctoral programmes'],
+      highlights: [
+        'Programmes across multiple disciplines, so a change of field at PG level is usually possible',
+        'Study without attendance requirements, around a full-time job',
+        'Credit transfer considered for semesters already completed elsewhere',
+      ],
+    },
+    {
+      name: 'PRIST Deemed University',
+      slug: 'prist-deemed-university',
+      location: 'Tamil Nadu, India',
+      body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
+      badge: 'UGC Approved',
+      validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+      type: 'Deemed-to-be university',
+      offers: ['Undergraduate degrees', 'Postgraduate degrees'],
+      highlights: [
+        'NAAC accredited, with an industry aligned curriculum',
+        'Suited to working professionals continuing an interrupted degree',
+        'Documentation and enrolment handled by your counsellor end to end',
+      ],
+    },
+    {
+      name: 'Marjon University',
+      slug: 'marjon-university',
+      location: 'Cornwall, United Kingdom',
+      body: 'UK government recognized university offering globally valid degrees.',
+      badge: 'UK Recognized',
+      validity: 'Globally Valid · UK Accredited · Career Ready',
+      type: 'UK university',
+      offers: ['Undergraduate degrees', 'Postgraduate degrees'],
+      highlights: [
+        'A UK government recognized award, held to UK quality assurance',
+        'An option for students who want a degree recognized outside India',
+        'Entry requirements and English language criteria are confirmed case by case',
+      ],
+    },
+  ]
 
 export const mbaModules = [
   'Strategic Management',

@@ -40,7 +40,7 @@ export function HeroTrust() {
           ))}
         </ul>
         <p className="mt-2.5 text-xs text-muted">
-          Central and State Government universities in India and recognized UK institutions   all
+          Central and State Government universities in India and recognized UK institutions — all
           100% UGC, AICTE & NAAC approved.
         </p>
       </div>
