@@ -22,6 +22,8 @@ const bodyModules = import.meta.glob('../content/posts/*.md', {
 
 type PostMeta = {
   title: string
+  /** Optional shorter title for the <title> tag, where the headline runs long. */
+  seoTitle?: string
   excerpt: string
   category: string
   date: string

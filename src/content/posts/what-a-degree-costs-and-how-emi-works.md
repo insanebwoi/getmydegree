@@ -1,5 +1,6 @@
 ---
 title: "What a degree actually costs, and how the instalments work"
+seoTitle: "What a Degree Costs & How Instalments Work"
 excerpt: "A plain breakdown of tuition, university and examination fees, what is included, and how monthly payment plans are structured."
 category: Fees
 date: 2026-07-07

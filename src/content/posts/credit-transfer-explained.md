@@ -1,5 +1,6 @@
 ---
 title: "You completed two years and stopped. What happens to those credits?"
+seoTitle: "Degree Credit Transfer — What Carries Across"
 excerpt: "Credit transfer means you resume rather than restart. What carries across, what does not, and the documents you need to make the case."
 category: Admissions
 date: 2026-08-04

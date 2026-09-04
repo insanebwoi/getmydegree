@@ -38,7 +38,7 @@ export const pageMeta: Record<string, PageMeta> = {
     path: '/about',
   },
   '/courses': {
-    title: 'UG & PG Degree Programmes — B.Com, BBA, BCA, MBA, MCA',
+    title: 'UG & PG Degree Programmes — B.Com, BBA, BCA, MBA',
     description:
       'Nine UG and PG programmes for working professionals: B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW. Compare duration, eligibility and study format.',
     path: '/courses',
@@ -86,8 +86,8 @@ export function metaFor(path: string): PageMeta {
     const university = universities.find((u) => u.slug === slug)
     if (university) {
       return {
-        title: `${university.name} — ${university.type}`,
-        description: `${university.body} Based in ${university.location}. Check eligibility, programmes and the admission process with a GetMyDegree counsellor.`,
+        title: `${university.name} — Degrees & Admission`,
+        description: `${university.type} in ${university.location}. What it offers, who can apply, and the programmes GetMyDegree places students into. Recognition confirmed at counselling.`,
         path,
       }
     }
@@ -97,7 +97,7 @@ export function metaFor(path: string): PageMeta {
   const post = posts.find((p) => p.slug === slug)
   if (post) {
     return {
-      title: post.title,
+      title: post.seoTitle ?? post.title,
       description: post.excerpt,
       path,
       image: post.cover,
