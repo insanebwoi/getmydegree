@@ -197,7 +197,10 @@ export default function Courses() {
       </div>
 
       {/* Degree Programs Grid */}
-      <section className="shell pb-12 sm:pb-16 lg:pb-20">
+      <section className="shell pb-12 sm:pb-16 lg:pb-20" aria-labelledby="programmes-heading">
+        <h2 id="programmes-heading" className="sr-only">
+          All undergraduate and postgraduate programmes
+        </h2>
         {filtered.length > 0 ? (
           <div className="grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
             {filtered.map((c, i) => (

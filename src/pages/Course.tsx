@@ -9,6 +9,7 @@ import { Section } from '../components/Section'
 import { ApplyDialog } from '../components/ApplyDialog'
 import {
   admissionForCourse,
+  courseDetail,
   courseSlug,
   eligibilityFor,
   getCourse,
@@ -29,6 +30,7 @@ export default function Course() {
   if (!course) return <NotFound />
 
   const level = course.level === 'UG' ? 'Undergraduate' : 'Postgraduate'
+  const detail = courseDetail[course.code]
   const facts = [
     { icon: GraduationCap, label: 'Level', value: `${level} (${course.level})` },
     { icon: CalendarDays, label: 'Duration', value: course.years },
@@ -148,6 +150,48 @@ export default function Course() {
             </p>
           </div>
         </div>
+
+        {/*
+          What this programme covers and where it leads. Without it every
+          course page was the same words with one line swapped, which reads as
+          templated to a reader and to a crawler alike.
+        */}
+        {detail && (
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            <div className="card card-p">
+              <h2 className="t-h3">What you study</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                The core of a {course.code}. Exact papers and electives are set by the awarding
+                university.
+              </p>
+              <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                {detail.subjects.map((subject) => (
+                  <li key={subject} className="flex items-start gap-2 text-sm text-muted">
+                    <Check size={14} className="mt-0.5 shrink-0 text-navy" aria-hidden="true" />
+                    {subject}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="card card-p">
+              <h2 className="t-h3">Where it leads</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">{detail.suits}</p>
+              <ul className="mt-4 grid gap-2">
+                {detail.careers.map((career) => (
+                  <li key={career} className="flex items-start gap-2 text-sm text-muted">
+                    <ArrowRight
+                      size={14}
+                      className="mt-0.5 shrink-0 text-gold-700"
+                      aria-hidden="true"
+                    />
+                    {career}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
 
         <div className="mt-6 card card-p">
           <h2 className="t-h3">Admission process</h2>

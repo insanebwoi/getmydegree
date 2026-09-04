@@ -65,3 +65,64 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     label: 'Programmes to compare on duration and fee structure',
   },
 }
+
+/**
+ * What each programme actually covers, and where it leads.
+ *
+ * Without this every course page was the same 459 words with a one-line
+ * description swapped in   B.Com and BBA differed by seven words, which is
+ * the shape of thin templated content whatever the metadata says. Subjects
+ * are the standard core of each degree and careers are the roles they
+ * ordinarily lead to; neither asserts a syllabus for a named university,
+ * because that varies by institution and academic year.
+ */
+export const courseDetail: Record<
+  string,
+  { subjects: string[]; careers: string[]; suits: string }
+> = {
+  'B.Com': {
+    subjects: ['Financial accounting', 'Corporate and business law', 'Cost and management accounting', 'Taxation', 'Auditing', 'Business economics'],
+    careers: ['Accountant', 'Audit assistant', 'Tax consultant', 'Banking and finance roles', 'Further study: M.Com, MBA, CA'],
+    suits: 'People already working in accounts, billing or finance who need the qualification their role is graded against.',
+  },
+  BBA: {
+    subjects: ['Principles of management', 'Marketing', 'Human resource management', 'Organisational behaviour', 'Business statistics', 'Entrepreneurship'],
+    careers: ['Team lead and supervisor roles', 'Sales and marketing', 'Operations', 'HR coordination', 'Further study: MBA'],
+    suits: 'People running a team or a small business who want the management vocabulary and the degree to go with the experience.',
+  },
+  BCA: {
+    subjects: ['Programming fundamentals', 'Data structures', 'Database management', 'Operating systems', 'Web technologies', 'Software engineering'],
+    careers: ['Junior developer', 'Support and QA roles', 'Database and systems administration', 'Further study: MCA, MSc IT'],
+    suits: 'People working in IT support or self-taught in code who need a recognized qualification behind the skills.',
+  },
+  BA: {
+    subjects: ['Language and literature', 'Communication', 'Sociology or political science', 'History', 'Psychology', 'Critical writing'],
+    careers: ['Government recruitment where a graduate degree is the bar', 'Teaching after B.Ed', 'Content and communications', 'Further study: MA'],
+    suits: 'People whose goal is the graduate qualification itself   most often for a government exam or a promotion band.',
+  },
+  'B.Sc': {
+    subjects: ['Core science specialisation', 'Mathematics', 'Statistics', 'Laboratory and practical work', 'Research method', 'Computer applications'],
+    careers: ['Technical and laboratory roles', 'Government science posts', 'Teaching after B.Ed', 'Further study: MSc'],
+    suits: 'People in technical work who need the formal science degree their next role or exam requires.',
+  },
+  MBA: {
+    subjects: ['Strategic management', 'Financial management', 'Marketing management', 'Operations and supply chain', 'Business analytics', 'Leadership'],
+    careers: ['Manager and senior manager roles', 'Business development', 'Consulting', 'Promotion into leadership bands'],
+    suits: 'Working professionals with a bachelor’s degree who have hit the ceiling a postgraduate qualification is gating.',
+  },
+  MCA: {
+    subjects: ['Advanced programming', 'Algorithms', 'Cloud and distributed systems', 'Machine learning foundations', 'Software architecture', 'Project work'],
+    careers: ['Senior developer', 'Systems architect', 'Technical lead', 'Government IT posts requiring a PG degree'],
+    suits: 'Developers who need a postgraduate qualification for a senior title or a government technical post.',
+  },
+  'M.Com': {
+    subjects: ['Advanced accounting', 'Financial management', 'Business research', 'Direct and indirect taxation', 'Managerial economics', 'Analytics'],
+    careers: ['Senior accountant', 'Finance manager', 'Lecturer after NET', 'Further study: PhD'],
+    suits: 'Commerce graduates in finance roles who want the postgraduate qualification for seniority or teaching.',
+  },
+  MSW: {
+    subjects: ['Social work practice', 'Community organisation', 'Counselling', 'Social policy and legislation', 'Field work', 'Research method'],
+    careers: ['NGO and development sector roles', 'Medical and psychiatric social work', 'CSR', 'Government welfare posts'],
+    suits: 'People working in community, welfare or NGO settings who need the professional qualification the sector asks for.',
+  },
+}
