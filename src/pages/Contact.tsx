@@ -1,8 +1,20 @@
 import { useState, type FormEvent } from 'react'
-import { ArrowRight, Check, CheckCircle2, Clock, Mail, MapPin, MessageCircle, Phone, ShieldCheck, Sparkles } from 'lucide-react'
+import {
+  ArrowRight,
+  Check,
+  CheckCircle2,
+  Clock,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  ShieldCheck,
+  Sparkles,
+} from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { contactSchema } from '../data/schema'
+import { counsellingRequest, href } from '../data/whatsapp'
 import { Reveal } from '../components/Reveal'
 import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
@@ -31,8 +43,7 @@ export default function Contact() {
 
     const next: Errors = {}
     if (name.length < 2) next.name = 'Enter your full name.'
-    if (!/^[+\d][\d\s-]{8,15}$/.test(phone))
-      next.phone = 'Enter a valid phone number.'
+    if (!/^[+\d][\d\s-]{8,15}$/.test(phone)) next.phone = 'Enter a valid phone number.'
     if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email)) next.email = 'Enter a valid email address.'
     if (!program) next.program = 'Choose a degree program.'
 
@@ -44,19 +55,15 @@ export default function Contact() {
 
     setStatus('sending')
 
-    const lines = [
-      `🎓 *Academic Counseling Request*`,
-      `━━━━━━━━━━━━━━━━━━`,
-      `👤 *Name:* ${name}`,
-      `📞 *Phone:* ${phone}`,
-      `✉️ *Email:* ${email}`,
-      `📚 *Interested Program:* ${program}`,
-      message ? `📝 *Status / Notes:* ${message}` : null,
-      `━━━━━━━━━━━━━━━━━━`,
-      `Sent via GetMyDegree Website`,
-    ].filter(Boolean)
-
-    const url = `https://wa.me/918606677828?text=${encodeURIComponent(lines.join('\n'))}`
+    const url = href(
+      counsellingRequest({
+        fullName: name,
+        phone,
+        email,
+        program,
+        message: message || undefined,
+      }),
+    )
     setWaUrl(url)
 
     window.setTimeout(() => {
@@ -197,7 +204,8 @@ export default function Contact() {
                       Request received &amp; redirecting!
                     </h3>
                     <p className="mt-2 max-w-md text-sm text-muted">
-                      Your enquiry has been prepared for WhatsApp. A counselor will connect with you with syllabus and fee details.
+                      Your enquiry has been prepared for WhatsApp. A counselor will connect with you
+                      with syllabus and fee details.
                     </p>
                     <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
                       {waUrl && (
@@ -221,7 +229,11 @@ export default function Contact() {
                     </div>
                   </div>
                 ) : (
-                  <form onSubmit={handleSubmit} noValidate className="mt-5 grid gap-4 sm:grid-cols-2">
+                  <form
+                    onSubmit={handleSubmit}
+                    noValidate
+                    className="mt-5 grid gap-4 sm:grid-cols-2"
+                  >
                     <div>
                       <label htmlFor="name" className={labelCls}>
                         Full name <span className="text-red-600">*</span>
@@ -332,7 +344,8 @@ export default function Contact() {
 
                     <div className="sm:col-span-2">
                       <label htmlFor="message" className={labelCls}>
-                        Where you stopped or current status <span className="text-muted font-normal">(optional)</span>
+                        Where you stopped or current status{' '}
+                        <span className="text-muted font-normal">(optional)</span>
                       </label>
                       <textarea
                         id="message"
@@ -349,11 +362,16 @@ export default function Contact() {
                         disabled={status === 'sending'}
                         className="btn btn-arrow btn-primary w-full justify-center sm:w-auto"
                       >
-                        <span>{status === 'sending' ? 'Submitting request…' : 'Submit counseling request'}</span>
+                        <span>
+                          {status === 'sending'
+                            ? 'Submitting request…'
+                            : 'Submit counseling request'}
+                        </span>
                         <ArrowRight size={15} aria-hidden="true" />
                       </button>
                       <p className="mt-2.5 text-xs text-muted">
-                        By submitting, you agree to receive academic counseling information via call or WhatsApp.
+                        By submitting, you agree to receive academic counseling information via call
+                        or WhatsApp.
                       </p>
                     </div>
                   </form>
@@ -364,7 +382,9 @@ export default function Contact() {
               <div className="mt-6 border-t border-line/60 pt-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted">
                 <span>Need urgent assistance?</span>
                 <a
-                  href={`https://wa.me/918606677828?text=${encodeURIComponent('Hello GetMyDegree, I would like urgent academic counseling assistance.')}`}
+                  href={href(
+                    'Hello GetMyDegree, I would like urgent academic counselling assistance.',
+                  )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="action gap-1 font-semibold text-[#25D366] hover:underline"
@@ -383,7 +403,9 @@ export default function Contact() {
               <div className="p-6 sm:p-7">
                 <div className="flex items-center justify-between gap-2">
                   <span className="badge badge-dark">Regional Hubs</span>
-                  <span className="text-[0.6875rem] font-medium text-white/50">Walk-in verified</span>
+                  <span className="text-[0.6875rem] font-medium text-white/50">
+                    Walk-in verified
+                  </span>
                 </div>
                 <h2 className="mt-3 font-display text-xl font-medium sm:text-2xl text-white">
                   Visit our counseling centers
@@ -412,11 +434,12 @@ export default function Contact() {
                           <span>Call</span>
                         </a>
                       </div>
-                      <p className="mt-1 text-xs leading-relaxed text-white/75">
-                        {c.address}
-                      </p>
+                      <p className="mt-1 text-xs leading-relaxed text-white/75">{c.address}</p>
                       <p className="mt-1.5 text-[0.6875rem] font-medium text-white/50">
-                        Ph: <a href={`tel:${c.phoneHref}`} className="action hover:text-white/80">{c.phone}</a>
+                        Ph:{' '}
+                        <a href={`tel:${c.phoneHref}`} className="action hover:text-white/80">
+                          {c.phone}
+                        </a>
                       </p>
                     </div>
                   ))}
@@ -432,7 +455,9 @@ export default function Contact() {
                   className="h-38 w-full object-cover sm:h-44"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950/90 via-navy-950/50 to-transparent p-3 text-left">
-                  <p className="text-xs font-medium text-white">The GetMyDegree centre in Malappuram</p>
+                  <p className="text-xs font-medium text-white">
+                    The GetMyDegree centre in Malappuram
+                  </p>
                 </div>
               </div>
 
@@ -445,7 +470,8 @@ export default function Contact() {
                   <div>
                     <p className="text-xs font-semibold text-white">Accreditation Guarantee</p>
                     <p className="text-[0.75rem] text-white/70 leading-snug">
-                      All universities are UGC, AICTE &amp; NAAC approved for government roles and higher study.
+                      All universities are UGC, AICTE &amp; NAAC approved for government roles and
+                      higher study.
                     </p>
                   </div>
                 </div>
@@ -473,4 +499,3 @@ export default function Contact() {
     </>
   )
 }
-

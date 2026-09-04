@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { ArrowRight, CheckCircle2, X } from 'lucide-react'
 import type { Course } from '../data/site'
+import { courseEnquiry, href } from '../data/whatsapp'
+import { courseSlug } from '../data/courses'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email', string>>
 
@@ -56,19 +58,17 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
 
     setStatus('sending')
 
-    const lines = [
-      `🎓 *Course Enquiry: ${course.code}*`,
-      `*Program:* ${course.name}`,
-      `━━━━━━━━━━━━━━━━━━`,
-      `👤 *Name:* ${name}`,
-      `📞 *Phone:* ${phone}`,
-      email ? `✉️ *Email:* ${email}` : null,
-      question ? `📝 *Notes/Questions:* ${question}` : null,
-      `━━━━━━━━━━━━━━━━━━`,
-      `Sent via GetMyDegree Website`,
-    ].filter(Boolean)
-
-    const url = `https://wa.me/918606677828?text=${encodeURIComponent(lines.join('\n'))}`
+    const url = href(
+      courseEnquiry({
+        code: course.code,
+        name: course.name,
+        slug: courseSlug(course),
+        fullName: name,
+        phone,
+        email: email || undefined,
+        question: question || undefined,
+      }),
+    )
     setWaUrl(url)
 
     window.setTimeout(() => {
@@ -111,7 +111,8 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
               </span>
               <h2 className="t-h3 mt-5 font-display font-medium text-ink">Enquiry sent!</h2>
               <p className="mt-2 text-base text-muted md:text-sm">
-                Redirecting to WhatsApp counselor chat. Our team will assist you with admission details for {course.code}.
+                Redirecting to WhatsApp counselor chat. Our team will assist you with admission
+                details for {course.code}.
               </p>
               <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-center">
                 {waUrl && (
@@ -135,7 +136,9 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
               <h2 id="apply-title" className="t-h3 mt-2.5 pr-12 font-display font-medium">
                 Enquire about {course.code}
               </h2>
-              <p className="mt-1 text-sm text-muted">{course.name} · Admission &amp; fee guidance</p>
+              <p className="mt-1 text-sm text-muted">
+                {course.name} · Admission &amp; fee guidance
+              </p>
 
               <form
                 onSubmit={onSubmit}
