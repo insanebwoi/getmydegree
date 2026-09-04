@@ -43,19 +43,24 @@ export function HeroVisual({ onChange }: Props) {
 
   useEffect(() => {
     /*
-      The sequence runs at every width. It was gated at lg, which meant a phone
-      showed one still photograph and none of the three messages the slides
-      carry   the audience most of this site is written for saw the least of it.
+      The sequence runs from lg up.
 
-      Motion that starts on its own needs a way to stop it (WCAG 2.2.2), and on
-      a phone that control cannot hide behind hover, so it is always visible
-      there. prefers-reduced-motion still turns the whole thing off.
+      Below that there is no room for the pips and the pause button without
+      putting a bar over the photograph, and WCAG 2.2.2 will not let content
+      move on its own without a way to stop it   the slides carry the headline
+      as well as the picture, so this is moving text, not decoration. With no
+      control there can be no motion: a phone gets the first slide, still.
     */
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const sync = () => setAnimated(!still.matches)
+    const wide = window.matchMedia('(min-width: 1024px)')
+    const sync = () => setAnimated(!still.matches && wide.matches)
     sync()
     still.addEventListener('change', sync)
-    return () => still.removeEventListener('change', sync)
+    wide.addEventListener('change', sync)
+    return () => {
+      still.removeEventListener('change', sync)
+      wide.removeEventListener('change', sync)
+    }
   }, [])
 
   useEffect(() => {
@@ -162,7 +167,7 @@ export function HeroVisual({ onChange }: Props) {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? 'Resume the slide sequence' : 'Pause the slide sequence'}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/70 text-ink backdrop-blur-md transition-opacity duration-200 hover:bg-white lg:opacity-0 lg:group-hover:opacity-100 lg:focus-visible:opacity-100"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/70 text-ink opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 hover:bg-white focus-visible:opacity-100"
             >
               {paused ? (
                 <Play size={14} aria-hidden="true" />
