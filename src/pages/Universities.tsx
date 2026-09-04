@@ -15,6 +15,7 @@ export default function Universities() {
       <Seo {...pageMeta['/universities']} schema={universitiesSchema} />
 
       <PageHero
+        image="universities-banner"
         badge="Partner universities"
         title="The universities that award your degree"
         intro="We prepare and submit your application; the degree itself is awarded by the university. These are the institutions we place students into."

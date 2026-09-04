@@ -82,6 +82,13 @@ const declared = {
     width: 1680,
     height: 720,
   },
+  'universities-banner': {
+    src: '/images/universities/universities-banner.webp',
+    alt: 'A university colonnade looking out over a city skyline at first light',
+    note: 'Universities page header banner',
+    width: 1600,
+    height: 900,
+  },
   'courses-banner': {
     src: '/images/courses/courses-banner.webp',
     alt: 'Students pursuing university degrees with GetMyDegree',
