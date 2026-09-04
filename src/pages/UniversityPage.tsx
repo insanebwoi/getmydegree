@@ -159,6 +159,27 @@ export default function UniversityPage() {
             </li>
           ))}
         </ul>
+
+        {/* The page ends on the way in, not on a list of other universities. */}
+        <div className="card card-p mt-10 flex flex-col items-start gap-5 bg-navy-950 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <h2 className="t-h3 font-display font-medium">
+              Apply to {university.name.split(' ').slice(0, 3).join(' ')}
+            </h2>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/65">
+              Tell us what you have completed so far and a counsellor confirms which programmes here
+              you are eligible for, in writing.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-col gap-2.5 sm:flex-row">
+            <Link to="/contact" className="btn btn-gold justify-center">
+              Apply now
+            </Link>
+            <Link to="/courses" className="btn btn-ghost-dark justify-center">
+              Browse programmes
+            </Link>
+          </div>
+        </div>
       </Section>
     </>
   )

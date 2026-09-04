@@ -75,6 +75,21 @@ export function counsellingRequest(input: {
   ])
 }
 
+/** A call-back request from the navbar, where no course is in play. */
+export function callbackRequest(input: {
+  fullName: string
+  phone: string
+  email?: string
+  question?: string
+}) {
+  return compose('Call back request', [
+    `Name: ${input.fullName}`,
+    `Phone: ${input.phone}`,
+    input.email ? `Email: ${input.email}` : null,
+    input.question ? `About: ${input.question}` : null,
+  ])
+}
+
 /** Built by the chat panel from the answers the visitor picked. */
 export function chatEnquiry(input: { goal: string; level: string; name?: string; phone?: string }) {
   return compose('Enquiry from the website', [

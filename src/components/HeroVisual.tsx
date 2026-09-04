@@ -43,21 +43,19 @@ export function HeroVisual({ onChange }: Props) {
 
   useEffect(() => {
     /*
-      The sequence runs from lg up only. On a phone it would cost data and
-      battery for a picture behind the copy, and the pause control it requires
-        motion that starts on its own needs one   is clutter at that size. No
-      motion, no control needed.
+      The sequence runs at every width. It was gated at lg, which meant a phone
+      showed one still photograph and none of the three messages the slides
+      carry   the audience most of this site is written for saw the least of it.
+
+      Motion that starts on its own needs a way to stop it (WCAG 2.2.2), and on
+      a phone that control cannot hide behind hover, so it is always visible
+      there. prefers-reduced-motion still turns the whole thing off.
     */
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const wide = window.matchMedia('(min-width: 1024px)')
-    const sync = () => setAnimated(!still.matches && wide.matches)
+    const sync = () => setAnimated(!still.matches)
     sync()
     still.addEventListener('change', sync)
-    wide.addEventListener('change', sync)
-    return () => {
-      still.removeEventListener('change', sync)
-      wide.removeEventListener('change', sync)
-    }
+    return () => still.removeEventListener('change', sync)
   }, [])
 
   useEffect(() => {
@@ -164,7 +162,7 @@ export function HeroVisual({ onChange }: Props) {
               type="button"
               onClick={() => setPaused((p) => !p)}
               aria-label={paused ? 'Resume the slide sequence' : 'Pause the slide sequence'}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/70 text-ink opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 hover:bg-white focus-visible:opacity-100"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/50 bg-white/70 text-ink backdrop-blur-md transition-opacity duration-200 hover:bg-white lg:opacity-0 lg:group-hover:opacity-100 lg:focus-visible:opacity-100"
             >
               {paused ? (
                 <Play size={14} aria-hidden="true" />

@@ -36,11 +36,26 @@ export function PageHero({ badge, title, intro, children, image }: Props) {
           />
         )}
 
-        <div className="relative mx-auto max-w-2xl">
+        {/*
+          The wash the words sit on. Without it the type is at the mercy of
+          whatever the photograph does behind it   this page's banner runs from
+          near-white sky to a dark navy pillar within the width of one heading,
+          which put the h1 at 1.00:1 where it crossed the pillar.
+        */}
+        {image && (
+          <div
+            aria-hidden="true"
+            className="page-brush-soft absolute top-1/2 left-1/2 -z-10 h-[210%] w-[min(42rem,92%)] -translate-x-1/2 -translate-y-1/2"
+          />
+        )}
+
+        <div className="relative mx-auto max-w-[min(34rem,84%)] sm:max-w-lg">
           <Reveal>
             <span className="badge">{badge}</span>
             <h1 className="t-h1 mt-4">{title}</h1>
-            <p className="t-body mx-auto mt-4 max-w-xl text-muted">{intro}</p>
+            <p className={`t-body mx-auto mt-4 max-w-xl ${image ? 'text-ink/85' : 'text-muted'}`}>
+              {intro}
+            </p>
             {children && (
               <div className="mt-7 flex flex-wrap justify-center gap-2.5">{children}</div>
             )}

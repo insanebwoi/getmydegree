@@ -206,6 +206,33 @@ export default function Course() {
             </Link>
           ))}
         </div>
+
+        {/*
+          The page ends on an action rather than a list. A reader who has come
+          this far has read the eligibility and the admission steps   the next
+          thing they need is the way in.
+        */}
+        <div className="card card-p mt-10 flex flex-col items-start gap-5 bg-navy-950 text-white sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div>
+            <h2 className="t-h3 font-display font-medium">Ready to apply for {course.code}?</h2>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/65">
+              Send your details and a counsellor confirms your eligibility, the university and the
+              fee before anything is paid.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-col gap-2.5 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => setApplying(true)}
+              className="btn btn-gold cursor-pointer justify-center"
+            >
+              Apply now
+            </button>
+            <Link to="/contact" className="btn btn-ghost-dark justify-center">
+              Talk to a counsellor
+            </Link>
+          </div>
+        </div>
       </Section>
     </>
   )

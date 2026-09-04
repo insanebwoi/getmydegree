@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { ArrowRight, CheckCircle2, X } from 'lucide-react'
 import type { Course } from '../data/site'
-import { courseEnquiry, href } from '../data/whatsapp'
+import { callbackRequest, courseEnquiry, href } from '../data/whatsapp'
 import { courseSlug } from '../data/courses'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email', string>>
@@ -11,11 +11,16 @@ const field =
   'mt-1.5 w-full rounded-xl border border-line bg-white px-3.5 py-2.5 text-base outline-none transition-colors placeholder:text-muted/55 focus:border-navy sm:py-3'
 
 /**
- * Applying without leaving the page. Escape closes it, focus starts on the
- * first field and returns to the tile afterwards, and the page behind cannot
- * scroll while it is open.
+ * Asking without leaving the page. Escape closes it, focus starts on the first
+ * field and returns to whatever opened it, and the page behind cannot scroll
+ * while it is open.
+ *
+ * Two callers: a course tile, which passes that course, and "Book a call" in
+ * the navbar, which passes none. The only difference is the heading and the
+ * message it composes   the fields, the validation and the handover are one
+ * implementation rather than two that drift apart.
  */
-export function ApplyDialog({ course, onClose }: { course: Course; onClose: () => void }) {
+export function ApplyDialog({ course, onClose }: { course?: Course; onClose: () => void }) {
   const first = useRef<HTMLInputElement>(null)
   const [errors, setErrors] = useState<Errors>({})
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
@@ -59,15 +64,22 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
     setStatus('sending')
 
     const url = href(
-      courseEnquiry({
-        code: course.code,
-        name: course.name,
-        slug: courseSlug(course),
-        fullName: name,
-        phone,
-        email: email || undefined,
-        question: question || undefined,
-      }),
+      course
+        ? courseEnquiry({
+            code: course.code,
+            name: course.name,
+            slug: courseSlug(course),
+            fullName: name,
+            phone,
+            email: email || undefined,
+            question: question || undefined,
+          })
+        : callbackRequest({
+            fullName: name,
+            phone,
+            email: email || undefined,
+            question: question || undefined,
+          }),
     )
     setWaUrl(url)
 
@@ -109,10 +121,13 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
               <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-emerald-600 text-white shadow-md">
                 <CheckCircle2 size={28} aria-hidden="true" />
               </span>
-              <h2 className="t-h3 mt-5 font-display font-medium text-ink">Enquiry sent!</h2>
+              <h2 className="t-h3 mt-5 font-display font-medium text-ink">
+                {course ? 'Enquiry ready' : 'Request ready'}
+              </h2>
               <p className="mt-2 text-base text-muted md:text-sm">
-                Redirecting to WhatsApp counselor chat. Our team will assist you with admission
-                details for {course.code}.
+                {course
+                  ? `Opening WhatsApp with your details for ${course.code}. Press send there and a counsellor will pick it up.`
+                  : 'Opening WhatsApp with your details. Press send there and a counsellor will call you back.'}
               </p>
               <div className="mt-6 flex flex-col gap-2.5 sm:flex-row sm:justify-center">
                 {waUrl && (
@@ -132,12 +147,16 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
             </div>
           ) : (
             <>
-              <span className="badge text-xs">{course.years} · UGC recognized</span>
+              <span className="badge text-xs">
+                {course ? `${course.years} · UGC recognized` : 'Free consultation'}
+              </span>
               <h2 id="apply-title" className="t-h3 mt-2.5 pr-12 font-display font-medium">
-                Enquire about {course.code}
+                {course ? `Enquire about ${course.code}` : 'Book a call'}
               </h2>
               <p className="mt-1 text-sm text-muted">
-                {course.name} · Admission &amp; fee guidance
+                {course
+                  ? `${course.name} · Admission & fee guidance`
+                  : 'Tell us how to reach you and a counsellor will call back.'}
               </p>
 
               <form
@@ -211,13 +230,18 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
 
                 <div className="sm:col-span-2">
                   <label htmlFor="apply-question" className="text-sm font-medium">
-                    Questions or notes <span className="text-muted">(optional)</span>
+                    {course ? 'Questions or notes' : 'What is it about?'}{' '}
+                    <span className="text-muted">(optional)</span>
                   </label>
                   <input
                     id="apply-question"
                     name="question"
                     type="text"
-                    placeholder="e.g. Credit transfer, fee EMI, syllabus"
+                    placeholder={
+                      course
+                        ? 'e.g. Credit transfer, fee EMI, syllabus'
+                        : 'e.g. Which degree suits me, credit transfer'
+                    }
                     className={field}
                   />
                 </div>
@@ -227,7 +251,11 @@ export function ApplyDialog({ course, onClose }: { course: Course; onClose: () =
                   disabled={status === 'sending'}
                   className="btn btn-arrow btn-primary mt-1 justify-center disabled:opacity-60 sm:col-span-2"
                 >
-                  {status === 'sending' ? 'Submitting enquiry…' : 'Submit enquiry'}
+                  {status === 'sending'
+                    ? 'Opening WhatsApp…'
+                    : course
+                      ? 'Submit enquiry'
+                      : 'Request a call back'}
                   <ArrowRight size={16} aria-hidden="true" />
                 </button>
                 <p className="text-center text-xs text-muted sm:col-span-2">
