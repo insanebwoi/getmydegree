@@ -3,6 +3,13 @@ import { site } from './site'
 /** One number, one place. */
 export const WHATSAPP_NUMBER = '918606677828'
 
+/** The studio that built the site. Its own number, not the counselling line. */
+const DEVELOPER_NUMBER = '919544464144'
+
+export const developerHref = `https://wa.me/${DEVELOPER_NUMBER}?text=${encodeURIComponent(
+  'Hi Delogen, I found you through the GetMyDegree website and would like to talk about a project.',
+)}`
+
 /**
  * Message templates.
  *

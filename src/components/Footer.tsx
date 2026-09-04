@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { courseSlug } from '../data/courses'
+import { developerHref } from '../data/whatsapp'
 import {
   Clock,
   GraduationCap,
@@ -193,11 +194,26 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="mt-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs text-white/50">
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs text-white/50 sm:pr-20 2xl:pr-0">
             <p>
               © {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
             <p>UGC recognized · NAAC accredited · AICTE approved</p>
+            {/*
+              The build credit, on the same rule as the copyright   a line the
+              reader can skip, not a claim competing with the accreditations.
+            */}
+            <p>
+              Developed by{' '}
+              <a
+                href={developerHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-white/70 underline-offset-2 transition-colors hover:text-gold hover:underline"
+              >
+                Delogen
+              </a>
+            </p>
           </div>
         </div>
       </div>
