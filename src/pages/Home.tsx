@@ -108,8 +108,9 @@ export default function Home() {
                         <br />
                         {s.headline[1]}
                       </div>
-                      <div className="mt-3 max-w-[34rem] mx-auto lg:mx-0 text-[0.9375rem] leading-relaxed sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
-                        {s.body}
+                      <div className="mx-auto mt-3 max-w-[34rem] text-[0.875rem] leading-relaxed sm:mt-3.5 sm:text-base lg:mx-0 lg:text-[1.0625rem]">
+                        <span className="sm:hidden">{s.shortBody}</span>
+                        <span className="hidden sm:inline">{s.body}</span>
                       </div>
                     </div>
                   ))}
@@ -143,8 +144,9 @@ export default function Home() {
                             <span className="text-navy">{s.headline[1]}</span>
                           </div>
                         )}
-                        <p className="mt-3 max-w-[34rem] mx-auto lg:mx-0 text-[0.9375rem] leading-relaxed text-ink sm:mt-3.5 sm:text-base lg:text-[1.0625rem] lg:text-muted">
-                          {s.body}
+                        <p className="mx-auto mt-3 max-w-[34rem] text-[0.875rem] leading-relaxed text-ink sm:mt-3.5 sm:text-base lg:mx-0 lg:text-[1.0625rem] lg:text-muted">
+                          <span className="sm:hidden">{s.shortBody}</span>
+                          <span className="hidden sm:inline">{s.body}</span>
                         </p>
                       </div>
                     )

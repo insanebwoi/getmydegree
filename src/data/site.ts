@@ -390,6 +390,9 @@ export type HeroSlide = {
   image: 'hero-portrait' | 'hero-portrait-2' | 'hero-portrait-3'
   headline: [string, string]
   body: string
+  /** Phones get the same promise in half the words   `body` is written for
+   *  the desktop column, where there is room for the qualifiers. */
+  shortBody: string
 }
 
 export const heroSlides: HeroSlide[] = [
@@ -397,15 +400,19 @@ export const heroSlides: HeroSlide[] = [
     image: 'hero-portrait',
     headline: ['Finish Your Degree,', 'Restart Your Career'],
     body: 'Complete a UGC, AICTE & NAAC approved degree from Central and State universities around your job   no entrance exam, no attendance, admission confirmed within 48 hours.',
+    shortBody: 'An approved degree from Central and State universities, completed around your job.',
   },
   {
     image: 'hero-portrait-2',
     headline: ['Study Around Your Job,', 'Not Instead Of It'],
     body: 'No attendance and no fixed class hours. Assessment is continuous, so the work fits into evenings and weekends at whatever pace your week allows.',
+    shortBody: 'No attendance, no fixed hours. The work fits your evenings and weekends.',
   },
   {
     image: 'hero-portrait-3',
     headline: ['A Degree That Counts', 'Where It Matters'],
     body: 'Awarded by Central & State Government, UGC, AICTE and NAAC approved universities in India and the UK   valid for government roles, promotions and further study.',
+    shortBody:
+      'From approved universities in India and the UK. Valid for government roles and promotions.',
   },
 ]
