@@ -47,10 +47,10 @@ export function Footer() {
           <div className="grid gap-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-9 lg:grid-cols-12 lg:gap-x-8">
             <div className="sm:col-span-2 lg:col-span-4">
               <img
-                src="/logo-light.svg"
+                src="/logo-light.webp"
                 alt={site.name}
-                width={180}
-                height={34}
+                width={400}
+                height={90}
                 className="h-7 w-auto sm:h-8"
               />
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">

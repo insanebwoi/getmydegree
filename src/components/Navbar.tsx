@@ -38,10 +38,10 @@ export function Navbar() {
         >
           <Link to="/" aria-label={`${site.name}   home`} className="action shrink-0">
             <img
-              src="/logo.svg"
+              src="/logo.webp"
               alt={site.name}
-              width={180}
-              height={34}
+              width={400}
+              height={90}
               className="h-9 w-auto sm:h-10"
             />
           </Link>
