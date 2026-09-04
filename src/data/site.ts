@@ -73,24 +73,35 @@ export const universities: {
   body: string
   initials: string
   logo?: string
+  /* The line across the card's foot. UK institutions are outside the UGC and
+     UPSC frame, so they carry their own claim rather than a borrowed one. */
+  validity: string
+  /* Same reason as validity: a UK university is not UGC approved. */
+  badge: string
 }[] = [
   {
     name: 'Rabindranath Tagore University',
     location: 'Madhya Pradesh, Bhopal',
     body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
     initials: 'RTU',
+    badge: 'UGC Approved',
+    validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
   },
   {
     name: 'PRIST Deemed University',
     location: 'Tamil Nadu, India',
     body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
     initials: 'PU',
+    badge: 'UGC Approved',
+    validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
   },
   {
     name: 'Marjon University',
     location: 'Cornwall, United Kingdom',
     body: 'UK government recognized university offering globally valid degrees.',
     initials: 'MU',
+    badge: 'UK Recognized',
+    validity: 'Globally Valid · UK Accredited · Career Ready',
   },
 ]
 

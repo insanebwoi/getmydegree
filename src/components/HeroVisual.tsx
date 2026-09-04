@@ -127,7 +127,10 @@ export function HeroVisual({ onChange }: Props) {
   const frames = mountRest ? heroSlides : heroSlides.slice(0, 1)
 
   return (
-    <div ref={frame} className="group absolute inset-0 -z-10">
+    <div
+      ref={frame}
+      className="group absolute inset-x-0 top-0 bottom-auto h-[var(--hero-band)] -z-10 sm:inset-0 sm:h-auto"
+    >
       <div ref={track} className="parallax enter-image absolute inset-0 overflow-hidden">
         <div
           role="img"

@@ -80,9 +80,9 @@ export default function Home() {
         <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line bg-white">
           <HeroVisual onChange={setSlide} />
           <div className="grid flex-1 items-stretch gap-5 sm:gap-7 lg:grid-cols-12 lg:gap-10">
-            <div className="flex flex-col justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)+0.5rem)] lg:col-span-7 lg:pt-3 xl:col-span-6">
+            <div className="flex flex-col items-center justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)+1.25rem)] text-center sm:pt-[calc(var(--hero-band)*0.42)] lg:col-span-7 lg:items-start lg:pt-3 lg:text-left xl:col-span-6">
               <p
-                className="enter mt-2 sm:mt-3 inline-flex items-center gap-2 self-start rounded-full border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
+                className="enter mt-0 inline-flex items-center gap-2 self-center rounded-full lg:mt-3 lg:self-start border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
                 style={{ ['--enter-delay' as string]: '60ms' }}
               >
                 <span
@@ -98,7 +98,7 @@ export default function Home() {
                 the box is as tall as the longest and nothing below it moves
                 when the slide turns.
               */}
-              <div className="relative mt-10 sm:mt-12 lg:mt-14">
+              <div className="relative mt-5 w-full sm:mt-6 lg:mt-14">
                 <div aria-hidden="true" className="invisible grid">
                   {heroSlides.map((s) => (
                     <div key={s.image} className="[grid-area:1/1]">
@@ -107,7 +107,7 @@ export default function Home() {
                         <br />
                         {s.headline[1]}
                       </div>
-                      <div className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
+                      <div className="mt-3 max-w-[34rem] mx-auto lg:mx-0 text-[0.9375rem] leading-relaxed sm:mt-3.5 sm:text-base lg:text-[1.0625rem]">
                         {s.body}
                       </div>
                     </div>
@@ -142,7 +142,7 @@ export default function Home() {
                             <span className="text-navy">{s.headline[1]}</span>
                           </div>
                         )}
-                        <p className="mt-3 max-w-[34rem] text-[0.9375rem] leading-relaxed text-ink sm:mt-3.5 sm:text-base lg:text-[1.0625rem] lg:text-muted">
+                        <p className="mt-3 max-w-[34rem] mx-auto lg:mx-0 text-[0.9375rem] leading-relaxed text-ink sm:mt-3.5 sm:text-base lg:text-[1.0625rem] lg:text-muted">
                           {s.body}
                         </p>
                       </div>
@@ -152,7 +152,7 @@ export default function Home() {
               </div>
 
               <ul
-                className="enter mt-2 flex flex-wrap items-center gap-x-3.5 gap-y-1 text-[0.75rem] font-medium text-ink sm:mt-2.5 sm:gap-x-5 sm:text-sm"
+                className="enter mt-2 flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1 text-[0.75rem] font-medium text-ink sm:mt-2.5 sm:gap-x-5 sm:text-sm lg:justify-start"
                 style={{ ['--enter-delay' as string]: '300ms' }}
               >
                 {['No entrance exam', 'No attendance', 'Admission within 48 hours'].map((point) => (
@@ -171,7 +171,7 @@ export default function Home() {
               </ul>
 
               <div
-                className="enter mt-3 flex flex-col items-stretch gap-3 sm:mt-3.5 sm:flex-row sm:items-center"
+                className="enter mt-3 flex w-full flex-col items-stretch gap-3 sm:mt-3.5 sm:w-auto sm:flex-row sm:items-center"
                 style={{ ['--enter-delay' as string]: '360ms' }}
               >
                 <Link to="/contact" className="btn btn-arrow btn-primary justify-center">
@@ -252,7 +252,9 @@ export default function Home() {
             3-Year Distance &amp; Regular Degree Programs
           </p>
           <p className="mt-2 text-sm text-muted">
-            Degrees awarded by UGC, AICTE &amp; NAAC recognized universities in India and accredited institutions in the United Kingdom — 100% valid for government roles, promotions and higher education.
+            Degrees awarded by UGC, AICTE &amp; NAAC recognized universities in India and accredited
+            institutions in the United Kingdom — 100% valid for government roles, promotions and
+            higher education.
           </p>
         </Reveal>
 
@@ -267,7 +269,7 @@ export default function Home() {
                     </span>
                     <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[0.6875rem] font-medium text-emerald-700">
                       <ShieldCheck size={12} />
-                      UGC Approved
+                      {u.badge}
                     </span>
                   </div>
 
@@ -278,14 +280,12 @@ export default function Home() {
                     <MapPin size={13} className="text-gold-700 shrink-0" />
                     {u.location}
                   </p>
-                  <p className="mt-3 text-xs leading-relaxed text-muted sm:text-sm">
-                    {u.body}
-                  </p>
+                  <p className="mt-3 text-xs leading-relaxed text-muted sm:text-sm">{u.body}</p>
                 </div>
 
                 <div className="mt-5 border-t border-line pt-3.5 text-center">
                   <span className="text-[0.6875rem] font-semibold uppercase tracking-wider text-navy">
-                    Valid for Govt Jobs · UPSC · PSC · Overseas
+                    {u.validity}
                   </span>
                 </div>
               </div>

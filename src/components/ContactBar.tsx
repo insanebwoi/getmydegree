@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Phone } from 'lucide-react'
 import { site } from '../data/site'
 
@@ -37,30 +37,46 @@ function WhatsAppMark({ className }: { className?: string }) {
  */
 export function ContactBar() {
   const [hovered, setHovered] = useState(false)
+  const [past, setPast] = useState(false)
+
+  /*
+    Nothing floats over the hero: the hero already carries both actions, and a
+    bar there would cover them. It arrives once the reader has scrolled a
+    screen and a half — past the hero, into the page — and leaves again if
+    they scroll back up.
+  */
+  useEffect(() => {
+    const onScroll = () => setPast(window.scrollY > window.innerHeight * 1.5)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <>
       {/* Phones: one bar, two actions. */}
       <nav
         aria-label="Contact us"
-        className="fixed inset-x-0 bottom-0 z-90 flex justify-center px-4 pt-2 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:hidden"
+        className={`fixed inset-x-0 bottom-0 z-90 flex justify-center px-4 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] transition-all duration-300 sm:hidden ${
+          past ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+        }`}
       >
-        <div className="flex items-center gap-1 rounded-full border border-line bg-white/95 p-1 shadow-[0_10px_36px_-12px_rgba(5,18,41,0.45)] backdrop-blur-md">
+        <div className="flex items-center gap-0.5 rounded-full border border-line bg-white/95 p-0.5 shadow-[0_8px_28px_-10px_rgba(5,18,41,0.4)] backdrop-blur-md">
           <a
             href={`tel:${site.phoneHref}`}
-            className="flex min-h-12 items-center gap-2 rounded-full px-5 text-sm font-medium text-navy transition-colors hover:bg-navy-50"
+            className="flex min-h-11 items-center gap-1.5 rounded-full px-4 text-[0.8125rem] font-medium text-navy transition-colors hover:bg-navy-50"
           >
-            <Phone size={17} aria-hidden="true" />
+            <Phone size={15} aria-hidden="true" />
             Call
           </a>
-          <span className="h-6 w-px bg-line" aria-hidden="true" />
+          <span className="h-5 w-px bg-line" aria-hidden="true" />
           <a
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-12 items-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-semibold text-white transition-colors hover:bg-[#20ba5a]"
+            className="flex min-h-11 items-center gap-1.5 rounded-full bg-[#25D366] px-4 text-[0.8125rem] font-semibold text-white transition-colors hover:bg-[#20ba5a]"
           >
-            <WhatsAppMark className="h-5 w-5" />
+            <WhatsAppMark className="h-4.5 w-4.5" />
             WhatsApp
           </a>
         </div>

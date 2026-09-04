@@ -367,7 +367,7 @@ export default function Contact() {
                   href={`https://wa.me/918606677828?text=${encodeURIComponent('Hello GetMyDegree, I would like urgent academic counseling assistance.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-semibold text-[#25D366] hover:underline"
+                  className="action gap-1 font-semibold text-[#25D366] hover:underline"
                 >
                   <MessageCircle size={14} />
                   <span>Chat directly on WhatsApp: +91 86066 77828</span>
@@ -416,7 +416,7 @@ export default function Contact() {
                         {c.address}
                       </p>
                       <p className="mt-1.5 text-[0.6875rem] font-medium text-white/50">
-                        Ph: <a href={`tel:${c.phoneHref}`} className="hover:text-white/80">{c.phone}</a>
+                        Ph: <a href={`tel:${c.phoneHref}`} className="action hover:text-white/80">{c.phone}</a>
                       </p>
                     </div>
                   ))}

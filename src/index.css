@@ -540,6 +540,18 @@
     padding-block: var(--hero-pad-y);
   }
 
+  /*
+    Phones: the panel is sized by its copy, not by the viewport. Holding a
+    full screen left a third of the panel as blank pale photograph above the
+    headline   space with nothing in it, paid for by an extra scroll.
+  */
+  @media (max-width: 639px) {
+    .hero-screen {
+      --hero-band: clamp(96px, 13vh, 132px);
+      min-height: 0;
+    }
+  }
+
   @media (min-width: 640px) {
     .hero-screen {
       --nav-h: 76px;
