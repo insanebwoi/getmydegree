@@ -36,8 +36,8 @@ export function Footer() {
   return (
     <footer className="pb-[calc(4.5rem+env(safe-area-inset-bottom))] sm:pb-4">
       <div className="shell">
-        <div className="rounded-[var(--radius-panel)] bg-navy-950 px-5 py-10 text-white sm:px-8 sm:py-12 lg:px-12 lg:py-14">
-          <div className="grid gap-9 sm:grid-cols-2 sm:gap-10 lg:grid-cols-12 lg:gap-8">
+        <div className="rounded-[var(--radius-panel)] bg-navy-950 px-5 py-9 text-white sm:px-8 sm:py-11 lg:px-10 lg:py-12">
+          <div className="grid gap-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-9 lg:grid-cols-12 lg:gap-x-8">
             <div className="sm:col-span-2 lg:col-span-4">
               <img
                 src="/logo-light.svg"
@@ -70,25 +70,66 @@ export function Footer() {
               Each page says what it holds, so the column is a way in rather
               than a list of words the reader has already seen in the navbar.
             */}
-            <nav aria-label="Pages" className="sm:col-span-2 lg:col-span-5">
+            {/*
+              Three columns that read across: where to go, what to study, how
+              to reach us. The programmes are the reason most people open the
+              footer, so they sit in the middle at full strength rather than
+              wrapping into a band below everything.
+            */}
+            {/*
+              Five destinations the navbar already carries, so on a phone they
+              are a single wrapped row rather than five 44px rows costing more
+              height than all nine programmes. From lg they return to a column,
+              where the space is free.
+            */}
+            <nav aria-label="Pages" className="lg:col-span-4">
               <h2 className={heading}>Explore</h2>
-              <ul className="mt-4 grid gap-1 sm:grid-cols-2">
+              <ul className="mt-3.5 flex flex-wrap gap-x-1.5 gap-y-1 lg:mt-4 lg:grid lg:gap-0.5">
                 {PAGE_LINKS.map((page) => (
                   <li key={page.to}>
                     <Link
                       to={page.to}
-                      className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/5"
+                      className="flex min-h-9 items-center gap-2 rounded-full border border-white/10 px-3 text-sm text-white/70 transition-colors hover:border-gold/40 hover:text-gold lg:min-h-0 lg:rounded-none lg:border-0 lg:px-0 lg:py-1.5"
                     >
-                      <page.Icon
-                        size={16}
-                        className="mt-0.5 shrink-0 text-gold"
-                        aria-hidden="true"
-                      />
-                      <span className="min-w-0">
-                        <span className="block text-sm font-medium text-white">{page.label}</span>
-                        <span className="mt-0.5 block text-xs leading-snug text-white/50">
-                          {page.hint}
-                        </span>
+                      <page.Icon size={14} className="shrink-0 text-gold" aria-hidden="true" />
+                      {page.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/*
+              Two columns of programmes, split the way a reader chooses one:
+              bachelor's or master's. The code leads because that is what people
+              scan for; the full name follows it quietly on the same line.
+            */}
+            {/*
+              All nine in one grid, UG first, the level marked on the entry.
+              Splitting the block into two named groups never fit a row: the
+              names either collided with the neighbouring group or truncated.
+              The code leads, since that is what people scan for.
+            */}
+            <nav
+              aria-label="Degree programmes"
+              className="sm:col-span-2 lg:order-last lg:col-span-12 lg:border-t lg:border-white/10 lg:pt-8"
+            >
+              <h2 className={heading}>Degree programmes</h2>
+              <ul className="mt-4 grid gap-x-6 gap-y-0.5 min-[360px]:grid-cols-2 lg:gap-x-10 xl:grid-cols-3 xl:gap-x-16">
+                {courses.map((course) => (
+                  <li key={course.code} className="min-w-0">
+                    <Link
+                      to={`/courses/${courseSlug(course)}`}
+                      className="group flex min-w-0 items-baseline gap-2 rounded-lg py-1.5 text-sm transition-colors hover:text-gold"
+                    >
+                      <span className="w-[3.25rem] shrink-0 font-medium text-white/85 group-hover:text-gold">
+                        {course.code}
+                      </span>
+                      {/* Anchor text for crawlers at every width; the phone
+                          hides it, where it would wrap and pull the two
+                          columns out of step. */}
+                      <span className="hidden min-w-0 truncate text-white/45 group-hover:text-gold/80 sm:block">
+                        {course.name}
                       </span>
                     </Link>
                   </li>
@@ -96,23 +137,7 @@ export function Footer() {
               </ul>
             </nav>
 
-            <nav aria-label="Degree programmes" className="sm:col-span-2 lg:col-span-12">
-              <h2 className={heading}>Degree programmes</h2>
-              <ul className="mt-4 flex flex-wrap gap-x-1 gap-y-1">
-                {courses.map((course) => (
-                  <li key={course.code}>
-                    <Link
-                      to={`/courses/${courseSlug(course)}`}
-                      className="block rounded-lg px-2.5 py-2 text-sm text-white/60 transition-colors hover:bg-white/5 hover:text-white"
-                    >
-                      {course.code} <span className="text-white/35">{course.name}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-4">
               <h2 className={heading}>Get in touch</h2>
               <ul className="mt-4 grid gap-0.5">
                 <li>
@@ -139,7 +164,7 @@ export function Footer() {
           </div>
 
           {/* The centres, on their own rule: an address is not a nav link. */}
-          <div className="mt-10 grid gap-6 border-t border-white/10 pt-8 sm:grid-cols-2 sm:gap-8">
+          <div className="mt-9 grid gap-5 border-t border-white/10 pt-7 sm:grid-cols-2 sm:gap-8">
             {centers.map((center) => (
               <address key={center.city} className="flex gap-3 not-italic">
                 <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/8 text-gold">
@@ -161,7 +186,7 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs text-white/50">
+          <div className="mt-7 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-t border-white/10 pt-6 text-xs text-white/50">
             <p>
               © {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>

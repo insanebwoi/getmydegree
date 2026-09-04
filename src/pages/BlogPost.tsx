@@ -70,9 +70,29 @@ export default function BlogPost() {
       </nav>
 
       <article>
+        {/*
+          The article's own cover carries its banner, the way every other page
+          on the site leads with a photograph. The picture is clear   only the
+          area under the words is washed out, by the same radial brush the
+          other page heroes use, so the type keeps its contrast without a flat
+          panel sitting over the image.
+        */}
         <section className="shell pt-1 pb-8 lg:pb-12">
-          <div className="panel px-4 py-11 sm:px-8 sm:py-14 lg:py-16">
-            <Reveal className="mx-auto max-w-3xl text-center">
+          <div className="panel relative isolate overflow-hidden border-transparent px-4 py-12 sm:px-8 sm:py-16 lg:py-20">
+            <Photo
+              src={post.cover}
+              alt=""
+              rounded="none"
+              priority
+              className="absolute inset-0 -z-20 h-full w-full object-[50%_45%]"
+            />
+            {/* The wash hugs the text block rather than the panel edge. */}
+            <div
+              aria-hidden="true"
+              className="page-brush absolute -inset-x-16 -inset-y-16 -z-10 sm:-inset-x-32 sm:-inset-y-24"
+            />
+
+            <Reveal className="relative mx-auto max-w-3xl text-center">
               <Link to="/blog" className="action text-sm font-medium text-navy">
                 <ArrowLeft size={15} className="mr-1.5" aria-hidden="true" />
                 All articles
@@ -96,14 +116,10 @@ export default function BlogPost() {
             {/*
               The article sits on its own white surface, like every other block
               on the site, rather than directly on the page wash. Its children
-              share one measure so the cover, text and CTA align.
+              share one measure so the text and CTA align.
             */}
             <div className="lg:col-span-8">
               <div className="panel card-p sm:p-8 lg:p-10 [&>*]:mx-auto [&>*]:max-w-[68ch]">
-                <Reveal>
-                  <Photo src={post.cover} alt={post.title} ratio="16/9" priority />
-                </Reveal>
-
                 {body ? (
                   <div
                     className="prose mt-9"
