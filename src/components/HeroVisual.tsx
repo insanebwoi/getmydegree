@@ -143,7 +143,7 @@ export function HeroVisual({ onChange }: Props) {
   return (
     <div
       ref={frame}
-      className="group absolute inset-x-0 top-0 bottom-auto h-[var(--hero-band)] -z-10 sm:inset-0 sm:h-auto"
+      className="group absolute top-[var(--hero-pad-y)] right-[var(--hero-pad)] left-[var(--hero-pad)] -z-10 h-[var(--hero-band)] overflow-hidden rounded-[var(--radius-card)] sm:inset-0 sm:h-auto sm:rounded-none"
     >
       <div ref={track} className="parallax enter-image absolute inset-0 overflow-hidden">
         <div

@@ -81,7 +81,7 @@ export default function Home() {
         <div className="hero-screen relative isolate overflow-hidden rounded-[var(--radius-panel)] border border-line bg-white">
           <HeroVisual onChange={setSlide} />
           <div className="grid flex-1 items-stretch gap-5 sm:gap-7 lg:grid-cols-12 lg:gap-10">
-            <div className="flex flex-col items-center justify-center pt-[calc(var(--hero-band)-var(--hero-pad-y)+1.25rem)] text-center sm:pt-[calc(var(--hero-band)*0.42)] lg:col-span-7 lg:items-start lg:pt-3 lg:text-left xl:col-span-6">
+            <div className="flex flex-col items-center justify-center pt-[calc(var(--hero-band)+var(--hero-pad-y)+0.5rem)] text-center sm:pt-[calc(var(--hero-band)*0.42)] lg:col-span-7 lg:items-start lg:pt-3 lg:text-left xl:col-span-6">
               <p
                 className="enter mt-0 inline-flex items-center gap-2 self-center rounded-full lg:mt-3 lg:self-start border border-line bg-white py-1.5 pr-4 pl-3 text-[0.8125rem] font-medium text-ink shadow-[0_1px_2px_rgba(14,21,38,0.04)]"
                 style={{ ['--enter-delay' as string]: '60ms' }}
