@@ -34,6 +34,9 @@ export function HeroVisual({ onChange }: Props) {
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [animated, setAnimated] = useState(false)
+  /* Below lg there are no controls, so the sequence is finite   see the effect
+     that sets it. Above lg it loops, because the pause button is there. */
+  const [loops, setLoops] = useState(true)
   const [mountRest, setMountRest] = useState(false)
 
   useEffect(() => {
@@ -43,17 +46,21 @@ export function HeroVisual({ onChange }: Props) {
 
   useEffect(() => {
     /*
-      The sequence runs from lg up.
+      The sequence runs at every width, so a phone sees all three messages
+      rather than one. Nothing is drawn over the photograph below lg: the pips
+      and the pause button are a desktop affordance, revealed on hover.
 
-      Below that there is no room for the pips and the pause button without
-      putting a bar over the photograph, and WCAG 2.2.2 will not let content
-      move on its own without a way to stop it   the slides carry the headline
-      as well as the picture, so this is moving text, not decoration. With no
-      control there can be no motion: a phone gets the first slide, still.
+      Without those controls the motion has to end by itself, or it would be
+      auto-updating content with no way to stop it (WCAG 2.2.2). So below lg it
+      plays each slide once and settles on the last; above lg it loops, because
+      there the pause button exists. Reduced-motion turns it off entirely.
     */
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
     const wide = window.matchMedia('(min-width: 1024px)')
-    const sync = () => setAnimated(!still.matches && wide.matches)
+    const sync = () => {
+      setAnimated(!still.matches)
+      setLoops(wide.matches)
+    }
     sync()
     still.addEventListener('change', sync)
     wide.addEventListener('change', sync)
@@ -75,7 +82,11 @@ export function HeroVisual({ onChange }: Props) {
     let onScreen = true
     const timer = window.setInterval(() => {
       if (document.hidden || !onScreen) return
-      setIndex((i) => (i + 1) % heroSlides.length)
+      setIndex((i) => {
+        const next = i + 1
+        if (next >= heroSlides.length) return loops ? 0 : i
+        return next
+      })
     }, HOLD)
 
     const observer = new IntersectionObserver(([entry]) => (onScreen = entry.isIntersecting), {
@@ -87,7 +98,7 @@ export function HeroVisual({ onChange }: Props) {
       window.clearInterval(timer)
       observer.disconnect()
     }
-  }, [animated, paused])
+  }, [animated, paused, loops])
 
   // Pointer parallax: a few pixels of depth, fine pointers only.
   useEffect(() => {
@@ -157,7 +168,7 @@ export function HeroVisual({ onChange }: Props) {
         </div>
 
         {animated && (
-          <div className="absolute top-4 right-4 z-20 flex items-center gap-3">
+          <div className="absolute top-4 right-4 z-20 hidden items-center gap-3 lg:flex">
             <div className="flex items-center gap-1.5" aria-hidden="true">
               {heroSlides.map((slide, i) => (
                 <span key={slide.image} className="hero-pip" data-active={i === active} />
