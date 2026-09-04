@@ -200,13 +200,23 @@ export function Gallery() {
           {/* The measured set, then a second copy so the wrap is invisible. */}
           <ul ref={unit} className="gallery-set">
             {set.map((image, i) => (
-              <Tile key={`a-${i}`} image={image} eager={i < 3} onOpen={() => setPreview(image.src)} />
+              <Tile
+                key={`a-${i}`}
+                image={image}
+                eager={i < 3}
+                onOpen={() => setPreview(image.src)}
+              />
             ))}
           </ul>
           {animated && (
             <ul className="gallery-set" aria-hidden="true">
               {set.map((image, i) => (
-                <Tile key={`b-${i}`} image={image} eager={false} onOpen={() => setPreview(image.src)} />
+                <Tile
+                  key={`b-${i}`}
+                  image={image}
+                  eager={false}
+                  onOpen={() => setPreview(image.src)}
+                />
               ))}
             </ul>
           )}
@@ -290,6 +300,7 @@ function Tile({
   eager: boolean
   onOpen: () => void
 }) {
+  const [loaded, setLoaded] = useState(false)
   return (
     <li className="shrink-0">
       <button
@@ -308,8 +319,16 @@ function Tile({
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
           draggable={false}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(true)}
+          ref={(el) => {
+            // Cache can beat the handler; ask the element directly.
+            if (el?.complete && el.naturalWidth > 0) setLoaded(true)
+          }}
           style={{ aspectRatio: `${image.width} / ${image.height}` }}
-          className="h-44 w-auto object-cover transition-transform duration-300 hover:scale-[1.03] sm:h-56 lg:h-64"
+          className={`photo-fade h-44 w-auto object-cover transition-transform duration-300 hover:scale-[1.03] sm:h-56 lg:h-64 ${
+            loaded ? 'is-loaded' : ''
+          }`}
         />
       </button>
     </li>
