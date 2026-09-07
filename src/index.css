@@ -1,6 +1,28 @@
 @import 'tailwindcss';
 
 /*
+  Self-hosted, same-origin   loading these from Google Fonts cost two extra
+  cross-origin round trips (fonts.googleapis.com for the CSS, then
+  fonts.gstatic.com for the file) before the page's largest text could paint.
+  One variable-font file per family covers every weight in use.
+*/
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/outfit-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Work Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/work-sans-variable.woff2') format('woff2');
+}
+
+/*
   Soft card system   neutral wash, white cards, generous radii, quiet shadows.
   Navy carries the interface; gold is the single highlight.
 */
