@@ -13,7 +13,19 @@ import { marked } from 'marked'
  */
 const FORMAT_PRIORITY = ['.avif', '.webp', '.jpg', '.jpeg', '.png', '.svg']
 
-function scanImages(dir: string, urlPrefix: string, out: Record<string, string>) {
+/**
+ * Social scrapers (Facebook, LinkedIn, WhatsApp) render OG images unreliably
+ * or not at all when they're WebP/AVIF, so the og:image tag needs a JPEG or
+ * PNG file specifically   never the same file the page itself uses.
+ */
+const OG_FORMAT_PRIORITY = ['.jpg', '.jpeg', '.png', '.webp', '.avif', '.svg']
+
+function scanImages(
+  dir: string,
+  urlPrefix: string,
+  out: Record<string, string>,
+  formatPriority: string[] = FORMAT_PRIORITY,
+) {
   let entries: import('node:fs').Dirent[]
   try {
     entries = readdirSync(dir, { withFileTypes: true })
@@ -23,15 +35,15 @@ function scanImages(dir: string, urlPrefix: string, out: Record<string, string>)
   for (const entry of entries) {
     if (entry.isDirectory()) {
       if (entry.name === 'gallery') continue
-      scanImages(join(dir, entry.name), `${urlPrefix}/${entry.name}`, out)
+      scanImages(join(dir, entry.name), `${urlPrefix}/${entry.name}`, out, formatPriority)
       continue
     }
     const ext = extname(entry.name).toLowerCase()
-    const rank = FORMAT_PRIORITY.indexOf(ext)
+    const rank = formatPriority.indexOf(ext)
     if (rank === -1) continue
     const name = basename(entry.name, ext)
     const existing = out[name]
-    if (existing && FORMAT_PRIORITY.indexOf(extname(existing).toLowerCase()) <= rank) continue
+    if (existing && formatPriority.indexOf(extname(existing).toLowerCase()) <= rank) continue
     out[name] = `${urlPrefix}/${entry.name}`
   }
 }
@@ -116,12 +128,25 @@ function imageSize(file: string): { width: number; height: number } | undefined 
   return undefined
 }
 
+type OgImage = { src: string; width: number; height: number }
+
 function imageManifest(): Plugin {
   const virtualId = 'virtual:image-manifest'
   const resolvedId = '\0' + virtualId
+  const imagesDir = join(process.cwd(), 'public/images')
   const build = () => {
     const manifest: Record<string, string> = {}
-    scanImages(join(process.cwd(), 'public/images'), '/images', manifest)
+    scanImages(imagesDir, '/images', manifest)
+    return manifest
+  }
+  const buildOgManifest = () => {
+    const paths: Record<string, string> = {}
+    scanImages(imagesDir, '/images', paths, OG_FORMAT_PRIORITY)
+    const manifest: Record<string, OgImage> = {}
+    for (const [name, src] of Object.entries(paths)) {
+      const size = imageSize(join(process.cwd(), 'public', src.replace(/^\//, '')))
+      if (size) manifest[name] = { src, ...size }
+    }
     return manifest
   }
   return {
@@ -130,6 +155,7 @@ function imageManifest(): Plugin {
     load: (id) =>
       id === resolvedId
         ? `export const imageManifest = ${JSON.stringify(build())};\n` +
+          `export const ogImageManifest = ${JSON.stringify(buildOgManifest())};\n` +
           `export const galleryImages = ${JSON.stringify(scanGallery(join(process.cwd(), 'public/images/gallery')))};`
         : undefined,
     // Picking up a newly added photograph should not need a restart.

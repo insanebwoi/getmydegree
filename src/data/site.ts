@@ -122,10 +122,10 @@ export const mbaModules = [
 ]
 
 export const pricing = [
-  { label: 'MBA', price: '$6,000' },
-  { label: 'BSc Business', price: '$7,500' },
-  { label: 'MA Programs', price: '$6,500' },
-  { label: 'Start From', price: '$1,000' },
+  { label: 'MBA', price: '₹6,000' },
+  { label: 'BSc Business', price: '₹7,500' },
+  { label: 'MA Programs', price: '₹6,500' },
+  { label: 'Start From', price: '₹1,000' },
 ]
 
 export const testimonials = [

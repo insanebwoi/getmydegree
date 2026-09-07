@@ -2,6 +2,7 @@ import { site } from './site'
 import { posts } from './posts'
 import { courses, universities } from './site'
 import { courseSlug } from './courses'
+import { ogImageFor } from './images'
 
 export type PageMeta = {
   title: string
@@ -125,11 +126,16 @@ export function canonical(meta: PageMeta) {
 }
 
 /**
- * Absolute URL for an OG image. The default is the hero photograph   a real
- * asset at 1500x844, close enough to 1.91:1 for every scraper   rather than a
- * separately maintained card that would drift out of date.
+ * The og:image for this page: an absolute URL, plus its pixel size where
+ * known. The default is the hero photograph. A JPEG/PNG file is preferred
+ * over whatever format the page itself uses, since WebP/AVIF render
+ * unreliably as link-preview images on Facebook, LinkedIn and WhatsApp.
  */
-export function ogImage(meta: PageMeta) {
+export function ogImage(meta: PageMeta): { url: string; width?: number; height?: number } {
   const path = meta.image ?? '/images/home/hero-portrait.webp'
-  return path.startsWith('http') ? path : `${site.url}${path}`
+  if (path.startsWith('http')) return { url: path }
+  const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '')
+  const { src, width, height } = ogImageFor(name, path)
+  const url = src.startsWith('http') ? src : `${site.url}${src}`
+  return { url, width, height }
 }

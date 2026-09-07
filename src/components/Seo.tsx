@@ -46,7 +46,9 @@ export function Seo({ schema, ...meta }: Props) {
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:url', url)
     setMeta('property', 'og:type', type)
-    setMeta('property', 'og:image', image)
+    setMeta('property', 'og:image', image.url)
+    setMeta('property', 'og:image:width', image.width ? String(image.width) : undefined)
+    setMeta('property', 'og:image:height', image.height ? String(image.height) : undefined)
     setMeta('property', 'og:site_name', site.name)
     setMeta('property', 'og:locale', 'en_IN')
 
@@ -58,7 +60,7 @@ export function Seo({ schema, ...meta }: Props) {
     setMeta('name', 'twitter:card', 'summary_large_image')
     setMeta('name', 'twitter:title', title)
     setMeta('name', 'twitter:description', description)
-    setMeta('name', 'twitter:image', image)
+    setMeta('name', 'twitter:image', image.url)
 
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     if (!link) {
@@ -77,7 +79,20 @@ export function Seo({ schema, ...meta }: Props) {
       script.textContent = JSON.stringify(schema)
       document.head.appendChild(script)
     }
-  }, [title, description, url, image, type, noindex, publishedTime, modifiedTime, section, schema])
+  }, [
+    title,
+    description,
+    url,
+    image.url,
+    image.width,
+    image.height,
+    type,
+    noindex,
+    publishedTime,
+    modifiedTime,
+    section,
+    schema,
+  ])
 
   return null
 }

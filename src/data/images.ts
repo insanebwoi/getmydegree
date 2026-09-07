@@ -6,7 +6,7 @@
  * to whichever file exists, preferring real formats over the .svg placeholder,
  * so no code change is needed. Cropping is handled by the layout.
  */
-import { imageManifest } from 'virtual:image-manifest'
+import { imageManifest, ogImageManifest } from 'virtual:image-manifest'
 
 export type ImageSlot = {
   /** Placeholder path; overridden by any real file of the same base name. */
@@ -131,6 +131,18 @@ export type ImageName = keyof typeof declared
 /** Resolves a slot to the file that actually exists for it. */
 export function imageSrc(name: string, fallback: string) {
   return imageManifest[name] ?? fallback
+}
+
+/**
+ * The JPEG/PNG file and pixel size for a photograph, for use as an og:image.
+ * Falls back to the page's own src (and no dimensions) if no such file
+ * exists yet   still a valid, if unoptimal, og:image.
+ */
+export function ogImageFor(
+  name: string,
+  fallback: string,
+): { src: string; width?: number; height?: number } {
+  return ogImageManifest[name] ?? { src: fallback }
 }
 
 export const images = Object.fromEntries(

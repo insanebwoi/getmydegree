@@ -200,23 +200,13 @@ export function Gallery() {
           {/* The measured set, then a second copy so the wrap is invisible. */}
           <ul ref={unit} className="gallery-set">
             {set.map((image, i) => (
-              <Tile
-                key={`a-${i}`}
-                image={image}
-                eager={i < 3}
-                onOpen={() => setPreview(image.src)}
-              />
+              <Tile key={`a-${i}`} image={image} onOpen={() => setPreview(image.src)} />
             ))}
           </ul>
           {animated && (
             <ul className="gallery-set" aria-hidden="true">
               {set.map((image, i) => (
-                <Tile
-                  key={`b-${i}`}
-                  image={image}
-                  eager={false}
-                  onOpen={() => setPreview(image.src)}
-                />
+                <Tile key={`b-${i}`} image={image} onOpen={() => setPreview(image.src)} />
               ))}
             </ul>
           )}
@@ -291,15 +281,7 @@ function Preview({ src, onClose }: { src: string; onClose: () => void }) {
   )
 }
 
-function Tile({
-  image,
-  eager,
-  onOpen,
-}: {
-  image: GalleryImage
-  eager: boolean
-  onOpen: () => void
-}) {
+function Tile({ image, onOpen }: { image: GalleryImage; onOpen: () => void }) {
   const [loaded, setLoaded] = useState(false)
   return (
     <li className="shrink-0">
@@ -316,7 +298,7 @@ function Tile({
           alt=""
           width={image.width}
           height={image.height}
-          loading={eager ? 'eager' : 'lazy'}
+          loading="lazy"
           decoding="async"
           draggable={false}
           onLoad={() => setLoaded(true)}

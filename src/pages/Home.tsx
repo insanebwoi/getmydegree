@@ -13,6 +13,7 @@ import {
   Wallet,
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
+import { courseSlug } from '../data/courses'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
@@ -374,19 +375,26 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
             {featured.map((c, i) => (
               <Reveal key={c.code} delay={i * 70}>
-                <article className="card card-hover card-p flex h-full flex-col">
+                <article className="card card-hover card-p relative flex h-full flex-col">
                   <div className="flex items-center justify-between">
                     <span className="font-display text-2xl font-medium text-navy">{c.code}</span>
                     <span className="badge">{c.years}</span>
                   </div>
-                  <h3 className="mt-4 t-h3 font-display font-medium">{c.name}</h3>
+                  <h3 className="mt-4 t-h3 font-display font-medium">
+                    <Link
+                      to={`/courses/${courseSlug(c)}`}
+                      className="after:absolute after:inset-0 hover:underline"
+                    >
+                      {c.name}
+                    </Link>
+                  </h3>
                   <p className="mt-2 flex-1 text-base leading-relaxed text-muted md:text-sm">
                     {c.body}
                   </p>
                   <button
                     type="button"
                     onClick={() => setApplying(c)}
-                    className="action mt-4 inline-flex items-center text-sm font-medium text-navy cursor-pointer text-left hover:underline"
+                    className="action relative z-10 mt-4 inline-flex items-center text-sm font-medium text-navy cursor-pointer text-left hover:underline"
                     aria-label={`Enquire about ${c.name}`}
                   >
                     <span>Enquire now</span>
@@ -538,7 +546,7 @@ export default function Home() {
             <div className="card card-p h-full sm:p-7 lg:p-9">
               <h3 className="t-h3 font-display font-medium">Fees</h3>
               <table className="mt-5 w-full text-left">
-                <caption className="sr-only">Programme fees in US dollars</caption>
+                <caption className="sr-only">Programme fees in Indian rupees</caption>
                 <tbody>
                   {pricing.map((p) => (
                     <tr key={p.label} className="border-b border-line last:border-0">
