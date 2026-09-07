@@ -53,13 +53,20 @@ function headFor(path) {
     if (meta.section)
       tags.push(`<meta property="article:section" content="${escape(meta.section)}" />`)
   }
-  const schema = schemaFor(path)
-  if (schema) {
-    tags.push(
-      `<script id="page-schema" type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`,
-    )
-  }
   return tags.join('\n    ')
+}
+
+/**
+ * JSON-LD carries no rendering weight, but it is real bytes the HTML parser
+ * has to get through   so it is appended at the very end of <head>, after
+ * Vite's own injected stylesheet and module script, rather than sitting
+ * ahead of them and delaying when the browser discovers the CSS the hero
+ * needs to paint.
+ */
+function schemaTagFor(path) {
+  const schema = schemaFor(path)
+  if (!schema) return ''
+  return `\n    <script id="page-schema" type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`
 }
 
 for (const path of prerenderPaths) {
@@ -71,6 +78,7 @@ for (const path of prerenderPaths) {
     .replace(/\s*<meta\s+property="og:[\s\S]*?\/>/g, '')
     .replace(/\s*<meta\s+name="robots"[\s\S]*?\/>/, '')
     .replace('<!--head-->', headFor(path))
+    .replace('</head>', `${schemaTagFor(path)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${render(path)}</div>`)
 
   // Written twice: `about.html` is what flat static hosts (and `vite preview`,
