@@ -52,6 +52,7 @@ export function Footer() {
                 alt={site.name}
                 width={400}
                 height={90}
+                loading="lazy"
                 className="h-7 w-auto sm:h-8"
               />
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">

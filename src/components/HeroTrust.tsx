@@ -28,7 +28,8 @@ export function HeroTrust() {
                 <img
                   src={u.logo}
                   alt={u.name}
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
                   className="h-8 w-auto opacity-80 transition hover:opacity-100"
                 />
               ) : (
