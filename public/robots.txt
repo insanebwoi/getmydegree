@@ -6,4 +6,4 @@ Allow: /
 Disallow: /*?q=
 Disallow: /*?category=
 
-Sitemap: https://getmydegree.in/sitemap.xml
+Sitemap: https://new.getmydegreeedu.com/sitemap.xml

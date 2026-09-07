@@ -3,7 +3,7 @@
 export const site = {
   name: 'GetMyDegree Institutions',
   shortName: 'GetMyDegree',
-  url: 'https://getmydegree.in',
+  url: 'https://new.getmydegreeedu.com',
   tagline: 'Complete Your Degree. Restart Your Career.',
   description:
     'GetMyDegree Institutions offers flexible, UGC recognized UG & PG degree programs for working professionals, dropouts and gap-year students across India.',

@@ -653,26 +653,22 @@
 
     Every image on the site is a decoded file that appears in one frame,
     against a placeholder tint. The jump is what reads as cheap, not the wait,
-    so the picture fades up and releases a small scale as it lands   the same
-    easing the rest of the page enters on.
+    so the picture wipes in from the top rather than popping in whole   the
+    same easing the rest of the page enters on.
 
-    It is opacity and transform only, so it stays on the compositor and costs
-    nothing in layout. The class goes on when the file has decoded, not on
-    mount, so a cached image is already `is-loaded` on its first paint and
-    never flashes.
+    It is clip-path only, so it stays on the compositor and costs nothing in
+    layout. The class goes on when the file has decoded, not on mount, so a
+    cached image is already `is-loaded` on its first paint   the clip starts
+    fully open and there is nothing to animate, so it never flashes.
   */
   .js .photo-in {
-    opacity: 0;
-    transform: scale(1.04);
-    transition:
-      opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
-      transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: clip-path;
   }
 
   .js .photo-in.is-loaded {
-    opacity: 1;
-    transform: none;
+    clip-path: inset(0 0 0 0);
     will-change: auto;
   }
 
@@ -690,7 +686,10 @@
   }
 
   /* No JavaScript, no transition   the image simply is where it belongs. */
-  .no-js .photo-in,
+  .no-js .photo-in {
+    clip-path: none;
+  }
+
   .no-js .photo-fade {
     opacity: 1;
     transform: none;
