@@ -27,9 +27,9 @@ export type PageMeta = {
  */
 export const pageMeta: Record<string, PageMeta> = {
   '/': {
-    title: 'Complete Your UG or PG Degree While Working',
+    title: 'Complete Your Unfinished Degree While Working — GetMyDegree',
     description:
-      'Finish an unfinished degree or start a new UG or PG programme around your job. Credit transfer for completed semesters, flexible study, free counselling.',
+      'Degree completion for working professionals. Complete an unfinished degree after discontinuing studies, with credit transfer. UGC recognized, valid for government jobs.',
     path: '/',
   },
   '/about': {

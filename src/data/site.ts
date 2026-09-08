@@ -399,8 +399,8 @@ export const heroSlides: HeroSlide[] = [
   {
     image: 'hero-portrait',
     headline: ['Finish Your Degree,', 'Restart Your Career'],
-    body: 'Complete a UGC, AICTE & NAAC approved degree from Central and State universities around your job   no entrance exam, no attendance, admission confirmed within 48 hours.',
-    shortBody: 'An approved degree from Central and State universities, completed around your job.',
+    body: 'Complete an unfinished degree after discontinuing studies, or study for a new UGC, AICTE & NAAC approved degree around your job   no entrance exam, no attendance, admission confirmed within 48 hours.',
+    shortBody: 'Complete an unfinished degree, or study for a new one, around your job.',
   },
   {
     image: 'hero-portrait-2',
