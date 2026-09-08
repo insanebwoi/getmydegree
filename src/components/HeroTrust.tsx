@@ -6,16 +6,20 @@ import { site, universities } from '../data/site'
  *
  * Inside the hero from lg, where there is room for it; on smaller screens it
  * is rendered beneath the hero instead, so a phone gets the promise and the
- * actions first and the credibility immediately after.
+ * actions first and the credibility immediately after. Both copies mount at
+ * once (CSS toggles which is visible per breakpoint), so only one may carry
+ * an <h2>   a second heading with identical text would be a real duplicate
+ * in the page's outline, not just a visual repeat.
  */
-export function HeroTrust() {
+export function HeroTrust({ heading = false }: { heading?: boolean }) {
+  const Eyebrow = heading ? 'h2' : 'p'
   return (
     <div className="hero-trust grid gap-4 rounded-2xl border border-line bg-white px-4 py-4 shadow-[var(--shadow-soft)] sm:grid-cols-2 sm:gap-x-6 sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
       <div className="sm:col-span-2 lg:col-span-6 lg:pr-8">
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-          <h2 className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
+          <Eyebrow className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
             Partner universities
-          </h2>
+          </Eyebrow>
           <span className="inline-flex items-center gap-1 rounded-full bg-navy-50 px-2 py-0.5 text-[0.6875rem] font-medium text-navy">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
             Central & State Gov · UGC · AICTE · NAAC Approved

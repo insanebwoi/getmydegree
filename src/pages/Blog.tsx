@@ -15,8 +15,7 @@ function Card({ post, delay }: { post: Post; delay: number }) {
     <Reveal delay={delay}>
       <article className="card card-hover h-full overflow-hidden">
         <Link to={`/blog/${post.slug}`} className="flex h-full flex-col">
-          {/* Decorative: the title follows immediately. */}
-          <Photo src={post.cover} alt="" ratio="16/9" rounded="none" />
+          <Photo src={post.cover} alt={post.title} ratio="16/9" rounded="none" />
           <div className="card-p flex flex-1 flex-col">
             <div className="flex flex-wrap items-center gap-2">
               <span className="badge">{post.category}</span>
@@ -142,7 +141,7 @@ export default function Blog() {
               <Link to={`/blog/${lead.slug}`} className="grid lg:grid-cols-2">
                 <Photo
                   src={lead.cover}
-                  alt=""
+                  alt={lead.title}
                   ratio="16/9"
                   rounded="none"
                   priority

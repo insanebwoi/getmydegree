@@ -81,7 +81,7 @@ export default function BlogPost() {
           <div className="panel relative isolate overflow-hidden border-transparent px-4 py-12 sm:px-8 sm:py-16 lg:py-20">
             <Photo
               src={post.cover}
-              alt=""
+              alt={post.title}
               rounded="none"
               priority
               className="absolute inset-0 -z-20 h-full w-full object-[50%_45%]"
@@ -193,9 +193,8 @@ export default function BlogPost() {
                         to={`/blog/${p.slug}`}
                         className="flex gap-3 rounded-2xl p-2 transition-colors hover:bg-wash"
                       >
-                        {/* Decorative: the title sits right beside it. */}
                         <span className="w-16 shrink-0">
-                          <Photo src={p.cover} alt="" ratio="1/1" />
+                          <Photo src={p.cover} alt={p.title} ratio="1/1" />
                         </span>
                         <span className="flex min-w-0 flex-1 flex-col justify-center">
                           <span className="text-xs font-medium text-gold-700">{p.category}</span>

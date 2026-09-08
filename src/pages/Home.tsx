@@ -217,13 +217,14 @@ export default function Home() {
             className="enter mt-6 hidden lg:block"
             style={{ ['--enter-delay' as string]: '760ms' }}
           >
-            <HeroTrust />
+            <HeroTrust heading />
           </div>
         </div>
       </section>
 
       {/* Below the hero on phones and tablets, where it does not cost the
-          first screen. */}
+          first screen. Both this copy and the one above mount at once   see
+          HeroTrust's own note on why only one may carry the heading. */}
       <div className="shell -mt-4 pb-10 sm:pb-14 lg:hidden">
         <HeroTrust />
       </div>
