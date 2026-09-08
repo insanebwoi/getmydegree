@@ -31,6 +31,7 @@ export const pageMeta: Record<string, PageMeta> = {
     description:
       'Degree completion for working professionals. Complete an unfinished degree after discontinuing studies, with credit transfer. UGC recognized, valid for government jobs.',
     path: '/',
+    image: '/images/home/banner.webp',
   },
   '/about': {
     title: 'About Us — Degree Counselling Since 2021',
