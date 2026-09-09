@@ -400,6 +400,25 @@ export default function Contact() {
                   <span>Chat directly on WhatsApp: +91 86066 77828</span>
                 </a>
               </div>
+
+              {/* Follow Us */}
+              <div className="mt-4 flex items-center justify-between gap-2 border-t border-line/60 pt-4">
+                <span className="text-xs text-muted">Follow us</span>
+                <div className="flex gap-2">
+                  {socials.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="grid h-8 w-8 place-items-center rounded-full border border-line text-muted transition-colors hover:border-navy hover:bg-navy hover:text-white"
+                    >
+                      <Icon size={14} />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
           </Reveal>
 
@@ -449,27 +468,6 @@ export default function Contact() {
                         </a>
                       </p>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Follow Us */}
-              <div className="px-6 pb-5 sm:px-7">
-                <p className="text-[0.6875rem] font-semibold tracking-[0.16em] text-white/45 uppercase">
-                  Follow us
-                </p>
-                <div className="mt-2.5 flex gap-2">
-                  {socials.map(({ label, href, Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      aria-label={label}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:bg-gold hover:text-navy-950"
-                    >
-                      <Icon size={15} />
-                    </a>
                   ))}
                 </div>
               </div>
