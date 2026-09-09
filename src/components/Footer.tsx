@@ -14,12 +14,12 @@ import {
   Phone,
 } from 'lucide-react'
 import { centers, courses, site } from '../data/site'
-import { FacebookIcon, TwitterIcon, YoutubeIcon } from './SocialIcons'
+import { FacebookIcon, InstagramIcon, ThreadsIcon } from './SocialIcons'
 
 const socials = [
+  { label: 'Instagram', href: site.social.instagram, Icon: InstagramIcon },
   { label: 'Facebook', href: site.social.facebook, Icon: FacebookIcon },
-  { label: 'Twitter', href: site.social.twitter, Icon: TwitterIcon },
-  { label: 'YouTube', href: site.social.youtube, Icon: YoutubeIcon },
+  { label: 'Threads', href: site.social.threads, Icon: ThreadsIcon },
 ]
 
 const heading = 'text-[0.6875rem] font-semibold tracking-[0.16em] text-white/45 uppercase'

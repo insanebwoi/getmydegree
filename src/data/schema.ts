@@ -25,6 +25,7 @@ const organization = {
   foundingDate: String(site.established),
   description: site.description,
   areaServed: { '@type': 'Country', name: 'India' },
+  sameAs: Object.values(site.social),
   address: centers.map((c) => ({
     '@type': 'PostalAddress',
     streetAddress: c.address,

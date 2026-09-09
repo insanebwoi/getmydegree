@@ -13,9 +13,9 @@ export const site = {
   officeHours: 'Mon–Sat · 9am to 7pm',
   established: 2021,
   social: {
-    facebook: 'https://facebook.com/',
-    twitter: 'https://twitter.com/',
-    youtube: 'https://youtube.com/',
+    facebook: 'https://www.facebook.com/share/1DPK5ojbSY/?mibextid=wwXIfr',
+    instagram: 'https://www.instagram.com/get_my_degree?stkn=aWZpZmVvdGdvcG5v&utm_source=qr',
+    threads: 'https://www.threads.com/@get_my_degree?igshid=NTc4MTIwNjQ2YQ==',
   },
 } as const
 

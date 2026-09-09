@@ -19,6 +19,13 @@ import { Reveal } from '../components/Reveal'
 import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { centers, courses, site, stats } from '../data/site'
+import { FacebookIcon, InstagramIcon, ThreadsIcon } from '../components/SocialIcons'
+
+const socials = [
+  { label: 'Instagram', href: site.social.instagram, Icon: InstagramIcon },
+  { label: 'Facebook', href: site.social.facebook, Icon: FacebookIcon },
+  { label: 'Threads', href: site.social.threads, Icon: ThreadsIcon },
+]
 
 type Errors = Partial<Record<'name' | 'phone' | 'email' | 'program', string>>
 
@@ -442,6 +449,27 @@ export default function Contact() {
                         </a>
                       </p>
                     </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Follow Us */}
+              <div className="px-6 pb-5 sm:px-7">
+                <p className="text-[0.6875rem] font-semibold tracking-[0.16em] text-white/45 uppercase">
+                  Follow us
+                </p>
+                <div className="mt-2.5 flex gap-2">
+                  {socials.map(({ label, href, Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:bg-gold hover:text-navy-950"
+                    >
+                      <Icon size={15} />
+                    </a>
                   ))}
                 </div>
               </div>
