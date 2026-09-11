@@ -283,8 +283,8 @@ export const courses: Course[] = [
 ]
 
 export const eligibility = [
-  { level: 'Undergraduate', points: ['12th Pass (Recognized Board)', 'Minimum 1-Year Gap'] },
-  { level: 'Postgraduate', points: ["Bachelor's Degree", 'Minimum 1-Year Gap'] },
+  { level: 'Undergraduate', points: ['12th Pass (Recognized Board)', 'Minimum 3-Year Gap'] },
+  { level: 'Postgraduate', points: ["Bachelor's Degree", 'Minimum 2-Year Gap'] },
 ]
 
 /**

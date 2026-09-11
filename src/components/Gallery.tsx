@@ -1,5 +1,8 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Pause, Play, X } from 'lucide-react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { ChevronLeft, ChevronRight, Pause, Play, X } from 'lucide-react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import type { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 import { galleryImages } from 'virtual:image-manifest'
 import { images } from '../data/images'
 
@@ -19,27 +22,21 @@ const FALLBACK: GalleryImage[] = (
 
 const source = galleryImages.length > 0 ? galleryImages : FALLBACK
 
-/** Movement past this many pixels counts as a drag, not a click. */
-const DRAG_THRESHOLD = 6
-/** Pixels per second the strip drifts on its own. */
-const DRIFT = 26
-/** How far the strip moves per pixel of page scroll. */
-const SCROLL_FACTOR = 0.35
+/** How strongly a slide shrinks per unit of distance from the centre. */
+const TWEEN_FACTOR_BASE = 0.84
 
+const clamp = (n: number, min: number, max: number) => Math.min(Math.max(n, min), max)
+
+/**
+ * A real momentum-drag carousel (Embla), matched to the poster strip on
+ * another of the practice's pages: slides shrink smoothly the further they
+ * drift from centre, rather than snapping between fixed positions. The scale
+ * is a plain transform written straight to each slide's DOM node from
+ * Embla's own scroll/reInit events, so it moves at native scroll frame rate
+ * without a React re-render or rAF loop of our own.
+ */
 export function Gallery() {
-  const viewport = useRef<HTMLDivElement>(null)
-  const track = useRef<HTMLDivElement>(null)
-  const unit = useRef<HTMLUListElement>(null)
-  /** Extra offset contributed by dragging, read by the animation loop. */
-  const dragOffset = useRef(0)
-  /** Distance the pointer travelled, to tell a drag from a click. */
-  const moved = useRef(0)
-
-  const [copies, setCopies] = useState(1)
-  const [paused, setPaused] = useState(false)
   const [animated, setAnimated] = useState(false)
-  const [dragging, setDragging] = useState(false)
-  const [preview, setPreview] = useState<string | null>(null)
 
   useEffect(() => {
     const still = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -49,173 +46,257 @@ export function Gallery() {
     return () => still.removeEventListener('change', sync)
   }, [])
 
-  /*
-    A loop only closes seamlessly if one copy of the set is at least as wide as
-    the viewport — otherwise the strip runs out and snaps back in view. With one
-    or two pictures it never is, so the set is repeated until it spans the
-    screen. Measured rather than assumed, because tile widths vary with each
-    photograph's aspect and with the breakpoint.
-  */
-  useLayoutEffect(() => {
-    const measure = () => {
-      if (!unit.current || !viewport.current) return
-      const perCopy = unit.current.getBoundingClientRect().width / copies
-      const needed = viewport.current.getBoundingClientRect().width
-      if (perCopy <= 0) return
-      // Solved in one pass: stepping up one copy at a time restarts the
-      // animation on every step, which resets the offset and reads as frozen.
-      const wanted = Math.min(12, Math.max(1, Math.ceil((needed * 1.15) / perCopy)))
-      if (wanted !== copies) setCopies(wanted)
-    }
-    measure()
-    window.addEventListener('resize', measure)
-    return () => window.removeEventListener('resize', measure)
-  }, [copies])
+  return animated ? <AnimatedGallery /> : <StillGallery />
+}
+
+/**
+ * How many posters one viewport-height of page scroll carries the row
+ * through, while the section is in view.
+ */
+const SCROLL_LINK_STEPS = 3
+/** Largest single step a scroll update is allowed to queue at once, so a big or fast scroll never launches one long, slow-to-settle animation that swallows everything scrolled during it. */
+const SCROLL_LINK_MAX_STEP = 2
+
+function AnimatedGallery() {
+  const [autoplay] = useState(() => Autoplay({ delay: 2600, stopOnInteraction: false }))
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: 'center', containScroll: false, dragFree: false, skipSnaps: false },
+    [autoplay],
+  )
+  const sectionRef = useRef<HTMLDivElement>(null)
+  /** Whether the section is anywhere near the viewport, kept by an observer rather than read per scroll event. */
+  const inView = useRef(false)
+  const [preview, setPreview] = useState<string | null>(null)
+  const [paused, setPaused] = useState(false)
+  const [canPrev, setCanPrev] = useState(true)
+  const [canNext, setCanNext] = useState(true)
+  const tweenFactor = useRef(0)
+  const tweenNodes = useRef<HTMLElement[]>([])
+
+  const setTweenNodes = useCallback((api: EmblaCarouselType) => {
+    tweenNodes.current = api.slideNodes().map((node) => node.querySelector('.gallery-poster-scale') as HTMLElement)
+  }, [])
+
+  const setTweenFactor = useCallback((api: EmblaCarouselType) => {
+    tweenFactor.current = TWEEN_FACTOR_BASE * api.scrollSnapList().length
+  }, [])
 
   /*
-    One loop drives everything: the strip drifts on its own, and page scroll
-    feeds straight into the same offset, so scrolling moves it too. The offset
-    wraps at the width of one set, which is why the seam never shows.
+    Every slide's closeness to centre drives two things together: a light
+    scale pop, and how much colour it keeps. The centred poster sits at full
+    scale and full colour; everything else shrinks slightly and fades to
+    monochrome, in proportion to how far its snap point sits from the
+    current scroll position. Run on Embla's own 'scroll' event, so it's
+    written every scroll frame without routing through React state.
+  */
+  const tweenScale = useCallback((api: EmblaCarouselType, eventName?: EmblaEventType) => {
+    const engine = api.internalEngine()
+    const scrollProgress = api.scrollProgress()
+    const slidesInView = api.slidesInView()
+    const isScrollEvent = eventName === 'scroll'
+
+    api.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+      let diffToTarget = scrollSnap - scrollProgress
+      const slidesInSnap = engine.slideRegistry[snapIndex]
+
+      slidesInSnap.forEach((slideIndex) => {
+        if (isScrollEvent && !slidesInView.includes(slideIndex)) return
+
+        if (engine.options.loop) {
+          engine.slideLooper.loopPoints.forEach((loopItem) => {
+            const target = loopItem.target()
+            if (slideIndex === loopItem.index && target !== 0) {
+              const sign = Math.sign(target)
+              if (sign === -1) diffToTarget = scrollSnap - (1 + scrollProgress)
+              if (sign === 1) diffToTarget = scrollSnap + (1 - scrollProgress)
+            }
+          })
+        }
+
+        const tweenValue = 1 - Math.abs(diffToTarget * tweenFactor.current)
+        const closeness = clamp(tweenValue, 0, 1)
+        const scale = clamp(tweenValue, 0.72, 1)
+        const node = tweenNodes.current[slideIndex]
+        if (node) {
+          node.style.transform = `scale(${scale})`
+          node.style.filter = `grayscale(${(1 - closeness) * 100}%)`
+        }
+      })
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    setTweenNodes(emblaApi)
+    setTweenFactor(emblaApi)
+    tweenScale(emblaApi)
+
+    const onSelect = () => {
+      setCanPrev(emblaApi.canScrollPrev())
+      setCanNext(emblaApi.canScrollNext())
+    }
+    onSelect()
+
+    emblaApi
+      .on('reInit', setTweenNodes)
+      .on('reInit', setTweenFactor)
+      .on('reInit', tweenScale)
+      .on('reInit', onSelect)
+      .on('scroll', tweenScale)
+      .on('slideFocus', tweenScale)
+      .on('select', onSelect)
+  }, [emblaApi, setTweenNodes, setTweenFactor, tweenScale])
+
+  /*
+    Autoplay stays off both while explicitly paused and while the page is
+    actively scrolling   scroll is what should be driving the row in that
+    moment (see below), and a 2.6s timer firing mid-scroll would fight it.
+  */
+  const pageScrolling = useRef(false)
+  useEffect(() => {
+    if (!emblaApi) return
+    if (paused || pageScrolling.current) autoplay.stop()
+    else autoplay.play()
+  }, [emblaApi, paused, autoplay])
+
+  /* Tracks whether the section is anywhere near the viewport, cheaply, without a per-scroll layout read. */
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    const observer = new IntersectionObserver(([entry]) => (inView.current = entry.isIntersecting), {
+      rootMargin: '20% 0px',
+    })
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  /*
+    A linear tie to the page's own scroll: as the section travels through
+    the viewport, the row slides a few posters across, animated the same as
+    a manual swipe rather than jumping between positions. Moves relative to
+    wherever the row currently sits (autoplay's own position included)
+    rather than an absolute index computed from scroll alone   recomputing
+    from scratch on every scroll would snap the row backward to "undo"
+    whatever autoplay had done while the reader was idle.
+
+    Only one animated scrollTo() plays at a time: Embla drops any call that
+    arrives before the previous one settles, so firing one per scroll event
+    during a fast gesture would collapse down to just the first step and
+    stall there. Extra scroll is instead accumulated in `carry` and applied
+    as one further step each time the current animation's 'settle' event
+    fires, so a quick scroll still keeps advancing all the way through
+    rather than stopping after one slide. Only active while the section is
+    near the viewport, so scrolling through the rest of the page doesn't
+    quietly move it out of view.
   */
   useEffect(() => {
-    if (!animated) return
-    const el = track.current
-    const list = unit.current
-    if (!el || !list) return
+    if (!emblaApi) return
 
-    let offset = 0
-    let last = performance.now()
-    let lastScroll = window.scrollY
-    let hovered = false
-    let frame = 0
+    let ticking = false
+    let lastScrollY = window.scrollY
+    let carry = 0
+    let idleTimer = 0
+    // True while a scrollTo() animation from this effect is still playing,
+    // so a fast scroll gesture queues up rather than firing overlapping
+    // animated calls   Embla drops any scrollTo() that arrives before the
+    // one before it has settled, which is what made the row stall after
+    // only its first step during a quick scroll.
+    let animating = false
 
-    const step = (now: number) => {
-      const dt = Math.min((now - last) / 1000, 0.05)
-      last = now
-      const scrolled = window.scrollY - lastScroll
-      lastScroll = window.scrollY
+    const takeStep = () => {
+      const steps = clamp(Math.trunc(carry), -SCROLL_LINK_MAX_STEP, SCROLL_LINK_MAX_STEP)
+      if (steps === 0) return false
+      carry -= steps
+      animating = true
+      emblaApi.scrollTo(emblaApi.selectedScrollSnap() + steps)
+      return true
+    }
 
-      const width = list.getBoundingClientRect().width
-      if (width > 0) {
-        if (!paused && !hovered) offset += DRIFT * dt
-        offset += scrolled * SCROLL_FACTOR
-        offset += dragOffset.current
-        dragOffset.current = 0
-        offset = ((offset % width) + width) % width
-        el.style.transform = `translate3d(${-offset}px, 0, 0)`
+    const settled = () => {
+      animating = false
+      takeStep()
+    }
+    emblaApi.on('settle', settled)
+
+    const update = () => {
+      ticking = false
+      const current = window.scrollY
+      const scrolled = current - lastScrollY
+      lastScrollY = current
+      if (scrolled === 0 || !inView.current) return
+
+      const vh = window.innerHeight || 1
+      carry += (scrolled / vh) * SCROLL_LINK_STEPS
+      if (animating) return
+      takeStep()
+    }
+
+    const onScroll = () => {
+      if (inView.current) {
+        pageScrolling.current = true
+        autoplay.stop()
+        window.clearTimeout(idleTimer)
+        idleTimer = window.setTimeout(() => {
+          pageScrolling.current = false
+          if (!paused) autoplay.play()
+        }, 400)
       }
-      frame = requestAnimationFrame(step)
+
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(update)
     }
 
-    // Captured now: the ref may point elsewhere by the time cleanup runs.
-    const frameEl = viewport.current
-    const enter = () => (hovered = true)
-    const leave = () => (hovered = false)
-    frameEl?.addEventListener('pointerenter', enter)
-    frameEl?.addEventListener('pointerleave', leave)
-    frame = requestAnimationFrame(step)
-
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
-      cancelAnimationFrame(frame)
-      frameEl?.removeEventListener('pointerenter', enter)
-      frameEl?.removeEventListener('pointerleave', leave)
+      window.removeEventListener('scroll', onScroll)
+      window.clearTimeout(idleTimer)
+      emblaApi.off('settle', settled)
     }
-  }, [animated, paused])
-
-  const set = Array.from({ length: copies }, () => source).flat()
-
-  /*
-    Dragging scrubs the strip: the pointer's movement is handed to the same
-    offset the drift and the scroll feed, so all three are one motion.
-
-    No pointer capture — capturing on the viewport swallows the click that
-    follows, and the pictures would never open. Instead the distance travelled
-    is remembered, and a click is suppressed only when the pointer actually
-    dragged.
-  */
-  function onPointerDown(event: React.PointerEvent<HTMLDivElement>) {
-    if (!animated || event.button !== 0) return
-    let lastX = event.clientX
-    moved.current = 0
-
-    const move = (e: PointerEvent) => {
-      const dx = e.clientX - lastX
-      lastX = e.clientX
-      moved.current += Math.abs(dx)
-      if (moved.current > DRAG_THRESHOLD) setDragging(true)
-      dragOffset.current -= dx
-    }
-    const up = () => {
-      window.removeEventListener('pointermove', move)
-      window.removeEventListener('pointerup', up)
-      setDragging(false)
-    }
-    window.addEventListener('pointermove', move)
-    window.addEventListener('pointerup', up)
-  }
-
-  /*
-    Wheel and trackpad. A sideways gesture — or a wheel with shift held, the
-    long-standing convention for horizontal scrolling — moves the strip and is
-    consumed. A plain vertical wheel is left alone: hijacking it would trap the
-    page, and vertical scrolling already moves the strip anyway.
-  */
-  useEffect(() => {
-    const el = viewport.current
-    if (!el || !animated) return
-
-    const onWheel = (event: WheelEvent) => {
-      const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY)
-      if (!horizontal && !event.shiftKey) return
-      event.preventDefault()
-      dragOffset.current += horizontal ? event.deltaX : event.deltaY
-    }
-
-    el.addEventListener('wheel', onWheel, { passive: false })
-    return () => el.removeEventListener('wheel', onWheel)
-  }, [animated])
-
-  /** A drag ends in a click; that click must not open a picture. */
-  function onClickCapture(event: React.MouseEvent<HTMLDivElement>) {
-    if (moved.current > DRAG_THRESHOLD) {
-      event.preventDefault()
-      event.stopPropagation()
-      moved.current = 0
-    }
-  }
+  }, [emblaApi, autoplay, paused])
 
   return (
-    <div className="relative">
+    <div className="relative" ref={sectionRef}>
       <div
-        ref={viewport}
-        onPointerDown={onPointerDown}
-        onClickCapture={onClickCapture}
-        className={`gallery-viewport ${animated ? 'is-animated' : ''} ${
-          dragging ? 'cursor-grabbing' : animated ? 'cursor-grab' : ''
-        }`}
+        className="gallery-embla"
         role="region"
         aria-label="Photographs from our centres and graduates"
+        onPointerEnter={() => setPaused(true)}
+        onPointerLeave={() => setPaused(false)}
       >
-        <div ref={track} className="gallery-track">
-          {/* The measured set, then a second copy so the wrap is invisible. */}
-          <ul ref={unit} className="gallery-set">
-            {set.map((image, i) => (
-              <Tile key={`a-${i}`} image={image} onOpen={() => setPreview(image.src)} />
+        <div className="gallery-embla-viewport" ref={emblaRef}>
+          <div className="gallery-embla-container">
+            {source.map((image, i) => (
+              <div className="gallery-embla-slide" key={i}>
+                <Tile image={image} priority={i < 3} onOpen={() => setPreview(image.src)} />
+              </div>
             ))}
-          </ul>
-          {animated && (
-            <ul className="gallery-set" aria-hidden="true">
-              {set.map((image, i) => (
-                <Tile key={`b-${i}`} image={image} onOpen={() => setPreview(image.src)} />
-              ))}
-            </ul>
-          )}
+          </div>
         </div>
+
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollPrev()}
+          disabled={!canPrev}
+          aria-label="Previous photograph"
+          className="gallery-nav gallery-nav-prev"
+        >
+          <ChevronLeft size={18} aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={() => emblaApi?.scrollNext()}
+          disabled={!canNext}
+          aria-label="Next photograph"
+          className="gallery-nav gallery-nav-next"
+        >
+          <ChevronRight size={18} aria-hidden="true" />
+        </button>
       </div>
 
       {preview && <Preview src={preview} onClose={() => setPreview(null)} />}
 
-      {animated && (
+      {source.length > 1 && (
         <button
           type="button"
           onClick={() => setPaused((p) => !p)}
@@ -225,6 +306,25 @@ export function Gallery() {
           {paused ? <Play size={14} aria-hidden="true" /> : <Pause size={14} aria-hidden="true" />}
         </button>
       )}
+    </div>
+  )
+}
+
+/** No JS motion (reduced-motion): a plain scrollable row of the same pictures. */
+function StillGallery() {
+  const [preview, setPreview] = useState<string | null>(null)
+  return (
+    <div className="relative">
+      <div className="gallery-viewport" role="region" aria-label="Photographs from our centres and graduates">
+        <ul className="gallery-set">
+          {source.map((image, i) => (
+            <li key={i} className="shrink-0">
+              <Tile image={image} priority={i < 3} onOpen={() => setPreview(image.src)} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      {preview && <Preview src={preview} onClose={() => setPreview(null)} />}
     </div>
   )
 }
@@ -281,24 +381,31 @@ function Preview({ src, onClose }: { src: string; onClose: () => void }) {
   )
 }
 
-function Tile({ image, onOpen }: { image: GalleryImage; onOpen: () => void }) {
+function Tile({
+  image,
+  priority = false,
+  onOpen,
+}: {
+  image: GalleryImage
+  priority?: boolean
+  onOpen: () => void
+}) {
   const [loaded, setLoaded] = useState(false)
   return (
-    <li className="shrink-0">
+    <div className="gallery-poster-scale">
       <button
         type="button"
         onClick={onOpen}
         aria-label="Open this photograph"
-        className="block overflow-hidden rounded-2xl border border-line"
+        className="gallery-poster block overflow-hidden rounded-2xl border border-line shadow-[var(--shadow-soft)]"
       >
-        {/* Intrinsic size ships with each tile, so the strip reserves its
-            width before the photograph decodes and nothing shifts. */}
         <img
           src={image.src}
           alt=""
           width={image.width}
           height={image.height}
-          loading="lazy"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
           decoding="async"
           draggable={false}
           onLoad={() => setLoaded(true)}
@@ -307,12 +414,9 @@ function Tile({ image, onOpen }: { image: GalleryImage; onOpen: () => void }) {
             // Cache can beat the handler; ask the element directly.
             if (el?.complete && el.naturalWidth > 0) setLoaded(true)
           }}
-          style={{ aspectRatio: `${image.width} / ${image.height}` }}
-          className={`photo-fade h-44 w-auto object-cover transition-transform duration-300 hover:scale-[1.03] sm:h-56 lg:h-64 ${
-            loaded ? 'is-loaded' : ''
-          }`}
+          className={`photo-fade h-full w-full object-cover ${loaded ? 'is-loaded' : ''}`}
         />
       </button>
-    </li>
+    </div>
   )
 }

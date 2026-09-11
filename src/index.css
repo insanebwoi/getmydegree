@@ -829,41 +829,94 @@
   }
 
   /*
-    Gallery strip. The track holds the pictures twice and travels exactly half
-    its width, so the loop closes seamlessly. Without motion it is simply a row
-    the reader can scroll, and the edges fade so it reads as continuing rather
-    than being cut off.
+    Embla carousel. The viewport clips horizontally so slides drifting to
+    either side stay hidden past the edge, but not vertically, so a slide's
+    scale-tween (driven straight off Embla's scroll position, see
+    Gallery.tsx) can still grow past its own row without being cut off.
   */
-  .gallery-viewport {
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+  .gallery-embla {
+    position: relative;
   }
-  .gallery-viewport::-webkit-scrollbar {
-    display: none;
+  .gallery-embla-viewport {
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+  .gallery-embla-container {
+    display: flex;
+    touch-action: pan-y pinch-zoom;
+    gap: 0.375rem;
+    padding-block: 1.5rem;
+  }
+  /*
+    Three posters visible at a time on every screen size, desktop included
+    — the same slide width throughout rather than widening to fit more
+    posters on a larger viewport.
+  */
+  .gallery-embla-slide {
+    position: relative;
+    flex: 0 0 42%;
+    min-width: 0;
   }
   @media (min-width: 640px) {
-    .gallery-viewport {
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-      mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    .gallery-embla-slide {
+      flex-basis: 30%;
     }
   }
-  .gallery-viewport.is-animated {
-    overflow-x: hidden;
-  }
-  /* The offset is driven in one rAF loop, so drift and page scroll share it. */
-  .gallery-track {
-    display: flex;
-    width: max-content;
-    gap: 1rem;
-  }
-  .is-animated .gallery-track {
+  /*
+    The node Embla actually scales, one level in from the slide itself so the
+    slide's own flex box keeps its layout size while the picture inside grows
+    or shrinks. transform-origin stays centred so growth reads as a pop
+    rather than a shift.
+  */
+  .gallery-poster-scale {
+    transform-origin: 50% 50%;
     will-change: transform;
   }
-  .gallery-set {
-    display: flex;
-    gap: 1rem;
-    margin-right: 1rem;
+  .gallery-poster {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    cursor: pointer;
+  }
+  .gallery-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    height: 2.5rem;
+    width: 2.5rem;
+    place-items: center;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-ink);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(8px);
+    transform: translateY(-50%);
+    transition:
+      opacity 200ms ease,
+      background-color 200ms ease;
+  }
+  .gallery-nav:hover:not(:disabled) {
+    background: #fff;
+  }
+  .gallery-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .gallery-nav-prev {
+    left: -0.5rem;
+  }
+  .gallery-nav-next {
+    right: -0.5rem;
+  }
+  @media (min-width: 640px) {
+    .gallery-nav-prev {
+      left: 0.5rem;
+    }
+    .gallery-nav-next {
+      right: 0.5rem;
+    }
   }
 
   /*
