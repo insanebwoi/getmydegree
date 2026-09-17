@@ -131,9 +131,8 @@ export default function Contact() {
           {quickChannels.map((q, i) => (
             <Reveal key={q.label} delay={i * 70}>
               <div
-                className={`card card-hover flex h-full items-start gap-4 p-5 ${
-                  q.highlight ? 'border-navy/20 bg-navy-50/50' : 'bg-white'
-                }`}
+                className={`card card-hover flex h-full items-start gap-4 p-5 ${q.highlight ? 'border-navy/20 bg-navy-50/50' : 'bg-white'
+                  }`}
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy-100/70 text-navy">
                   <q.Icon size={20} aria-hidden="true" />
@@ -397,7 +396,7 @@ export default function Contact() {
                   className="action gap-1 font-semibold text-[#25D366] hover:underline"
                 >
                   <MessageCircle size={14} />
-                  <span>Chat directly on WhatsApp: +91 86066 77828</span>
+                  <span>Chat directly on WhatsApp: +91 73566 44343</span>
                 </a>
               </div>
 
