@@ -43,9 +43,9 @@ export default function Universities() {
       </div>
 
       <Section align="left">
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="rail">
           {universities.map((u, i) => (
-            <Reveal key={u.slug} delay={i * 70} className="h-full">
+            <Reveal key={u.slug} delay={i * 70}>
               <li className="h-full">
                 <div className="card card-hover card-p relative flex h-full flex-col justify-between">
                   <div>

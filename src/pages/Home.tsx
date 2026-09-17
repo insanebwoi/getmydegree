@@ -263,9 +263,9 @@ export default function Home() {
           </p>
         </Reveal>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10">
+        <div className="rail mt-8 lg:mt-10">
           {universities.map((u, i) => (
-            <Reveal key={u.name} delay={i * 70} className="h-full">
+            <Reveal key={u.name} delay={i * 70}>
               <div className="card card-hover card-p relative flex h-full flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between">

@@ -96,6 +96,22 @@ export const universities: {
       ],
     },
     {
+      name: 'Bharathidasan University',
+      slug: 'bharathidasan-university',
+      location: 'Tamil Nadu, Tiruchirappalli',
+      body: 'State university established in 1982, NAAC A+ accredited, offering UG, PG and doctoral programs through its Centre for Distance and Online Education.',
+      badge: 'UGC Approved',
+      validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+      type: 'State university',
+      offers: ['Undergraduate degrees', 'Postgraduate degrees', 'Doctoral programmes'],
+      highlights: [
+        'NAAC accredited A+ in its third cycle, and recognized by the UGC under sections 2(f) and 12(B)',
+        'Distance and online programmes run through the university\u2019s own centre, recognized by the UGC Distance Education Bureau',
+        'Arts, science, commerce, computer applications and management streams at both UG and PG level',
+        'Learner support centres handle mentoring, so study fits around a full-time job',
+      ],
+    },
+    {
       name: 'Marjon University',
       slug: 'marjon-university',
       location: 'Cornwall, United Kingdom',

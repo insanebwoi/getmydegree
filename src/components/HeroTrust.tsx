@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { Headphones, Users } from 'lucide-react'
 import { site, universities } from '../data/site'
 
@@ -15,7 +16,7 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
   const Eyebrow = heading ? 'h2' : 'p'
   return (
     <div className="hero-trust grid gap-4 rounded-2xl border border-line bg-white px-4 py-4 shadow-[var(--shadow-soft)] sm:grid-cols-2 sm:gap-x-6 sm:px-6 lg:grid-cols-12 lg:items-center lg:gap-0">
-      <div className="sm:col-span-2 lg:col-span-6 lg:pr-8">
+      <div className="min-w-0 sm:col-span-2 lg:col-span-6 lg:pr-8">
         <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
           <Eyebrow className="text-[0.6875rem] font-semibold tracking-[0.16em] text-navy uppercase">
             Partner universities
@@ -25,25 +26,40 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
             Central & State Gov · UGC · AICTE · NAAC Approved
           </span>
         </div>
-        <ul className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-3">
-          {universities.map((u) => (
-            <li key={u.name}>
-              {u.logo ? (
-                <img
-                  src={u.logo}
-                  alt={u.name}
-                  loading="eager"
-                  decoding="async"
-                  className="h-8 w-auto opacity-80 transition hover:opacity-100"
-                />
-              ) : (
-                <span className="font-display text-[0.9375rem] leading-tight font-medium text-ink">
-                  {u.name}
-                </span>
-              )}
-            </li>
-          ))}
-        </ul>
+        {/*
+          Rendered twice so the drift can loop on itself. The second pass is
+          scenery: it is hidden from assistive tech, which reads the names
+          once.
+        */}
+        <div className="marquee mt-3">
+          <ul className="marquee__track">
+            {[0, 1].map((copy) =>
+              universities.map((u, i) => (
+                <li
+                  key={`${copy}-${u.slug}`}
+                  data-copy={copy}
+                  aria-hidden={copy === 1 || undefined}
+                  className={copy === 0 ? 'marquee__item' : undefined}
+                  style={{ '--i': i } as CSSProperties}
+                >
+                  {u.logo ? (
+                    <img
+                      src={u.logo}
+                      alt={u.name}
+                      loading="eager"
+                      decoding="async"
+                      className="h-8 w-auto max-w-none opacity-80 transition hover:opacity-100"
+                    />
+                  ) : (
+                    <span className="block font-display text-[0.9375rem] leading-tight font-medium whitespace-nowrap text-ink">
+                      {u.name}
+                    </span>
+                  )}
+                </li>
+              )),
+            )}
+          </ul>
+        </div>
         <p className="mt-2.5 text-xs text-muted">
           Central and State Government universities in India and recognized UK institutions — all
           100% UGC, AICTE & NAAC approved.

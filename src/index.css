@@ -110,28 +110,80 @@
 }
 
 @layer components {
+  /* The page gutter lives in a variable so a rail can bleed back out to the
+     screen edge by exactly the amount the shell pulled in. */
+  :root {
+    --shell-pad: 0.875rem;
+  }
+
   .shell {
     width: 100%;
     max-width: 1440px;
     margin-inline: auto;
-    padding-inline: 0.875rem;
+    padding-inline: var(--shell-pad);
   }
 
   @media (min-width: 640px) {
-    .shell {
-      padding-inline: 1.25rem;
+    :root {
+      --shell-pad: 1.25rem;
     }
   }
 
   @media (min-width: 1024px) {
-    .shell {
-      padding-inline: 2rem;
+    :root {
+      --shell-pad: 2rem;
     }
   }
 
   @media (min-width: 1536px) {
-    .shell {
-      padding-inline: 2.5rem;
+    :root {
+      --shell-pad: 2.5rem;
+    }
+  }
+
+  /*
+    One row of cards that scrolls sideways when it outgrows the screen. It
+    bleeds to both edges so a card can sit flush with the viewport instead of
+    stopping short at the gutter, and the vertical padding leaves room for the
+    lift and shadow a card takes on hover. From lg the cards share the row
+    evenly and there is nothing left to scroll.
+  */
+  .rail {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--shell-pad);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    margin-inline: calc(-1 * var(--shell-pad));
+    padding-inline: var(--shell-pad);
+    padding-block: 0.25rem 0.5rem;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail > * {
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: min(78vw, 20rem);
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 1024px) {
+    .rail {
+      overflow-x: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .rail > * {
+      flex: 1 1 0;
+      width: auto;
+      min-width: 0;
     }
   }
 
@@ -477,6 +529,108 @@
 
   .chip-row > * {
     scroll-snap-align: start;
+  }
+
+  /*
+    The partner names in the hero drift sideways forever. The list is rendered
+    twice and the track travels exactly half its width, so the loop closes on
+    itself with no seam and no JavaScript. The names blur in one by one on
+    first paint, then the drift takes over.
+
+    Two things do the blurring. The mask fades each name out at both ends of
+    the strip, and the ::before/::after panes sit over those ends with a
+    backdrop blur that is itself masked, so a name softens as it approaches
+    the edge rather than sliding under a hard line.
+  */
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    /* A max-content track inside a grid or flex item will widen its parent,
+       because those items size to their content by default. Without this the
+       strip grows to the full length of the track and shows both copies at
+       once instead of scrolling. */
+    min-width: 0;
+    max-width: 100%;
+    --marquee-fade: 3rem;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 var(--marquee-fade),
+      #000 calc(100% - var(--marquee-fade)),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 var(--marquee-fade),
+      #000 calc(100% - var(--marquee-fade)),
+      transparent 100%
+    );
+  }
+
+  .marquee::before,
+  .marquee::after {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    width: var(--marquee-fade);
+    pointer-events: none;
+    z-index: 1;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .marquee::before {
+    left: 0;
+    -webkit-mask-image: linear-gradient(90deg, #000, transparent);
+    mask-image: linear-gradient(90deg, #000, transparent);
+  }
+
+  .marquee::after {
+    right: 0;
+    -webkit-mask-image: linear-gradient(270deg, #000, transparent);
+    mask-image: linear-gradient(270deg, #000, transparent);
+  }
+
+  .marquee__track {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    width: max-content;
+    padding-inline-end: 1.75rem;
+    animation: marquee-drift 28s linear infinite;
+    animation-delay: 1s;
+  }
+
+  /* Reading is easier when it holds still, so it stops under the pointer and
+     whenever a link inside it takes focus. */
+  .marquee:hover .marquee__track,
+  .marquee:focus-within .marquee__track {
+    animation-play-state: paused;
+  }
+
+  .marquee__item {
+    animation: marquee-name-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i) * 130ms);
+  }
+
+  @keyframes marquee-drift {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @keyframes marquee-name-in {
+    from {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translate3d(0, 6px, 0);
+    }
+    to {
+      opacity: 1;
+      filter: blur(0);
+      transform: none;
+    }
   }
 
   /*
@@ -1132,6 +1286,38 @@
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .marquee {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .marquee::before,
+  .marquee::after {
+    display: none;
+  }
+
+  .marquee__track {
+    flex-wrap: wrap;
+    width: auto;
+    gap: 0.75rem 1.75rem;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .marquee__item {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  /* The second copy exists only to close the loop; with no loop it is a
+     duplicate of every name. */
+  .marquee__track [data-copy='1'] {
+    display: none;
   }
 
   /*
