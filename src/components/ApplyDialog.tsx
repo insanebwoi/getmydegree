@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, X } from 'lucide-react'
 import type { Course } from '../data/site'
 import { callbackRequest, courseEnquiry, href } from '../data/whatsapp'
 import { courseSlug } from '../data/courses'
+import { trackConversion } from '../data/tracking'
 
 type Errors = Partial<Record<'name' | 'phone' | 'email', string>>
 
@@ -62,6 +63,13 @@ export function ApplyDialog({ course, onClose }: { course?: Course; onClose: () 
     }
 
     setStatus('sending')
+
+    /* Counted here, past validation, so an abandoned or mistyped
+       attempt is not a lead. */
+    trackConversion('enquiry', {
+      form: course ? 'course_enquiry' : 'call_back',
+      programme: course?.code,
+    })
 
     const url = href(
       course

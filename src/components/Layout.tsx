@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { Navbar } from './Navbar'
 import { Footer } from './Footer'
 import { ContactBar } from './ContactBar'
+import { trackConversion, trackPageView, trackedLinkFromEvent } from '../data/tracking'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -37,6 +38,42 @@ function PixelPageView() {
   return null
 }
 
+/** Same problem as the Pixel, same shape of fix: gtag.js counts the document
+ *  load and nothing after it, so each client-side navigation reports itself. */
+function AdsPageView() {
+  const { pathname } = useLocation()
+  const first = useRef(true)
+  useEffect(() => {
+    if (first.current) {
+      first.current = false
+      return
+    }
+    /* The page's own <Seo> sets the title in its effect, and effect order is
+       not ours to rely on. A task boundary puts this after all of them, so the
+       title reported is the new page's and not the one just left. */
+    const id = window.setTimeout(() => trackPageView(pathname), 0)
+    return () => window.clearTimeout(id)
+  }, [pathname])
+  return null
+}
+
+/**
+ * Phone and WhatsApp taps, caught once on the way up rather than wired into
+ * every link that exists   and every link added later. Capture phase, so a
+ * handler that stops propagation cannot silently cost a conversion.
+ */
+function ConversionClicks() {
+  useEffect(() => {
+    function onClick(event: MouseEvent) {
+      const conversion = trackedLinkFromEvent(event.target)
+      if (conversion) trackConversion(conversion)
+    }
+    document.addEventListener('click', onClick, true)
+    return () => document.removeEventListener('click', onClick, true)
+  }, [])
+  return null
+}
+
 export function Layout() {
   return (
     <>
@@ -48,6 +85,8 @@ export function Layout() {
       </a>
       <ScrollToTop />
       <PixelPageView />
+      <AdsPageView />
+      <ConversionClicks />
       <Navbar />
       <main id="main">
         <Outlet />

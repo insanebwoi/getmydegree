@@ -20,6 +20,7 @@ import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { centers, courses, site, stats } from '../data/site'
 import { FacebookIcon, InstagramIcon, ThreadsIcon } from '../components/SocialIcons'
+import { trackConversion } from '../data/tracking'
 
 const socials = [
   { label: 'Instagram', href: site.social.instagram, Icon: InstagramIcon },
@@ -61,6 +62,10 @@ export default function Contact() {
     }
 
     setStatus('sending')
+
+    /* Counted here, past validation, so an abandoned or mistyped
+       attempt is not a lead. */
+    trackConversion('enquiry', { form: 'counselling_request', programme: program })
 
     const url = href(
       counsellingRequest({
@@ -131,8 +136,9 @@ export default function Contact() {
           {quickChannels.map((q, i) => (
             <Reveal key={q.label} delay={i * 70}>
               <div
-                className={`card card-hover flex h-full items-start gap-4 p-5 ${q.highlight ? 'border-navy/20 bg-navy-50/50' : 'bg-white'
-                  }`}
+                className={`card card-hover flex h-full items-start gap-4 p-5 ${
+                  q.highlight ? 'border-navy/20 bg-navy-50/50' : 'bg-white'
+                }`}
               >
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-navy-100/70 text-navy">
                   <q.Icon size={20} aria-hidden="true" />
