@@ -286,30 +286,29 @@ export function releaseIso(date: string): string {
 /**
  * Preview switch, for reading the run before it has been published.
  *
- * `npm run dev`, then open any page with `?preview` to unlock every scheduled
- * article for the rest of the browser session, and `?preview=off` to lock them
- * again. The alternative is changing the machine's clock, which is a worse
- * afternoon.
+ * `npm run dev` shows every scheduled article, published or not. That is the
+ * useful default: nobody running the dev server wants twenty-nine of their
+ * own drafts hidden, and a switch you have to remember to turn on is a switch
+ * that looks broken when you forget. Add `?preview=off` to any URL to see the
+ * listing as a visitor does, and `?preview` to go back.
  *
  * Fenced behind `import.meta.env.DEV`, so the branch is removed entirely from
- * a production build   there is no query string that unlocks the live site.
- * Read once at module load, because the query string is gone after the first
- * client-side navigation; session storage carries the answer from there.
+ * a production build   nothing unlocks the live site. The choice is read once
+ * at module load and kept in session storage, because the query string is gone
+ * after the first client-side navigation.
  */
 const PREVIEW_ALL = (() => {
   if (!import.meta.env.DEV || typeof window === 'undefined') return false
   const KEY = 'preview-schedule'
   try {
     const value = new URLSearchParams(window.location.search).get('preview')
-    if (value === 'off') {
-      window.sessionStorage.removeItem(KEY)
-      return false
-    }
-    if (value !== null) window.sessionStorage.setItem(KEY, '1')
-    return window.sessionStorage.getItem(KEY) === '1'
+    if (value === 'off') window.sessionStorage.setItem(KEY, 'off')
+    else if (value !== null) window.sessionStorage.removeItem(KEY)
+    return window.sessionStorage.getItem(KEY) !== 'off'
   } catch {
     // Private windows and blocked storage throw rather than returning null.
-    return false
+    // Unlocked is still the right answer in dev.
+    return true
   }
 })()
 

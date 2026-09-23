@@ -102,7 +102,7 @@ export default function Blog() {
       {import.meta.env.DEV && isPreviewing && (
         <div className="shell pb-6">
           <p className="rounded-xl border border-gold/40 bg-gold-50 px-4 py-2.5 text-xs font-medium text-navy">
-            Preview: every scheduled article is unlocked, including ones not yet published. Add{' '}
+            Dev preview: every scheduled article is listed, including ones not yet published. Add{' '}
             <code>?preview=off</code> to any URL to see the site as a visitor does.
           </p>
         </div>
