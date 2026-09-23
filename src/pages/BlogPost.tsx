@@ -10,11 +10,13 @@ import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
 import { BlogSearch } from '../components/BlogSearch'
 import { formatDate, getBody, getPost, loadBody, relatedPosts } from '../data/posts'
+import { useIsPublished } from '../data/usePublishedPosts'
 import NotFound from './NotFound'
 
 export default function BlogPost() {
   const { slug } = useParams()
   const post = slug ? getPost(slug) : undefined
+  const released = useIsPublished(slug)
 
   // Bodies live in their own chunk. It is preloaded before hydration, so this
   // is already populated on first render; the effect only covers client-side
@@ -32,8 +34,10 @@ export default function BlogPost() {
     }
   }, [slug, body])
 
-  // An unknown slug is a 404, not an empty article.
-  if (!post) return <NotFound />
+  // An unknown slug is a 404, not an empty article   and so is one whose
+  // release moment has not arrived, which keeps a guessed URL from reading
+  // tomorrow's article today.
+  if (!post || !released) return <NotFound />
 
   const related = relatedPosts(post.slug)
   // Programmes this guide should hand the reader next.
@@ -81,7 +85,7 @@ export default function BlogPost() {
           <div className="panel relative isolate overflow-hidden border-transparent px-4 py-12 sm:px-8 sm:py-16 lg:py-20">
             <Photo
               src={post.cover}
-              alt={post.title}
+              alt={post.coverAlt ?? post.title}
               rounded="none"
               priority
               className="absolute inset-0 -z-20 h-full w-full object-[50%_45%]"
@@ -194,7 +198,7 @@ export default function BlogPost() {
                         className="flex gap-3 rounded-2xl p-2 transition-colors hover:bg-wash"
                       >
                         <span className="w-16 shrink-0">
-                          <Photo src={p.cover} alt={p.title} ratio="1/1" />
+                          <Photo src={p.cover} alt={p.coverAlt ?? p.title} ratio="1/1" />
                         </span>
                         <span className="flex min-w-0 flex-1 flex-col justify-center">
                           <span className="text-xs font-medium text-gold-700">{p.category}</span>

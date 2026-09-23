@@ -263,7 +263,7 @@ export function postSchema(slug: string): object | undefined {
       datePublished: post.date,
       dateModified: post.updated ?? post.date,
       timeRequired: `PT${post.readingMinutes}M`,
-      image: `${site.url}${post.cover}`,
+      image: post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`,
       inLanguage: 'en-IN',
       author: { '@type': 'Organization', '@id': ORG, name: post.author },
       publisher: { '@id': ORG },

@@ -8,14 +8,15 @@ import { Reveal } from '../components/Reveal'
 import { PageHero } from '../components/PageHero'
 import { BlogSearch } from '../components/BlogSearch'
 import { Photo } from '../components/Photo'
-import { categories, formatDate, PAGE_SIZE, postsByDate, type Post } from '../data/posts'
+import { categories, formatDate, PAGE_SIZE, type Post } from '../data/posts'
+import { usePublishedPosts } from '../data/usePublishedPosts'
 
 function Card({ post, delay }: { post: Post; delay: number }) {
   return (
     <Reveal delay={delay}>
       <article className="card card-hover h-full overflow-hidden">
         <Link to={`/blog/${post.slug}`} className="flex h-full flex-col">
-          <Photo src={post.cover} alt={post.title} ratio="16/9" rounded="none" />
+          <Photo src={post.cover} alt={post.coverAlt ?? post.title} ratio="16/9" rounded="none" />
           <div className="card-p flex flex-1 flex-col">
             <div className="flex flex-wrap items-center gap-2">
               <span className="badge">{post.category}</span>
@@ -49,9 +50,13 @@ export default function Blog() {
   const [category, setCategory] = useState<string | null>(null)
   const [page, setPage] = useState(1)
 
+  // Published on the visitor's clock, so a tab left open overnight picks up
+  // the next morning's article without a reload or a deploy.
+  const live = usePublishedPosts()
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return postsByDate.filter((post) => {
+    return live.filter((post) => {
       if (category && post.category !== category) return false
       if (!q) return true
       return (
@@ -60,7 +65,7 @@ export default function Blog() {
         post.category.toLowerCase().includes(q)
       )
     })
-  }, [category, query])
+  }, [category, query, live])
   const [lead, ...rest] = filtered
   const shown = rest.slice(0, page * PAGE_SIZE)
   const remaining = rest.length - shown.length
@@ -141,7 +146,7 @@ export default function Blog() {
               <Link to={`/blog/${lead.slug}`} className="grid lg:grid-cols-2">
                 <Photo
                   src={lead.cover}
-                  alt={lead.title}
+                  alt={lead.coverAlt ?? lead.title}
                   ratio="16/9"
                   rounded="none"
                   priority

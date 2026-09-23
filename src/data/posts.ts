@@ -9,6 +9,7 @@
  */
 
 import { imageSrc } from './images'
+import { isPublished, scheduleFor } from './postSchedule'
 
 const metaModules = import.meta.glob('../content/posts/*.md', {
   eager: true,
@@ -34,32 +35,65 @@ type PostMeta = {
   readingMinutes: number
 }
 
-export type Post = PostMeta & { slug: string; cover: string }
+export type Post = PostMeta & { slug: string; cover: string; coverAlt?: string }
 
 const slugOf = (path: string) => path.replace(/^.*\/(.+)\.md(\?.*)?$/, '$1')
 
-export const posts: Post[] = Object.entries(metaModules)
+/**
+ * Every article, published or not yet. The schedule is authoritative for the
+ * date and the cover where it has a row, so moving a post is one edit in
+ * `postSchedule.ts` rather than two in two files.
+ */
+export const allPosts: Post[] = Object.entries(metaModules)
   .map(([path, meta]) => {
     const slug = slugOf(path)
-    // A cover is whatever file exists at public/images/blog/<slug>.*
-    return { ...meta, slug, cover: imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`) }
+    const row = scheduleFor(slug)
+    // A cover is the scheduled one, else whatever file exists at
+    // public/images/blog/<slug>.*, else the placeholder.
+    return {
+      ...meta,
+      slug,
+      date: row?.date ?? meta.date,
+      cover: row?.image ?? imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`),
+      coverAlt: row?.alt,
+    }
   })
   .sort((a, b) => b.date.localeCompare(a.date))
+
+/** The articles that are live at `now`, newest first. */
+export function publishedPosts(now: number = Date.now()): Post[] {
+  return allPosts.filter((post) => isPublished(post.slug, now))
+}
+
+/**
+ * Live at the moment this module was evaluated.
+ *
+ * That is the right list for prerendering, the sitemap and per-page metadata,
+ * all of which are produced by a build and describe that build. Anything
+ * rendered in a browser should call `publishedPosts()` instead, so a visitor
+ * with the tab open at 8am sees the new article without a deploy.
+ */
+export const posts: Post[] = publishedPosts()
 
 /** Newest first. */
 export const postsByDate = posts
 
-export const categories = [...new Set(posts.map((p) => p.category))].sort()
+export const categories = [...new Set(allPosts.map((p) => p.category))].sort()
 
+/** Looks through every article, including ones not yet released: a caller that
+ *  cares about the difference asks `isPublished` itself. */
 export function getPost(slug: string) {
-  return posts.find((p) => p.slug === slug)
+  return allPosts.find((p) => p.slug === slug)
 }
 
+export { isPublished } from './postSchedule'
+
 /** Same category first, then most recent. */
-export function relatedPosts(slug: string, count = 3) {
+export function relatedPosts(slug: string, count = 3, now: number = Date.now()) {
+  const live = publishedPosts(now)
   const post = getPost(slug)
-  if (!post) return posts.slice(0, count)
-  const others = posts.filter((p) => p.slug !== slug)
+  if (!post) return live.slice(0, count)
+  const others = live.filter((p) => p.slug !== slug)
   const sameTopic = others.filter((p) => p.category === post.category)
   return [...sameTopic, ...others.filter((p) => p.category !== post.category)].slice(0, count)
 }
