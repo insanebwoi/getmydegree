@@ -9,6 +9,7 @@ import { postSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
 import { BlogSearch } from '../components/BlogSearch'
+import { ShareArticle } from '../components/ShareArticle'
 import { formatDate, getBody, getPost, loadBody, relatedPosts } from '../data/posts'
 import { useIsPublished } from '../data/usePublishedPosts'
 import NotFound from './NotFound'
@@ -167,6 +168,10 @@ export default function BlogPost() {
                     </div>
                   </Reveal>
                 )}
+
+                <Reveal delay={60}>
+                  <ShareArticle slug={post.slug} title={post.title} />
+                </Reveal>
 
                 <Reveal delay={80} className="mt-11">
                   <div className="card card-p flex flex-col gap-5 bg-navy-950 text-white sm:flex-row sm:items-center sm:justify-between sm:p-7">
