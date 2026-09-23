@@ -9,7 +9,7 @@
  */
 
 import { imageSrc } from './images'
-import { isPublished, scheduleFor } from './postSchedule'
+import { isPublished, releaseIso, scheduleFor } from './postSchedule'
 
 const metaModules = import.meta.glob('../content/posts/*.md', {
   eager: true,
@@ -35,7 +35,14 @@ type PostMeta = {
   readingMinutes: number
 }
 
-export type Post = PostMeta & { slug: string; cover: string; coverAlt?: string }
+export type Post = PostMeta & {
+  slug: string
+  cover: string
+  coverAlt?: string
+  /** Full ISO release instant. `date` stays a plain day, for display and for
+   *  sorting; this is what metadata should carry. */
+  publishedAt: string
+}
 
 const slugOf = (path: string) => path.replace(/^.*\/(.+)\.md(\?.*)?$/, '$1')
 
@@ -56,6 +63,7 @@ export const allPosts: Post[] = Object.entries(metaModules)
       date: row?.date ?? meta.date,
       cover: row?.image ?? imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`),
       coverAlt: row?.alt,
+      publishedAt: row ? releaseIso(row.date) : new Date(meta.date).toISOString(),
     }
   })
   .sort((a, b) => b.date.localeCompare(a.date))

@@ -104,8 +104,8 @@ export function metaFor(path: string): PageMeta {
       path,
       image: post.cover,
       type: 'article',
-      publishedTime: post.date,
-      modifiedTime: post.updated ?? post.date,
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
       section: post.category,
     }
   }
@@ -134,7 +134,15 @@ export function canonical(meta: PageMeta) {
  */
 export function ogImage(meta: PageMeta): { url: string; width?: number; height?: number } {
   const path = meta.image ?? '/images/home/hero-portrait.webp'
-  if (path.startsWith('http')) return { url: path }
+  if (path.startsWith('http')) {
+    /* A remote cover has no file on disk to measure, but it was requested at a
+       specific size, so the request itself is the measurement. Without these
+       a social card renders blank until the crawler has fetched the image. */
+    const query = new URLSearchParams(path.split('?')[1] ?? '')
+    const width = Number(query.get('w'))
+    const height = Number(query.get('h'))
+    return width && height ? { url: path, width, height } : { url: path }
+  }
   const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '')
   const { src, width, height } = ogImageFor(name, path)
   const url = src.startsWith('http') ? src : `${site.url}${src}`

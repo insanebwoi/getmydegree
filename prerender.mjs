@@ -11,7 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 const root = dirname(fileURLToPath(import.meta.url))
 const template = readFileSync(resolve(root, 'dist/index.html'), 'utf-8')
 const server = await import(pathToFileURL(resolve(root, 'dist-ssr/entry-server.js')).href)
-const { render, prerenderPaths, metaFor, schemaFor, fullTitle, canonical, ogImage } = server
+const { render, prerenderPaths, metaFor, schemaFor, fullTitle, canonical, ogImage, posts } = server
 
 const escape = (value) =>
   String(value)
@@ -133,5 +133,23 @@ ${prerenderPaths
 `
 writeFileSync(resolve(root, 'dist/sitemap.xml'), sitemap)
 console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls)`)
+
+/*
+  llms.txt lists the guides, and the guides now arrive on a schedule. Rewriting
+  the section from the same list the sitemap is built from means it cannot fall
+  behind, and an article that has not been released is not advertised.
+*/
+{
+  const path = resolve(root, 'dist/llms.txt')
+  const guides = posts
+    .map((post) => `- [${post.title}](${canonical(metaFor(`/blog/${post.slug}`))})`)
+    .join('\n')
+  const text = readFileSync(path, 'utf-8').replace(
+    /(## Guides\n\n)[\s\S]*?(\n\n## )/,
+    `$1${guides}$2`,
+  )
+  writeFileSync(path, text)
+  console.log(`llms.txt   → dist/llms.txt (${posts.length} guides)`)
+}
 
 rmSync(resolve(root, 'dist-ssr'), { recursive: true, force: true })

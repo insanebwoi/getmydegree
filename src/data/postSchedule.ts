@@ -31,8 +31,15 @@ export const RELEASE_HOUR = 8
  *  fixed offset is exact rather than an approximation. */
 export const RELEASE_ZONE = '+05:30'
 
+/** Covers are cropped to a fixed size rather than left at the source photo's
+ *  own aspect. A declared `og:image:width` and `height` is what lets a social
+ *  card render immediately instead of after the crawler has fetched the file,
+ *  and we can only declare a size we have asked for. */
+export const COVER_WIDTH = 1600
+export const COVER_HEIGHT = 900
+
 const unsplash = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=70`
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${COVER_WIDTH}&h=${COVER_HEIGHT}&q=70`
 
 export const schedule: ScheduledPost[] = [
   {
@@ -269,6 +276,13 @@ export function releaseAt(date: string): number {
  * Articles with no row in the schedule are the ones written before it existed.
  * They are already public and stay that way.
  */
+/** The release moment as a full ISO timestamp, for metadata that should carry
+ *  a time rather than a bare date. */
+export function releaseIso(date: string): string {
+  const at = releaseAt(date)
+  return Number.isFinite(at) ? new Date(at).toISOString() : date
+}
+
 export function isPublished(slug: string, now: number = Date.now()): boolean {
   const row = bySlug.get(slug)
   if (!row) return true

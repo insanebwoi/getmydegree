@@ -64,6 +64,126 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
     label: 'Programmes to compare on duration and fee structure',
   },
+  'best-degree-options-for-working-professionals': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes that most often fit around a full-time job',
+  },
+  'ugc-deb-approval-search-verify-recognition': {
+    codes: ['BA', 'B.Com', 'BBA', 'MBA'],
+    label: 'Programmes we place students into, at recognized universities',
+  },
+  'online-degree-admission-deadlines': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes admitting in the current cycle',
+  },
+  'bba-vs-bcom-for-career-growth': {
+    codes: ['BBA', 'B.Com', 'MBA', 'M.Com'],
+    label: 'The two pathways, and where each one continues',
+  },
+  'masters-degree-while-working-full-time': {
+    codes: ['MBA', 'M.Com', 'MCA', 'MSW'],
+    label: 'Postgraduate programmes built around working hours',
+  },
+  'ugc-updates-for-online-degree-applicants': {
+    codes: ['BA', 'B.Com', 'BBA', 'MBA'],
+    label: 'Programmes at universities entitled for distance and online mode',
+  },
+  'how-to-choose-the-right-online-university': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes to compare across our partner universities',
+  },
+  'kerala-online-mca-msc-it-programs': {
+    codes: ['MCA', 'BCA', 'B.Sc', 'MBA'],
+    label: 'Technical programmes for working IT professionals',
+  },
+  'naac-grades-and-nirf-rankings-explained': {
+    codes: ['BA', 'B.Com', 'BBA', 'MBA'],
+    label: 'Programmes at accredited partner universities',
+  },
+  'ai-and-digital-skills-in-degree-curriculums': {
+    codes: ['BCA', 'B.Sc', 'MCA', 'MBA'],
+    label: 'Programmes carrying data and digital electives',
+  },
+  'distance-mba-admission-process': {
+    codes: ['MBA', 'M.Com', 'MCA', 'BBA'],
+    label: 'The MBA, and the programmes most often compared with it',
+  },
+  'dual-degree-pathways-under-ugc-guidelines': {
+    codes: ['B.Com', 'BBA', 'BA', 'MBA'],
+    label: 'Programmes commonly taken as the second degree',
+  },
+  'degrees-for-defence-and-public-sector-employees': {
+    codes: ['BA', 'B.Com', 'B.Sc', 'MBA'],
+    label: 'Degrees that meet most government eligibility criteria',
+  },
+  'academic-bank-of-credits-abc-id-explained': {
+    codes: ['B.Com', 'BBA', 'BCA', 'BA'],
+    label: 'Programmes students most often resume with transferred credits',
+  },
+  'top-online-masters-for-corporate-careers': {
+    codes: ['MBA', 'M.Com', 'MCA', 'MSW'],
+    label: 'Postgraduate programmes for corporate progression',
+  },
+  'degree-admission-cycles-july-and-january': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes open in the current admission cycle',
+  },
+  'online-vs-distance-degree-modes': {
+    codes: ['BA', 'B.Com', 'BBA', 'MCA'],
+    label: 'Programmes offered in both modes',
+  },
+  'degree-requirements-for-executive-promotions': {
+    codes: ['BBA', 'B.Com', 'MBA', 'BA'],
+    label: 'The fastest recognized routes to a graduate qualification',
+  },
+  'red-flags-before-enrolling-in-an-online-degree': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes at universities we have verified',
+  },
+  'balancing-full-time-work-with-an-online-degree': {
+    codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
+    label: 'Programmes with workloads that survive a full-time job',
+  },
+  'bsc-vs-bca-for-tech-jobs': {
+    codes: ['BCA', 'B.Sc', 'MCA', 'MBA'],
+    label: 'The two pathways, and where each one continues',
+  },
+  'equivalence-of-online-and-campus-degrees': {
+    codes: ['BA', 'B.Com', 'BBA', 'MBA'],
+    label: 'Degrees awarded by recognized universities',
+  },
+  'degrees-for-healthcare-and-shift-workers': {
+    codes: ['B.Com', 'BA', 'BBA', 'MSW'],
+    label: 'Programmes that work around a rotating roster',
+  },
+  'nri-and-international-students-indian-degrees': {
+    codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
+    label: 'Programmes most often taken from outside India',
+  },
+  'degree-fees-instalments-and-emi-options': {
+    codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
+    label: 'Programmes to compare on duration and fee structure',
+  },
+  'proctored-exams-and-assessment-models': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes and how each one is assessed',
+  },
+  'flexible-degree-options-in-kerala': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes we place Kerala students into',
+  },
+  'pg-diploma-vs-masters-degree': {
+    codes: ['MBA', 'M.Com', 'MCA', 'MSW'],
+    label: 'Master’s degrees, where only a degree will do',
+  },
+  'micro-credentials-and-specializations': {
+    codes: ['MBA', 'BBA', 'BCA', 'M.Com'],
+    label: 'Programmes offering named specialisations',
+  },
+  'step-by-step-degree-application-guide': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes to start an application with',
+  },
 }
 
 /**
@@ -81,48 +201,162 @@ export const courseDetail: Record<
   { subjects: string[]; careers: string[]; suits: string }
 > = {
   'B.Com': {
-    subjects: ['Financial accounting', 'Corporate and business law', 'Cost and management accounting', 'Taxation', 'Auditing', 'Business economics'],
-    careers: ['Accountant', 'Audit assistant', 'Tax consultant', 'Banking and finance roles', 'Further study: M.Com, MBA, CA'],
-    suits: 'People already working in accounts, billing or finance who need the qualification their role is graded against.',
+    subjects: [
+      'Financial accounting',
+      'Corporate and business law',
+      'Cost and management accounting',
+      'Taxation',
+      'Auditing',
+      'Business economics',
+    ],
+    careers: [
+      'Accountant',
+      'Audit assistant',
+      'Tax consultant',
+      'Banking and finance roles',
+      'Further study: M.Com, MBA, CA',
+    ],
+    suits:
+      'People already working in accounts, billing or finance who need the qualification their role is graded against.',
   },
   BBA: {
-    subjects: ['Principles of management', 'Marketing', 'Human resource management', 'Organisational behaviour', 'Business statistics', 'Entrepreneurship'],
-    careers: ['Team lead and supervisor roles', 'Sales and marketing', 'Operations', 'HR coordination', 'Further study: MBA'],
-    suits: 'People running a team or a small business who want the management vocabulary and the degree to go with the experience.',
+    subjects: [
+      'Principles of management',
+      'Marketing',
+      'Human resource management',
+      'Organisational behaviour',
+      'Business statistics',
+      'Entrepreneurship',
+    ],
+    careers: [
+      'Team lead and supervisor roles',
+      'Sales and marketing',
+      'Operations',
+      'HR coordination',
+      'Further study: MBA',
+    ],
+    suits:
+      'People running a team or a small business who want the management vocabulary and the degree to go with the experience.',
   },
   BCA: {
-    subjects: ['Programming fundamentals', 'Data structures', 'Database management', 'Operating systems', 'Web technologies', 'Software engineering'],
-    careers: ['Junior developer', 'Support and QA roles', 'Database and systems administration', 'Further study: MCA, MSc IT'],
-    suits: 'People working in IT support or self-taught in code who need a recognized qualification behind the skills.',
+    subjects: [
+      'Programming fundamentals',
+      'Data structures',
+      'Database management',
+      'Operating systems',
+      'Web technologies',
+      'Software engineering',
+    ],
+    careers: [
+      'Junior developer',
+      'Support and QA roles',
+      'Database and systems administration',
+      'Further study: MCA, MSc IT',
+    ],
+    suits:
+      'People working in IT support or self-taught in code who need a recognized qualification behind the skills.',
   },
   BA: {
-    subjects: ['Language and literature', 'Communication', 'Sociology or political science', 'History', 'Psychology', 'Critical writing'],
-    careers: ['Government recruitment where a graduate degree is the bar', 'Teaching after B.Ed', 'Content and communications', 'Further study: MA'],
-    suits: 'People whose goal is the graduate qualification itself   most often for a government exam or a promotion band.',
+    subjects: [
+      'Language and literature',
+      'Communication',
+      'Sociology or political science',
+      'History',
+      'Psychology',
+      'Critical writing',
+    ],
+    careers: [
+      'Government recruitment where a graduate degree is the bar',
+      'Teaching after B.Ed',
+      'Content and communications',
+      'Further study: MA',
+    ],
+    suits:
+      'People whose goal is the graduate qualification itself   most often for a government exam or a promotion band.',
   },
   'B.Sc': {
-    subjects: ['Core science specialisation', 'Mathematics', 'Statistics', 'Laboratory and practical work', 'Research method', 'Computer applications'],
-    careers: ['Technical and laboratory roles', 'Government science posts', 'Teaching after B.Ed', 'Further study: MSc'],
-    suits: 'People in technical work who need the formal science degree their next role or exam requires.',
+    subjects: [
+      'Core science specialisation',
+      'Mathematics',
+      'Statistics',
+      'Laboratory and practical work',
+      'Research method',
+      'Computer applications',
+    ],
+    careers: [
+      'Technical and laboratory roles',
+      'Government science posts',
+      'Teaching after B.Ed',
+      'Further study: MSc',
+    ],
+    suits:
+      'People in technical work who need the formal science degree their next role or exam requires.',
   },
   MBA: {
-    subjects: ['Strategic management', 'Financial management', 'Marketing management', 'Operations and supply chain', 'Business analytics', 'Leadership'],
-    careers: ['Manager and senior manager roles', 'Business development', 'Consulting', 'Promotion into leadership bands'],
-    suits: 'Working professionals with a bachelor’s degree who have hit the ceiling a postgraduate qualification is gating.',
+    subjects: [
+      'Strategic management',
+      'Financial management',
+      'Marketing management',
+      'Operations and supply chain',
+      'Business analytics',
+      'Leadership',
+    ],
+    careers: [
+      'Manager and senior manager roles',
+      'Business development',
+      'Consulting',
+      'Promotion into leadership bands',
+    ],
+    suits:
+      'Working professionals with a bachelor’s degree who have hit the ceiling a postgraduate qualification is gating.',
   },
   MCA: {
-    subjects: ['Advanced programming', 'Algorithms', 'Cloud and distributed systems', 'Machine learning foundations', 'Software architecture', 'Project work'],
-    careers: ['Senior developer', 'Systems architect', 'Technical lead', 'Government IT posts requiring a PG degree'],
-    suits: 'Developers who need a postgraduate qualification for a senior title or a government technical post.',
+    subjects: [
+      'Advanced programming',
+      'Algorithms',
+      'Cloud and distributed systems',
+      'Machine learning foundations',
+      'Software architecture',
+      'Project work',
+    ],
+    careers: [
+      'Senior developer',
+      'Systems architect',
+      'Technical lead',
+      'Government IT posts requiring a PG degree',
+    ],
+    suits:
+      'Developers who need a postgraduate qualification for a senior title or a government technical post.',
   },
   'M.Com': {
-    subjects: ['Advanced accounting', 'Financial management', 'Business research', 'Direct and indirect taxation', 'Managerial economics', 'Analytics'],
+    subjects: [
+      'Advanced accounting',
+      'Financial management',
+      'Business research',
+      'Direct and indirect taxation',
+      'Managerial economics',
+      'Analytics',
+    ],
     careers: ['Senior accountant', 'Finance manager', 'Lecturer after NET', 'Further study: PhD'],
-    suits: 'Commerce graduates in finance roles who want the postgraduate qualification for seniority or teaching.',
+    suits:
+      'Commerce graduates in finance roles who want the postgraduate qualification for seniority or teaching.',
   },
   MSW: {
-    subjects: ['Social work practice', 'Community organisation', 'Counselling', 'Social policy and legislation', 'Field work', 'Research method'],
-    careers: ['NGO and development sector roles', 'Medical and psychiatric social work', 'CSR', 'Government welfare posts'],
-    suits: 'People working in community, welfare or NGO settings who need the professional qualification the sector asks for.',
+    subjects: [
+      'Social work practice',
+      'Community organisation',
+      'Counselling',
+      'Social policy and legislation',
+      'Field work',
+      'Research method',
+    ],
+    careers: [
+      'NGO and development sector roles',
+      'Medical and psychiatric social work',
+      'CSR',
+      'Government welfare posts',
+    ],
+    suits:
+      'People working in community, welfare or NGO settings who need the professional qualification the sector asks for.',
   },
 }
