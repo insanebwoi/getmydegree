@@ -170,7 +170,7 @@ export default function BlogPost() {
                 )}
 
                 <Reveal delay={60}>
-                  <ShareArticle slug={post.slug} title={post.title} />
+                  <ShareArticle slug={post.slug} title={post.title} excerpt={post.excerpt} />
                 </Reveal>
 
                 <Reveal delay={80} className="mt-11">

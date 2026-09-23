@@ -40,6 +40,40 @@ export function href(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
 }
 
+/**
+ * The same link with no number on it.
+ *
+ * `wa.me/<number>` opens a chat with that number   which is what every other
+ * link here wants, and exactly wrong for a reader forwarding an article: it
+ * would send the piece back to us instead of to their friend. Omitting the
+ * number opens their own contact list and lets them choose.
+ */
+export function shareHref(message: string) {
+  return `https://wa.me/?text=${encodeURIComponent(message)}`
+}
+
+/**
+ * A reader forwarding an article to someone else.
+ *
+ * Same shape as every other message here: a bold heading, a short body, and
+ * the link last so WhatsApp fetches the article's own Open Graph image and
+ * renders a preview card beneath the text. The closing line is what makes the
+ * forward useful to us   the recipient learns who wrote it and what we do,
+ * without the message reading as an advertisement the sender did not choose.
+ */
+export function articleShare(input: { title: string; excerpt: string; url: string }) {
+  return compose(
+    input.title,
+    [
+      input.excerpt,
+      /* `compose` drops empty rows, so the blank line that separates the
+         summary from the sign-off has to travel with the row itself. */
+      '\nFree counselling on degree admissions for working professionals, from GetMyDegree.',
+    ],
+    input.url,
+  )
+}
+
 /** The plain opener behind the floating button. */
 export const generalEnquiry =
   'Hello GetMyDegree, I would like to know more about degree admission and counselling.'
