@@ -1,0 +1,59 @@
+# Publishes the day's scheduled article.
+#
+# The site is prerendered, so the static HTML, the sitemap and the per-page
+# metadata are only ever as current as the last build. This rebuilds every
+# morning just after the release moment in `src/data/postSchedule.ts` and
+# commits the result, which is what makes the new article appear in the
+# sitemap and in crawlers' view of the site rather than only in a browser.
+#
+# Nothing here needs setting up. It runs on the repository's own token, with
+# no deploy hook, no secret and no third-party account, so it keeps working
+# whoever owns the repo. `dist/` is committed, so the push is the deploy.
+name: Daily publish
+
+on:
+  schedule:
+    # 02:30 UTC is 08:00 India time, a little after the 08:00 release moment.
+    # GitHub runs scheduled jobs on a shared queue and can be several minutes
+    # late; the articles do not depend on this being punctual, because the
+    # browser reads its own clock. This is for the static output.
+    - cron: '30 2 * * *'
+  # So a new article can be pushed out by hand without waiting for tomorrow.
+  workflow_dispatch:
+
+# Two runs committing to the same branch would conflict.
+concurrency:
+  group: daily-publish
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Commit the rebuilt site, if it changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add dist
+          # Most days nothing changes   no article is due, and the build is
+          # deterministic. An empty commit every morning would be noise.
+          if git diff --staged --quiet; then
+            echo 'No change to publish today.'
+            exit 0
+          fi
+          git commit -m 'Rebuild: publish the day'"'"'s scheduled article'
+          git push
