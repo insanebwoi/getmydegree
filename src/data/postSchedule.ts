@@ -283,7 +283,41 @@ export function releaseIso(date: string): string {
   return Number.isFinite(at) ? new Date(at).toISOString() : date
 }
 
+/**
+ * Preview switch, for reading the run before it has been published.
+ *
+ * `npm run dev`, then open any page with `?preview` to unlock every scheduled
+ * article for the rest of the browser session, and `?preview=off` to lock them
+ * again. The alternative is changing the machine's clock, which is a worse
+ * afternoon.
+ *
+ * Fenced behind `import.meta.env.DEV`, so the branch is removed entirely from
+ * a production build   there is no query string that unlocks the live site.
+ * Read once at module load, because the query string is gone after the first
+ * client-side navigation; session storage carries the answer from there.
+ */
+const PREVIEW_ALL = (() => {
+  if (!import.meta.env.DEV || typeof window === 'undefined') return false
+  const KEY = 'preview-schedule'
+  try {
+    const value = new URLSearchParams(window.location.search).get('preview')
+    if (value === 'off') {
+      window.sessionStorage.removeItem(KEY)
+      return false
+    }
+    if (value !== null) window.sessionStorage.setItem(KEY, '1')
+    return window.sessionStorage.getItem(KEY) === '1'
+  } catch {
+    // Private windows and blocked storage throw rather than returning null.
+    return false
+  }
+})()
+
+/** True while the dev preview switch is on, for anything that wants to say so. */
+export const isPreviewing = PREVIEW_ALL
+
 export function isPublished(slug: string, now: number = Date.now()): boolean {
+  if (PREVIEW_ALL) return true
   const row = bySlug.get(slug)
   if (!row) return true
   return releaseAt(row.date) <= now

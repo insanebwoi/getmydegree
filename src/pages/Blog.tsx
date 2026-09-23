@@ -10,6 +10,7 @@ import { BlogSearch } from '../components/BlogSearch'
 import { Photo } from '../components/Photo'
 import { categories, formatDate, PAGE_SIZE, type Post } from '../data/posts'
 import { usePublishedPosts } from '../data/usePublishedPosts'
+import { isPreviewing } from '../data/postSchedule'
 
 function Card({ post, delay }: { post: Post; delay: number }) {
   return (
@@ -90,6 +91,22 @@ export default function Blog() {
         title="Straight answers about degrees, admissions and recognition"
         intro="No sales copy. What we tell students on the phone, written down — so you can check it before you commit to anything."
       />
+
+      {/* Only ever rendered by `npm run dev` with the preview switch on. The
+          `import.meta.env.DEV` test is what makes the whole block statically
+          dead in a production build   gating on the constant alone left this
+          markup in the bundle, because a minifier cannot see through the IIFE
+          behind it.
+          Without it, seeing thirty articles listed is indistinguishable from
+          the schedule having broken. */}
+      {import.meta.env.DEV && isPreviewing && (
+        <div className="shell pb-6">
+          <p className="rounded-xl border border-gold/40 bg-gold-50 px-4 py-2.5 text-xs font-medium text-navy">
+            Preview: every scheduled article is unlocked, including ones not yet published. Add{' '}
+            <code>?preview=off</code> to any URL to see the site as a visitor does.
+          </p>
+        </div>
+      )}
 
       {/* Search and categories share one row; the chips scroll when they outgrow it. */}
       <div className="shell pb-8">
