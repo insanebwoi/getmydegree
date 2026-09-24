@@ -8,8 +8,8 @@ export const site = {
   description:
     'GetMyDegree Institutions offers flexible, UGC recognized UG & PG degree programs for working professionals, dropouts and gap-year students across India.',
   email: 'getmydegreeedu@gmail.com',
-  phone: '+91 86066 77828',
-  phoneHref: '+918606677828',
+  phone: '+91 92076 77828',
+  phoneHref: '+919207677828',
   officeHours: 'Mon–Sat · 9am to 7pm',
   established: 2021,
   social: {
@@ -31,8 +31,8 @@ export const centers = [
   {
     city: 'Thrissur',
     address: 'Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur',
-    phone: '86066 77828',
-    phoneHref: '+918606677828',
+    phone: '92076 77828',
+    phoneHref: '+919207677828',
   },
   {
     city: 'Malappuram',
