@@ -160,15 +160,27 @@ export default function Blog() {
         <section className="shell pb-12 lg:pb-16">
           <Reveal>
             <article className="card card-hover overflow-hidden">
-              <Link to={`/blog/${lead.slug}`} className="grid lg:grid-cols-2">
-                <Photo
-                  src={lead.cover}
-                  alt={lead.coverAlt ?? lead.title}
-                  ratio="16/9"
-                  rounded="none"
-                  priority
-                  className="lg:h-full"
-                />
+              <Link to={`/blog/${lead.slug}`} className="grid lg:grid-cols-2 lg:items-center">
+                {/*
+                  The covers carry their own headline, so this one keeps its
+                  16:9 shape instead of stretching to the height of the text
+                  beside it   filling that height crops the sides, and the
+                  first thing lost is the title written into the artwork.
+
+                  The wrapper is what makes that hold: `Photo` is always
+                  `h-full`, which against the grid row resolves to the text
+                  column's height. Against a plain auto-height parent it
+                  resolves to auto, and the aspect ratio decides instead.
+                */}
+                <div className="lg:self-center">
+                  <Photo
+                    src={lead.cover}
+                    alt={lead.coverAlt ?? lead.title}
+                    ratio="16/9"
+                    rounded="none"
+                    priority
+                  />
+                </div>
                 <div className="card-p flex flex-col justify-center lg:p-10">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="badge">{lead.category}</span>

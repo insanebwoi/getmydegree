@@ -19,9 +19,17 @@ export type ScheduledPost = {
   slug: string
   /** Release date, `YYYY-MM-DD`, interpreted at `RELEASE_HOUR` India time. */
   date: string
-  /** Cover photograph. An absolute URL is served by that host; a path under
-   *  `/images/` is served by us. */
-  image: string
+  /**
+   * Cover photograph, when it comes from somewhere else: an absolute URL is
+   * served by that host, a path under `/images/` by us.
+   *
+   * Leave it out once a real cover exists at `public/images/blog/<slug>.*`.
+   * The build then resolves the file itself, preferring avif over webp over
+   * jpg and pairing the page's image with the jpg that social cards need   so
+   * replacing a stock photograph is a matter of adding the file and deleting
+   * this line, with no path to keep in step.
+   */
+  image?: string
   /** The cover's alt text. Written here because the cover lives here. */
   alt: string
 }
@@ -46,35 +54,30 @@ export const schedule: ScheduledPost[] = [
     day: 1,
     slug: 'best-degree-options-for-working-professionals',
     date: '2026-09-23',
-    image: unsplash('photo-1454165804606-c3d57bc86b40'),
     alt: 'A working professional at a desk planning their next qualification',
   },
   {
     day: 2,
     slug: 'ugc-deb-approval-search-verify-recognition',
     date: '2026-09-24',
-    image: unsplash('photo-1450101499163-c8848c66ca85'),
     alt: 'Checking a university approval record on a laptop',
   },
   {
     day: 3,
     slug: 'online-degree-admission-deadlines',
     date: '2026-09-25',
-    image: unsplash('photo-1506784365847-bbad939e9335'),
     alt: 'A calendar marked with admission dates',
   },
   {
     day: 4,
     slug: 'bba-vs-bcom-for-career-growth',
     date: '2026-09-26',
-    image: unsplash('photo-1560250097-0b93528c311a'),
     alt: 'Two career paths being weighed on paper',
   },
   {
     day: 5,
     slug: 'masters-degree-while-working-full-time',
     date: '2026-09-27',
-    image: unsplash('photo-1531482615713-2afd69097998'),
     alt: 'Studying at a laptop after work hours',
   },
   {
