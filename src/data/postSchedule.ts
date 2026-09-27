@@ -46,6 +46,34 @@ export const RELEASE_ZONE = '+05:30'
 export const COVER_WIDTH = 1600
 export const COVER_HEIGHT = 900
 
+/**
+ * Our own covers, served from the `gmd-images` repository over jsDelivr.
+ *
+ * They live outside this repository so the site stays small and the files
+ * cost the site no bandwidth. The `w` and `h` are not instructions to the
+ * CDN, which ignores them   they are how `ogImage` learns the size of a
+ * remote file it cannot measure, so a social card renders before the image
+ * has been fetched.
+ */
+/*
+  Pinned to a commit rather than to `main`.
+
+  jsDelivr caches a branch reference for up to a week, so a replaced image
+  goes on being served from the old one   a purge is asked for politely and
+  does not reach every edge. A commit is immutable: the CDN can cache it
+  forever, and a changed image means a changed URL, which is what we want
+  anyway. Bump this after pushing to the images repository.
+*/
+const CDN =
+  'https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@f38fbc8d24fb25e4e3f204546db9444a504cd0ed/blog'
+
+/** Every cover in that repository is this size, so the suffix below is one
+ *  true number rather than a per-file lookup. */
+const COVER_FILE_WIDTH = 1400
+const COVER_FILE_HEIGHT = 787
+
+const cover = (name: string) => `${CDN}/${name}.webp?w=${COVER_FILE_WIDTH}&h=${COVER_FILE_HEIGHT}`
+
 const unsplash = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${COVER_WIDTH}&h=${COVER_HEIGHT}&q=70`
 
@@ -54,30 +82,35 @@ export const schedule: ScheduledPost[] = [
     day: 1,
     slug: 'best-degree-options-for-working-professionals',
     date: '2026-09-23',
+    image: cover('best-degree-options-for-working-professionals'),
     alt: 'A working professional at a desk planning their next qualification',
   },
   {
     day: 2,
     slug: 'ugc-deb-approval-search-verify-recognition',
     date: '2026-09-24',
+    image: cover('ugc-deb-approval-search-verify-recognition'),
     alt: 'Checking a university approval record on a laptop',
   },
   {
     day: 3,
     slug: 'online-degree-admission-deadlines',
     date: '2026-09-25',
+    image: cover('online-degree-admission-deadlines'),
     alt: 'A calendar marked with admission dates',
   },
   {
     day: 4,
     slug: 'bba-vs-bcom-for-career-growth',
     date: '2026-09-26',
+    image: cover('bba-vs-bcom-for-career-growth'),
     alt: 'Two career paths being weighed on paper',
   },
   {
     day: 5,
     slug: 'masters-degree-while-working-full-time',
     date: '2026-09-27',
+    image: cover('masters-degree-while-working-full-time'),
     alt: 'Studying at a laptop after work hours',
   },
   {

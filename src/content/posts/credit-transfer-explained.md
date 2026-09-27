@@ -5,7 +5,7 @@ excerpt: "Credit transfer means you resume rather than restart. What carries acr
 category: Admissions
 date: 2026-08-04
 author: "GetMyDegree Academic Team"
-cover: /images/blog/credit-transfer-explained.svg
+cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@f38fbc8d24fb25e4e3f204546db9444a504cd0ed/blog/credit-transfer-explained.webp?w=1400&h=787
 ---
 
 A large share of the people who call us left a degree partway through   a job abroad came up, fees became impossible, a family situation changed. The assumption is that those completed semesters are gone. Usually they are not.

@@ -4,7 +4,7 @@ excerpt: "Flexible study only works if the plan survives a bad week at work. A r
 category: Study advice
 date: 2026-07-21
 author: "GetMyDegree Academic Team"
-cover: /images/blog/studying-while-working-full-time.svg
+cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@f38fbc8d24fb25e4e3f204546db9444a504cd0ed/blog/studying-while-working-full-time.webp?w=1400&h=787
 ---
 
 Flexibility is the reason people choose this route and the reason some do not finish. When nothing is scheduled, nothing is protected   and the degree loses every negotiation against a deadline at work.
