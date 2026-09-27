@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 
 /*
+  Scan the source, and only the source.
+
+  `dist/` is committed, so Tailwind's automatic detection was reading the
+  previous build's own HTML and generating utilities for classes it found
+  there. That fed each build its predecessor's output: class names survived
+  after nothing in `src` produced them any more, and the CSS hash changed
+  depending on whether `dist` happened to be present. Naming the source
+  directory explicitly makes a build depend on the source alone.
+*/
+@source not '../dist';
+
+/*
   Self-hosted, same-origin   loading these from Google Fonts cost two extra
   cross-origin round trips (fonts.googleapis.com for the CSS, then
   fonts.gstatic.com for the file) before the page's largest text could paint.

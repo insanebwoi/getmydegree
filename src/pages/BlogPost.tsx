@@ -76,25 +76,20 @@ export default function BlogPost() {
 
       <article>
         {/*
-          The article's own cover carries its banner, the way every other page
-          on the site leads with a photograph. The picture is clear   only the
-          area under the words is washed out, by the same radial brush the
-          other page heroes use, so the type keeps its contrast without a flat
-          panel sitting over the image.
+          The cover is shown, not sat behind the title.
+
+          It used to be the background of this header, washed out under the
+          words. That reads well for a photograph, and badly for these covers:
+          they carry their own headline and artwork, so the wash dimmed the
+          picture and the type sat on top of lettering. The heading block now
+          stands on the page wash like any other, and the cover follows it at
+          full width in its own shape, uncropped.
         */}
-        <section className="shell pt-1 pb-8 lg:pb-12">
-          <div className="panel relative isolate overflow-hidden border-transparent px-4 py-12 sm:px-8 sm:py-16 lg:py-20">
-            <Photo
-              src={post.cover}
-              alt={post.coverAlt ?? post.title}
-              rounded="none"
-              priority
-              className="absolute inset-0 -z-20 h-full w-full object-[50%_45%]"
-            />
-            {/* The wash hugs the text block rather than the panel edge. */}
+        <section className="shell pt-1 pb-7 lg:pb-9">
+          <div className="relative isolate px-4 py-10 sm:px-8 sm:py-12 lg:py-14">
             <div
               aria-hidden="true"
-              className="page-brush-soft absolute -inset-x-16 -inset-y-16 -z-10 sm:-inset-x-32 sm:-inset-y-24"
+              className="page-brush-soft absolute -inset-x-16 -inset-y-10 -z-10 sm:-inset-x-32"
             />
 
             <Reveal className="relative mx-auto max-w-3xl text-center">
@@ -114,6 +109,21 @@ export default function BlogPost() {
               <p className="mt-6 text-base text-ink/75 md:text-sm">By {post.author}</p>
             </Reveal>
           </div>
+        </section>
+
+        {/* The cover at full width, in its own 16:9, so nothing in the artwork
+            is cropped away. */}
+        <section className="shell pb-10 lg:pb-14">
+          <Reveal>
+            <Photo
+              src={post.cover}
+              alt={post.coverAlt ?? post.title}
+              ratio="16/9"
+              rounded="panel"
+              priority
+              className="w-full"
+            />
+          </Reveal>
         </section>
 
         <div className="shell pb-16 lg:pb-24">
