@@ -111,21 +111,6 @@ export default function BlogPost() {
           </div>
         </section>
 
-        {/* The cover at full width, in its own 16:9, so nothing in the artwork
-            is cropped away. */}
-        <section className="shell pb-10 lg:pb-14">
-          <Reveal>
-            <Photo
-              src={post.cover}
-              alt={post.coverAlt ?? post.title}
-              ratio="16/9"
-              rounded="panel"
-              priority
-              className="w-full"
-            />
-          </Reveal>
-        </section>
-
         <div className="shell pb-16 lg:pb-24">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
             {/*
@@ -135,6 +120,18 @@ export default function BlogPost() {
             */}
             <div className="lg:col-span-8">
               <div className="panel card-p sm:p-8 lg:p-10 [&>*]:mx-auto [&>*]:max-w-[68ch]">
+                {/* The cover opens the article itself, on the same surface and
+                    the same measure as the text, rather than floating above it
+                    as a banner. Its own 16:9, so none of the artwork is lost. */}
+                <Photo
+                  src={post.cover}
+                  alt={post.coverAlt ?? post.title}
+                  ratio="16/9"
+                  rounded="card"
+                  priority
+                  className="w-full"
+                />
+
                 {body ? (
                   <div
                     className="prose mt-9"
