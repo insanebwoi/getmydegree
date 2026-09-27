@@ -76,20 +76,27 @@ export default function BlogPost() {
 
       <article>
         {/*
-          The cover is shown, not sat behind the title.
+          The header keeps its banner, but not the article's own cover.
 
-          It used to be the background of this header, washed out under the
-          words. That reads well for a photograph, and badly for these covers:
-          they carry their own headline and artwork, so the wash dimmed the
-          picture and the type sat on top of lettering. The heading block now
-          stands on the page wash like any other, and the cover follows it at
-          full width in its own shape, uncropped.
+          Using the cover here was what buried it: these covers carry their
+          own headline and artwork, and the wash that makes a heading legible
+          dimmed the picture while the page's type sat over lettering. The
+          shared blog banner has no words in it, so it takes the wash the way
+          a header photograph is supposed to   and the article's cover is left
+          to open the content, at full size, where it can actually be read.
         */}
         <section className="shell pt-1 pb-7 lg:pb-9">
-          <div className="relative isolate px-4 py-10 sm:px-8 sm:py-12 lg:py-14">
+          <div className="panel relative isolate overflow-hidden border-transparent px-4 py-11 sm:px-8 sm:py-14 lg:py-16">
+            <Photo
+              name="blog-banner"
+              rounded="none"
+              priority
+              className="absolute inset-0 -z-20 h-full w-full object-[50%_35%]"
+            />
+            {/* The wash hugs the text block rather than the panel edge. */}
             <div
               aria-hidden="true"
-              className="page-brush-soft absolute -inset-x-16 -inset-y-10 -z-10 sm:-inset-x-32"
+              className="page-brush-soft absolute -inset-x-16 -inset-y-16 -z-10 sm:-inset-x-32 sm:-inset-y-24"
             />
 
             <Reveal className="relative mx-auto max-w-3xl text-center">
