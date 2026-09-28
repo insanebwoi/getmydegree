@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type MouseEvent } from 'react'
 import { Check, Link2, Share2 } from 'lucide-react'
 import { FacebookIcon, InstagramIcon, LinkedInIcon, TwitterIcon } from './SocialIcons'
 import { WhatsAppMark } from './WhatsAppMark'
@@ -29,14 +29,41 @@ export function ShareArticle({
   const url = `${site.url}/blog/${slug}`
   const [copied, setCopied] = useState<'link' | 'instagram' | null>(null)
 
+  const hasSheet = typeof navigator !== 'undefined' && typeof navigator.share === 'function'
+
   /* `navigator.share` exists in desktop Chrome too, where it opens a sheet
-     most people do not recognise, so the system sheet is offered on a coarse
-     pointer   a phone or tablet   rather than wherever the API is defined. */
+     most people do not recognise, so the sheet is offered up front on a
+     coarse pointer   a phone or tablet   rather than wherever the API is
+     defined. Instagram still uses it everywhere it exists, because for
+     Instagram it is the only thing that works at all. */
   const canUseSheet =
-    typeof navigator !== 'undefined' &&
-    typeof navigator.share === 'function' &&
-    typeof window !== 'undefined' &&
-    window.matchMedia('(pointer: coarse)').matches
+    hasSheet && typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
+
+  /*
+    Share targets belong in a dialog, not a background tab.
+
+    Opened with `target="_blank"` these land behind the current page on some
+    setups, which reads as the button having done nothing   the single most
+    common reason a share row looks broken. A named, sized window puts the
+    dialog in front. The anchor keeps its `href` so the browser's own
+    behaviours still work: middle-click, ctrl-click, copy link address, and
+    the case where a popup blocker refuses us, which falls back to a tab.
+  */
+  function openShare(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+    event.preventDefault()
+    const w = 620
+    const h = 660
+    const left = window.screenX + Math.max(0, (window.outerWidth - w) / 2)
+    const top = window.screenY + Math.max(0, (window.outerHeight - h) / 2)
+    const opened = window.open(
+      href,
+      'gmd-share',
+      `popup=yes,width=${w},height=${h},left=${Math.round(left)},top=${Math.round(top)}`,
+    )
+    if (opened) opened.focus()
+    else window.open(href, '_blank', 'noopener,noreferrer')
+  }
 
   async function copy(as: 'link' | 'instagram') {
     try {
@@ -60,13 +87,21 @@ export function ShareArticle({
   }
 
   /*
-    Instagram has no share URL. It accepts no link from a web page at all, so
-    a button posing as one would do nothing   the honest version copies the
-    link and says where to put it. On a phone the system sheet above reaches
-    Instagram properly, which is why this is the desktop answer rather than
-    the only one.
+    Instagram publishes no share URL   it accepts no link from a web page at
+    all, so a button posing as one can only pretend. Where the system share
+    sheet exists it lists Instagram as a target and genuinely hands the link
+    over, so that is tried first. Everywhere else the honest fallback is to
+    copy the link and say where to put it.
   */
   async function shareToInstagram() {
+    if (hasSheet) {
+      try {
+        await navigator.share({ title, text: excerpt, url })
+        return
+      } catch {
+        // Cancelled, or refused by the browser. Fall through to the copy.
+      }
+    }
     await copy('instagram')
     window.open('https://www.instagram.com/', '_blank', 'noopener,noreferrer')
   }
@@ -89,12 +124,12 @@ export function ShareArticle({
     },
     {
       label: 'X',
-      href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+      href: `https://x.com/intent/post?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
       icon: <TwitterIcon size={14} />,
     },
     {
       label: 'LinkedIn',
-      href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+      href: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(excerpt)}`,
       icon: <LinkedInIcon size={14} />,
     },
   ]
@@ -131,6 +166,7 @@ export function ShareArticle({
             data-share="true"
             className={chip}
             aria-label={`Share this article on ${link.label}`}
+            onClick={(event) => openShare(event, link.href)}
           >
             {link.icon}
             {link.label}
