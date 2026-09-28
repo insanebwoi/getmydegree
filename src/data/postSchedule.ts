@@ -65,7 +65,7 @@ export const COVER_HEIGHT = 900
   anyway. Bump this after pushing to the images repository.
 */
 const CDN =
-  'https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@0cf3be44ff2a52835a2ee59fee15dd541ecb298e/blog'
+  'https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog'
 
 /** Every cover in that repository is this size, so the suffix below is one
  *  true number rather than a per-file lookup. */
@@ -73,9 +73,6 @@ const COVER_FILE_WIDTH = 1400
 const COVER_FILE_HEIGHT = 787
 
 const cover = (name: string) => `${CDN}/${name}.webp?w=${COVER_FILE_WIDTH}&h=${COVER_FILE_HEIGHT}`
-
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${COVER_WIDTH}&h=${COVER_HEIGHT}&q=70`
 
 export const schedule: ScheduledPost[] = [
   {
@@ -222,70 +219,70 @@ export const schedule: ScheduledPost[] = [
     day: 21,
     slug: 'bsc-vs-bca-for-tech-jobs',
     date: '2026-10-13',
-    image: unsplash('photo-1517048676732-d65bc937f952'),
+    image: cover('bsc-vs-bca-for-tech-jobs'),
     alt: 'A developer at work on a software project',
   },
   {
     day: 22,
     slug: 'equivalence-of-online-and-campus-degrees',
     date: '2026-10-14',
-    image: unsplash('photo-1552664730-d307ca884978'),
+    image: cover('equivalence-of-online-and-campus-degrees'),
     alt: 'A degree certificate beside an employment file',
   },
   {
     day: 23,
     slug: 'degrees-for-healthcare-and-shift-workers',
     date: '2026-10-15',
-    image: unsplash('photo-1600880292203-757bb62b4baf'),
+    image: cover('degrees-for-healthcare-and-shift-workers'),
     alt: 'A healthcare worker between shifts',
   },
   {
     day: 24,
     slug: 'nri-and-international-students-indian-degrees',
     date: '2026-10-16',
-    image: unsplash('photo-1571260899304-425eee4c7efc'),
+    image: cover('nri-and-international-students-indian-degrees'),
     alt: 'An international applicant preparing documents',
   },
   {
     day: 25,
     slug: 'degree-fees-instalments-and-emi-options',
     date: '2026-10-17',
-    image: unsplash('photo-1543269865-cbf427effbad'),
+    image: cover('degree-fees-instalments-and-emi-options'),
     alt: 'Planning education finances at a desk',
   },
   {
     day: 26,
     slug: 'proctored-exams-and-assessment-models',
     date: '2026-10-18',
-    image: unsplash('photo-1524178232363-1fb2b075b655'),
+    image: cover('proctored-exams-and-assessment-models'),
     alt: 'A student sitting a remotely proctored examination',
   },
   {
     day: 27,
     slug: 'flexible-degree-options-in-kerala',
     date: '2026-10-19',
-    image: unsplash('photo-1541178735493-479c1a27ed24'),
+    image: cover('flexible-degree-options-in-kerala'),
     alt: 'A learner in Kerala studying for a flexible degree',
   },
   {
     day: 28,
     slug: 'pg-diploma-vs-masters-degree',
     date: '2026-10-20',
-    image: unsplash('photo-1488190211105-8b0e65b80b4e'),
+    image: cover('pg-diploma-vs-masters-degree'),
     alt: 'Comparing a diploma and a degree on paper',
   },
   {
     day: 29,
     slug: 'micro-credentials-and-specializations',
     date: '2026-10-21',
-    image: unsplash('photo-1516321318423-f06f85e504b3'),
+    image: cover('micro-credentials-and-specializations'),
     alt: 'A specialisation elective being chosen on screen',
   },
   {
     day: 30,
     slug: 'step-by-step-degree-application-guide',
     date: '2026-10-22',
-    image: unsplash('photo-1573164713988-8665fc963095'),
+    image: cover('step-by-step-degree-application-guide'),
     alt: 'An applicant completing a university admission form',
   },
 ]

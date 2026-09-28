@@ -5,7 +5,7 @@ excerpt: "A plain breakdown of tuition, university and examination fees, what is
 category: Fees
 date: 2026-07-07
 author: "GetMyDegree Academic Team"
-cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@0cf3be44ff2a52835a2ee59fee15dd541ecb298e/blog/what-a-degree-costs-and-how-emi-works.webp?w=1400&h=787
+cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog/what-a-degree-costs-and-how-emi-works.webp?w=1400&h=787
 ---
 
 Fee conversations in this sector are often vague, which is exactly why people get caught out later. Here is how the cost is actually built up, so you can compare any two offers on the same terms.
