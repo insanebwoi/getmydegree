@@ -48,3 +48,4 @@ export { metaFor, fullTitle, canonical, ogImage } from './data/meta'
 export { prerenderPaths } from './routes'
 /** Live articles, for the guide list the prerender writes into llms.txt. */
 export { posts } from './data/posts'
+export { site } from './data/site'

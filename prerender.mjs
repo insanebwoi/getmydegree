@@ -11,7 +11,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 const root = dirname(fileURLToPath(import.meta.url))
 const template = readFileSync(resolve(root, 'dist/index.html'), 'utf-8')
 const server = await import(pathToFileURL(resolve(root, 'dist-ssr/entry-server.js')).href)
-const { render, prerenderPaths, metaFor, schemaFor, fullTitle, canonical, ogImage, posts } = server
+const { render, prerenderPaths, metaFor, schemaFor, fullTitle, canonical, ogImage, posts, site } = server
 
 const escape = (value) =>
   String(value)
@@ -19,6 +19,7 @@ const escape = (value) =>
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 
 function headFor(path) {
   const meta = metaFor(path)
@@ -38,12 +39,14 @@ function headFor(path) {
     `<meta property="og:image" content="${escape(image.url)}" />`,
     ...(image.width ? [`<meta property="og:image:width" content="${image.width}" />`] : []),
     ...(image.height ? [`<meta property="og:image:height" content="${image.height}" />`] : []),
+    ...(meta.imageAlt ? [`<meta property="og:image:alt" content="${escape(meta.imageAlt)}" />`] : []),
     `<meta property="og:site_name" content="GetMyDegree Institutions" />`,
     `<meta property="og:locale" content="en_IN" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escape(title)}" />`,
     `<meta name="twitter:description" content="${escape(meta.description)}" />`,
     `<meta name="twitter:image" content="${escape(image.url)}" />`,
+    ...(meta.imageAlt ? [`<meta name="twitter:image:alt" content="${escape(meta.imageAlt)}" />`] : []),
   ]
   if (type === 'article') {
     if (meta.publishedTime)
@@ -121,18 +124,39 @@ const lastmod = (path) => {
   const meta = metaFor(path)
   return (meta.modifiedTime ?? meta.publishedTime ?? buildDate).slice(0, 10)
 }
+function imageTagFor(path) {
+  if (path.startsWith('/blog/')) {
+    const slug = path.replace('/blog/', '')
+    const post = posts.find((p) => p.slug === slug)
+    if (post && post.cover) {
+      const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
+      const imgUrl = rawCover.split('?')[0]
+      const imgTitle = escape(post.title)
+      const imgCaption = escape(post.coverAlt || post.excerpt)
+      return `\n    <image:image>\n      <image:loc>${escape(imgUrl)}</image:loc>\n      <image:title>${imgTitle}</image:title>\n      <image:caption>${imgCaption}</image:caption>\n    </image:image>`
+    }
+  }
+  if (path === '/blog') {
+    return `\n    <image:image>\n      <image:loc>${site.url}/images/blog/blog-banner.webp</image:loc>\n      <image:title>GetMyDegree Degree Guides &amp; Articles</image:title>\n      <image:caption>Articles, degree advice, and admission guides for working professionals</image:caption>\n    </image:image>`
+  }
+  if (path === '/') {
+    return `\n    <image:image>\n      <image:loc>${site.url}/images/home/hero-portrait.webp</image:loc>\n      <image:title>GetMyDegree Institutions</image:title>\n      <image:caption>Degree completion for working professionals with credit transfer</image:caption>\n    </image:image>`
+  }
+  return ''
+}
+
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${prerenderPaths
   .map(
     (path) =>
-      `  <url><loc>${canonical(metaFor(path))}</loc><lastmod>${lastmod(path)}</lastmod><changefreq>${changefreq(path)}</changefreq><priority>${priority(path)}</priority></url>`,
+      `  <url>\n    <loc>${canonical(metaFor(path))}</loc>\n    <lastmod>${lastmod(path)}</lastmod>\n    <changefreq>${changefreq(path)}</changefreq>\n    <priority>${priority(path)}</priority>${imageTagFor(path)}\n  </url>`,
   )
   .join('\n')}
 </urlset>
 `
 writeFileSync(resolve(root, 'dist/sitemap.xml'), sitemap)
-console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls)`)
+console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls with Google Image Sitemap tags)`)
 
 /*
   llms.txt lists the guides, and the guides now arrive on a schedule. Rewriting

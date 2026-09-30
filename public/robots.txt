@@ -6,4 +6,7 @@ Allow: /
 Disallow: /*?q=
 Disallow: /*?category=
 
+User-agent: Googlebot-Image
+Allow: /
+
 Sitemap: https://new.getmydegreeedu.com/sitemap.xml

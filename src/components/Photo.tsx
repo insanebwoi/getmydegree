@@ -37,11 +37,25 @@ export function Photo({
   animate = true,
 }: Props) {
   const registered = name ? images[name] : undefined
+  let explicitWidth = registered?.width
+  let explicitHeight = registered?.height
+  let cleanSrc = src ?? registered?.src ?? ''
+  if (!explicitWidth && src?.includes('?')) {
+    const q = new URLSearchParams(src.split('?')[1])
+    const w = Number(q.get('w'))
+    const h = Number(q.get('h'))
+    if (w && h) {
+      explicitWidth = w
+      explicitHeight = h
+      cleanSrc = src.split('?')[0]
+    }
+  }
+
   const image = {
-    src: src ?? registered?.src ?? '',
+    src: cleanSrc,
     alt: alt ?? registered?.alt ?? '',
-    width: registered?.width ?? 1600,
-    height: registered?.height ?? 900,
+    width: explicitWidth ?? 1600,
+    height: explicitHeight ?? 900,
   }
 
   const ref = useRef<HTMLImageElement>(null)

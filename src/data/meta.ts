@@ -10,6 +10,8 @@ export type PageMeta = {
   path: string
   /** Absolute or root-relative image for OG/Twitter. Falls back to the site card. */
   image?: string
+  /** Alt text for the image, passed to og:image:alt and twitter:image:alt */
+  imageAlt?: string
   /** og:type. Articles set 'article' so scrapers read the published dates. */
   type?: 'website' | 'article'
   /** Set on pages that must stay out of the index (404, thin filtered views). */
@@ -50,6 +52,8 @@ export const pageMeta: Record<string, PageMeta> = {
     description:
       'Plain guidance on credit transfer, degree recognition, government-job eligibility and course fees, from the GetMyDegree academic team.',
     path: '/blog',
+    image: '/images/blog/blog-banner.webp',
+    imageAlt: 'Articles, degree advice, and admission guides at GetMyDegree',
   },
   '/universities': {
     title: 'Partner Universities — Where Your Degree Is Awarded',
@@ -103,6 +107,7 @@ export function metaFor(path: string): PageMeta {
       description: post.excerpt,
       path,
       image: post.cover,
+      imageAlt: post.coverAlt ?? post.title,
       type: 'article',
       publishedTime: post.publishedAt,
       modifiedTime: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
@@ -141,7 +146,8 @@ export function ogImage(meta: PageMeta): { url: string; width?: number; height?:
     const query = new URLSearchParams(path.split('?')[1] ?? '')
     const width = Number(query.get('w'))
     const height = Number(query.get('h'))
-    return width && height ? { url: path, width, height } : { url: path }
+    const cleanUrl = path.split('?')[0]
+    return width && height ? { url: cleanUrl, width, height } : { url: cleanUrl }
   }
   const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '')
   const { src, width, height } = ogImageFor(name, path)

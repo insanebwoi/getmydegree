@@ -46,6 +46,17 @@ export type Post = PostMeta & {
 
 const slugOf = (path: string) => path.replace(/^.*\/(.+)\.md(\?.*)?$/, '$1')
 
+const defaultAltMap: Record<string, string> = {
+  'is-a-distance-degree-valid-for-government-jobs':
+    'Checking the validity and recognition of distance education degrees for government jobs in India',
+  'credit-transfer-explained':
+    'Academic credit transfer for discontinued students completing their university degree',
+  'studying-while-working-full-time':
+    'A working professional balancing study schedules and career commitments',
+  'what-a-degree-costs-and-how-emi-works':
+    'Breakdown of online degree tuition fees and flexible monthly instalment options',
+}
+
 /**
  * Every article, published or not yet. The schedule is authoritative for the
  * date and the cover where it has a row, so moving a post is one edit in
@@ -62,7 +73,7 @@ export const allPosts: Post[] = Object.entries(metaModules)
       slug,
       date: row?.date ?? meta.date,
       cover: row?.image ?? imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`),
-      coverAlt: row?.alt,
+      coverAlt: row?.alt ?? defaultAltMap[slug] ?? meta.title,
       publishedAt: row ? releaseIso(row.date) : new Date(meta.date).toISOString(),
     }
   })

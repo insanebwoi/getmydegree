@@ -130,14 +130,21 @@ export default function BlogPost() {
                 {/* The cover opens the article itself, on the same surface and
                     the same measure as the text, rather than floating above it
                     as a banner. Its own 16:9, so none of the artwork is lost. */}
-                <Photo
-                  src={post.cover}
-                  alt={post.coverAlt ?? post.title}
-                  ratio="16/9"
-                  rounded="card"
-                  priority
-                  className="w-full"
-                />
+                <figure className="my-0">
+                  <Photo
+                    src={post.cover}
+                    alt={post.coverAlt ?? post.title}
+                    ratio="16/9"
+                    rounded="card"
+                    priority
+                    className="w-full"
+                  />
+                  {post.coverAlt && (
+                    <figcaption className="mt-2.5 text-center text-xs text-muted">
+                      {post.coverAlt}
+                    </figcaption>
+                  )}
+                </figure>
 
                 {body ? (
                   <div

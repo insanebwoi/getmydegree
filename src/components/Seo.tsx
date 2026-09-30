@@ -49,6 +49,7 @@ export function Seo({ schema, ...meta }: Props) {
     setMeta('property', 'og:image', image.url)
     setMeta('property', 'og:image:width', image.width ? String(image.width) : undefined)
     setMeta('property', 'og:image:height', image.height ? String(image.height) : undefined)
+    setMeta('property', 'og:image:alt', meta.imageAlt)
     setMeta('property', 'og:site_name', site.name)
     setMeta('property', 'og:locale', 'en_IN')
 
@@ -61,6 +62,7 @@ export function Seo({ schema, ...meta }: Props) {
     setMeta('name', 'twitter:title', title)
     setMeta('name', 'twitter:description', description)
     setMeta('name', 'twitter:image', image.url)
+    setMeta('name', 'twitter:image:alt', meta.imageAlt)
 
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     if (!link) {
@@ -86,6 +88,7 @@ export function Seo({ schema, ...meta }: Props) {
     image.url,
     image.width,
     image.height,
+    meta.imageAlt,
     type,
     noindex,
     publishedTime,

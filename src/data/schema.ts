@@ -233,16 +233,21 @@ export const blogSchema: object = graph(
       'Guidance on credit transfer, degree recognition, studying while working and course fees.',
     isPartOf: { '@id': WEBSITE },
     publisher: { '@id': ORG },
-    blogPost: postsByDate.map((post) => ({
-      '@type': 'BlogPosting',
-      '@id': `${site.url}/blog/${post.slug}#article`,
-      headline: post.title,
-      description: post.excerpt,
-      datePublished: post.publishedAt,
-      dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
-      author: { '@type': 'Organization', '@id': ORG, name: post.author },
-      url: `${site.url}/blog/${post.slug}`,
-    })),
+    blogPost: postsByDate.map((post) => {
+      const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
+      const coverUrl = rawCover.split('?')[0]
+      return {
+        '@type': 'BlogPosting',
+        '@id': `${site.url}/blog/${post.slug}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        image: coverUrl,
+        datePublished: post.publishedAt,
+        dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
+        author: { '@type': 'Organization', '@id': ORG, name: post.author },
+        url: `${site.url}/blog/${post.slug}`,
+      }
+    }),
   },
   breadcrumb([{ name: 'Blog', path: '/blog' }]),
 )
@@ -252,6 +257,25 @@ export function postSchema(slug: string): object | undefined {
   const post = posts.find((p) => p.slug === slug)
   if (!post) return undefined
   const url = `${site.url}/blog/${post.slug}`
+  const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
+  const coverUrl = rawCover.split('?')[0]
+  const imageId = `${url}#primaryimage`
+  const imageAlt = post.coverAlt ?? post.title
+
+  const imageObject = {
+    '@type': 'ImageObject',
+    '@id': imageId,
+    url: coverUrl,
+    contentUrl: coverUrl,
+    caption: imageAlt,
+    description: post.excerpt,
+    name: post.title,
+    width: 1400,
+    height: 787,
+    inLanguage: 'en-IN',
+    representativeOfPage: true,
+  }
+
   return graph(
     {
       '@type': 'BlogPosting',
@@ -263,13 +287,23 @@ export function postSchema(slug: string): object | undefined {
       datePublished: post.publishedAt,
       dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
       timeRequired: `PT${post.readingMinutes}M`,
-      image: post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`,
+      image: imageObject,
       inLanguage: 'en-IN',
       author: { '@type': 'Organization', '@id': ORG, name: post.author },
       publisher: { '@id': ORG },
-      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': url,
+        url,
+        name: post.title,
+        description: post.excerpt,
+        isPartOf: { '@id': WEBSITE },
+        primaryImageOfPage: { '@id': imageId },
+        image: { '@id': imageId },
+      },
       isPartOf: { '@id': `${site.url}/blog#blog` },
     },
+    imageObject,
     {
       '@type': 'Blog',
       '@id': `${site.url}/blog#blog`,
