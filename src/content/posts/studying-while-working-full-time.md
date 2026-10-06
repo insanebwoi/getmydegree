@@ -5,6 +5,7 @@ category: Study advice
 date: 2026-07-21
 author: "GetMyDegree Academic Team"
 cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog/studying-while-working-full-time.webp?w=1400&h=787
+keywords: "studying while working full time, online degree studying while working full time, distance education studying while working full time, getmydegree studying while working full time"
 ---
 
 Flexibility is the reason people choose this route and the reason some do not finish. When nothing is scheduled, nothing is protected   and the degree loses every negotiation against a deadline at work.

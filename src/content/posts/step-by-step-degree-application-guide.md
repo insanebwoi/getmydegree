@@ -6,6 +6,7 @@ category: Admissions
 date: 2026-10-22
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "step by step degree application guide, online degree step by step degree application guide, distance education step by step degree application guide, getmydegree step by step degree application guide"
 ---
 
 Admission is not complicated, but it has a sequence, and problems almost always come from doing a step out of order. Here is the whole thing.

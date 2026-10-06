@@ -6,6 +6,7 @@ category: Recognition
 date: 2026-09-24
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "ugc deb approval, verify degree recognition, check online degree validity, UGC recognized online universities, DEB approved distance education"
 ---
 
 The single most expensive mistake in this field is paying for a degree that turns out not to count. It is also the most avoidable, because the records you need are public and the checks take about fifteen minutes.

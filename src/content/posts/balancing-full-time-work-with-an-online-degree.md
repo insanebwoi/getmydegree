@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-12
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "balancing full time work with an online degree, online degree balancing full time work with an online degree, distance education balancing full time work with an online degree, getmydegree balancing full time work with an online degree"
 ---
 
 People rarely abandon a degree because the material was too hard. They abandon it because a bad month became a bad semester and re-entry felt impossible. Nearly all of the difference is in how the time is arranged.

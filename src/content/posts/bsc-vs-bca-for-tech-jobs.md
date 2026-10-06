@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-13
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "bsc vs bca for tech jobs, online degree bsc vs bca for tech jobs, distance education bsc vs bca for tech jobs, getmydegree bsc vs bca for tech jobs"
 ---
 
 BCA and B.Sc in computer science or IT overlap enough to look interchangeable and differ enough to matter. The right answer depends on what you want the degree to do.

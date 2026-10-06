@@ -6,6 +6,7 @@ category: Fees
 date: 2026-07-07
 author: "GetMyDegree Academic Team"
 cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog/what-a-degree-costs-and-how-emi-works.webp?w=1400&h=787
+keywords: "what a degree costs and how emi works, online degree what a degree costs and how emi works, distance education what a degree costs and how emi works, getmydegree what a degree costs and how emi works"
 ---
 
 Fee conversations in this sector are often vague, which is exactly why people get caught out later. Here is how the cost is actually built up, so you can compare any two offers on the same terms.

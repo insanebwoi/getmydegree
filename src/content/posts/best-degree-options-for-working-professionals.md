@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-09-23
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "online degree for working professionals, degree while working, flexible degree programs, part time degree, working professional degree options"
 ---
 
 Most people who call us are not choosing between a degree and no degree. They are choosing between the degree they think they should do and the one they can actually finish while holding a job. Those are different questions, and the second one decides whether you graduate.

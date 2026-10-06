@@ -6,6 +6,7 @@ category: Admissions
 date: 2026-10-06
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "academic bank of credits abc id explained, online degree academic bank of credits abc id explained, distance education academic bank of credits abc id explained, getmydegree academic bank of credits abc id explained"
 ---
 
 Applicants are now routinely asked for an Academic Bank of Credits identifier during admission, often with no explanation of what it is. It is straightforward, and creating one takes a few minutes.

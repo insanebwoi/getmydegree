@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-21
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "micro credentials and specializations, online degree micro credentials and specializations, distance education micro credentials and specializations, getmydegree micro credentials and specializations"
 ---
 
 Standard degrees increasingly carry named specialisations: business analytics inside an MBA, digital marketing inside a BBA, fintech inside a commerce programme. Some are substantial. Some are a label. The difference is checkable.

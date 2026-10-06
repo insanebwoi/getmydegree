@@ -6,6 +6,7 @@ category: Recognition
 date: 2026-10-11
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "red flags before enrolling in an online degree, online degree red flags before enrolling in an online degree, distance education red flags before enrolling in an online degree, getmydegree red flags before enrolling in an online degree"
 ---
 
 Most people who lose money in this field are not careless. They are busy, they are dealing with someone confident and helpful, and the problems are not obvious unless you know what they look like. Here is what they look like.

@@ -6,6 +6,7 @@ category: Recognition
 date: 2026-10-01
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "naac grades and nirf rankings explained, online degree naac grades and nirf rankings explained, distance education naac grades and nirf rankings explained, getmydegree naac grades and nirf rankings explained"
 ---
 
 These two acronyms appear in every brochure and are regularly presented as though they were the same thing, or as though either one meant a degree was recognized. Neither is true.

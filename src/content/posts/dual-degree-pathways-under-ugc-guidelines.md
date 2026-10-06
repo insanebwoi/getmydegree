@@ -6,6 +6,7 @@ category: Recognition
 date: 2026-10-04
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "dual degree pathways under ugc guidelines, online degree dual degree pathways under ugc guidelines, distance education dual degree pathways under ugc guidelines, getmydegree dual degree pathways under ugc guidelines"
 ---
 
 For most of the history of Indian higher education, holding two degrees at the same time was not permitted. That position has changed, and it opens a genuine option for people in a hurry. It also gets misrepresented, so it is worth setting out carefully.

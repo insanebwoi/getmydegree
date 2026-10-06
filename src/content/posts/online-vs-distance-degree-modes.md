@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-09
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "online vs distance degree modes, online degree online vs distance degree modes, distance education online vs distance degree modes, getmydegree online vs distance degree modes"
 ---
 
 Open and distance learning and online learning are frequently used as though they meant the same thing. They are separate modes, regulated separately, and they produce a noticeably different experience.

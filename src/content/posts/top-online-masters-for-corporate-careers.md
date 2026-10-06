@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-07
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "top online masters for corporate careers, online degree top online masters for corporate careers, distance education top online masters for corporate careers, getmydegree top online masters for corporate careers"
 ---
 
 Postgraduate programmes get chosen by reputation more often than by fit. Here is what each of the common ones actually supports, so the choice can be made against the role you want.

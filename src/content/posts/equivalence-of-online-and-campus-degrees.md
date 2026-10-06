@@ -6,6 +6,7 @@ category: Recognition
 date: 2026-10-14
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "equivalence of online and campus degrees, online degree equivalence of online and campus degrees, distance education equivalence of online and campus degrees, getmydegree equivalence of online and campus degrees"
 ---
 
 This is the question behind almost every enquiry we receive, usually phrased as whether the degree will be "accepted". The answer is settled in principle and conditional in practice, and the condition is the part that matters.

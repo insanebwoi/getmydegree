@@ -6,6 +6,7 @@ category: Recognition
 date: 2026-09-28
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "ugc updates for online degree applicants, online degree ugc updates for online degree applicants, distance education ugc updates for online degree applicants, getmydegree ugc updates for online degree applicants"
 ---
 
 Regulation in this field changes often enough that any article naming a specific circular will be out of date within a year. What does not change is the shape of the rules, and knowing that shape lets you check the current position yourself.

@@ -20,6 +20,7 @@ export type PageMeta = {
   publishedTime?: string
   modifiedTime?: string
   section?: string
+  keywords?: string
 }
 
 /**
@@ -112,6 +113,7 @@ export function metaFor(path: string): PageMeta {
       publishedTime: post.publishedAt,
       modifiedTime: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
       section: post.category,
+      keywords: post.keywords,
     }
   }
 

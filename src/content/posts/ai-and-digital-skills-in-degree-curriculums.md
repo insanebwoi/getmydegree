@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-02
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "ai and digital skills in degree curriculums, online degree ai and digital skills in degree curriculums, distance education ai and digital skills in degree curriculums, getmydegree ai and digital skills in degree curriculums"
 ---
 
 Nearly every university now advertises something with artificial intelligence or data in the name. Some of it is a genuine addition to the curriculum. Some of it is the same syllabus with a new cover. Telling them apart is not difficult.

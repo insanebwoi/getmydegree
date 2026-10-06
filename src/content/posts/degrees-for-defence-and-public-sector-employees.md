@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-05
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "degrees for defence and public sector employees, online degree degrees for defence and public sector employees, distance education degrees for defence and public sector employees, getmydegree degrees for defence and public sector employees"
 ---
 
 Serving personnel and public sector employees face a specific version of this problem. The qualification requirement is usually written down precisely somewhere, the posting may move, and the working pattern is not negotiable.

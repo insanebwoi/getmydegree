@@ -31,11 +31,12 @@ export function Seo({ schema, ...meta }: Props) {
   const title = fullTitle(meta)
   const url = canonical(meta)
   const image = ogImage(meta)
-  const { description, type = 'website', noindex, publishedTime, modifiedTime, section } = meta
+  const { description, type = 'website', noindex, publishedTime, modifiedTime, section, keywords } = meta
 
   useEffect(() => {
     document.title = title
     setMeta('name', 'description', description)
+    setMeta('name', 'keywords', keywords)
     setMeta(
       'name',
       'robots',
@@ -94,6 +95,7 @@ export function Seo({ schema, ...meta }: Props) {
     publishedTime,
     modifiedTime,
     section,
+    keywords,
     schema,
   ])
 

@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-10
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "degree requirements for executive promotions, online degree degree requirements for executive promotions, distance education degree requirements for executive promotions, getmydegree degree requirements for executive promotions"
 ---
 
 A particular call comes in regularly. Twelve or fifteen years in the role, running a team, genuinely good at the work, and passed over for a management position because the file does not show a degree. It is a frustrating way to be stopped, and it is one of the more fixable problems we deal with.

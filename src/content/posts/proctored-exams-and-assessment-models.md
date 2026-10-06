@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-18
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "proctored exams and assessment models, online degree proctored exams and assessment models, distance education proctored exams and assessment models, getmydegree proctored exams and assessment models"
 ---
 
 The examination system is the part of a programme people ask about least and are most affected by. It decides where you have to be, how the year is shaped, and how the degree is actually earned.

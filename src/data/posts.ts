@@ -33,6 +33,7 @@ type PostMeta = {
   author: string
   cover?: string
   readingMinutes: number
+  keywords?: string
 }
 
 export type Post = PostMeta & {

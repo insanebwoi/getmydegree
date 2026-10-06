@@ -6,6 +6,7 @@ category: Admissions
 date: 2026-09-29
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "how to choose the right online university, online degree how to choose the right online university, distance education how to choose the right online university, getmydegree how to choose the right online university"
 ---
 
 Once you have two or three universities that are genuinely entitled to run your programme, the choice between them is a practical one. These are the comparisons that change the experience, roughly in the order they matter.

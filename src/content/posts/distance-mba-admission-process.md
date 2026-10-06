@@ -6,6 +6,7 @@ category: Admissions
 date: 2026-10-03
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "distance mba admission process, online degree distance mba admission process, distance education distance mba admission process, getmydegree distance mba admission process"
 ---
 
 The distance MBA is the most asked-about programme we handle and the one surrounded by the most confusion, mostly because the marketing is loud and the process is rarely explained.

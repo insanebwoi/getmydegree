@@ -6,6 +6,7 @@ category: Fees
 date: 2026-10-17
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "degree fees instalments and emi options, online degree degree fees instalments and emi options, distance education degree fees instalments and emi options, getmydegree degree fees instalments and emi options"
 ---
 
 Fees are quoted in a way that makes comparison difficult, usually by naming one number that is not the total. Here is the whole structure, so you can ask for it properly.

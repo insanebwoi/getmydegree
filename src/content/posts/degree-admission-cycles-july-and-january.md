@@ -6,6 +6,7 @@ category: Admissions
 date: 2026-10-08
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "degree admission cycles july and january, online degree degree admission cycles july and january, distance education degree admission cycles july and january, getmydegree degree admission cycles july and january"
 ---
 
 Distance and online programmes in India admit in two cycles, one around July and August and another around January and February. People tend to treat whichever is next as the only option, which occasionally costs them a better start.

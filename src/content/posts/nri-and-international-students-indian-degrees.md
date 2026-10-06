@@ -6,6 +6,7 @@ category: Admissions
 date: 2026-10-16
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "nri and international students indian degrees, online degree nri and international students indian degrees, distance education nri and international students indian degrees, getmydegree nri and international students indian degrees"
 ---
 
 A recognized Indian degree earned from abroad is a common requirement for Indians working overseas, particularly in the Gulf, where a degree is often needed for a visa category, a promotion or a professional licence. The process has a few extra steps and none of them are difficult if handled in the right order.

@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-09-27
 author: "GetMyDegree Academic Team"
 readingMinutes: 5
+keywords: "master's degree while working, PG degree full-time job, online MBA for working professionals, flexible masters program, study while working"
 ---
 
 A postgraduate degree while employed is ordinary, not heroic. Large numbers of people do it every year. The ones who finish tend to have made the same few decisions early.

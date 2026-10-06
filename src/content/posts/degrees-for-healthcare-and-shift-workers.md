@@ -6,6 +6,7 @@ category: Study advice
 date: 2026-10-15
 author: "GetMyDegree Academic Team"
 readingMinutes: 4
+keywords: "degrees for healthcare and shift workers, online degree degrees for healthcare and shift workers, distance education degrees for healthcare and shift workers, getmydegree degrees for healthcare and shift workers"
 ---
 
 Rotating shifts break most study plans, and the usual advice about fixed weekly study hours is useless if your week changes every week. The programme features that matter are different, and choosing on them makes the difference between finishing and not.
