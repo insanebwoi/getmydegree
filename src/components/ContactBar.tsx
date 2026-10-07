@@ -3,6 +3,7 @@ import { Phone } from 'lucide-react'
 import { WhatsAppMark } from './WhatsAppMark'
 import { ChatPanel } from './ChatPanel'
 import { site } from '../data/site'
+import { reportPhoneConversion } from '../data/tracking'
 
 /**
  * Both ways of reaching a counselor, always within reach.
@@ -44,6 +45,7 @@ export function ContactBar() {
         <div className="flex items-center gap-0.5 rounded-full border border-line bg-white/95 p-0.5 shadow-[0_8px_28px_-10px_rgba(5,18,41,0.4)] backdrop-blur-md">
           <a
             href={`tel:${site.phoneHref}`}
+            onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
             className="flex min-h-11 items-center gap-1.5 rounded-full px-4 text-[0.8125rem] font-medium text-navy transition-colors hover:bg-navy-50"
           >
             <Phone size={15} aria-hidden="true" />

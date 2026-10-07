@@ -614,10 +614,11 @@
     animation-delay: 1s;
   }
 
-  /* Reading is easier when it holds still, so it stops under the pointer and
-     whenever a link inside it takes focus. */
+  /* Reading is easier when it holds still, so it stops under the pointer,
+     on touch/active, and whenever a link inside it takes focus. */
   .marquee:hover .marquee__track,
-  .marquee:focus-within .marquee__track {
+  .marquee:focus-within .marquee__track,
+  .marquee:active .marquee__track {
     animation-play-state: paused;
   }
 

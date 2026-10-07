@@ -31,6 +31,35 @@
       gtag('js', new Date())
       gtag('config', 'AW-18461138319')
     </script>
+    <script>
+      gtag('config', 'AW-18461138319/aithCLq82ZQdEI-7-uJE', {
+        'phone_conversion_number': '9207677828'
+      })
+      gtag('config', 'AW-18461138319/aithCLq82ZQdEI-7-uJE', {
+        'phone_conversion_number': '+91 92076 77828'
+      })
+      gtag('config', 'AW-18461138319/aithCLq82ZQdEI-7-uJE', {
+        'phone_conversion_number': '92076 77828'
+      })
+    </script>
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof url !== 'undefined' && url) {
+            window.location = url
+          }
+        }
+        if (window.gtag) {
+          window.gtag('event', 'conversion', {
+            send_to: 'AW-18461138319/aithCLq82ZQdEI-7-uJE',
+            event_callback: callback
+          })
+          setTimeout(callback, 500)
+          return false
+        }
+        return true
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

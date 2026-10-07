@@ -83,6 +83,7 @@ for (const path of prerenderPaths) {
     .replace('<!--head-->', headFor(path))
     .replace('</head>', `${schemaTagFor(path)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${render(path)}</div>`)
+    .replace(/href="tel:([^"]+)"/g, 'href="tel:$1" onclick="return gtag_report_conversion(\'tel:$1\');"')
 
   // Written twice: `about.html` is what flat static hosts (and `vite preview`,
   // whose SPA fallback would otherwise shadow it) resolve `/about` to, while
@@ -110,6 +111,7 @@ for (const path of prerenderPaths) {
     .replace(/\s*<meta\s+property="og:[\s\S]*?\/>/g, '')
     .replace('<!--head-->', `<title>Page not found | GetMyDegree</title>\n    <meta name="robots" content="noindex, follow" />`)
     .replace('<div id="root"></div>', `<div id="root">${render('/404')}</div>`)
+    .replace(/href="tel:([^"]+)"/g, 'href="tel:$1" onclick="return gtag_report_conversion(\'tel:$1\');"')
   writeFileSync(resolve(root, 'dist/404.html'), html)
   console.log('prerendered 404       → dist/404.html')
 }

@@ -9,6 +9,7 @@ import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { Stats } from '../components/Stats'
 import { site, stats, trustPoints, validity } from '../data/site'
+import { reportPhoneConversion } from '../data/tracking'
 
 export default function About() {
   return (
@@ -167,7 +168,11 @@ export default function About() {
               <Link to="/contact" className="btn btn-gold">
                 Book a free consultation
               </Link>
-              <a href={`tel:${site.phoneHref}`} className="btn btn-ghost-dark">
+              <a
+                href={`tel:${site.phoneHref}`}
+                onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
+                className="btn btn-ghost-dark"
+              >
                 {site.phone}
               </a>
             </div>

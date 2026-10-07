@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Menu, X, Phone } from 'lucide-react'
 import { nav, site } from '../data/site'
+import { reportPhoneConversion } from '../data/tracking'
 import { ApplyDialog } from './ApplyDialog'
 
 export function Navbar() {
@@ -72,6 +73,7 @@ export function Navbar() {
             <div className="flex items-center gap-2">
               <a
                 href={`tel:${site.phoneHref}`}
+                onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
                 className="action hidden gap-2 rounded-full px-3 text-sm font-medium text-ink md:inline-flex"
               >
                 <Phone size={15} className="text-navy" aria-hidden="true" />

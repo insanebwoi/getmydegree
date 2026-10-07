@@ -14,6 +14,7 @@ import {
   Phone,
 } from 'lucide-react'
 import { centers, courses, site } from '../data/site'
+import { reportPhoneConversion } from '../data/tracking'
 import { FacebookIcon, InstagramIcon, ThreadsIcon } from './SocialIcons'
 
 const socials = [
@@ -150,7 +151,11 @@ export function Footer() {
               <h2 className={heading}>Get in touch</h2>
               <ul className="mt-4 grid gap-0.5">
                 <li>
-                  <a href={`tel:${site.phoneHref}`} className={`${link} gap-2.5`}>
+                  <a
+                    href={`tel:${site.phoneHref}`}
+                    onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
+                    className={`${link} gap-2.5`}
+                  >
                     <Phone size={15} className="shrink-0 text-gold" aria-hidden="true" />
                     {site.phone}
                   </a>
@@ -186,6 +191,7 @@ export function Footer() {
                   </span>
                   <a
                     href={`tel:${center.phoneHref}`}
+                    onClick={() => reportPhoneConversion(`tel:${center.phoneHref}`)}
                     className="action text-sm font-medium text-white transition-colors hover:text-gold"
                   >
                     {center.phone}

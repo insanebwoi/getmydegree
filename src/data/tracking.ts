@@ -24,13 +24,11 @@ const AW_ID = 'AW-18461138319'
  * simply not sent.
  */
 const LABELS: Record<ConversionEvent, string> = {
-  /* A tap on a phone number. Worth saying plainly: this records the intent to
-     call, not a connected call. Google's own call reporting, or a forwarding
-     number, is what distinguishes the two. Keep this one Primary only if you
-     accept that gap; otherwise make it Secondary and keep enquiries Primary. */
-  phone_call: '',
+  /* A tap on a phone number. Sends the conversion event to Google Ads
+     using the phone call conversion label. */
+  phone_call: 'aithCLq82ZQdEI-7-uJE',
   /* A completed enquiry form, counted after validation passes and the message
-     is handed to WhatsApp   not on every submit attempt. */
+     is handed to WhatsApp — not on every submit attempt. */
   enquiry: '',
   /* A tap on a WhatsApp link that opens a chat. */
   whatsapp: '',
@@ -42,12 +40,23 @@ declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void
     dataLayer?: unknown[]
+    gtag_report_conversion?: (url?: string) => boolean
   }
 }
+
+let lastCall = 0
+let lastEvent = ''
 
 /** Report one conversion moment. Safe before gtag.js has loaded, and safe
  *  where an ad blocker removed it entirely. */
 export function trackConversion(event: ConversionEvent, params: Record<string, unknown> = {}) {
+  const now = Date.now()
+  if (event === lastEvent && now - lastCall < 600) {
+    return
+  }
+  lastEvent = event
+  lastCall = now
+
   const gtag = window.gtag
   if (!gtag) return
 
@@ -55,6 +64,18 @@ export function trackConversion(event: ConversionEvent, params: Record<string, u
 
   const label = LABELS[event]
   if (label) gtag('event', 'conversion', { send_to: `${AW_ID}/${label}`, ...params })
+}
+
+/**
+ * Report a click on a phone number specifically, matching Google Ads conversion setup.
+ * Calls window.gtag_report_conversion if present, and falls back to trackConversion('phone_call').
+ */
+export function reportPhoneConversion(url?: string): boolean {
+  if (typeof window !== 'undefined' && typeof window.gtag_report_conversion === 'function') {
+    return window.gtag_report_conversion(url)
+  }
+  trackConversion('phone_call', { phone_number: '9207677828' })
+  return true
 }
 
 /**

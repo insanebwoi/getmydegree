@@ -1,6 +1,8 @@
 import type { CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
 import { Headphones, Users } from 'lucide-react'
 import { site, universities } from '../data/site'
+import { reportPhoneConversion } from '../data/tracking'
 
 /**
  * Institutions, the graduate count and a way to talk to someone.
@@ -42,19 +44,25 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
                   className={copy === 0 ? 'marquee__item' : undefined}
                   style={{ '--i': i } as CSSProperties}
                 >
-                  {u.logo ? (
-                    <img
-                      src={u.logo}
-                      alt={u.name}
-                      loading="eager"
-                      decoding="async"
-                      className="h-8 w-auto max-w-none opacity-80 transition hover:opacity-100"
-                    />
-                  ) : (
-                    <span className="block font-display text-[0.9375rem] leading-tight font-medium whitespace-nowrap text-ink">
-                      {u.name}
-                    </span>
-                  )}
+                  <Link
+                    to={`/universities/${u.slug}`}
+                    tabIndex={copy === 1 ? -1 : 0}
+                    className="group inline-flex items-center gap-1.5 rounded-lg py-1 px-1.5 transition-colors hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy/20"
+                  >
+                    {u.logo ? (
+                      <img
+                        src={u.logo}
+                        alt={u.name}
+                        loading="eager"
+                        decoding="async"
+                        className="h-8 w-auto max-w-none opacity-80 transition group-hover:opacity-100"
+                      />
+                    ) : (
+                      <span className="block font-display text-[0.9375rem] leading-tight font-medium whitespace-nowrap text-ink transition-colors group-hover:text-navy group-hover:underline decoration-navy/40 underline-offset-4">
+                        {u.name}
+                      </span>
+                    )}
+                  </Link>
                 </li>
               )),
             )}
@@ -87,6 +95,7 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
           <span className="block text-sm font-medium">Counseling, free</span>
           <a
             href={`tel:${site.phoneHref}`}
+            onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
             className="action font-display text-[1.0625rem] font-semibold text-navy underline-offset-4 hover:underline"
           >
             {site.phone}

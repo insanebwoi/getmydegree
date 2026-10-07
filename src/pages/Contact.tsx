@@ -20,7 +20,7 @@ import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { centers, courses, site, stats } from '../data/site'
 import { FacebookIcon, InstagramIcon, ThreadsIcon } from '../components/SocialIcons'
-import { trackConversion } from '../data/tracking'
+import { trackConversion, reportPhoneConversion } from '../data/tracking'
 
 const socials = [
   { label: 'Instagram', href: site.social.instagram, Icon: InstagramIcon },
@@ -125,7 +125,11 @@ export default function Contact() {
         <a href="#counseling-form" className="btn btn-primary">
           Book free counseling
         </a>
-        <a href={`tel:${site.phoneHref}`} className="btn btn-ghost">
+        <a
+          href={`tel:${site.phoneHref}`}
+          onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
+          className="btn btn-ghost"
+        >
           Call {site.phone}
         </a>
       </PageHero>
@@ -150,6 +154,11 @@ export default function Contact() {
                   {q.href ? (
                     <a
                       href={q.href}
+                      onClick={
+                        q.href.startsWith('tel:')
+                          ? () => reportPhoneConversion(q.href)
+                          : undefined
+                      }
                       className="action mt-0.5 block truncate text-base font-medium text-navy hover:underline"
                     >
                       {q.value}
@@ -459,6 +468,7 @@ export default function Contact() {
                         </p>
                         <a
                           href={`tel:${c.phoneHref}`}
+                          onClick={() => reportPhoneConversion(`tel:${c.phoneHref}`)}
                           className="action inline-flex items-center gap-1 text-xs font-semibold text-gold hover:underline"
                         >
                           <Phone size={11} />
@@ -468,7 +478,11 @@ export default function Contact() {
                       <p className="mt-1 text-xs leading-relaxed text-white/75">{c.address}</p>
                       <p className="mt-1.5 text-[0.6875rem] font-medium text-white/50">
                         Ph:{' '}
-                        <a href={`tel:${c.phoneHref}`} className="action hover:text-white/80">
+                        <a
+                          href={`tel:${c.phoneHref}`}
+                          onClick={() => reportPhoneConversion(`tel:${c.phoneHref}`)}
+                          className="action hover:text-white/80"
+                        >
                           {c.phone}
                         </a>
                       </p>
