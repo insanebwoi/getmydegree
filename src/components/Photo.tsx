@@ -6,6 +6,8 @@ type Props = {
   name?: ImageName
   src?: string
   alt?: string
+  title?: string
+  itemProp?: string
   className?: string
   /** Aspect ratio applied to the frame, e.g. "4/3". Omit to fill the parent. */
   ratio?: string
@@ -30,6 +32,8 @@ export function Photo({
   name,
   src,
   alt,
+  title,
+  itemProp,
   className = '',
   ratio,
   priority = false,
@@ -54,6 +58,7 @@ export function Photo({
   const image = {
     src: cleanSrc,
     alt: alt ?? registered?.alt ?? '',
+    title: title ?? alt ?? registered?.alt ?? '',
     width: explicitWidth ?? 1600,
     height: explicitHeight ?? 900,
   }
@@ -85,8 +90,10 @@ export function Photo({
       ref={ref}
       src={image.src}
       alt={image.alt}
+      title={image.title}
       width={image.width}
       height={image.height}
+      itemProp={itemProp}
       loading={priority ? 'eager' : 'lazy'}
       decoding={priority ? 'sync' : 'async'}
       fetchPriority={priority ? 'high' : 'auto'}

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ChevronDown, HelpCircle, CheckCircle2 } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { metaFor } from '../data/meta'
 import { courseSlug, guideCourses } from '../data/courses'
-import { courses } from '../data/site'
+import { courses, site } from '../data/site'
 import { postSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
@@ -55,26 +55,58 @@ export default function BlogPost() {
       <Seo {...metaFor(`/blog/${post.slug}`)} schema={postSchema(post.slug)} />
 
       <nav aria-label="Breadcrumb" className="shell pt-6">
-        <ol className="flex flex-wrap items-center gap-1.5 text-xs text-muted">
-          <li>
-            <Link to="/" className="hover:text-navy">
-              Home
+        <ol
+          className="flex flex-wrap items-center gap-1.5 text-xs text-muted"
+          itemScope
+          itemType="https://schema.org/BreadcrumbList"
+        >
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <Link to="/" itemProp="item" className="hover:text-navy">
+              <span itemProp="name">Home</span>
             </Link>
+            <meta itemProp="position" content="1" />
           </li>
           <li aria-hidden="true">/</li>
-          <li>
-            <Link to="/blog" className="hover:text-navy">
-              Blog
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <Link to="/blog" itemProp="item" className="hover:text-navy">
+              <span itemProp="name">Blog</span>
             </Link>
+            <meta itemProp="position" content="2" />
           </li>
           <li aria-hidden="true">/</li>
-          <li aria-current="page" className="line-clamp-1 font-medium text-ink">
-            {post.title}
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <Link
+              to={`/blog?category=${encodeURIComponent(post.category)}`}
+              itemProp="item"
+              className="hover:text-navy"
+            >
+              <span itemProp="name">{post.category}</span>
+            </Link>
+            <meta itemProp="position" content="3" />
+          </li>
+          <li aria-hidden="true">/</li>
+          <li
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+            aria-current="page"
+            className="line-clamp-1 font-medium text-ink"
+          >
+            <span itemProp="name">{post.title}</span>
+            <meta itemProp="position" content="4" />
           </li>
         </ol>
       </nav>
 
-      <article>
+      <article itemScope itemType="https://schema.org/BlogPosting">
+        <meta itemProp="headline" content={post.title} />
+        <meta itemProp="description" content={post.excerpt} />
+        <meta itemProp="datePublished" content={post.publishedAt} />
+        <meta
+          itemProp="dateModified"
+          content={post.updated ? new Date(post.updated).toISOString() : post.publishedAt}
+        />
+        <meta itemProp="author" content={post.author} />
         {/*
           The header keeps its banner, but not the article's own cover.
 
@@ -130,21 +162,58 @@ export default function BlogPost() {
                 {/* The cover opens the article itself, on the same surface and
                     the same measure as the text, rather than floating above it
                     as a banner. Its own 16:9, so none of the artwork is lost. */}
-                <figure className="my-0">
+                <figure
+                  className="my-0 overflow-hidden rounded-2xl border border-line/60 bg-navy-950/5 shadow-xs"
+                  itemScope
+                  itemType="https://schema.org/ImageObject"
+                >
                   <Photo
                     src={post.cover}
                     alt={post.coverAlt ?? post.title}
+                    title={post.coverAlt ?? post.title}
                     ratio="16/9"
                     rounded="card"
                     priority
                     className="w-full"
+                    itemProp="contentUrl"
                   />
+                  <meta itemProp="name" content={post.title} />
+                  <meta itemProp="caption" content={post.coverAlt ?? post.title} />
+                  <meta itemProp="description" content={post.excerpt} />
+                  <meta itemProp="license" content={`${site.url}/about`} />
+                  <meta itemProp="acquireLicensePage" content={`${site.url}/contact`} />
+                  <meta itemProp="creditText" content="GetMyDegree Academic Guides" />
+                  <meta itemProp="width" content="1400" />
+                  <meta itemProp="height" content="787" />
                   {post.coverAlt && (
-                    <figcaption className="mt-2.5 text-center text-xs text-muted">
-                      {post.coverAlt}
+                    <figcaption
+                      itemProp="caption"
+                      className="border-t border-line/40 bg-wash/80 px-4 py-2.5 text-center text-xs text-muted"
+                    >
+                      <span className="font-medium text-ink/80">Photo Guide:</span> {post.coverAlt}
                     </figcaption>
                   )}
                 </figure>
+
+                {/* Key Guide Takeaways block for Google Featured Snippets and instant reader orientation */}
+                <div className="mt-8 rounded-2xl border border-gold-300/40 bg-gold-50/50 p-5 sm:p-6">
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gold-800">
+                    <CheckCircle2 size={16} className="text-gold-600" aria-hidden="true" />
+                    <span>Key Guide Takeaways</span>
+                  </div>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-ink/90">
+                    {post.excerpt}
+                  </p>
+                  <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-gold-200/50 pt-3 text-xs text-muted">
+                    <span>
+                      Verified by <strong>GetMyDegree Academic Team</strong>
+                    </span>
+                    <span>•</span>
+                    <span>Updated: {formatDate(post.updated ?? post.date)}</span>
+                    <span>•</span>
+                    <span>UGC &amp; DEB Compliant</span>
+                  </div>
+                </div>
 
                 {body ? (
                   <div
@@ -163,6 +232,44 @@ export default function BlogPost() {
                       />
                     ))}
                   </div>
+                )}
+
+                {/* Visible FAQ Accordion Section for Google Rich FAQ Snippets */}
+                {post.faqs && post.faqs.length > 0 && (
+                  <section
+                    className="mt-12 border-t border-line pt-10"
+                    aria-label="Frequently Asked Questions"
+                  >
+                    <div className="flex items-center gap-2">
+                      <HelpCircle size={20} className="text-gold-600" aria-hidden="true" />
+                      <h2 className="t-h2 font-display font-medium text-ink">
+                        Frequently Asked Questions
+                      </h2>
+                    </div>
+                    <p className="mt-2 text-sm text-muted">
+                      Direct answers to common questions on this topic according to current academic
+                      guidelines.
+                    </p>
+                    <div className="mt-6 divide-y divide-line rounded-2xl border border-line bg-wash/40">
+                      {post.faqs.map((faq, i) => (
+                        <details
+                          key={i}
+                          className="group p-5 first:rounded-t-2xl last:rounded-b-2xl [&_summary::-webkit-details-marker]:hidden"
+                          open={i === 0}
+                        >
+                          <summary className="flex cursor-pointer items-center justify-between font-display text-base font-semibold text-ink transition-colors hover:text-navy">
+                            <span>{faq.question}</span>
+                            <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line bg-white text-muted transition-transform group-open:rotate-180">
+                              <ChevronDown size={14} aria-hidden="true" />
+                            </span>
+                          </summary>
+                          <div className="mt-3 text-sm leading-relaxed text-ink/80">
+                            <p>{faq.answer}</p>
+                          </div>
+                        </details>
+                      ))}
+                    </div>
+                  </section>
                 )}
 
                 {cluster && cluster.courses.length > 0 && (

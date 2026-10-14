@@ -193,7 +193,49 @@ function markdownPosts(): Plugin {
 
       if (query === 'meta') {
         const words = content.split(/\s+/).filter(Boolean).length
-        const meta = { ...data, readingMinutes: Math.max(1, Math.round(words / 200)) }
+
+        // Extract FAQs from H2 sections for Google Search FAQ Rich Snippets
+        const lines = content.split('\n')
+        const faqs: { question: string; answer: string }[] = []
+        let currentHeading = ''
+        let currentAnswer: string[] = []
+
+        for (const line of lines) {
+          const trimmed = line.trim()
+          if (trimmed.startsWith('## ')) {
+            if (currentHeading && currentAnswer.length > 0) {
+              const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
+              if (ansText.length > 25) {
+                faqs.push({ question: currentHeading, answer: ansText })
+              }
+            }
+            let headingText = trimmed.replace(/^##\s+/, '').trim()
+            if (!headingText.endsWith('?') && !headingText.match(/^(what|how|why|is|can|does|where|when|which)/i)) {
+              headingText = `${headingText} — ${data.title ?? ''}`.trim()
+            } else if (!headingText.endsWith('?')) {
+              headingText = `${headingText}?`
+            }
+            currentHeading = headingText
+            currentAnswer = []
+          } else if (currentHeading && trimmed && !trimmed.startsWith('#')) {
+            if (currentAnswer.length < 3) {
+              currentAnswer.push(trimmed)
+            }
+          }
+        }
+        if (currentHeading && currentAnswer.length > 0) {
+          const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
+          if (ansText.length > 25) {
+            faqs.push({ question: currentHeading, answer: ansText })
+          }
+        }
+
+        const meta = {
+          ...data,
+          readingMinutes: Math.max(1, Math.round(words / 200)),
+          wordCount: words,
+          faqs: faqs.slice(0, 6),
+        }
         return { code: `export const meta = ${JSON.stringify(meta)};`, map: null }
       }
 

@@ -27,22 +27,34 @@ function headFor(path) {
   const url = canonical(meta)
   const image = ogImage(meta)
   const type = meta.type ?? 'website'
+  const robots = meta.noindex
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+  const imgType = image.url.endsWith('.png') ? 'image/png' : image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp'
   const tags = [
     `<title>${escape(title)}</title>`,
     `<meta name="description" content="${escape(meta.description)}" />`,
+    ...(meta.keywords ? [`<meta name="keywords" content="${escape(meta.keywords)}" />`] : []),
     `<link rel="canonical" href="${url}" />`,
-    `<meta name="robots" content="${meta.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}" />`,
+    `<link rel="image_src" href="${escape(image.url)}" />`,
+    `<meta name="robots" content="${robots}" />`,
+    `<meta name="googlebot" content="${robots}" />`,
+    `<meta name="bingbot" content="${robots}" />`,
     `<meta property="og:title" content="${escape(title)}" />`,
     `<meta property="og:description" content="${escape(meta.description)}" />`,
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:type" content="${type}" />`,
     `<meta property="og:image" content="${escape(image.url)}" />`,
+    `<meta property="og:image:secure_url" content="${escape(image.url)}" />`,
+    `<meta property="og:image:type" content="${imgType}" />`,
     ...(image.width ? [`<meta property="og:image:width" content="${image.width}" />`] : []),
     ...(image.height ? [`<meta property="og:image:height" content="${image.height}" />`] : []),
     ...(meta.imageAlt ? [`<meta property="og:image:alt" content="${escape(meta.imageAlt)}" />`] : []),
     `<meta property="og:site_name" content="GetMyDegree Institutions" />`,
     `<meta property="og:locale" content="en_IN" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:site" content="@get_my_degree" />`,
+    `<meta name="twitter:creator" content="@get_my_degree" />`,
     `<meta name="twitter:title" content="${escape(title)}" />`,
     `<meta name="twitter:description" content="${escape(meta.description)}" />`,
     `<meta name="twitter:image" content="${escape(image.url)}" />`,
@@ -55,6 +67,13 @@ function headFor(path) {
       tags.push(`<meta property="article:modified_time" content="${escape(meta.modifiedTime)}" />`)
     if (meta.section)
       tags.push(`<meta property="article:section" content="${escape(meta.section)}" />`)
+    tags.push(`<meta property="article:author" content="${site.url}/about" />`)
+    tags.push(`<meta property="article:publisher" content="${site.url}/" />`)
+    if (meta.keywords) {
+      for (const tag of meta.keywords.split(',').map((t) => t.trim()).filter(Boolean)) {
+        tags.push(`<meta property="article:tag" content="${escape(tag)}" />`)
+      }
+    }
   }
   return tags.join('\n    ')
 }
@@ -78,8 +97,11 @@ for (const path of prerenderPaths) {
     .replace(/<title>[\s\S]*?<\/title>/, '<!--head-->')
     .replace(/\s*<meta\s+name="description"[\s\S]*?\/>/, '')
     .replace(/\s*<link rel="canonical"[\s\S]*?\/>/, '')
+    .replace(/\s*<link\s+rel="image_src"[\s\S]*?\/>/, '')
     .replace(/\s*<meta\s+property="og:[\s\S]*?\/>/g, '')
     .replace(/\s*<meta\s+name="robots"[\s\S]*?\/>/, '')
+    .replace(/\s*<meta\s+name="googlebot"[\s\S]*?\/>/, '')
+    .replace(/\s*<meta\s+name="bingbot"[\s\S]*?\/>/, '')
     .replace('<!--head-->', headFor(path))
     .replace('</head>', `${schemaTagFor(path)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${render(path)}</div>`)
@@ -118,8 +140,8 @@ for (const path of prerenderPaths) {
 
 // Sitemap is generated from the same list, so pages can never drift out of it.
 const priority = (path) =>
-  path === '/' ? '1.0' : path.startsWith('/blog/') ? '0.6' : path.startsWith('/courses/') ? '0.8' : '0.9'
-const changefreq = (path) => (path === '/' || path === '/blog' ? 'weekly' : 'monthly')
+  path === '/' ? '1.0' : path.startsWith('/blog/') ? '0.9' : path.startsWith('/courses/') ? '0.9' : '0.8'
+const changefreq = (path) => (path === '/' || path === '/blog' || path.startsWith('/blog/') ? 'weekly' : 'monthly')
 // Articles carry a real lastmod; everything else uses the build date.
 const buildDate = new Date().toISOString().slice(0, 10)
 const lastmod = (path) => {
@@ -135,14 +157,14 @@ function imageTagFor(path) {
       const imgUrl = rawCover.split('?')[0]
       const imgTitle = escape(post.title)
       const imgCaption = escape(post.coverAlt || post.excerpt)
-      return `\n    <image:image>\n      <image:loc>${escape(imgUrl)}</image:loc>\n      <image:title>${imgTitle}</image:title>\n      <image:caption>${imgCaption}</image:caption>\n    </image:image>`
+      return `\n    <image:image>\n      <image:loc>${escape(imgUrl)}</image:loc>\n      <image:title>${imgTitle}</image:title>\n      <image:caption>${imgCaption}</image:caption>\n      <image:geo_location>Kerala, India</image:geo_location>\n      <image:license>${site.url}/about</image:license>\n    </image:image>`
     }
   }
   if (path === '/blog') {
-    return `\n    <image:image>\n      <image:loc>${site.url}/images/blog/blog-banner.webp</image:loc>\n      <image:title>GetMyDegree Degree Guides &amp; Articles</image:title>\n      <image:caption>Articles, degree advice, and admission guides for working professionals</image:caption>\n    </image:image>`
+    return `\n    <image:image>\n      <image:loc>${site.url}/images/blog/blog-banner.webp</image:loc>\n      <image:title>GetMyDegree Degree Guides &amp; Articles</image:title>\n      <image:caption>Articles, degree advice, and admission guides for working professionals</image:caption>\n      <image:geo_location>Kerala, India</image:geo_location>\n      <image:license>${site.url}/about</image:license>\n    </image:image>`
   }
   if (path === '/') {
-    return `\n    <image:image>\n      <image:loc>${site.url}/images/home/hero-portrait.webp</image:loc>\n      <image:title>GetMyDegree Institutions</image:title>\n      <image:caption>Degree completion for working professionals with credit transfer</image:caption>\n    </image:image>`
+    return `\n    <image:image>\n      <image:loc>${site.url}/images/home/hero-portrait.webp</image:loc>\n      <image:title>GetMyDegree Institutions</image:title>\n      <image:caption>Degree completion for working professionals with credit transfer</image:caption>\n      <image:geo_location>Kerala, India</image:geo_location>\n      <image:license>${site.url}/about</image:license>\n    </image:image>`
   }
   return ''
 }
@@ -159,6 +181,57 @@ ${prerenderPaths
 `
 writeFileSync(resolve(root, 'dist/sitemap.xml'), sitemap)
 console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls with Google Image Sitemap tags)`)
+
+// Dedicated Google Image Sitemap for Googlebot-Image crawler
+{
+  const imageEntries = []
+  for (const post of posts) {
+    if (post.cover) {
+      const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
+      const cleanImg = rawCover.split('?')[0]
+      const postUrl = canonical(metaFor(`/blog/${post.slug}`))
+      imageEntries.push(`  <url>
+    <loc>${postUrl}</loc>
+    <image:image>
+      <image:loc>${escape(cleanImg)}</image:loc>
+      <image:title>${escape(post.title)}</image:title>
+      <image:caption>${escape(post.coverAlt || post.excerpt)}</image:caption>
+      <image:geo_location>Kerala, India</image:geo_location>
+      <image:license>${site.url}/about</image:license>
+    </image:image>
+  </url>`)
+    }
+  }
+
+  // Add primary site sections to image sitemap
+  const siteImages = [
+    { loc: `${site.url}/blog`, img: `${site.url}/images/blog/blog-banner.webp`, title: 'GetMyDegree Blog & Guides Banner', caption: 'Articles and degree admission guides for working professionals' },
+    { loc: `${site.url}/`, img: `${site.url}/images/home/hero-portrait.webp`, title: 'GetMyDegree Professional Degree Completion', caption: 'Editorial portrait of working professional completing UGC recognized degree' },
+    { loc: `${site.url}/about`, img: `${site.url}/images/about/about-banner.webp`, title: 'GetMyDegree Thrissur & Malappuram Academic Counselling', caption: 'Academic counselor helping student with credit transfer in Kerala' },
+    { loc: `${site.url}/courses`, img: `${site.url}/images/courses/courses-banner.webp`, title: 'GetMyDegree UG & PG Degree Programmes', caption: 'UGC recognized university degree courses in India' },
+    { loc: `${site.url}/universities`, img: `${site.url}/images/universities/universities-banner.webp`, title: 'Partner Universities Colonnade', caption: 'Partner universities awarding UGC recognized and accredited degrees' },
+  ]
+  for (const s of siteImages) {
+    imageEntries.push(`  <url>
+    <loc>${s.loc}</loc>
+    <image:image>
+      <image:loc>${escape(s.img)}</image:loc>
+      <image:title>${escape(s.title)}</image:title>
+      <image:caption>${escape(s.caption)}</image:caption>
+      <image:geo_location>Kerala, India</image:geo_location>
+      <image:license>${site.url}/about</image:license>
+    </image:image>
+  </url>`)
+  }
+
+  const imageSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+${imageEntries.join('\n')}
+</urlset>
+`
+  writeFileSync(resolve(root, 'dist/image-sitemap.xml'), imageSitemap)
+  console.log(`image-sitemap → dist/image-sitemap.xml (${imageEntries.length} images indexed for Google Images)`)
+}
 
 /*
   llms.txt lists the guides, and the guides now arrive on a schedule. Rewriting

@@ -1,5 +1,5 @@
 import { site } from './site'
-import { posts } from './posts'
+import { allPosts } from './posts'
 import { courses, universities } from './site'
 import { courseSlug } from './courses'
 import { ogImageFor } from './images'
@@ -49,12 +49,12 @@ export const pageMeta: Record<string, PageMeta> = {
     path: '/courses',
   },
   '/blog': {
-    title: 'Degree Guides — Credit Transfer & Recognition',
+    title: 'Degree Guides & Career Advice — Credit Transfer, UGC Recognition & Admissions',
     description:
-      'Plain guidance on credit transfer, degree recognition, government-job eligibility and course fees, from the GetMyDegree academic team.',
+      'Clear, expert guidance on academic credit transfer, UGC DEB degree recognition, government-job validity, admission cycles and flexible fees from the GetMyDegree academic team.',
     path: '/blog',
     image: '/images/blog/blog-banner.webp',
-    imageAlt: 'Articles, degree advice, and admission guides at GetMyDegree',
+    imageAlt: 'Comprehensive degree guides, UGC recognition articles, and admission advice at GetMyDegree Institutions',
   },
   '/universities': {
     title: 'Partner Universities — Where Your Degree Is Awarded',
@@ -101,7 +101,7 @@ export function metaFor(path: string): PageMeta {
   }
 
   const slug = path.replace(/^\/blog\//, '')
-  const post = posts.find((p) => p.slug === slug)
+  const post = allPosts.find((p) => p.slug === slug)
   if (post) {
     return {
       title: post.seoTitle ?? post.title,
@@ -113,7 +113,7 @@ export function metaFor(path: string): PageMeta {
       publishedTime: post.publishedAt,
       modifiedTime: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
       section: post.category,
-      keywords: post.keywords,
+      keywords: post.keywords ?? `${post.category}, degree completion, online degree, distance education, UGC approved degree, GetMyDegree`,
     }
   }
 
@@ -146,10 +146,10 @@ export function ogImage(meta: PageMeta): { url: string; width?: number; height?:
        specific size, so the request itself is the measurement. Without these
        a social card renders blank until the crawler has fetched the image. */
     const query = new URLSearchParams(path.split('?')[1] ?? '')
-    const width = Number(query.get('w'))
-    const height = Number(query.get('h'))
+    const width = Number(query.get('w')) || 1400
+    const height = Number(query.get('h')) || 787
     const cleanUrl = path.split('?')[0]
-    return width && height ? { url: cleanUrl, width, height } : { url: cleanUrl }
+    return { url: cleanUrl, width, height }
   }
   const name = path.replace(/^.*\//, '').replace(/\.[^.]+$/, '')
   const { src, width, height } = ogImageFor(name, path)

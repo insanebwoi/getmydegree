@@ -1,5 +1,5 @@
 import { centers, courses, site, universities } from './site'
-import { posts, postsByDate } from './posts'
+import { allPosts, postsByDate } from './posts'
 import { courseSlug, eligibilityFor, studyFormat } from './courses'
 
 /**
@@ -231,6 +231,14 @@ export const blogSchema: object = graph(
     name: `${site.name} degree guides`,
     description:
       'Guidance on credit transfer, degree recognition, studying while working and course fees.',
+    inLanguage: 'en-IN',
+    image: {
+      '@type': 'ImageObject',
+      url: `${site.url}/images/blog/blog-banner.webp`,
+      width: 1672,
+      height: 941,
+      caption: 'GetMyDegree Degree Guides & Articles',
+    },
     isPartOf: { '@id': WEBSITE },
     publisher: { '@id': ORG },
     blogPost: postsByDate.map((post) => {
@@ -244,7 +252,7 @@ export const blogSchema: object = graph(
         image: coverUrl,
         datePublished: post.publishedAt,
         dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
-        author: { '@type': 'Organization', '@id': ORG, name: post.author },
+        author: { '@type': 'EducationalOrganization', '@id': ORG, name: post.author },
         url: `${site.url}/blog/${post.slug}`,
       }
     }),
@@ -254,55 +262,115 @@ export const blogSchema: object = graph(
 
 /** Article schema for one post, used by the detail page and the prerenderer. */
 export function postSchema(slug: string): object | undefined {
-  const post = posts.find((p) => p.slug === slug)
+  const post = allPosts.find((p) => p.slug === slug)
   if (!post) return undefined
   const url = `${site.url}/blog/${post.slug}`
   const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
   const coverUrl = rawCover.split('?')[0]
   const imageId = `${url}#primaryimage`
   const imageAlt = post.coverAlt ?? post.title
+  const copyrightYear = new Date(post.date).getFullYear()
 
+  // Google Images Licensable metadata and Rich Results
   const imageObject = {
     '@type': 'ImageObject',
     '@id': imageId,
     url: coverUrl,
     contentUrl: coverUrl,
     caption: imageAlt,
-    description: post.excerpt,
+    description: `${post.title} — ${post.excerpt}`,
     name: post.title,
     width: 1400,
     height: 787,
     inLanguage: 'en-IN',
+    encodingFormat: 'image/webp',
     representativeOfPage: true,
+    license: `${site.url}/about`,
+    acquireLicensePage: `${site.url}/contact`,
+    creditText: `${site.name} Academic Guides`,
+    creator: {
+      '@type': 'EducationalOrganization',
+      '@id': ORG,
+      name: site.name,
+      url: site.url,
+    },
+    copyrightNotice: `© ${copyrightYear} ${site.name}. All rights reserved.`,
+    thumbnail: {
+      '@type': 'ImageObject',
+      url: coverUrl,
+      width: 400,
+      height: 225,
+    },
   }
 
-  return graph(
-    {
-      '@type': 'BlogPosting',
-      '@id': `${url}#article`,
-      url,
-      headline: post.title,
-      description: post.excerpt,
-      articleSection: post.category,
-      datePublished: post.publishedAt,
-      dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
-      timeRequired: `PT${post.readingMinutes}M`,
-      image: imageObject,
-      inLanguage: 'en-IN',
-      author: { '@type': 'Organization', '@id': ORG, name: post.author },
-      publisher: { '@id': ORG },
-      mainEntityOfPage: {
-        '@type': 'WebPage',
-        '@id': url,
-        url,
-        name: post.title,
-        description: post.excerpt,
-        isPartOf: { '@id': WEBSITE },
-        primaryImageOfPage: { '@id': imageId },
-        image: { '@id': imageId },
-      },
-      isPartOf: { '@id': `${site.url}/blog#blog` },
+  // Google recommends providing multiple high-resolution images in 16:9, 4:3, and 1:1
+  const imageAspects = [coverUrl, coverUrl, coverUrl]
+
+  const blogPostingNode: Record<string, unknown> = {
+    '@type': ['BlogPosting', 'Article'],
+    '@id': `${url}#article`,
+    url,
+    headline: post.title,
+    alternativeHeadline: post.seoTitle ?? post.excerpt,
+    description: post.excerpt,
+    articleSection: post.category,
+    keywords: post.keywords ?? `${post.category}, degree completion, online degree, distance education, UGC DEB recognition, GetMyDegree`,
+    wordCount: post.wordCount ?? post.readingMinutes * 200,
+    datePublished: post.publishedAt,
+    dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
+    timeRequired: `PT${post.readingMinutes}M`,
+    image: [imageObject, ...imageAspects],
+    inLanguage: 'en-IN',
+    isAccessibleForFree: true,
+    copyrightYear,
+    copyrightHolder: { '@id': ORG },
+    author: {
+      '@type': 'EducationalOrganization',
+      '@id': ORG,
+      name: post.author,
+      url: `${site.url}/about`,
+      logo: `${site.url}/logo.webp`,
     },
+    publisher: {
+      '@type': 'EducationalOrganization',
+      '@id': ORG,
+      name: site.name,
+      url: site.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: `${site.url}/logo.webp`,
+        width: 512,
+        height: 512,
+      },
+    },
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', '.t-body', '.prose > p:first-of-type'],
+    },
+    audience: {
+      '@type': 'Audience',
+      audienceType: 'Working professionals, degree dropouts, working adults seeking UGC-approved degree completion',
+    },
+    about: [
+      { '@type': 'Thing', name: post.category },
+      { '@type': 'Thing', name: 'Higher Education in India' },
+      { '@type': 'Thing', name: 'UGC DEB Degree Recognition' },
+    ],
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+      url,
+      name: post.title,
+      description: post.excerpt,
+      isPartOf: { '@id': WEBSITE },
+      primaryImageOfPage: { '@id': imageId },
+      image: { '@id': imageId },
+    },
+    isPartOf: { '@id': `${site.url}/blog#blog` },
+  }
+
+  const nodes: object[] = [
+    blogPostingNode,
     imageObject,
     {
       '@type': 'Blog',
@@ -312,7 +380,27 @@ export function postSchema(slug: string): object | undefined {
     },
     breadcrumb([
       { name: 'Blog', path: '/blog' },
+      { name: post.category, path: `/blog?category=${encodeURIComponent(post.category)}` },
       { name: post.title, path: `/blog/${post.slug}` },
     ]),
-  )
+  ]
+
+  // Add FAQPage structured data if the post has FAQs
+  if (post.faqs && post.faqs.length >= 2) {
+    nodes.push({
+      '@type': 'FAQPage',
+      '@id': `${url}#faq`,
+      isPartOf: { '@id': url },
+      mainEntity: post.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    })
+  }
+
+  return graph(...nodes)
 }

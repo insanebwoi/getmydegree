@@ -37,17 +37,20 @@ export function Seo({ schema, ...meta }: Props) {
     document.title = title
     setMeta('name', 'description', description)
     setMeta('name', 'keywords', keywords)
-    setMeta(
-      'name',
-      'robots',
-      noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large',
-    )
+    const robotsContent = noindex
+      ? 'noindex, follow'
+      : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    setMeta('name', 'robots', robotsContent)
+    setMeta('name', 'googlebot', robotsContent)
+    setMeta('name', 'bingbot', robotsContent)
 
     setMeta('property', 'og:title', title)
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:url', url)
     setMeta('property', 'og:type', type)
     setMeta('property', 'og:image', image.url)
+    setMeta('property', 'og:image:secure_url', image.url)
+    setMeta('property', 'og:image:type', image.url.endsWith('.png') ? 'image/png' : image.url.endsWith('.jpg') || image.url.endsWith('.jpeg') ? 'image/jpeg' : 'image/webp')
     setMeta('property', 'og:image:width', image.width ? String(image.width) : undefined)
     setMeta('property', 'og:image:height', image.height ? String(image.height) : undefined)
     setMeta('property', 'og:image:alt', meta.imageAlt)
@@ -58,12 +61,24 @@ export function Seo({ schema, ...meta }: Props) {
     setMeta('property', 'article:published_time', type === 'article' ? publishedTime : undefined)
     setMeta('property', 'article:modified_time', type === 'article' ? modifiedTime : undefined)
     setMeta('property', 'article:section', type === 'article' ? section : undefined)
+    setMeta('property', 'article:author', type === 'article' ? `${site.url}/about` : undefined)
+    setMeta('property', 'article:publisher', type === 'article' ? `${site.url}/` : undefined)
 
     setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:site', '@get_my_degree')
+    setMeta('name', 'twitter:creator', '@get_my_degree')
     setMeta('name', 'twitter:title', title)
     setMeta('name', 'twitter:description', description)
     setMeta('name', 'twitter:image', image.url)
     setMeta('name', 'twitter:image:alt', meta.imageAlt)
+
+    let imageLink = document.head.querySelector<HTMLLinkElement>('link[rel="image_src"]')
+    if (!imageLink && image.url) {
+      imageLink = document.createElement('link')
+      imageLink.rel = 'image_src'
+      document.head.appendChild(imageLink)
+    }
+    if (imageLink) imageLink.href = image.url
 
     let link = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]')
     if (!link) {

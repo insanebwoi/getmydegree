@@ -21,6 +21,11 @@ const bodyModules = import.meta.glob('../content/posts/*.md', {
   import: 'html',
 }) as Record<string, () => Promise<string>>
 
+export type FAQItem = {
+  question: string
+  answer: string
+}
+
 type PostMeta = {
   title: string
   /** Optional shorter title for the <title> tag, where the headline runs long. */
@@ -34,6 +39,8 @@ type PostMeta = {
   cover?: string
   readingMinutes: number
   keywords?: string
+  wordCount?: number
+  faqs?: FAQItem[]
 }
 
 export type Post = PostMeta & {
@@ -49,13 +56,13 @@ const slugOf = (path: string) => path.replace(/^.*\/(.+)\.md(\?.*)?$/, '$1')
 
 const defaultAltMap: Record<string, string> = {
   'is-a-distance-degree-valid-for-government-jobs':
-    'Checking the validity and recognition of distance education degrees for government jobs in India',
+    'Checking the validity and recognition of UGC approved distance education degrees for government jobs, SSC and UPSC in India — GetMyDegree verification guide',
   'credit-transfer-explained':
-    'Academic credit transfer for discontinued students completing their university degree',
+    'Academic credit transfer and lateral entry for discontinued students completing their UGC recognized university degree',
   'studying-while-working-full-time':
-    'A working professional balancing study schedules and career commitments',
+    'Working professional balancing flexible online study schedules, exams, and career commitments',
   'what-a-degree-costs-and-how-emi-works':
-    'Breakdown of online degree tuition fees and flexible monthly instalment options',
+    'Breakdown of UGC approved online degree tuition fees, flexible semester payments, and zero-cost EMI financing options',
 }
 
 /**

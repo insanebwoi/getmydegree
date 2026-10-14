@@ -15,9 +15,27 @@ import { isPreviewing } from '../data/postSchedule'
 function Card({ post, delay }: { post: Post; delay: number }) {
   return (
     <Reveal delay={delay}>
-      <article className="card card-hover h-full overflow-hidden">
+      <article
+        className="card card-hover h-full overflow-hidden"
+        itemScope
+        itemType="https://schema.org/BlogPosting"
+      >
+        <meta itemProp="headline" content={post.title} />
+        <meta itemProp="datePublished" content={post.publishedAt} />
+        <meta itemProp="author" content={post.author} />
         <Link to={`/blog/${post.slug}`} className="flex h-full flex-col">
-          <Photo src={post.cover} alt={post.coverAlt ?? post.title} ratio="16/9" rounded="none" />
+          <figure className="my-0 overflow-hidden" itemScope itemType="https://schema.org/ImageObject">
+            <Photo
+              src={post.cover}
+              alt={post.coverAlt ?? post.title}
+              title={post.coverAlt ?? post.title}
+              ratio="16/9"
+              rounded="none"
+              itemProp="contentUrl"
+            />
+            <meta itemProp="name" content={post.title} />
+            <meta itemProp="caption" content={post.coverAlt ?? post.title} />
+          </figure>
           <div className="card-p flex flex-1 flex-col">
             <div className="flex flex-wrap items-center gap-2">
               <span className="badge">{post.category}</span>
@@ -25,8 +43,10 @@ function Card({ post, delay }: { post: Post; delay: number }) {
                 {post.readingMinutes} min read
               </span>
             </div>
-            <h2 className="t-h3 mt-3 font-display font-medium">{post.title}</h2>
-            <p className="mt-2 flex-1 text-base leading-relaxed text-muted md:text-sm">
+            <h2 className="t-h3 mt-3 font-display font-medium" itemProp="name">
+              {post.title}
+            </h2>
+            <p className="mt-2 flex-1 text-base leading-relaxed text-muted md:text-sm" itemProp="description">
               {post.excerpt}
             </p>
             <span className="action mt-4 text-sm font-medium text-navy">
@@ -159,7 +179,14 @@ export default function Blog() {
       {lead && (
         <section className="shell pb-12 lg:pb-16">
           <Reveal>
-            <article className="card card-hover overflow-hidden">
+            <article
+              className="card card-hover overflow-hidden"
+              itemScope
+              itemType="https://schema.org/BlogPosting"
+            >
+              <meta itemProp="headline" content={lead.title} />
+              <meta itemProp="datePublished" content={lead.publishedAt} />
+              <meta itemProp="author" content={lead.author} />
               <Link to={`/blog/${lead.slug}`} className="grid lg:grid-cols-2 lg:items-center">
                 {/*
                   The covers carry their own headline, so this one keeps its
@@ -172,15 +199,23 @@ export default function Blog() {
                   column's height. Against a plain auto-height parent it
                   resolves to auto, and the aspect ratio decides instead.
                 */}
-                <div className="lg:self-center">
+                <figure
+                  className="my-0 overflow-hidden lg:self-center"
+                  itemScope
+                  itemType="https://schema.org/ImageObject"
+                >
                   <Photo
                     src={lead.cover}
                     alt={lead.coverAlt ?? lead.title}
+                    title={lead.coverAlt ?? lead.title}
                     ratio="16/9"
                     rounded="none"
                     priority
+                    itemProp="contentUrl"
                   />
-                </div>
+                  <meta itemProp="name" content={lead.title} />
+                  <meta itemProp="caption" content={lead.coverAlt ?? lead.title} />
+                </figure>
                 <div className="card-p flex flex-col justify-center lg:p-10">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="badge">{lead.category}</span>
@@ -188,8 +223,12 @@ export default function Blog() {
                       {formatDate(lead.date)} · {lead.readingMinutes} min read
                     </span>
                   </div>
-                  <h2 className="t-h2 mt-4 font-display font-medium">{lead.title}</h2>
-                  <p className="mt-3 text-base leading-relaxed text-muted">{lead.excerpt}</p>
+                  <h2 className="t-h2 mt-4 font-display font-medium" itemProp="name">
+                    {lead.title}
+                  </h2>
+                  <p className="mt-3 text-base leading-relaxed text-muted" itemProp="description">
+                    {lead.excerpt}
+                  </p>
                   <span className="action mt-5 text-sm font-medium text-navy">
                     Read the article
                     <ArrowRight size={15} className="ml-1.5" aria-hidden="true" />
