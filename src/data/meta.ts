@@ -30,43 +30,51 @@ export type PageMeta = {
  */
 export const pageMeta: Record<string, PageMeta> = {
   '/': {
-    title: 'Complete Your Unfinished Degree While Working — GetMyDegree',
+    title: 'Get My Degree — UGC Recognized Online Degrees & Fast-Track Degree Completion',
     description:
-      'Degree completion for working professionals. Complete an unfinished degree after discontinuing studies, with credit transfer. UGC recognized, valid for government jobs.',
+      'Get My Degree: Complete your UGC recognized UG & PG degree with credit transfer for working professionals and dropouts across India.',
     path: '/',
     image: '/images/home/banner.webp',
+    keywords:
+      'get my degree, getmydegree, get my degree edu, getmydegreeedu, get my degree blog, degree completion, ugc approved online degree, distance degree kerala, credit transfer degree',
   },
   '/about': {
-    title: 'About Us — Degree Counselling Since 2021',
+    title: 'About Get My Degree — Academic Counselling & Degree Completion Since 2021',
     description:
-      'Guiding students through UG and PG admissions since 2021, with centres in Thrissur and Malappuram. How we assess eligibility and transfer credits.',
+      'Guiding students through UGC recognized UG and PG admissions since 2021, with centres in Thrissur and Malappuram. How Get My Degree assesses eligibility and transfers credits.',
     path: '/about',
+    keywords: 'about get my degree, get my degree thrissur, get my degree malappuram, getmydegree counsellors',
   },
   '/courses': {
-    title: 'UG & PG Degree Programmes — B.Com, BBA, BCA, MBA',
+    title: 'Degree Programmes — B.Com, BBA, BCA, MBA | Get My Degree',
     description:
-      'Nine UG and PG programmes for working professionals: B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW. Compare duration, eligibility and study format.',
+      'UGC recognized UG and PG degree programmes for working professionals at Get My Degree: B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW. Compare eligibility and study formats.',
     path: '/courses',
+    keywords: 'get my degree courses, get my degree bcom, get my degree mba, get my degree bba, online degree programs',
   },
   '/blog': {
-    title: 'Degree Guides & Career Advice — Credit Transfer, UGC Recognition & Admissions',
+    title: 'Get My Degree Blog — Degree Guides, UGC Recognition & Admissions',
     description:
-      'Clear, expert guidance on academic credit transfer, UGC DEB degree recognition, government-job validity, admission cycles and flexible fees from the GetMyDegree academic team.',
+      'The official Get My Degree blog. Clear, expert guidance on academic credit transfer, UGC DEB degree recognition, government job validity, and flexible degree fees.',
     path: '/blog',
     image: '/images/blog/blog-banner.webp',
-    imageAlt: 'Comprehensive degree guides, UGC recognition articles, and admission advice at GetMyDegree Institutions',
+    imageAlt: 'Get My Degree Official Blog and Degree Guides',
+    keywords:
+      'get my degree blog, get my degree, getmydegree, get my degree edu, getmydegreeedu, ugc deb degree guide, credit transfer degree, online degree kerala',
   },
   '/universities': {
-    title: 'Partner Universities — Where Your Degree Is Awarded',
+    title: 'Partner Universities — UGC Recognized Institutions | Get My Degree',
     description:
-      'The universities GetMyDegree places students into, in India and the United Kingdom. What each offers, where it is based, and how recognition is confirmed.',
+      'The accredited universities Get My Degree places students into across India and the UK: RTU, PRIST, Bharathidasan, and Plymouth Marjon. UGC approval confirmed.',
     path: '/universities',
+    keywords: 'get my degree partner universities, get my degree ugc universities, rtu bhopal, prist university',
   },
   '/contact': {
-    title: 'Book Free Degree Counselling — Thrissur & Malappuram',
+    title: 'Contact Get My Degree — Book Free Degree Counselling in Kerala',
     description:
-      'Talk to an academic counsellor about eligibility, credit transfer and programme options. Centres in Thrissur and Malappuram, Kerala.',
+      'Talk to an academic counsellor at Get My Degree about eligibility, credit transfer and university options. Physical centres in Thrissur and Malappuram, Kerala.',
     path: '/contact',
+    keywords: 'contact get my degree, get my degree phone number, get my degree thrissur address, get my degree malappuram',
   },
 }
 
@@ -122,10 +130,15 @@ export function metaFor(path: string): PageMeta {
 
 /**
  * Titles already carrying the brand are left alone, so no page ends up saying
- * "GetMyDegree" twice. Everything else gets the short brand suffix.
+ * "Get My Degree" twice. Everything else gets the brand suffix.
  */
 export function fullTitle(meta: PageMeta) {
-  return meta.title.includes(site.shortName) ? meta.title : `${meta.title} | ${site.shortName}`
+  const brand = 'Get My Degree'
+  const titleLower = meta.title.toLowerCase()
+  if (titleLower.includes('get my degree') || titleLower.includes('getmydegree')) {
+    return meta.title
+  }
+  return `${meta.title} | ${brand}`
 }
 
 /** One canonical form: absolute, https, no trailing slash except the root. */

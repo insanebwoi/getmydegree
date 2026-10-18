@@ -285,6 +285,20 @@ export const schedule: ScheduledPost[] = [
     image: cover('step-by-step-degree-application-guide'),
     alt: 'Step-by-step university online degree application form submission, document upload, and admission confirmation',
   },
+  {
+    day: 31,
+    slug: 'get-my-degree-official-guide',
+    date: '2026-10-17',
+    image: '/images/blog/get-my-degree-official-guide.jpg',
+    alt: 'Academic counsellor in Kerala assisting student with UGC approved degree completion and credit transfer at Get My Degree office',
+  },
+  {
+    day: 32,
+    slug: 'get-my-degree-reviews-validity-guide',
+    date: '2026-10-17',
+    image: '/images/blog/get-my-degree-reviews-validity-guide.jpg',
+    alt: 'Graduate holding UGC accredited degree certificate and marksheet verifying Get My Degree validity for government jobs',
+  },
 ]
 
 const bySlug = new Map(schedule.map((row) => [row.slug, row]))

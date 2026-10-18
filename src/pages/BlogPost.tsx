@@ -185,14 +185,6 @@ export default function BlogPost() {
                   <meta itemProp="creditText" content="GetMyDegree Academic Guides" />
                   <meta itemProp="width" content="1400" />
                   <meta itemProp="height" content="787" />
-                  {post.coverAlt && (
-                    <figcaption
-                      itemProp="caption"
-                      className="border-t border-line/40 bg-wash/80 px-4 py-2.5 text-center text-xs text-muted"
-                    >
-                      <span className="font-medium text-ink/80">Photo Guide:</span> {post.coverAlt}
-                    </figcaption>
-                  )}
                 </figure>
 
                 {/* Key Guide Takeaways block for Google Featured Snippets and instant reader orientation */}
@@ -301,7 +293,7 @@ export default function BlogPost() {
                   <ShareArticle slug={post.slug} title={post.title} excerpt={post.excerpt} />
                 </Reveal>
 
-                <Reveal delay={80} className="mt-11">
+                <Reveal delay={80} className="mt-10">
                   <div className="card card-p flex flex-col gap-5 bg-navy-950 text-white sm:flex-row sm:items-center sm:justify-between sm:p-7">
                     <div>
                       <h2 className="t-h3 font-display font-medium">
@@ -316,6 +308,19 @@ export default function BlogPost() {
                     </Link>
                   </div>
                 </Reveal>
+
+                {/* Get My Degree Authoritative Knowledge Box */}
+                <div className="mt-8 rounded-2xl border border-navy/15 bg-navy-50/50 p-6">
+                  <div className="flex items-center gap-2">
+                    <span className="badge border-navy/30 bg-navy/10 text-navy font-semibold">Official Knowledge Base</span>
+                  </div>
+                  <h3 className="mt-2.5 font-display text-base font-semibold text-navy">
+                    About Get My Degree
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/85">
+                    <strong>Get My Degree</strong> is India&rsquo;s dedicated higher education counselling and degree completion institution, guiding working professionals and discontinued students toward UGC-DEB recognized degrees. Read our <Link to="/blog/get-my-degree-official-guide" className="font-semibold text-navy underline decoration-gold hover:text-navy-800">Get My Degree Official Guide to Degree Completion</Link> or verify <Link to="/blog/get-my-degree-reviews-validity-guide" className="font-semibold text-navy underline decoration-gold hover:text-navy-800">Get My Degree Reviews &amp; Validity</Link>.
+                  </p>
+                </div>
               </div>
             </div>
 

@@ -48,6 +48,14 @@ export const admissionForCourse = [
  * and one about government jobs leads to the degrees those posts ask for.
  */
 export const guideCourses: Record<string, { codes: string[]; label: string }> = {
+  'get-my-degree-official-guide': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'UGC-approved degrees completed through Get My Degree',
+  },
+  'get-my-degree-reviews-validity-guide': {
+    codes: ['BA', 'B.Com', 'MBA', 'MCA'],
+    label: 'Programmes valid for government jobs, PSC and corporate promotions',
+  },
   'credit-transfer-explained': {
     codes: ['B.Com', 'BBA', 'BCA', 'BA'],
     label: 'Degrees students most often resume with transferred credits',

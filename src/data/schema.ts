@@ -16,16 +16,41 @@ const organization = {
   '@type': 'EducationalOrganization',
   '@id': ORG,
   name: site.name,
-  alternateName: site.shortName,
+  legalName: 'GetMyDegree Institutions',
+  alternateName: [
+    'GetMyDegree',
+    'Get My Degree Edu',
+    'GetMyDegreeEdu',
+    'getmydegreeedu.com',
+    'Get My Degree Official Website',
+    'Get My Degree Blog',
+  ],
   url: site.url,
-  logo: { '@type': 'ImageObject', url: `${site.url}/logo.webp` },
+  logo: {
+    '@type': 'ImageObject',
+    url: `${site.url}/logo.webp`,
+    caption: 'Get My Degree Official Logo',
+  },
   image: `${site.url}/logo.webp`,
   email: site.email,
   telephone: site.phone,
   foundingDate: String(site.established),
-  description: site.description,
+  description:
+    'Get My Degree is India\'s dedicated higher education counselling and degree completion institution providing UGC recognized UG and PG degrees, credit transfer, and flexible online education for working professionals.',
   areaServed: { '@type': 'Country', name: 'India' },
-  sameAs: Object.values(site.social),
+  knowsAbout: [
+    'Higher Education in India',
+    'UGC DEB Degree Recognition',
+    'Academic Bank of Credits (ABC)',
+    'Lateral Entry Degree Completion',
+    'Degree Completion for Working Professionals',
+    'Online and Distance Education in Kerala',
+    'B.Com, BBA, BCA, MBA, MCA Degree Programs',
+  ],
+  sameAs: [
+    ...Object.values(site.social),
+    'https://getmydegreeedu.com',
+  ],
   address: centers.map((c) => ({
     '@type': 'PostalAddress',
     streetAddress: c.address,
@@ -40,8 +65,23 @@ const website = {
   '@id': WEBSITE,
   url: site.url,
   name: site.name,
+  alternateName: [
+    'GetMyDegree',
+    'Get My Degree Edu',
+    'GetMyDegreeEdu',
+    'getmydegreeedu.com',
+  ],
+  description: 'Official portal of Get My Degree — UGC approved degrees, credit transfer and admissions.',
   inLanguage: 'en-IN',
   publisher: { '@id': ORG },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${site.url}/blog?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 }
 
 /** Breadcrumbs for any page below the root. */
@@ -228,19 +268,26 @@ export const blogSchema: object = graph(
     '@type': 'Blog',
     '@id': `${site.url}/blog#blog`,
     url: `${site.url}/blog`,
-    name: `${site.name} degree guides`,
+    name: 'Get My Degree Official Blog & Knowledge Center',
+    headline: 'Get My Degree Blog — Academic Credit Transfer, UGC Recognition & Degree Completion',
     description:
-      'Guidance on credit transfer, degree recognition, studying while working and course fees.',
+      'Official Get My Degree guides on UGC DEB approved degree completion, academic credit transfer (ABC ID), lateral entry, university comparisons, and flexible degree options for working professionals.',
     inLanguage: 'en-IN',
     image: {
       '@type': 'ImageObject',
       url: `${site.url}/images/blog/blog-banner.webp`,
       width: 1672,
       height: 941,
-      caption: 'GetMyDegree Degree Guides & Articles',
+      caption: 'Get My Degree Degree Guides & Articles',
     },
     isPartOf: { '@id': WEBSITE },
     publisher: { '@id': ORG },
+    about: [
+      { '@type': 'Thing', name: 'Get My Degree' },
+      { '@type': 'Thing', name: 'UGC DEB Degree Recognition' },
+      { '@type': 'Thing', name: 'Academic Credit Transfer' },
+      { '@type': 'Thing', name: 'Degree Completion for Working Professionals' },
+    ],
     blogPost: postsByDate.map((post) => {
       const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
       const coverUrl = rawCover.split('?')[0]
@@ -256,6 +303,45 @@ export const blogSchema: object = graph(
         url: `${site.url}/blog/${post.slug}`,
       }
     }),
+  },
+  {
+    '@type': 'FAQPage',
+    '@id': `${site.url}/blog#faq`,
+    isPartOf: { '@id': `${site.url}/blog#blog` },
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'What is Get My Degree and what is its official website?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Get My Degree (operated by GetMyDegree Institutions since 2021) is India\'s premier academic advisory and degree completion institution, providing direct university admissions, syllabus guides, and verified academic counseling.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Are degrees completed through Get My Degree UGC approved and valid for government jobs?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. All partner universities associated with Get My Degree are recognized by the University Grants Commission (UGC) under Section 2(f)/12(B) and entitled by the Distance Education Bureau (DEB). Degrees are fully recognized for UPSC, Kerala PSC, SSC, Banking, and corporate promotions.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Can college dropouts complete their degree through Get My Degree without starting over?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes. Under UGC guidelines and the Academic Bank of Credits (ABC ID), students who completed prior college semesters can transfer eligible credits to accredited partner universities and complete their bachelor\'s or master\'s degree with lateral entry.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Where are Get My Degree physical counseling centres located?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Get My Degree has physical counselling centres in Kerala at Thrissur (Vadanappilly Centre, Beach Road) and Malappuram (Near Tirur Bus Stand, Forza Mall), along with digital online counselling nationwide.',
+        },
+      },
+    ],
   },
   breadcrumb([{ name: 'Blog', path: '/blog' }]),
 )

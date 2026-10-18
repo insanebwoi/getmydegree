@@ -4,18 +4,18 @@ seoTitle: "Degree Credit Transfer — What Carries Across"
 excerpt: "Credit transfer means you resume rather than restart. What carries across, what does not, and the documents you need to make the case."
 category: Admissions
 date: 2026-08-04
-author: "GetMyDegree Academic Team"
+author: "Get My Degree Academic Team"
 cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog/credit-transfer-explained.webp?w=1400&h=787
-keywords: "credit transfer explained, online degree credit transfer explained, distance education credit transfer explained, getmydegree credit transfer explained"
+keywords: "credit transfer explained, get my degree, get my degree blog, online degree credit transfer, getmydegree credit transfer"
 ---
 
-A large share of the people who call us left a degree partway through   a job abroad came up, fees became impossible, a family situation changed. The assumption is that those completed semesters are gone. Usually they are not.
+A large share of the people who call us left a degree partway through — a job abroad came up, fees became impossible, a family situation changed. The assumption is that those completed semesters are gone. Usually they are not.
 
 ## What credit transfer means in practice
 
 Under the UGC credit framework, semesters you completed and passed at a recognized university carry a credit value. A receiving university can accept those credits against equivalent papers in its own programme, admitting you with advanced standing rather than into the first year.
 
-The practical effect: someone who finished two years of a three-year B.Com may complete the remaining year rather than repeating all three. That is two years and two years of fees you do not spend again.
+The practical effect: someone who finished two years of a three-year B.Com may complete the remaining year rather than repeating all three. That is two years and two years of fees you do not spend again. Read our comprehensive [Get My Degree Official Guide](/blog/get-my-degree-official-guide) for an in-depth breakdown of partner universities.
 
 ## What usually transfers
 
@@ -23,20 +23,18 @@ The practical effect: someone who finished two years of a three-year B.Com may c
 
 - Foundation and language papers, which map cleanly across most programmes.
 
-- Semesters completed within a reasonable window   most universities look for the last eight to ten years.
-
+- Semesters completed within a reasonable window — most universities look for the last eight to ten years.
 
 ## What usually does not
 
-- Backlog papers you never cleared   these have no credit value to transfer.
+- Backlog papers you never cleared — these have no credit value to transfer.
 
 - Study at an institution that was not recognized at the time you attended.
 
 - A discipline change so wide that no paper maps across, for example engineering into social work.
 
-
 ## The documents that decide it
 
 The assessment is made on paper, so gather these before the conversation: all semester marksheets you hold, the transfer or migration certificate from the previous institution if it was issued, your 12th certificate, and the course structure if you have it. Where a marksheet is lost, the previous university can usually issue a duplicate.
 
-Send us what you have and we will map it against the programmes our partner universities run, then tell you exactly how much of the degree remains. That assessment is free and takes about a day.
+Send us what you have and the **[Get My Degree](/)** academic advisory team will map it against the programmes our partner universities run, then tell you exactly how much of the degree remains. That assessment is free and takes about a day. You can also explore our [Degree Programmes](/courses) to see the full list of options.

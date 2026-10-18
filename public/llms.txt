@@ -1,8 +1,8 @@
-# GetMyDegree Institutions
+# Get My Degree
 
-> GetMyDegree Institutions helps working professionals, dropouts and gap-year students in India complete or restart a UG or PG degree around their existing job. It places students into UGC/AICTE/NAAC recognized Central and State university programmes (and a UK-awarded MBA), with credit transfer for previously completed semesters, continuous assessment instead of a final exam hall, and monthly interest-free instalments. Admission is confirmed within 48 hours of document verification, with free academic counselling by phone at every step.
+> Get My Degree (operated by GetMyDegree Institutions) helps working professionals, dropouts and gap-year students across India complete or restart a UGC recognized UG or PG degree around their existing job. It places students into UGC, AICTE, and NAAC recognized universities, with academic credit transfer for previously completed semesters (ABC ID), flexible distance and online learning modes, and zero-cost monthly instalments.
 
-GetMyDegree Institutions was established in 2021 and operates physical counselling centres in Thrissur and Malappuram, Kerala, India, alongside its online admissions process. It does not itself award degrees — it counsels students on eligibility, transfers prior academic credit, and places them into programmes run by its partner universities, who award the actual degree.
+Get My Degree was established in 2021 and operates physical counselling centres in Thrissur and Malappuram, Kerala, India, alongside its nationwide online admissions portal. It does not itself award degrees — it counsels students on eligibility, transfers prior academic credit, and places them into accredited programmes run by its partner universities, who award the actual degree.
 
 ## Core pages
 

@@ -1,12 +1,13 @@
 /** Single source of truth for all site copy. Edit text here, not in the pages. */
 
 export const site = {
-  name: 'GetMyDegree Institutions',
-  shortName: 'GetMyDegree',
+  name: 'Get My Degree',
+  shortName: 'Get My Degree',
+  legalName: 'GetMyDegree Institutions',
   url: 'https://new.getmydegreeedu.com',
   tagline: 'Complete Your Degree. Restart Your Career.',
   description:
-    'GetMyDegree Institutions offers flexible, UGC recognized UG & PG degree programs for working professionals, dropouts and gap-year students across India.',
+    'Get My Degree offers flexible, UGC recognized UG & PG degree programs and academic credit transfer for working professionals, dropouts and gap-year students across India.',
   email: 'getmydegreeedu@gmail.com',
   phone: '+91 92076 77828',
   phoneHref: '+919207677828',

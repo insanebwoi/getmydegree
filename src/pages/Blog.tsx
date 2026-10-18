@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChevronDown, HelpCircle } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { blogSchema } from '../data/schema'
@@ -105,11 +105,37 @@ export default function Blog() {
     <>
       <Seo {...pageMeta['/blog']} noindex={Boolean(query || category)} schema={blogSchema} />
 
+      <nav aria-label="Breadcrumb" className="shell pt-6">
+        <ol
+          className="flex flex-wrap items-center gap-1.5 text-xs text-muted"
+          itemScope
+          itemType="https://schema.org/BreadcrumbList"
+        >
+          <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+            <Link to="/" itemProp="item" className="hover:text-navy">
+              <span itemProp="name">Home</span>
+            </Link>
+            <meta itemProp="position" content="1" />
+          </li>
+          <li aria-hidden="true">/</li>
+          <li
+            itemProp="itemListElement"
+            itemScope
+            itemType="https://schema.org/ListItem"
+            aria-current="page"
+            className="font-medium text-ink"
+          >
+            <span itemProp="name">Get My Degree Blog</span>
+            <meta itemProp="position" content="2" />
+          </li>
+        </ol>
+      </nav>
+
       <PageHero
         image="blog-banner"
-        badge="Blog & Guides"
-        title="Straight answers about degrees, admissions and recognition"
-        intro="No sales copy. What we tell students on the phone, written down — so you can check it before you commit to anything."
+        badge="Get My Degree Knowledge Base"
+        title="Get My Degree Blog — Degree Completion, Credit Transfer & UGC Guides"
+        intro="The official educational intelligence desk. Straight, verified answers on UGC-DEB recognition, lateral entry, university approvals, and degree programs for working professionals."
       />
 
       {/* Only ever rendered by `npm run dev` with the preview switch on. The
@@ -284,6 +310,81 @@ export default function Blog() {
             </p>
           </div>
         )}
+      </section>
+
+      {/* Frequently Asked Questions about Get My Degree */}
+      <section className="shell pb-16 lg:pb-24" aria-label="Frequently Asked Questions about Get My Degree">
+        <Reveal>
+          <div className="card card-p sm:p-9 lg:p-12">
+            <div className="flex items-center gap-2">
+              <HelpCircle size={22} className="text-gold-600" aria-hidden="true" />
+              <h2 className="t-h2 font-display font-medium text-ink">
+                Frequently Asked Questions About Get My Degree
+              </h2>
+            </div>
+            <p className="mt-2 text-base text-muted">
+              Essential answers on degree validity, UGC approvals, credit transfer, and official portal updates.
+            </p>
+
+            <div className="mt-8 divide-y divide-line rounded-2xl border border-line bg-wash/30">
+              <details className="group p-5 first:rounded-t-2xl [&_summary::-webkit-details-marker]:hidden" open>
+                <summary className="flex cursor-pointer items-center justify-between font-display text-base font-semibold text-ink transition-colors hover:text-navy">
+                  <span>What is Get My Degree and what is its official website?</span>
+                  <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line bg-white text-muted transition-transform group-open:rotate-180">
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </span>
+                </summary>
+                <div className="mt-3 text-sm leading-relaxed text-ink/80">
+                  <p>
+                    <strong>Get My Degree</strong> (GetMyDegree Institutions, established in 2021) is India’s premier higher education advisory platform specializing in UGC-recognized degree completion and credit transfer, providing direct university admissions, syllabus guides, and verified academic counseling.
+                  </p>
+                </div>
+              </details>
+
+              <details className="group p-5 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between font-display text-base font-semibold text-ink transition-colors hover:text-navy">
+                  <span>Are degrees completed through Get My Degree UGC approved and valid for government jobs?</span>
+                  <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line bg-white text-muted transition-transform group-open:rotate-180">
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </span>
+                </summary>
+                <div className="mt-3 text-sm leading-relaxed text-ink/80">
+                  <p>
+                    Yes. All universities partnering with Get My Degree are statutory universities recognized by the University Grants Commission (UGC) under Section 2(f)/12(B) and entitled by the Distance Education Bureau (DEB). Under official UGC and Ministry of Education gazette notifications, these degrees are 100% equivalent to campus degrees for UPSC, Kerala PSC, SSC, Bank exams, and overseas immigration (WES).
+                  </p>
+                </div>
+              </details>
+
+              <details className="group p-5 [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between font-display text-base font-semibold text-ink transition-colors hover:text-navy">
+                  <span>Can discontinued or dropout students complete their degree without starting from year one?</span>
+                  <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line bg-white text-muted transition-transform group-open:rotate-180">
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </span>
+                </summary>
+                <div className="mt-3 text-sm leading-relaxed text-ink/80">
+                  <p>
+                    Yes. Under UGC guidelines and the Academic Bank of Credits (ABC ID), students who completed prior college semesters can transfer eligible credits to accredited partner universities. You do not have to repeat passed subjects—you only study and appear for remaining semester requirements through lateral entry.
+                  </p>
+                </div>
+              </details>
+
+              <details className="group p-5 last:rounded-b-2xl [&_summary::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer items-center justify-between font-display text-base font-semibold text-ink transition-colors hover:text-navy">
+                  <span>Where are Get My Degree physical counseling centres located?</span>
+                  <span className="ml-4 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line bg-white text-muted transition-transform group-open:rotate-180">
+                    <ChevronDown size={14} aria-hidden="true" />
+                  </span>
+                </summary>
+                <div className="mt-3 text-sm leading-relaxed text-ink/80">
+                  <p>
+                    Get My Degree maintains full-service academic counseling centres in Kerala at <strong>Thrissur</strong> (Vadanappilly Centre, Beach Road, Labba Building, 1st Floor; Ph: 92076 77828) and <strong>Malappuram</strong> (Near Tirur Bus Stand, Forza Mall; Ph: 73566 44343). We also provide end-to-end digital admissions for students across India.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="shell pb-12 sm:pb-16 lg:pb-24">

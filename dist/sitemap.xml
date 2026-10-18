@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://new.getmydegreeedu.com/</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -15,19 +15,19 @@
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/about</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/blog</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -40,93 +40,119 @@
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/contact</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/bcom</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/bba</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/bca</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/ba</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/bsc</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/mba</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/mca</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/mcom</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/courses/msw</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/universities</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/universities/rabindranath-tagore-university</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/universities/prist-deemed-university</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/universities/bharathidasan-university</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/universities/marjon-university</loc>
-    <lastmod>2026-10-17</lastmod>
+    <lastmod>2026-10-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://new.getmydegreeedu.com/blog/get-my-degree-official-guide</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://new.getmydegreeedu.com/images/blog/get-my-degree-official-guide.jpg</image:loc>
+      <image:title>Get My Degree: Official Guide to UGC-Approved Degree Completion, Credit Transfer &amp; Admissions</image:title>
+      <image:caption>Academic counsellor in Kerala assisting student with UGC approved degree completion and credit transfer at Get My Degree office</image:caption>
+      <image:geo_location>Kerala, India</image:geo_location>
+      <image:license>https://new.getmydegreeedu.com/about</image:license>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://new.getmydegreeedu.com/blog/get-my-degree-reviews-validity-guide</loc>
+    <lastmod>2026-10-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://new.getmydegreeedu.com/images/blog/get-my-degree-reviews-validity-guide.jpg</image:loc>
+      <image:title>Get My Degree Reviews &amp; Legitimacy: Is a Degree from GetMyDegree UGC Valid?</image:title>
+      <image:caption>Graduate holding UGC accredited degree certificate and marksheet verifying Get My Degree validity for government jobs</image:caption>
+      <image:geo_location>Kerala, India</image:geo_location>
+      <image:license>https://new.getmydegreeedu.com/about</image:license>
+    </image:image>
   </url>
   <url>
     <loc>https://new.getmydegreeedu.com/blog/step-by-step-degree-application-guide</loc>

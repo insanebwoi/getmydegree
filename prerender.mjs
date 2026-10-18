@@ -50,7 +50,7 @@ function headFor(path) {
     ...(image.width ? [`<meta property="og:image:width" content="${image.width}" />`] : []),
     ...(image.height ? [`<meta property="og:image:height" content="${image.height}" />`] : []),
     ...(meta.imageAlt ? [`<meta property="og:image:alt" content="${escape(meta.imageAlt)}" />`] : []),
-    `<meta property="og:site_name" content="GetMyDegree Institutions" />`,
+    `<meta property="og:site_name" content="Get My Degree" />`,
     `<meta property="og:locale" content="en_IN" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:site" content="@get_my_degree" />`,
