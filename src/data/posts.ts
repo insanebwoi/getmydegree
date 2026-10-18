@@ -120,9 +120,16 @@ export function relatedPosts(slug: string, count = 3, now: number = Date.now()) 
   const live = publishedPosts(now)
   const post = getPost(slug)
   if (!post) return live.slice(0, count)
-  const others = live.filter((p) => p.slug !== slug)
-  const sameTopic = others.filter((p) => p.category === post.category)
-  return [...sameTopic, ...others.filter((p) => p.category !== post.category)].slice(0, count)
+  // Start from the post's own position and wrap around, rather than always
+  // taking the newest few: otherwise every article links to the same handful
+  // and older ones get no internal links at all.
+  const after = (list: Post[]) => {
+    const i = list.findIndex((p) => p.slug === slug)
+    return [...list.slice(i + 1), ...list.slice(0, Math.max(i, 0))].filter((p) => p.slug !== slug)
+  }
+  const sameTopic = after(live.filter((p) => p.category === post.category))
+  const rest = after(live).filter((p) => p.category !== post.category)
+  return [...sameTopic, ...rest].slice(0, count)
 }
 
 const bodyCache = new Map<string, string>()

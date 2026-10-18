@@ -310,6 +310,22 @@ export default function Blog() {
             </p>
           </div>
         )}
+
+        {/* "Load more" is a button, which crawlers never press, so every live
+            article also gets a plain link here. Without it, posts past the
+            first page are reachable only through the sitemap. */}
+        <nav aria-label="All articles" className="mt-16 border-t border-line pt-10">
+          <h2 className="t-h3 font-display font-medium text-ink">All articles</h2>
+          <ul className="mt-5 grid gap-x-8 gap-y-2.5 text-sm sm:grid-cols-2">
+            {live.map((post) => (
+              <li key={post.slug}>
+                <Link to={`/blog/${post.slug}`} className="text-ink/80 hover:text-navy hover:underline">
+                  {post.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </section>
 
       {/* Frequently Asked Questions about Get My Degree */}
