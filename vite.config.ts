@@ -246,6 +246,27 @@ function markdownPosts(): Plugin {
 }
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [react(), tailwindcss(), markdownPosts(), imageManifest()],
-})
+  build: {
+    // Read by the prerender to preload each page's own chunk, then deleted.
+    manifest: !isSsrBuild,
+    rolldownOptions: {
+      output: {
+        // React and the router change only when they are upgraded, so they get
+        // their own chunk: the daily article rebuild then leaves that file's
+        // hash, and the visitor's cached copy, untouched.
+        codeSplitting: isSsrBuild
+          ? true
+          : {
+              groups: [
+                {
+                  name: 'react',
+                  test: /node_modules[\\/](react|react-dom|react-router|react-router-dom|scheduler)[\\/]/,
+                },
+              ],
+            },
+      },
+    },
+  },
+}))

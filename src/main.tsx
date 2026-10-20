@@ -3,6 +3,7 @@ import { createRoot, hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { loadBody } from './data/posts'
+import { preloadRoute } from './routes'
 import './index.css'
 
 // Enables the scroll-reveal styles. Without JS the content simply stays visible.
@@ -26,14 +27,11 @@ function start() {
   }
 }
 
-// On an article URL the body lives in its own chunk. Fetch it before hydrating
-// so the first client render matches the prerendered HTML; every other page
-// starts immediately and never downloads article text.
-const match = window.location.pathname.match(/^\/blog\/([^/]+)\/?$/)
-if (match) {
-  loadBody(match[1])
-    .catch(() => undefined)
-    .then(start)
-} else {
-  start()
-}
+// The page's own chunk, and on an article URL its body, load before hydrating
+// so the first client render matches the prerendered HTML. Other pages never
+// download article text.
+const { pathname } = window.location
+const match = pathname.match(/^\/blog\/([^/]+)\/?$/)
+Promise.all([preloadRoute(pathname), match ? loadBody(match[1]) : undefined])
+  .catch(() => undefined)
+  .then(start)

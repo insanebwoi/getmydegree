@@ -91,6 +91,44 @@ function schemaTagFor(path) {
   return `\n    <script id="page-schema" type="application/ld+json">${JSON.stringify(schema).replace(/</g, '\\u003c')}</script>`
 }
 
+/**
+ * Each page lives in its own chunk, which the entry only requests once it has
+ * run. A modulepreload per page lets the browser fetch it alongside the entry
+ * instead, so hydration is not held up by a second round trip.
+ */
+const manifestFile = resolve(root, 'dist/.vite/manifest.json')
+const manifest = JSON.parse(readFileSync(manifestFile, 'utf-8'))
+const entry = Object.values(manifest).find((chunk) => chunk.isEntry)
+
+function staticImports(key, seen = new Set()) {
+  for (const dep of manifest[key]?.imports ?? []) {
+    if (seen.has(dep)) continue
+    seen.add(dep)
+    staticImports(dep, seen)
+  }
+  return seen
+}
+const entryChunks = staticImports(entry.src).add(entry.src)
+
+function pageSource(path) {
+  if (path === '/') return 'src/pages/Home.tsx'
+  if (path === '/404') return 'src/pages/NotFound.tsx'
+  if (path.startsWith('/courses/')) return 'src/pages/Course.tsx'
+  if (path.startsWith('/universities/')) return 'src/pages/UniversityPage.tsx'
+  if (path.startsWith('/blog/')) return 'src/pages/BlogPost.tsx'
+  const page = { '/about': 'About', '/courses': 'Courses', '/universities': 'Universities', '/contact': 'Contact', '/blog': 'Blog' }[path]
+  return page && `src/pages/${page}.tsx`
+}
+
+function preloadTagsFor(path) {
+  const src = pageSource(path)
+  if (!src || !manifest[src]) return ''
+  const keys = [src, ...staticImports(src)].filter((key) => !entryChunks.has(key))
+  return keys
+    .map((key) => `\n    <link rel="modulepreload" crossorigin href="/${manifest[key].file}">`)
+    .join('')
+}
+
 for (const path of prerenderPaths) {
   const html = template
     // Replace the template's build-time title/description/canonical with this route's.
@@ -103,7 +141,7 @@ for (const path of prerenderPaths) {
     .replace(/\s*<meta\s+name="googlebot"[\s\S]*?\/>/, '')
     .replace(/\s*<meta\s+name="bingbot"[\s\S]*?\/>/, '')
     .replace('<!--head-->', headFor(path))
-    .replace('</head>', `${schemaTagFor(path)}\n  </head>`)
+    .replace('</head>', `${preloadTagsFor(path)}${schemaTagFor(path)}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${render(path)}</div>`)
     .replace(/href="tel:([^"]+)"/g, 'href="tel:$1" onclick="return gtag_report_conversion(\'tel:$1\');"')
 
@@ -132,6 +170,7 @@ for (const path of prerenderPaths) {
     .replace(/\s*<meta\s+name="robots"[\s\S]*?\/>/, '')
     .replace(/\s*<meta\s+property="og:[\s\S]*?\/>/g, '')
     .replace('<!--head-->', `<title>Page not found | GetMyDegree</title>\n    <meta name="robots" content="noindex, follow" />`)
+    .replace('</head>', `${preloadTagsFor('/404')}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${render('/404')}</div>`)
     .replace(/href="tel:([^"]+)"/g, 'href="tel:$1" onclick="return gtag_report_conversion(\'tel:$1\');"')
   writeFileSync(resolve(root, 'dist/404.html'), html)
@@ -252,3 +291,6 @@ ${imageEntries.join('\n')}
 }
 
 rmSync(resolve(root, 'dist-ssr'), { recursive: true, force: true })
+
+// The manifest was only for the prerender; it should not be published.
+rmSync(resolve(root, 'dist/.vite'), { recursive: true, force: true })

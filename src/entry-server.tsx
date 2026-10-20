@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import App from './App'
+import { pages } from './routes'
 import './data/postBodies.ssr'
 import {
   homeSchema,
@@ -14,6 +15,9 @@ import {
   universitiesSchema,
   universitySchema,
 } from './data/schema'
+
+// renderToString cannot wait on lazy chunks, so every page is loaded up front.
+await Promise.all(pages.map((page) => page.preload()))
 
 /** Renders one route to HTML for the prerender step. */
 export function render(url: string) {
