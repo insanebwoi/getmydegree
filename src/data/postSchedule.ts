@@ -47,32 +47,13 @@ export const COVER_WIDTH = 1600
 export const COVER_HEIGHT = 900
 
 /**
- * Our own covers, served from the `gmd-images` repository over jsDelivr.
- *
- * They live outside this repository so the site stays small and the files
- * cost the site no bandwidth. The `w` and `h` are not instructions to the
- * CDN, which ignores them   they are how `ogImage` learns the size of a
- * remote file it cannot measure, so a social card renders before the image
- * has been fetched.
+ * Our own covers, served from this site under /images/covers. Each has a
+ * .jpg twin beside the .webp: the page shows the WebP, while link previews
+ * (WhatsApp, Facebook, LinkedIn) get the JPEG, which they render reliably.
+ * They used to come from a jsDelivr mirror of a separate repository, which
+ * went down and took every cover and blog link preview with it.
  */
-/*
-  Pinned to a commit rather than to `main`.
-
-  jsDelivr caches a branch reference for up to a week, so a replaced image
-  goes on being served from the old one   a purge is asked for politely and
-  does not reach every edge. A commit is immutable: the CDN can cache it
-  forever, and a changed image means a changed URL, which is what we want
-  anyway. Bump this after pushing to the images repository.
-*/
-const CDN =
-  'https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog'
-
-/** Every cover in that repository is this size, so the suffix below is one
- *  true number rather than a per-file lookup. */
-const COVER_FILE_WIDTH = 1400
-const COVER_FILE_HEIGHT = 787
-
-const cover = (name: string) => `${CDN}/${name}.webp?w=${COVER_FILE_WIDTH}&h=${COVER_FILE_HEIGHT}`
+const cover = (name: string) => `/images/covers/${name}.webp`
 
 export const schedule: ScheduledPost[] = [
   {

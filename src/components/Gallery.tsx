@@ -268,7 +268,7 @@ function AnimatedGallery() {
           <div className="gallery-embla-container">
             {source.map((image, i) => (
               <div className="gallery-embla-slide" key={i}>
-                <Tile image={image} priority={i < 3} onOpen={() => setPreview(image.src)} />
+                <Tile image={image} index={i} priority={i < 3} onOpen={() => setPreview(image.src)} />
               </div>
             ))}
           </div>
@@ -319,7 +319,7 @@ function StillGallery() {
         <ul className="gallery-set">
           {source.map((image, i) => (
             <li key={i} className="shrink-0">
-              <Tile image={image} priority={i < 3} onOpen={() => setPreview(image.src)} />
+              <Tile image={image} index={i} priority={i < 3} onOpen={() => setPreview(image.src)} />
             </li>
           ))}
         </ul>
@@ -383,10 +383,12 @@ function Preview({ src, onClose }: { src: string; onClose: () => void }) {
 
 function Tile({
   image,
+  index,
   priority = false,
   onOpen,
 }: {
   image: GalleryImage
+  index: number
   priority?: boolean
   onOpen: () => void
 }) {
@@ -401,11 +403,14 @@ function Tile({
       >
         <img
           src={image.src}
-          alt=""
+          // Described for image search; the tile's button already names its action.
+          alt={`Get My Degree students and graduates in Kerala, photo ${index + 1}`}
           width={image.width}
           height={image.height}
+          // The gallery sits far below the fold, so it never competes with the
+          // hero image for bandwidth.
           loading={priority ? 'eager' : 'lazy'}
-          fetchPriority={priority ? 'high' : 'auto'}
+          fetchPriority="low"
           decoding="async"
           draggable={false}
           onLoad={() => setLoaded(true)}

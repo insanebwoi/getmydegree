@@ -30,9 +30,9 @@ export type PageMeta = {
  */
 export const pageMeta: Record<string, PageMeta> = {
   '/': {
-    title: 'Get My Degree — UGC Recognized Online Degrees & Fast-Track Degree Completion',
+    title: 'Get My Degree — UGC Approved Distance Degrees in Kerala',
     description:
-      'Get My Degree: Complete your UGC recognized UG & PG degree with credit transfer for working professionals and dropouts across India.',
+      'Complete your UGC recognized UG & PG degree with credit transfer. Counselling centres in Thrissur and Malappuram, Kerala, for working professionals and dropouts.',
     path: '/',
     image: '/images/home/banner.webp',
     keywords:

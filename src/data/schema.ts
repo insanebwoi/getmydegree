@@ -47,10 +47,7 @@ const organization = {
     'Online and Distance Education in Kerala',
     'B.Com, BBA, BCA, MBA, MCA Degree Programs',
   ],
-  sameAs: [
-    ...Object.values(site.social),
-    'https://getmydegreeedu.com',
-  ],
+  sameAs: Object.values(site.social),
   address: centers.map((c) => ({
     '@type': 'PostalAddress',
     streetAddress: c.address,

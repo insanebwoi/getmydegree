@@ -4,7 +4,7 @@ excerpt: "The short answer is yes \u2014 provided the university is UGC recogniz
 category: Recognition
 date: 2026-08-18
 author: "Get My Degree Academic Team"
-cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog/is-a-distance-degree-valid-for-government-jobs.webp?w=1400&h=787
+cover: /images/covers/is-a-distance-degree-valid-for-government-jobs.webp
 keywords: "is a distance degree valid for government jobs, get my degree, get my degree blog, getmydegree validity, ugc distance degree government jobs"
 ---
 

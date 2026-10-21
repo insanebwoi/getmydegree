@@ -17,13 +17,22 @@
       name="keywords"
       content="get my degree, getmydegree, get my degree edu, getmydegreeedu, get my degree blog, degree completion, ugc approved online degree, distance degree kerala, credit transfer degree"
     />
-    <link rel="canonical" href="https://new.getmydegreeedu.com/" />
+    <link rel="canonical" href="https://getmydegreeedu.com/" />
     <meta property="og:site_name" content="Get My Degree" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_IN" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <script>
+      // The same build is also reachable on the host's preview domain
+      // (*.technotalim.in). Only getmydegreeedu.com may be indexed.
+      if (/(^|\.)technotalim\.in$/.test(location.hostname)) {
+        document.querySelectorAll('meta[name="robots"],meta[name="googlebot"],meta[name="bingbot"]').forEach(function (m) {
+          m.setAttribute('content', 'noindex, nofollow')
+        })
+      }
+    </script>
     <link rel="preload" href="/fonts/outfit-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/work-sans-variable.woff2" as="font" type="font/woff2" crossorigin />
 

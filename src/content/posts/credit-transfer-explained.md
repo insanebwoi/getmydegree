@@ -5,7 +5,7 @@ excerpt: "Credit transfer means you resume rather than restart. What carries acr
 category: Admissions
 date: 2026-08-04
 author: "Get My Degree Academic Team"
-cover: https://cdn.jsdelivr.net/gh/insanebwoi/gmd-images@8e3b5b2bce89e44e77a6e31690eb4b068e3c430f/blog/credit-transfer-explained.webp?w=1400&h=787
+cover: /images/covers/credit-transfer-explained.webp
 keywords: "credit transfer explained, get my degree, get my degree blog, online degree credit transfer, getmydegree credit transfer"
 ---
 

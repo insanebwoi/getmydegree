@@ -9,5 +9,5 @@ Disallow: /*?category=
 User-agent: Googlebot-Image
 Allow: /
 
-Sitemap: https://new.getmydegreeedu.com/sitemap.xml
-Sitemap: https://new.getmydegreeedu.com/image-sitemap.xml
+Sitemap: https://getmydegreeedu.com/sitemap.xml
+Sitemap: https://getmydegreeedu.com/image-sitemap.xml
