@@ -155,7 +155,7 @@ export function HeroVisual({ onChange }: Props) {
             <div key={slide.image} className={`hero-frame ${i === active ? 'is-active' : ''}`}>
               <img
                 src={images[slide.image].src}
-                alt=""
+                alt={i === 0 ? images[slide.image].alt : ''}
                 width={images[slide.image].width}
                 height={images[slide.image].height}
                 loading="eager"
