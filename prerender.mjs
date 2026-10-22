@@ -134,6 +134,7 @@ for (const path of prerenderPaths) {
     // Replace the template's build-time title/description/canonical with this route's.
     .replace(/<title>[\s\S]*?<\/title>/, '<!--head-->')
     .replace(/\s*<meta\s+name="description"[\s\S]*?\/>/, '')
+    .replace(/\s*<meta\s+name="keywords"[\s\S]*?\/>/, '')
     .replace(/\s*<link rel="canonical"[\s\S]*?\/>/, '')
     .replace(/\s*<link\s+rel="image_src"[\s\S]*?\/>/, '')
     .replace(/\s*<meta\s+property="og:[\s\S]*?\/>/g, '')
