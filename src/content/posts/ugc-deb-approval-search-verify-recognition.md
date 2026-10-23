@@ -48,3 +48,5 @@ A legitimate admission produces an enrolment number issued by the university, in
 ## If you would rather not do this alone
 
 We run these checks before we place anyone, and we will run them on a programme you found yourself, whether or not we have anything to do with it. Send us the university and programme name and we will tell you what the records say.
+
+**Official sources:** [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

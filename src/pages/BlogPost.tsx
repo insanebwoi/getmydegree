@@ -198,12 +198,10 @@ export default function BlogPost() {
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-gold-200/50 pt-3 text-xs text-muted">
                     <span>
-                      Verified by <strong>GetMyDegree Academic Team</strong>
+                      By <strong>{post.author}</strong>
                     </span>
                     <span>•</span>
                     <span>Updated: {formatDate(post.updated ?? post.date)}</span>
-                    <span>•</span>
-                    <span>UGC &amp; DEB Compliant</span>
                   </div>
                 </div>
 

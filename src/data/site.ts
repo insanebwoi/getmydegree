@@ -14,9 +14,9 @@ export const site = {
   officeHours: 'Mon–Sat · 9am to 7pm',
   established: 2021,
   social: {
-    facebook: 'https://www.facebook.com/share/1DPK5ojbSY/?mibextid=wwXIfr',
-    instagram: 'https://www.instagram.com/get_my_degree?stkn=aWZpZmVvdGdvcG5v&utm_source=qr',
-    threads: 'https://www.threads.com/@get_my_degree?igshid=NTc4MTIwNjQ2YQ==',
+    facebook: 'https://www.facebook.com/share/1DPK5ojbSY/',
+    instagram: 'https://www.instagram.com/get_my_degree/',
+    threads: 'https://www.threads.com/@get_my_degree',
   },
 } as const
 
@@ -24,6 +24,7 @@ export const nav = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Courses', to: '/courses' },
+  { label: 'Credit transfer', to: '/credit-transfer' },
   { label: 'Blog', to: '/blog' },
   { label: 'Contact', to: '/contact' },
 ]
@@ -72,7 +73,7 @@ export const universities: {
       location: 'Madhya Pradesh, Bhopal',
       body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
       badge: 'UGC Approved',
-      validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+      validity: 'UGC Recognized · Govt Jobs · UPSC · PSC',
       type: 'State private university',
       offers: ['Undergraduate degrees', 'Postgraduate degrees', 'Doctoral programmes'],
       highlights: [
@@ -87,7 +88,7 @@ export const universities: {
       location: 'Tamil Nadu, India',
       body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
       badge: 'UGC Approved',
-      validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+      validity: 'UGC Recognized · Govt Jobs · UPSC · PSC',
       type: 'Deemed-to-be university',
       offers: ['Undergraduate degrees', 'Postgraduate degrees'],
       highlights: [
@@ -102,7 +103,7 @@ export const universities: {
       location: 'Tamil Nadu, Tiruchirappalli',
       body: 'State university established in 1982, NAAC A+ accredited, offering UG, PG and doctoral programs through its Centre for Distance and Online Education.',
       badge: 'UGC Approved',
-      validity: 'Valid for Govt Jobs · UPSC · PSC · Overseas',
+      validity: 'UGC Recognized · Govt Jobs · UPSC · PSC',
       type: 'State university',
       offers: ['Undergraduate degrees', 'Postgraduate degrees', 'Doctoral programmes'],
       highlights: [
@@ -116,9 +117,9 @@ export const universities: {
       name: 'Marjon University',
       slug: 'marjon-university',
       location: 'Cornwall, United Kingdom',
-      body: 'UK government recognized university offering globally valid degrees.',
+      body: 'UK university awarding UK degrees. For Indian government posts, a UK degree usually needs AIU equivalence.',
       badge: 'UK Recognized',
-      validity: 'Globally Valid · UK Accredited · Career Ready',
+      validity: 'UK Degree · AIU Equivalence for India',
       type: 'UK university',
       offers: ['Undergraduate degrees', 'Postgraduate degrees'],
       highlights: [
@@ -172,7 +173,7 @@ export const stats = [
   { value: '10,000+', label: 'Graduates' },
   { value: '2021', label: 'Established' },
   { value: '9+', label: 'UG & PG Programs' },
-  { value: '100%', label: 'UGC Recognized' },
+  { value: '4', label: 'Partner Universities' },
 ]
 
 export const trustPoints = [
@@ -364,7 +365,7 @@ export const admissionSteps = [
   {
     step: '04',
     title: 'Study and graduate',
-    body: 'Learn at your own pace around work. Assessment is continuous   no sit-down examination hall.',
+    body: 'Learn at your own pace around work, with assessment set by the university that awards your degree.',
     when: '2–3 years',
   },
 ]
@@ -374,14 +375,14 @@ export const paths = [
   {
     situation: 'You dropped out',
     answer: 'Credit transfer',
-    to: '/blog/credit-transfer-explained',
+    to: '/credit-transfer',
     body: 'Completed semesters are carried across, so you resume rather than restart.',
   },
   {
     situation: 'You are working full time',
     answer: 'Study around the job',
     to: '/blog/studying-while-working-full-time',
-    body: 'No attendance requirement and no fixed class hours. Your employer never has to know.',
+    body: 'No attendance requirement and no fixed class hours, so study fits around your shifts.',
   },
   {
     situation: 'You have hit a ceiling',
@@ -416,19 +417,19 @@ export const heroSlides: HeroSlide[] = [
   {
     image: 'hero-portrait',
     headline: ['Finish Your Degree,', 'Restart Your Career'],
-    body: 'Complete an unfinished degree after discontinuing studies, or study for a new UGC, AICTE & NAAC approved degree around your job   no entrance exam, no attendance, admission confirmed within 48 hours.',
+    body: 'Complete an unfinished degree after discontinuing studies, or study for a new UGC recognized degree around your job   no entrance exam, no attendance, admission confirmed within 48 hours.',
     shortBody: 'Complete an unfinished degree, or study for a new one, around your job.',
   },
   {
     image: 'hero-portrait-2',
     headline: ['Study Around Your Job,', 'Not Instead Of It'],
-    body: 'No attendance and no fixed class hours. Assessment is continuous, so the work fits into evenings and weekends at whatever pace your week allows.',
+    body: 'No attendance and no fixed class hours. The work fits into evenings and weekends at whatever pace your week allows.',
     shortBody: 'No attendance, no fixed hours. The work fits your evenings and weekends.',
   },
   {
     image: 'hero-portrait-3',
     headline: ['A Degree That Counts', 'Where It Matters'],
-    body: 'Awarded by Central & State Government, UGC, AICTE and NAAC approved universities in India and the UK   valid for government roles, promotions and further study.',
+    body: 'Awarded by UGC recognized universities in India and by Marjon University in the UK   for government roles, promotions and further study.',
     shortBody:
       'From approved universities in India and the UK. Valid for government roles and promotions.',
   },

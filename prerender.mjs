@@ -75,6 +75,11 @@ function headFor(path) {
       }
     }
   }
+  // The hero photograph is the homepage's largest paint. React also emits a
+  // preload for it, but inside <body>, after every script and stylesheet;
+  // announcing it here lets the browser start on it first.
+  if (path === '/')
+    tags.unshift('<link rel="preload" as="image" href="/images/home/hero-portrait.webp" fetchpriority="high" />')
   return tags.join('\n    ')
 }
 
@@ -116,6 +121,8 @@ function pageSource(path) {
   if (path.startsWith('/courses/')) return 'src/pages/Course.tsx'
   if (path.startsWith('/universities/')) return 'src/pages/UniversityPage.tsx'
   if (path.startsWith('/blog/')) return 'src/pages/BlogPost.tsx'
+  if (path === '/privacy-policy') return 'src/pages/PrivacyPolicy.tsx'
+  if (path === '/credit-transfer') return 'src/pages/CreditTransfer.tsx'
   const page = { '/about': 'About', '/courses': 'Courses', '/universities': 'Universities', '/contact': 'Contact', '/blog': 'Blog' }[path]
   return page && `src/pages/${page}.tsx`
 }
@@ -178,91 +185,86 @@ for (const path of prerenderPaths) {
   console.log('prerendered 404       → dist/404.html')
 }
 
-// Sitemap is generated from the same list, so pages can never drift out of it.
-const priority = (path) =>
-  path === '/' ? '1.0' : path.startsWith('/blog/') ? '0.9' : path.startsWith('/courses/') ? '0.9' : '0.8'
-const changefreq = (path) => (path === '/' || path === '/blog' || path.startsWith('/blog/') ? 'weekly' : 'monthly')
-// Articles carry a real lastmod; everything else uses the build date.
-const buildDate = new Date().toISOString().slice(0, 10)
-const lastmod = (path) => {
-  const meta = metaFor(path)
-  return (meta.modifiedTime ?? meta.publishedTime ?? buildDate).slice(0, 10)
+// Retired URLs. A static host cannot send a 301, so each old address gets a
+// page that redirects at once; Google treats an instant meta refresh as a
+// permanent redirect, and the canonical names the destination either way.
+const retired = {
+  '/blog/balancing-full-time-work-with-an-online-degree': '/blog/studying-while-working-full-time',
+  '/blog/degree-fees-instalments-and-emi-options': '/blog/what-a-degree-costs-and-how-emi-works',
 }
-function imageTagFor(path) {
-  if (path.startsWith('/blog/')) {
-    const slug = path.replace('/blog/', '')
-    const post = posts.find((p) => p.slug === slug)
-    if (post && post.cover) {
-      const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
-      const imgUrl = rawCover.split('?')[0]
-      const imgTitle = escape(post.title)
-      const imgCaption = escape(post.coverAlt || post.excerpt)
-      return `\n    <image:image>\n      <image:loc>${escape(imgUrl)}</image:loc>\n      <image:title>${imgTitle}</image:title>\n      <image:caption>${imgCaption}</image:caption>\n      <image:geo_location>Kerala, India</image:geo_location>\n      <image:license>${site.url}/about</image:license>\n    </image:image>`
-    }
+for (const [from, to] of Object.entries(retired)) {
+  const url = `${site.url}${to}`
+  const html = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Moved | Get My Degree</title>
+    <link rel="canonical" href="${url}" />
+    <meta http-equiv="refresh" content="0; url=${to}" />
+    <script>location.replace(${JSON.stringify(to)})</script>
+  </head>
+  <body><p>This guide has moved to <a href="${to}">${url}</a>.</p></body>
+</html>
+`
+  for (const target of [`dist${from}.html`, `dist${from}/index.html`]) {
+    const file = resolve(root, target)
+    mkdirSync(dirname(file), { recursive: true })
+    writeFileSync(file, html)
   }
-  if (path === '/blog') {
-    return `\n    <image:image>\n      <image:loc>${site.url}/images/blog/blog-banner.webp</image:loc>\n      <image:title>GetMyDegree Degree Guides &amp; Articles</image:title>\n      <image:caption>Articles, degree advice, and admission guides for working professionals</image:caption>\n      <image:geo_location>Kerala, India</image:geo_location>\n      <image:license>${site.url}/about</image:license>\n    </image:image>`
-  }
-  if (path === '/') {
-    return `\n    <image:image>\n      <image:loc>${site.url}/images/home/hero-portrait.webp</image:loc>\n      <image:title>GetMyDegree Institutions</image:title>\n      <image:caption>Degree completion for working professionals with credit transfer</image:caption>\n      <image:geo_location>Kerala, India</image:geo_location>\n      <image:license>${site.url}/about</image:license>\n    </image:image>`
-  }
-  return ''
+  console.log(`redirect   ${from} → ${to}`)
+}
+
+// Sitemap is generated from the same list, so pages can never drift out of it.
+// Only a date we actually know goes in <lastmod>: an article's own publish or
+// update date, and for /blog the newest of those. Stamping every other page
+// with the build date taught crawlers to ignore the field. Google reads
+// neither <changefreq> nor <priority>, so they are left out, and images live
+// only in the image sitemap below.
+const newestPost = posts
+  .map((post) => metaFor(`/blog/${post.slug}`))
+  .map((meta) => meta.modifiedTime ?? meta.publishedTime)
+  .filter(Boolean)
+  .sort()
+  .at(-1)
+const lastmod = (path) => {
+  if (path === '/blog') return newestPost?.slice(0, 10)
+  if (!path.startsWith('/blog/')) return undefined
+  const meta = metaFor(path)
+  return (meta.modifiedTime ?? meta.publishedTime)?.slice(0, 10)
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${prerenderPaths
-  .map(
-    (path) =>
-      `  <url>\n    <loc>${canonical(metaFor(path))}</loc>\n    <lastmod>${lastmod(path)}</lastmod>\n    <changefreq>${changefreq(path)}</changefreq>\n    <priority>${priority(path)}</priority>${imageTagFor(path)}\n  </url>`,
-  )
+  .map((path) => {
+    const date = lastmod(path)
+    return `  <url>\n    <loc>${canonical(metaFor(path))}</loc>${date ? `\n    <lastmod>${date}</lastmod>` : ''}\n  </url>`
+  })
   .join('\n')}
 </urlset>
 `
 writeFileSync(resolve(root, 'dist/sitemap.xml'), sitemap)
-console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls with Google Image Sitemap tags)`)
+console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls)`)
 
-// Dedicated Google Image Sitemap for Googlebot-Image crawler
+// Image sitemap. Google reads only <image:loc>; title, caption, geo_location
+// and license were retired in 2022.
 {
   const imageEntries = []
+  const entry = (loc, img) =>
+    `  <url>\n    <loc>${loc}</loc>\n    <image:image>\n      <image:loc>${escape(img)}</image:loc>\n    </image:image>\n  </url>`
   for (const post of posts) {
-    if (post.cover) {
-      const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
-      const cleanImg = rawCover.split('?')[0]
-      const postUrl = canonical(metaFor(`/blog/${post.slug}`))
-      imageEntries.push(`  <url>
-    <loc>${postUrl}</loc>
-    <image:image>
-      <image:loc>${escape(cleanImg)}</image:loc>
-      <image:title>${escape(post.title)}</image:title>
-      <image:caption>${escape(post.coverAlt || post.excerpt)}</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>${site.url}/about</image:license>
-    </image:image>
-  </url>`)
-    }
+    if (!post.cover) continue
+    const rawCover = post.cover.startsWith('http') ? post.cover : `${site.url}${post.cover}`
+    imageEntries.push(entry(canonical(metaFor(`/blog/${post.slug}`)), rawCover.split('?')[0]))
   }
-
-  // Add primary site sections to image sitemap
   const siteImages = [
-    { loc: `${site.url}/blog`, img: `${site.url}/images/blog/blog-banner.webp`, title: 'GetMyDegree Blog & Guides Banner', caption: 'Articles and degree admission guides for working professionals' },
-    { loc: `${site.url}/`, img: `${site.url}/images/home/hero-portrait.webp`, title: 'GetMyDegree Professional Degree Completion', caption: 'Editorial portrait of working professional completing UGC recognized degree' },
-    { loc: `${site.url}/about`, img: `${site.url}/images/about/about-banner.webp`, title: 'GetMyDegree Thrissur & Malappuram Academic Counselling', caption: 'Academic counselor helping student with credit transfer in Kerala' },
-    { loc: `${site.url}/courses`, img: `${site.url}/images/courses/courses-banner.webp`, title: 'GetMyDegree UG & PG Degree Programmes', caption: 'UGC recognized university degree courses in India' },
-    { loc: `${site.url}/universities`, img: `${site.url}/images/universities/universities-banner.webp`, title: 'Partner Universities Colonnade', caption: 'Partner universities awarding UGC recognized and accredited degrees' },
+    [`${site.url}/`, `${site.url}/images/home/hero-portrait.webp`],
+    [`${site.url}/blog`, `${site.url}/images/blog/blog-banner.webp`],
+    [`${site.url}/about`, `${site.url}/images/about/about-banner.webp`],
+    [`${site.url}/courses`, `${site.url}/images/courses/courses-banner.webp`],
+    [`${site.url}/universities`, `${site.url}/images/universities/universities-banner.webp`],
   ]
-  for (const s of siteImages) {
-    imageEntries.push(`  <url>
-    <loc>${s.loc}</loc>
-    <image:image>
-      <image:loc>${escape(s.img)}</image:loc>
-      <image:title>${escape(s.title)}</image:title>
-      <image:caption>${escape(s.caption)}</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>${site.url}/about</image:license>
-    </image:image>
-  </url>`)
-  }
+  for (const [loc, img] of siteImages) imageEntries.push(entry(loc, img))
 
   const imageSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">

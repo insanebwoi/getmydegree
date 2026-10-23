@@ -1,599 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://getmydegreeedu.com/</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/home/hero-portrait.webp</image:loc>
-      <image:title>GetMyDegree Institutions</image:title>
-      <image:caption>Degree completion for working professionals with credit transfer</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/about</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog</loc>
     <lastmod>2026-10-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/blog/blog-banner.webp</image:loc>
-      <image:title>GetMyDegree Degree Guides &amp; Articles</image:title>
-      <image:caption>Articles, degree advice, and admission guides for working professionals</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/contact</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getmydegreeedu.com/credit-transfer</loc>
+  </url>
+  <url>
+    <loc>https://getmydegreeedu.com/privacy-policy</loc>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/bcom</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/bba</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/bca</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/ba</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/bsc</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/mba</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/mca</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/mcom</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/courses/msw</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/universities</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/universities/rabindranath-tagore-university</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/universities/prist-deemed-university</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/universities/bharathidasan-university</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/universities/marjon-university</loc>
-    <lastmod>2026-10-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/get-my-degree-official-guide</loc>
     <lastmod>2026-10-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/blog/get-my-degree-official-guide.jpg</image:loc>
-      <image:title>Get My Degree: Official Guide to UGC-Approved Degree Completion, Credit Transfer &amp; Admissions</image:title>
-      <image:caption>Academic counsellor in Kerala assisting student with UGC approved degree completion and credit transfer at Get My Degree office</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/get-my-degree-reviews-validity-guide</loc>
     <lastmod>2026-10-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/blog/get-my-degree-reviews-validity-guide.jpg</image:loc>
-      <image:title>Get My Degree Reviews &amp; Legitimacy: Is a Degree from GetMyDegree UGC Valid?</image:title>
-      <image:caption>Graduate holding UGC accredited degree certificate and marksheet verifying Get My Degree validity for government jobs</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/step-by-step-degree-application-guide</loc>
     <lastmod>2026-10-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/step-by-step-degree-application-guide.webp</image:loc>
-      <image:title>The whole admission process, step by step</image:title>
-      <image:caption>Step-by-step university online degree application form submission, document upload, and admission confirmation</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/micro-credentials-and-specializations</loc>
     <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/micro-credentials-and-specializations.webp</image:loc>
-      <image:title>Specialisations and micro-credentials inside a degree</image:title>
-      <image:caption>Selecting specialized industry micro-credentials and elective certifications alongside university degree</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/pg-diploma-vs-masters-degree</loc>
     <lastmod>2026-10-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/pg-diploma-vs-masters-degree.webp</image:loc>
-      <image:title>PG diploma or master&#39;s degree: which one do you need</image:title>
-      <image:caption>Evaluating differences between postgraduate PG diploma and full university master degree for jobs and higher study</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/flexible-degree-options-in-kerala</loc>
     <lastmod>2026-10-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/flexible-degree-options-in-kerala.webp</image:loc>
-      <image:title>Flexible degree options for working people in Kerala</image:title>
-      <image:caption>Student in Kerala completing flexible university degree with local academic counselling in Thrissur and Malappuram</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/proctored-exams-and-assessment-models</loc>
     <lastmod>2026-10-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/proctored-exams-and-assessment-models.webp</image:loc>
-      <image:title>How online degree examinations actually work</image:title>
-      <image:caption>Online degree student taking remotely proctored semester examination with webcam AI monitoring</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://getmydegreeedu.com/blog/degree-fees-instalments-and-emi-options</loc>
-    <lastmod>2026-10-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/degree-fees-instalments-and-emi-options.webp</image:loc>
-      <image:title>What a degree costs, and how instalments work</image:title>
-      <image:caption>Budgeting online degree tuition fees with flexible semester instalments and zero-cost EMI plans</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/nri-and-international-students-indian-degrees</loc>
     <lastmod>2026-10-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/nri-and-international-students-indian-degrees.webp</image:loc>
-      <image:title>NRI and international applicants: studying for an Indian degree from abroad</image:title>
-      <image:caption>NRI international student preparing verification documents for Indian university online degree admission</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/degrees-for-healthcare-and-shift-workers</loc>
     <lastmod>2026-10-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/degrees-for-healthcare-and-shift-workers.webp</image:loc>
-      <image:title>Degrees that work around shift patterns</image:title>
-      <image:caption>Healthcare shift worker studying flexible online degree modules between hospital shifts</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/equivalence-of-online-and-campus-degrees</loc>
     <lastmod>2026-10-06</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/equivalence-of-online-and-campus-degrees.webp</image:loc>
-      <image:title>Are online and campus degrees treated equally?</image:title>
-      <image:caption>UGC official equivalence gazette notification establishing online degrees equal to regular campus degrees</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/bsc-vs-bca-for-tech-jobs</loc>
     <lastmod>2026-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/bsc-vs-bca-for-tech-jobs.webp</image:loc>
-      <image:title>BCA or B.Sc: which undergraduate degree for a technology job</image:title>
-      <image:caption>Software developer analyzing B.Sc Computer Science vs BCA degree curriculums for software engineering careers</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://getmydegreeedu.com/blog/balancing-full-time-work-with-an-online-degree</loc>
-    <lastmod>2026-10-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/balancing-full-time-work-with-an-online-degree.webp</image:loc>
-      <image:title>How to actually finish a degree while working full-time</image:title>
-      <image:caption>Weekly time management study schedule and work planner for balancing job with an online degree</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/red-flags-before-enrolling-in-an-online-degree</loc>
     <lastmod>2026-10-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/red-flags-before-enrolling-in-an-online-degree.webp</image:loc>
-      <image:title>Red flags to check before you pay for an online degree</image:title>
-      <image:caption>Reviewing university admission fine print and avoiding unaccredited fake degree fraud red flags</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/degree-requirements-for-executive-promotions</loc>
     <lastmod>2026-10-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/degree-requirements-for-executive-promotions.webp</image:loc>
-      <image:title>When a missing degree is what is blocking the promotion</image:title>
-      <image:caption>Corporate management team meeting highlighting executive degree qualification requirements for promotion</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/online-vs-distance-degree-modes</loc>
     <lastmod>2026-10-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/online-vs-distance-degree-modes.webp</image:loc>
-      <image:title>Online or distance: which study mode suits you</image:title>
-      <image:caption>Comparing online learning vs open distance education degree modes, LMS portals, and exam formats</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/degree-admission-cycles-july-and-january</loc>
     <lastmod>2026-09-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/degree-admission-cycles-july-and-january.webp</image:loc>
-      <image:title>July or January: choosing your admission cycle</image:title>
-      <image:caption>University campus session commencement for biannual July and January degree admission cycles in India</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/top-online-masters-for-corporate-careers</loc>
     <lastmod>2026-09-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/top-online-masters-for-corporate-careers.webp</image:loc>
-      <image:title>Which postgraduate degree fits a corporate career</image:title>
-      <image:caption>Corporate professional reviewing postgraduate master degree options including MBA, M.Com, and MCA</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/academic-bank-of-credits-abc-id-explained</loc>
     <lastmod>2026-09-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/academic-bank-of-credits-abc-id-explained.webp</image:loc>
-      <image:title>The Academic Bank of Credits ID, and why your university asks for it</image:title>
-      <image:caption>Registering for Academic Bank of Credits ABC ID online account on DigiLocker for university credit transfer</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/degrees-for-defence-and-public-sector-employees</loc>
     <lastmod>2026-09-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/degrees-for-defence-and-public-sector-employees.webp</image:loc>
-      <image:title>Degree options for defence and public sector employees</image:title>
-      <image:caption>Defence personnel and PSU employee studying for government recognized degree for departmental promotions</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/dual-degree-pathways-under-ugc-guidelines</loc>
     <lastmod>2026-09-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/dual-degree-pathways-under-ugc-guidelines.webp</image:loc>
-      <image:title>Two degrees at once: how dual-degree pathways work</image:title>
-      <image:caption>Pursuing two degrees simultaneously under official UGC dual degree guidelines and regulatory norms</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/distance-mba-admission-process</loc>
     <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/distance-mba-admission-process.webp</image:loc>
-      <image:title>How distance MBA admission works: eligibility, fees and process</image:title>
-      <image:caption>MBA applicant organizing application documents, marksheets, and eligibility proofs for distance admission</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/ai-and-digital-skills-in-degree-curriculums</loc>
     <lastmod>2026-09-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/ai-and-digital-skills-in-degree-curriculums.webp</image:loc>
-      <image:title>AI and digital skills inside ordinary degree programmes</image:title>
-      <image:caption>Online university degree curriculum featuring AI, data science, and modern digital technology electives</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/naac-grades-and-nirf-rankings-explained</loc>
     <lastmod>2026-09-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/naac-grades-and-nirf-rankings-explained.webp</image:loc>
-      <image:title>What NAAC grades and NIRF rankings actually tell you</image:title>
-      <image:caption>Evaluating university NAAC A++ accreditation certificate and NIRF ranking metrics for degree credibility</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/kerala-online-mca-msc-it-programs</loc>
     <lastmod>2026-09-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/kerala-online-mca-msc-it-programs.webp</image:loc>
-      <image:title>Kerala IT professionals: choosing an approved online MCA or M.Sc IT</image:title>
-      <image:caption>Software engineer pursuing online MCA or MSc IT degree program in Kerala for IT job promotion</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/how-to-choose-the-right-online-university</loc>
     <lastmod>2026-09-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/how-to-choose-the-right-online-university.webp</image:loc>
-      <image:title>How to choose an online university: a checklist for applicants</image:title>
-      <image:caption>Comparing accredited online universities side by side for NAAC grade, UGC approval, and placement support</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/ugc-updates-for-online-degree-applicants</loc>
     <lastmod>2026-09-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/ugc-updates-for-online-degree-applicants.webp</image:loc>
-      <image:title>What applicants should know about UGC rules for online degrees</image:title>
-      <image:caption>Reviewing official UGC regulations and statutory notifications for online and distance degree applicants</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/masters-degree-while-working-full-time</loc>
     <lastmod>2026-09-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/masters-degree-while-working-full-time.webp</image:loc>
-      <image:title>How to complete a master&#39;s degree while working full-time</image:title>
-      <image:caption>Professional studying for online master degree on laptop after work hours without career interruption</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/bba-vs-bcom-for-career-growth</loc>
     <lastmod>2026-09-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/bba-vs-bcom-for-career-growth.webp</image:loc>
-      <image:title>BBA or B.Com: which undergraduate degree fits your career</image:title>
-      <image:caption>Comparing BBA vs B.Com degree career opportunities, salary scope, and corporate management pathways</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/online-degree-admission-deadlines</loc>
     <lastmod>2026-09-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/online-degree-admission-deadlines.webp</image:loc>
-      <image:title>Admission deadlines for online degrees: what to prepare before the window closes</image:title>
-      <image:caption>University academic calendar showing July and January online degree admission cycles and enrolment deadlines</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/ugc-deb-approval-search-verify-recognition</loc>
     <lastmod>2026-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/ugc-deb-approval-search-verify-recognition.webp</image:loc>
-      <image:title>How to verify that an online or distance degree is actually recognized</image:title>
-      <image:caption>Verifying university UGC DEB distance education bureau recognition status on official portal laptop screen — GetMyDegree guide</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/best-degree-options-for-working-professionals</loc>
     <lastmod>2026-09-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/best-degree-options-for-working-professionals.webp</image:loc>
-      <image:title>Best degree options for working professionals in 2026</image:title>
-      <image:caption>Working professional planning UGC approved online and distance degree qualification options at office desk — GetMyDegree career guide</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/is-a-distance-degree-valid-for-government-jobs</loc>
     <lastmod>2026-08-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/is-a-distance-degree-valid-for-government-jobs.webp</image:loc>
-      <image:title>Is a distance degree valid for government jobs in India?</image:title>
-      <image:caption>Checking the validity and recognition of UGC approved distance education degrees for government jobs, SSC and UPSC in India — GetMyDegree verification guide</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/credit-transfer-explained</loc>
     <lastmod>2026-08-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/credit-transfer-explained.webp</image:loc>
-      <image:title>You completed two years and stopped. What happens to those credits?</image:title>
-      <image:caption>Academic credit transfer and lateral entry for discontinued students completing their UGC recognized university degree</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/studying-while-working-full-time</loc>
-    <lastmod>2026-07-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/studying-while-working-full-time.webp</image:loc>
-      <image:title>How to actually finish a degree while working full time</image:title>
-      <image:caption>Working professional balancing flexible online study schedules, exams, and career commitments</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
+    <lastmod>2026-10-23</lastmod>
   </url>
   <url>
     <loc>https://getmydegreeedu.com/blog/what-a-degree-costs-and-how-emi-works</loc>
-    <lastmod>2026-07-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://getmydegreeedu.com/images/covers/what-a-degree-costs-and-how-emi-works.webp</image:loc>
-      <image:title>What a degree actually costs, and how the instalments work</image:title>
-      <image:caption>Breakdown of UGC approved online degree tuition fees, flexible semester payments, and zero-cost EMI financing options</image:caption>
-      <image:geo_location>Kerala, India</image:geo_location>
-      <image:license>https://getmydegreeedu.com/about</image:license>
-    </image:image>
+    <lastmod>2026-10-23</lastmod>
   </url>
 </urlset>

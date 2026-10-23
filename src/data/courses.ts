@@ -148,10 +148,6 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
     label: 'Programmes at universities we have verified',
   },
-  'balancing-full-time-work-with-an-online-degree': {
-    codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
-    label: 'Programmes with workloads that survive a full-time job',
-  },
   'bsc-vs-bca-for-tech-jobs': {
     codes: ['BCA', 'B.Sc', 'MCA', 'MBA'],
     label: 'The two pathways, and where each one continues',
@@ -167,10 +163,6 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
   'nri-and-international-students-indian-degrees': {
     codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
     label: 'Programmes most often taken from outside India',
-  },
-  'degree-fees-instalments-and-emi-options': {
-    codes: ['B.Com', 'BBA', 'MBA', 'MCA'],
-    label: 'Programmes to compare on duration and fee structure',
   },
   'proctored-exams-and-assessment-models': {
     codes: ['B.Com', 'BBA', 'BCA', 'MBA'],

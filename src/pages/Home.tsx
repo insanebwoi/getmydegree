@@ -43,7 +43,7 @@ const perks = [
   {
     Icon: BadgeCheck,
     title: 'No entrance exam',
-    body: 'Continuous assessment instead of an examination hall.',
+    body: 'Admission is decided on your eligibility, not an entrance test.',
   },
   {
     Icon: Clock,
@@ -255,14 +255,14 @@ export default function Home() {
       <section className="shell pb-10 sm:pb-14 lg:pb-16">
         <Reveal className="mx-auto max-w-3xl text-center">
           <span className="badge">Accredited degree programs</span>
-          <h2 className="t-h1 mt-3">State &amp; Central Government Universities</h2>
+          <h2 className="t-h1 mt-3">Recognized Universities in India and the UK</h2>
           <p className="t-body mt-2.5 text-navy font-medium sm:text-lg">
             3-Year Distance &amp; Regular Degree Programs
           </p>
           <p className="mt-2 text-sm text-muted">
-            Degrees awarded by UGC, AICTE &amp; NAAC recognized universities in India and accredited
-            institutions in the United Kingdom — 100% valid for government roles, promotions and
-            higher education.
+            Degrees awarded by UGC recognized universities in India, and by Marjon University in the
+            United Kingdom. Check how each one applies to your goal: Indian government posts follow
+            each exam's notification, and a UK degree may need AIU equivalence.
           </p>
         </Reveal>
 
@@ -318,11 +318,11 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5 rounded-2xl border border-line bg-navy-50/50 px-5 py-3.5 text-center text-xs font-medium text-navy sm:text-sm">
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-              100% UGC, AICTE &amp; NAAC Approved
+              UGC Recognized Indian Universities
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-              Continuous Assessment — No Exam Hall
+              No Attendance Requirement
             </span>
             <span className="inline-flex items-center gap-1.5">
               <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
@@ -417,8 +417,8 @@ export default function Home() {
                   Five undergraduate and four postgraduate degrees
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-white/65 md:text-sm">
-                  Every one is UGC recognized and assessed continuously there is no final
-                  examination hall to sit in.
+                  Each is awarded by a recognized university partner, studied around your job and
+                  assessed by the university that awards it.
                 </p>
                 {/*
                   A fixed height, not an aspect ratio: this card shares a grid

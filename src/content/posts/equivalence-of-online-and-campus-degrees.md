@@ -40,3 +40,5 @@ When you graduate, keep the degree certificate, the consolidated marksheet, and 
 Occasionally an employer or an institution asserts that a distance degree does not count. Ask for the requirement in writing. Frequently it turns out to be a specific criterion in a notification rather than a blanket position, and the specific criterion is something you can plan around.
 
 Send us the requirement and we will tell you what satisfies it.
+
+**Official sources:** [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

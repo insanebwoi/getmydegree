@@ -33,7 +33,7 @@ Every student enrolled through Get My Degree receives personalized end-to-end gu
 
 ## Why Get My Degree is India's trusted portal for degree completion
 
-With thousands of successful admissions across Kerala and India, Get My Degree provides a transparent, secure, and student-first platform.
+Get My Degree has guided students across Kerala and India since 2021, with counselling centres in Thrissur and Malappuram.
 
 Through our platform:
 - Students can browse verified [UG and PG course catalogues](/courses) including B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com, and MSW.
@@ -67,12 +67,11 @@ Through the **Academic Bank of Credits (ABC ID)** and university lateral entry p
 
 ## Are degrees obtained through Get My Degree valid for government jobs and PSC
 
-**Yes, absolutely.** All partner universities affiliated with Get My Degree are statutory universities recognized by the University Grants Commission (UGC) under Section 2(f) and Section 12(B) of the UGC Act, 1956.
+**For the Indian partner universities, yes — with the usual conditions.** Each is recognized by the University Grants Commission, but not all in the same way: Bharathidasan University is a state university recognized under Sections 2(f) and 12(B) of the UGC Act, PRIST is a deemed-to-be university, and Rabindranath Tagore University is a state private university. Marjon University is in the United Kingdom, so the UGC does not recognize it; a UK degree usually needs [AIU equivalence](https://aiu.ac.in/) before it counts for Indian government posts.
 
-Furthermore, under the landmark Gazette Notification issued by the UGC and Ministry of Education:
-> *"Degrees, Diplomas, and Certificates awarded through Open and Distance Learning mode or Online mode by Higher Educational Institutions recognized by the UGC shall be treated as equivalent to corresponding awards of the traditional universities for all purposes including employment in government posts and higher studies."*
+The [UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020](https://www.ugc.gov.in/) treat distance and online degrees from recognized institutions as equivalent to campus degrees, provided the university held a valid [DEB](https://deb.ugc.ac.in/) entitlement for that programme in your admission year. Always check that entitlement before you enrol.
 
-Degrees completed through Get My Degree programs are 100% eligible for:
+With those conditions met, a degree from an Indian partner university is accepted for:
 - **UPSC Civil Services** (IAS, IPS, IFS)
 - **State PSC Examinations** (including Kerala Public Service Commission)
 - **Staff Selection Commission (SSC)** and **Railway Recruitment Board (RRB)**
@@ -139,3 +138,5 @@ Taking the first step toward finishing your degree is simple:
 An unfinished degree does not define your future—completing it does. Through **Get My Degree**, thousands of working adults across Kerala and India have restarted their careers, secured government promotions, and fulfilled their educational aspirations.
 
 Contact the Get My Degree academic advisory team today to begin your credit evaluation and secure your UGC-approved degree.
+
+**Official sources:** [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

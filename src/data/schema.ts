@@ -17,14 +17,7 @@ const organization = {
   '@id': ORG,
   name: site.name,
   legalName: 'GetMyDegree Institutions',
-  alternateName: [
-    'GetMyDegree',
-    'Get My Degree Edu',
-    'GetMyDegreeEdu',
-    'getmydegreeedu.com',
-    'Get My Degree Official Website',
-    'Get My Degree Blog',
-  ],
+  alternateName: ['GetMyDegree', 'GetMyDegree Institutions'],
   url: site.url,
   logo: {
     '@type': 'ImageObject',
@@ -33,7 +26,13 @@ const organization = {
   },
   image: `${site.url}/logo.webp`,
   email: site.email,
-  telephone: site.phone,
+  telephone: `+${site.phoneHref.replace(/\D/g, '')}`,
+  contactPoint: centers.map((c) => ({
+    '@type': 'ContactPoint',
+    contactType: 'admissions',
+    telephone: `+${c.phoneHref.replace(/\D/g, '')}`,
+    areaServed: 'IN',
+  })),
   foundingDate: String(site.established),
   description:
     'Get My Degree is India\'s dedicated higher education counselling and degree completion institution providing UGC recognized UG and PG degrees, credit transfer, and flexible online education for working professionals.',
@@ -62,12 +61,7 @@ const website = {
   '@id': WEBSITE,
   url: site.url,
   name: site.name,
-  alternateName: [
-    'GetMyDegree',
-    'Get My Degree Edu',
-    'GetMyDegreeEdu',
-    'getmydegreeedu.com',
-  ],
+  alternateName: 'GetMyDegree',
   description: 'Official portal of Get My Degree — UGC approved degrees, credit transfer and admissions.',
   inLanguage: 'en-IN',
   publisher: { '@id': ORG },
@@ -225,6 +219,24 @@ export function universitySchema(slug: string): object | undefined {
   )
 }
 
+export const creditTransferSchema: object = graph(
+  {
+    '@type': 'Service',
+    '@id': `${site.url}/credit-transfer#service`,
+    name: 'Degree credit transfer counselling',
+    serviceType: 'Degree completion through credit transfer',
+    url: `${site.url}/credit-transfer`,
+    provider: { '@id': ORG },
+    areaServed: [
+      { '@type': 'State', name: 'Kerala' },
+      { '@type': 'Country', name: 'India' },
+    ],
+    description:
+      'Assessment of semesters already passed at a recognized university, and admission with advanced standing to a partner university so only the remaining papers are studied.',
+  },
+  breadcrumb([{ name: 'Credit transfer', path: '/credit-transfer' }]),
+)
+
 export const contactSchema: object = graph(
   {
     '@type': 'ContactPage',
@@ -296,7 +308,7 @@ export const blogSchema: object = graph(
         image: coverUrl,
         datePublished: post.publishedAt,
         dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
-        author: { '@type': 'EducationalOrganization', '@id': ORG, name: post.author },
+        author: { '@id': ORG },
         url: `${site.url}/blog/${post.slug}`,
       }
     }),
@@ -319,7 +331,7 @@ export const blogSchema: object = graph(
         name: 'Are degrees completed through Get My Degree UGC approved and valid for government jobs?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Yes. All partner universities associated with Get My Degree are recognized by the University Grants Commission (UGC) under Section 2(f)/12(B) and entitled by the Distance Education Bureau (DEB). Degrees are fully recognized for UPSC, Kerala PSC, SSC, Banking, and corporate promotions.',
+          text: 'For the Indian partner universities, yes, provided the university held a valid Distance Education Bureau (DEB) entitlement for the programme in your admission year; eligibility for a given post follows that exam\'s notification. Marjon University is a UK university, so its degrees usually need AIU equivalence for Indian government posts.',
         },
       },
       {
@@ -407,13 +419,9 @@ export function postSchema(slug: string): object | undefined {
     isAccessibleForFree: true,
     copyrightYear,
     copyrightHolder: { '@id': ORG },
-    author: {
-      '@type': 'EducationalOrganization',
-      '@id': ORG,
-      name: post.author,
-      url: `${site.url}/about`,
-      logo: `${site.url}/logo.webp`,
-    },
+    // The team writes as the organization, so the author is that node itself
+    // rather than a second record under a different name sharing its @id.
+    author: { '@id': ORG },
     publisher: {
       '@type': 'EducationalOrganization',
       '@id': ORG,
@@ -463,7 +471,6 @@ export function postSchema(slug: string): object | undefined {
     },
     breadcrumb([
       { name: 'Blog', path: '/blog' },
-      { name: post.category, path: `/blog?category=${encodeURIComponent(post.category)}` },
       { name: post.title, path: `/blog/${post.slug}` },
     ]),
   ]

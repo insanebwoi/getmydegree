@@ -9,6 +9,7 @@ import {
   aboutSchema,
   coursesSchema,
   contactSchema,
+  creditTransferSchema,
   blogSchema,
   postSchema,
   courseSchema,
@@ -36,6 +37,7 @@ const fixedSchemas: Record<string, object> = {
   '/courses': coursesSchema,
   '/blog': blogSchema,
   '/contact': contactSchema,
+  '/credit-transfer': creditTransferSchema,
   '/universities': universitiesSchema,
 }
 

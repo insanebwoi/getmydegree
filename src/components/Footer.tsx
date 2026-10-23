@@ -205,7 +205,10 @@ export function Footer() {
             <p>
               © {new Date().getFullYear()} {site.name}. All rights reserved.
             </p>
-            <p>UGC recognized · NAAC accredited · AICTE approved</p>
+            <p>UGC recognized university partners</p>
+            <Link to="/privacy-policy" className="transition-colors hover:text-gold">
+              Privacy policy
+            </Link>
             {/*
               The build credit, on the same rule as the copyright   a line the
               reader can skip, not a claim competing with the accreditations.

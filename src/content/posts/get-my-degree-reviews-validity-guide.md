@@ -13,7 +13,7 @@ When students and working professionals consider restarting an interrupted educa
 
 In an educational landscape cluttered with unregistered private diplomas and deceptive fast-track claims, prospective learners have every right to demand complete institutional transparency.
 
-This official guide addresses all **Get My Degree reviews, statutory UGC approvals, government job validity, and verification protocols** to give you 100% confidence before enrolling.
+This official guide addresses all **Get My Degree reviews, statutory UGC approvals, government job validity, and verification protocols** to give you confidence before enrolling.
 
 ---
 

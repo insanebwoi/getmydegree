@@ -40,3 +40,5 @@ Older credits, earned before the register existed, are not automatically in it. 
 Credits missing from your account are corrected by the institution that awarded them, not by the register. Approach the university, with your marksheets, and ask them to deposit the record.
 
 We help students create the ID and match it against their existing records as part of admission, and we will walk you through it whether or not we are handling your enrolment.
+
+**Official sources:** [Academic Bank of Credits portal](https://www.abc.gov.in/) · [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

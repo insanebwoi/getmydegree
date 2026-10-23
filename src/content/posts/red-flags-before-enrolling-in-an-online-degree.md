@@ -44,3 +44,5 @@ If all three hold, most of the risk is gone. If any one fails, nothing else comp
 Ask in writing for the enrolment number and the university receipt. Keep every message. If neither arrives, stop paying further instalments and raise it with the university directly, using the contact details from its official website rather than the ones you were given.
 
 We will check a programme you found yourself, whether or not we have any involvement in it. It costs you nothing and it takes us about a day, which is a good trade against a fee you cannot recover.
+
+**Official sources:** [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

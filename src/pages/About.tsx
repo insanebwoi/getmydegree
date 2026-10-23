@@ -19,7 +19,7 @@ export default function About() {
       <PageHero
         image="about-banner"
         badge="About us"
-        title="Your trusted partner for academic success"
+        title="Degree completion counselling in Kerala since 2021"
         intro={`${site.name} provides flexible, recognized education for people completing, restarting or upgrading their studies   built for the realities of modern life.`}
       >
         <Link to="/contact" className="btn btn-primary">
@@ -138,7 +138,7 @@ export default function About() {
         </div>
       </Section>
 
-      <Section badge="100% valid & recognized" title="Degrees accepted everywhere it matters" dark>
+      <Section badge="Valid & recognized" title="Degrees accepted everywhere it matters" dark>
         <div className="grid gap-4 md:grid-cols-3">
           {validity.map((v, i) => (
             <Reveal key={v.title} delay={i * 80}>

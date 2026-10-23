@@ -190,13 +190,6 @@ export const schedule: ScheduledPost[] = [
     alt: 'Reviewing university admission fine print and avoiding unaccredited fake degree fraud red flags',
   },
   {
-    day: 20,
-    slug: 'balancing-full-time-work-with-an-online-degree',
-    date: '2026-10-04',
-    image: cover('balancing-full-time-work-with-an-online-degree'),
-    alt: 'Weekly time management study schedule and work planner for balancing job with an online degree',
-  },
-  {
     day: 21,
     slug: 'bsc-vs-bca-for-tech-jobs',
     date: '2026-10-05',
@@ -223,13 +216,6 @@ export const schedule: ScheduledPost[] = [
     date: '2026-10-08',
     image: cover('nri-and-international-students-indian-degrees'),
     alt: 'NRI international student preparing verification documents for Indian university online degree admission',
-  },
-  {
-    day: 25,
-    slug: 'degree-fees-instalments-and-emi-options',
-    date: '2026-10-09',
-    image: cover('degree-fees-instalments-and-emi-options'),
-    alt: 'Budgeting online degree tuition fees with flexible semester instalments and zero-cost EMI plans',
   },
   {
     day: 26,

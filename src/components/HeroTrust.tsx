@@ -25,7 +25,7 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
           </Eyebrow>
           <span className="inline-flex items-center gap-1 rounded-full bg-navy-50 px-2 py-0.5 text-[0.6875rem] font-medium text-navy">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
-            Central & State Gov · UGC · AICTE · NAAC Approved
+            UGC Recognized · UK Partner
           </span>
         </div>
         {/*
@@ -69,8 +69,7 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
           </ul>
         </div>
         <p className="mt-2.5 text-xs text-muted">
-          Central and State Government universities in India and recognized UK institutions — all
-          100% UGC, AICTE & NAAC approved.
+          UGC recognized universities in India, and Marjon University in the United Kingdom.
         </p>
       </div>
 

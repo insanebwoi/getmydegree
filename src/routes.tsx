@@ -16,6 +16,8 @@ const UniversityPage = lazyPage(() => import('./pages/UniversityPage'))
 const Contact = lazyPage(() => import('./pages/Contact'))
 const Blog = lazyPage(() => import('./pages/Blog'))
 const BlogPost = lazyPage(() => import('./pages/BlogPost'))
+const CreditTransfer = lazyPage(() => import('./pages/CreditTransfer'))
+const PrivacyPolicy = lazyPage(() => import('./pages/PrivacyPolicy'))
 const NotFound = lazyPage(() => import('./pages/NotFound'))
 
 export const pages: LazyPage[] = [
@@ -28,6 +30,8 @@ export const pages: LazyPage[] = [
   Contact,
   Blog,
   BlogPost,
+  CreditTransfer,
+  PrivacyPolicy,
   NotFound,
 ]
 
@@ -45,6 +49,8 @@ export const routes: RouteObject[] = [
       { path: 'blog', element: <Blog /> },
       { path: 'blog/:slug', element: <BlogPost /> },
       { path: 'contact', element: <Contact /> },
+      { path: 'credit-transfer', element: <CreditTransfer /> },
+      { path: 'privacy-policy', element: <PrivacyPolicy /> },
       { path: '*', element: <NotFound /> },
     ],
   },
@@ -65,6 +71,8 @@ export const prerenderPaths = [
   '/courses',
   '/blog',
   '/contact',
+  '/credit-transfer',
+  '/privacy-policy',
   ...courses.map((course) => `/courses/${courseSlug(course)}`),
   '/universities',
   ...universities.map((university) => `/universities/${university.slug}`),

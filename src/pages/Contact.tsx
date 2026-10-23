@@ -201,11 +201,11 @@ export default function Contact() {
                 <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs font-medium text-muted">
                   <span className="inline-flex items-center gap-1">
                     <Check size={13} strokeWidth={2.5} className="text-emerald-600" />
-                    100% UGC Approved
+                    UGC Recognized Partners
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <Check size={13} strokeWidth={2.5} className="text-emerald-600" />
-                    Continuous Assessment
+                    No Attendance Requirement
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <Check size={13} strokeWidth={2.5} className="text-emerald-600" />
@@ -506,17 +506,17 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Accreditation Guarantee Docked Strip */}
+              {/* Recognition Docked Strip */}
               <div className="border-t border-white/10 bg-white/5 px-6 py-4 sm:px-7">
                 <div className="flex items-center gap-3">
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gold text-navy-950">
                     <ShieldCheck size={18} aria-hidden="true" />
                   </span>
                   <div>
-                    <p className="text-xs font-semibold text-white">Accreditation Guarantee</p>
+                    <p className="text-xs font-semibold text-white">Recognition you can verify</p>
                     <p className="text-[0.75rem] text-white/70 leading-snug">
-                      All universities are UGC, AICTE &amp; NAAC approved for government roles and
-                      higher study.
+                      Ask us for each university's UGC and DEB references, and check them yourself on
+                      ugc.gov.in before you pay.
                     </p>
                   </div>
                 </div>

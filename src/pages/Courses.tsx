@@ -124,9 +124,9 @@ export default function Courses() {
 
       <PageHero
         image="courses-banner"
-        badge="Accredited degrees"
-        title="Recognized programs designed for your career"
-        intro="Five undergraduate and four postgraduate programs, built with continuous assessment and flexible schedules for working professionals, gap-year students and career upgraders."
+        badge="Recognized degrees"
+        title="UG and PG degree programmes: B.Com, BBA, BCA, MBA and more"
+        intro="Five undergraduate and four postgraduate programs, built with flexible schedules for working professionals, gap-year students and career upgraders."
       >
         <Link to="/contact" className="btn btn-primary">
           Get free counseling

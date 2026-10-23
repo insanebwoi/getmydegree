@@ -76,6 +76,19 @@ export const pageMeta: Record<string, PageMeta> = {
     path: '/contact',
     keywords: 'contact get my degree, get my degree phone number, get my degree thrissur address, get my degree malappuram',
   },
+  '/credit-transfer': {
+    title: 'Credit Transfer Degree in Kerala — Complete Your Discontinued Degree',
+    description:
+      'Left a degree partway through? Transfer the semesters you passed to a UGC recognized university and finish only what remains. Free credit assessment in Thrissur and Malappuram.',
+    path: '/credit-transfer',
+    keywords: 'credit transfer degree kerala, complete discontinued degree, degree credit transfer, lateral entry degree kerala',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Get My Degree',
+    description:
+      'What Get My Degree collects through this website and during admission, how it is used and shared, and how to ask us to correct or delete it.',
+    path: '/privacy-policy',
+  },
 }
 
 /** Head content for any prerendered path, including posts and course pages. */

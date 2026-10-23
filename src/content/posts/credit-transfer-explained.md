@@ -37,4 +37,6 @@ The practical effect: someone who finished two years of a three-year B.Com may c
 
 The assessment is made on paper, so gather these before the conversation: all semester marksheets you hold, the transfer or migration certificate from the previous institution if it was issued, your 12th certificate, and the course structure if you have it. Where a marksheet is lost, the previous university can usually issue a duplicate.
 
-Send us what you have and the **[Get My Degree](/)** academic advisory team will map it against the programmes our partner universities run, then tell you exactly how much of the degree remains. That assessment is free and takes about a day. You can also explore our [Degree Programmes](/courses) to see the full list of options.
+Send us what you have and the **[Get My Degree](/)** academic advisory team will map it against the programmes our partner universities run, then tell you exactly how much of the degree remains. That assessment is free and takes about a day. See how our [credit transfer service](/credit-transfer) works, or explore our [Degree Programmes](/courses) to see the full list of options.
+
+**Official sources:** [Academic Bank of Credits portal](https://www.abc.gov.in/) · [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

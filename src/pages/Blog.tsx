@@ -366,7 +366,7 @@ export default function Blog() {
                 </summary>
                 <div className="mt-3 text-sm leading-relaxed text-ink/80">
                   <p>
-                    Yes. All universities partnering with Get My Degree are statutory universities recognized by the University Grants Commission (UGC) under Section 2(f)/12(B) and entitled by the Distance Education Bureau (DEB). Under official UGC and Ministry of Education gazette notifications, these degrees are 100% equivalent to campus degrees for UPSC, Kerala PSC, SSC, Bank exams, and overseas immigration (WES).
+                    For the Indian partner universities, yes: under the UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020, a distance or online degree from a recognized university, with a valid DEB entitlement for that programme, is treated as equivalent to a campus degree for UPSC, Kerala PSC, SSC and bank exams. Marjon University is a UK university, so its degrees usually need AIU equivalence for Indian government posts.
                   </p>
                 </div>
               </details>

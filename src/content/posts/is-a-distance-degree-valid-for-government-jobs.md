@@ -37,3 +37,5 @@ Rejections we have seen almost never turn on distance mode itself. They turn on 
 ## Before you enrol
 
 Ask any provider for the university name, the DEB approval reference and the year of approval, then verify them yourself on the UGC and DEB sites. A legitimate counselor will hand these over without hesitation. Every programme we place students into at **[Get My Degree](/)** is verified this way before we recommend it. Reach out to our [academic counseling team](/contact) for a verified evaluation.
+
+**Official sources:** [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

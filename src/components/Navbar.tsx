@@ -60,7 +60,7 @@ export function Navbar() {
                   to={item.to}
                   end={item.to === '/'}
                   className={({ isActive }) =>
-                    `rounded-full px-4 py-2 text-[0.9375rem] font-medium transition-colors ${
+                    `rounded-full px-4 py-2 text-[0.9375rem] font-medium whitespace-nowrap transition-colors lg:px-3 xl:px-4 ${
                       isActive ? 'bg-navy-50 text-navy' : 'text-muted hover:text-ink'
                     }`
                   }
@@ -74,7 +74,7 @@ export function Navbar() {
               <a
                 href={`tel:${site.phoneHref}`}
                 onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
-                className="action hidden gap-2 rounded-full px-3 text-sm font-medium text-ink md:inline-flex"
+                className="action hidden gap-2 rounded-full px-3 text-sm font-medium whitespace-nowrap text-ink md:inline-flex lg:hidden xl:inline-flex"
               >
                 <Phone size={15} className="text-navy" aria-hidden="true" />
                 {site.phone}
