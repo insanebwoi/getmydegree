@@ -50,7 +50,8 @@ const organization = {
   address: centers.map((c) => ({
     '@type': 'PostalAddress',
     streetAddress: c.address,
-    addressLocality: c.city,
+    addressLocality: c.locality,
+    postalCode: c.postalCode,
     addressRegion: 'Kerala',
     addressCountry: 'IN',
   })),
@@ -197,7 +198,6 @@ export function universitySchema(slug: string): object | undefined {
   const university = universities.find((u) => u.slug === slug)
   if (!university) return undefined
   const url = `${site.url}/universities/${slug}`
-  const [region, city] = university.location.split(',').map((part) => part.trim())
   return graph(
     {
       '@type': 'CollegeOrUniversity',
@@ -205,11 +205,12 @@ export function universitySchema(slug: string): object | undefined {
       url,
       name: university.name,
       description: university.body,
+      sameAs: university.website,
       address: {
         '@type': 'PostalAddress',
-        addressLocality: city ?? region,
-        addressRegion: region,
-        addressCountry: university.location.includes('Kingdom') ? 'GB' : 'IN',
+        addressLocality: university.address.locality,
+        addressRegion: university.address.region,
+        addressCountry: university.address.country,
       },
     },
     breadcrumb([
@@ -258,10 +259,12 @@ export const contactSchema: object = graph(
     address: {
       '@type': 'PostalAddress',
       streetAddress: c.address,
-      addressLocality: c.city,
+      addressLocality: c.locality,
+      postalCode: c.postalCode,
       addressRegion: 'Kerala',
       addressCountry: 'IN',
     },
+    hasMap: c.map,
     openingHoursSpecification: {
       '@type': 'OpeningHoursSpecification',
       dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],

@@ -475,15 +475,27 @@ export default function Contact() {
                           <span>Call</span>
                         </a>
                       </div>
-                      <p className="mt-1 text-xs leading-relaxed text-white/75">{c.address}</p>
-                      <p className="mt-1.5 text-[0.6875rem] font-medium text-white/50">
-                        Ph:{' '}
+                      <p className="mt-1 text-xs leading-relaxed text-white/75">
+                        {c.address} {c.postalCode}
+                      </p>
+                      <p className="mt-1.5 flex flex-wrap gap-x-3 text-[0.6875rem] font-medium text-white/50">
+                        <span>
+                          Ph:{' '}
+                          <a
+                            href={`tel:${c.phoneHref}`}
+                            onClick={() => reportPhoneConversion(`tel:${c.phoneHref}`)}
+                            className="action hover:text-white/80"
+                          >
+                            {c.phone}
+                          </a>
+                        </span>
                         <a
-                          href={`tel:${c.phoneHref}`}
-                          onClick={() => reportPhoneConversion(`tel:${c.phoneHref}`)}
-                          className="action hover:text-white/80"
+                          href={c.map}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="action text-gold/80 hover:text-gold hover:underline"
                         >
-                          {c.phone}
+                          Get directions
                         </a>
                       </p>
                     </div>

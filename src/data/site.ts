@@ -35,12 +35,18 @@ export const centers = [
     address: 'Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur',
     phone: '92076 77828',
     phoneHref: '+919207677828',
+    locality: 'Vadanappally',
+    postalCode: '680614',
+    map: 'https://www.google.com/maps/search/?api=1&query=Labba+Building+Beach+Road+Vadanappally+Thrissur+680614',
   },
   {
     city: 'Malappuram',
     address: 'Near Tirur Bus Stand, Forza Mall, Malappuram',
     phone: '7356644343',
     phoneHref: '+917356644343',
+    locality: 'Tirur',
+    postalCode: '676101',
+    map: 'https://www.google.com/maps/search/?api=1&query=Forza+Mall+Tirur+Malappuram+676101',
   },
 ]
 
@@ -66,12 +72,18 @@ export const universities: {
   /** Points a counsellor would make on the phone. Nothing here asserts a fee,
    *  an intake date, a ranking or a placement figure. */
   highlights: string[]
+  /** Postal address parts, for the schema; `location` is the display line. */
+  address: { locality: string; region: string; country: 'IN' | 'GB' }
+  /** The university's own site. */
+  website: string
+  /** Where each fact on the page can be checked. Public pages only. */
+  sources: { label: string; url: string }[]
 }[] = [
     {
       name: 'Rabindranath Tagore University',
       slug: 'rabindranath-tagore-university',
-      location: 'Madhya Pradesh, Bhopal',
-      body: 'UGC recognized private university offering UG, PG and doctoral programs across multiple disciplines.',
+      location: 'Raisen, near Bhopal, Madhya Pradesh',
+      body: 'State private university established in 2010 (formerly AISECT University), recognized by the UGC under Section 2(f) and regulated by the Madhya Pradesh Private Universities Regulatory Commission.',
       badge: 'UGC Approved',
       validity: 'UGC Recognized · Govt Jobs · UPSC · PSC',
       type: 'State private university',
@@ -81,26 +93,39 @@ export const universities: {
         'Study without attendance requirements, around a full-time job',
         'Credit transfer considered for semesters already completed elsewhere',
       ],
+      address: { locality: 'Raisen', region: 'Madhya Pradesh', country: 'IN' },
+      website: 'https://rntu.ac.in/',
+      sources: [
+        { label: 'University profile (rntu.ac.in)', url: 'https://rntu.ac.in/' },
+        { label: 'UGC list of private universities', url: 'https://www.ugc.gov.in/universitydetails/university?type=privte' },
+      ],
     },
     {
       name: 'PRIST Deemed University',
       slug: 'prist-deemed-university',
-      location: 'Tamil Nadu, India',
-      body: 'Deemed-to-be University with NAAC accreditation and industry aligned curriculum.',
+      location: 'Vallam, Thanjavur, Tamil Nadu',
+      body: 'Ponnaiyah Ramajayam Institute of Science and Technology, declared a deemed-to-be university under Section 3 of the UGC Act in 2008, with its main campus at Vallam, Thanjavur.',
       badge: 'UGC Approved',
       validity: 'UGC Recognized · Govt Jobs · UPSC · PSC',
       type: 'Deemed-to-be university',
       offers: ['Undergraduate degrees', 'Postgraduate degrees'],
       highlights: [
-        'NAAC accredited, with an industry aligned curriculum',
+        'A deemed-to-be university under Section 3 of the UGC Act, so it awards its own degrees',
+        'Engineering, science, arts, commerce and management schools on one campus',
         'Suited to working professionals continuing an interrupted degree',
         'Documentation and enrolment handled by your counsellor end to end',
+      ],
+      address: { locality: 'Thanjavur', region: 'Tamil Nadu', country: 'IN' },
+      website: 'https://www.prist.ac.in/',
+      sources: [
+        { label: 'Mandatory disclosure (prist.ac.in)', url: 'https://www.prist.ac.in/wp-content/uploads/2023/02/MANDATORY-DISCLOSURE-V3.pdf' },
+        { label: 'UGC list of deemed universities', url: 'https://www.ugc.gov.in/universitydetails/university?type=deemed' },
       ],
     },
     {
       name: 'Bharathidasan University',
       slug: 'bharathidasan-university',
-      location: 'Tamil Nadu, Tiruchirappalli',
+      location: 'Tiruchirappalli, Tamil Nadu',
       body: 'State university established in 1982, NAAC A+ accredited, offering UG, PG and doctoral programs through its Centre for Distance and Online Education.',
       badge: 'UGC Approved',
       validity: 'UGC Recognized · Govt Jobs · UPSC · PSC',
@@ -112,12 +137,18 @@ export const universities: {
         'Arts, science, commerce, computer applications and management streams at both UG and PG level',
         'Learner support centres handle mentoring, so study fits around a full-time job',
       ],
+      address: { locality: 'Tiruchirappalli', region: 'Tamil Nadu', country: 'IN' },
+      website: 'https://www.bdu.ac.in/',
+      sources: [
+        { label: 'Centre for Distance and Online Education', url: 'https://sde.b-u.ac.in/' },
+        { label: 'UGC-DEB recognised institutions', url: 'https://deb.ugc.ac.in/' },
+      ],
     },
     {
       name: 'Marjon University',
       slug: 'marjon-university',
-      location: 'Cornwall, United Kingdom',
-      body: 'UK university awarding UK degrees. For Indian government posts, a UK degree usually needs AIU equivalence.',
+      location: 'Plymouth, United Kingdom',
+      body: 'Plymouth Marjon University traces its history to St John\u2019s College, founded in London in 1840, and has held full university status since 2013. For Indian government posts, a UK degree usually needs AIU equivalence.',
       badge: 'UK Recognized',
       validity: 'UK Degree · AIU Equivalence for India',
       type: 'UK university',
@@ -126,6 +157,12 @@ export const universities: {
         'A UK government recognized award, held to UK quality assurance',
         'An option for students who want a degree recognized outside India',
         'Entry requirements and English language criteria are confirmed case by case',
+      ],
+      address: { locality: 'Plymouth', region: 'Devon', country: 'GB' },
+      website: 'https://www.marjon.ac.uk/',
+      sources: [
+        { label: 'History of Marjon (marjon.ac.uk)', url: 'https://www.marjon.ac.uk/about-marjon/history/' },
+        { label: 'AIU equivalence for foreign degrees', url: 'https://aiu.ac.in/' },
       ],
     },
   ]

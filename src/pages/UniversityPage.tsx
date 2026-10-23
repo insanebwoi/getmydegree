@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { ArrowRight, BadgeCheck, Check, GraduationCap, MapPin, University } from 'lucide-react'
+import { ArrowRight, BadgeCheck, Check, ExternalLink, GraduationCap, MapPin, University } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { metaFor } from '../data/meta'
 import { universitySchema } from '../data/schema'
@@ -110,6 +110,32 @@ export default function UniversityPage() {
               {university.validity}
             </p>
           </div>
+        </div>
+      </Section>
+
+      <Section align="left" title="Check it yourself">
+        <div className="card card-p">
+          <p className="text-sm leading-relaxed text-muted">
+            Every fact above comes from a public source. Confirm the university&rsquo;s recognition,
+            and the entitlement for your programme and admission year, before you pay anything.
+          </p>
+          <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {[{ label: 'Official website', url: university.website }, ...university.sources].map(
+              (source) => (
+                <li key={source.url}>
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-navy hover:underline"
+                  >
+                    <ExternalLink size={13} className="shrink-0" aria-hidden="true" />
+                    {source.label}
+                  </a>
+                </li>
+              ),
+            )}
+          </ul>
         </div>
       </Section>
 

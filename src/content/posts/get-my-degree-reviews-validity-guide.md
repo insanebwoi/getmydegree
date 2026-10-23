@@ -46,7 +46,7 @@ Every university associated with Get My Degree can be verified directly on offic
    - Access the *Entitled Higher Educational Institutions (HEIs)* directory.
    - Cross-verify the specific undergraduate or postgraduate program (e.g., B.Com, BCA, MBA) to ensure that the university holds active approval for the academic session.
 3. **National Institutional Ranking Framework (NIRF) & NAAC Ratings**:
-   - Partner universities such as Rabindranath Tagore University and PRIST Deemed University hold active NAAC accreditation and NIRF performance standings.
+   - Look the university up on the [NAAC](https://www.naac.gov.in/) and [NIRF](https://www.nirfindia.org/) sites yourself. A grade expires after its cycle, so check the date as well as the letter.
 
 ---
 

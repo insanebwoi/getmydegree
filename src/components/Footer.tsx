@@ -187,7 +187,7 @@ export function Footer() {
                 <span>
                   <span className="block font-display font-medium">{center.city}</span>
                   <span className="mt-1 block text-sm leading-relaxed text-white/60">
-                    {center.address}
+                    {center.address} {center.postalCode}
                   </span>
                   <a
                     href={`tel:${center.phoneHref}`}

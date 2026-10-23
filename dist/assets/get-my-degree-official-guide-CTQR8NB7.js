@@ -70,12 +70,12 @@ var e=`<p>When working professionals, degree dropouts, and career-switchers deci
 </ul>
 <hr>
 <h2>Which universities partner with Get My Degree</h2>
-<p>We maintain partnerships with leading institutions known for academic excellence, NAAC accreditation, and flexible examination frameworks:</p>
+<p>Four universities award the degrees we place students into. Each one&#39;s status can be checked on a public list:</p>
 <ol>
-<li><strong>Rabindranath Tagore University (RTU)</strong>: Renowned UGC-approved university with NIRF recognition and comprehensive UG/PG programs.</li>
-<li><strong>PRIST Deemed University</strong>: NAAC accredited deemed-to-be university with an industry-aligned curriculum and flexible study arrangements.</li>
-<li><strong>Bharathidasan University</strong>: Esteemed state university in Tamil Nadu renowned for academic rigor and distance education excellence.</li>
-<li><strong>Plymouth Marjon University</strong>: Prestigious UK institution offering globally recognized British master’s and bachelor’s degree frameworks.</li>
+<li><strong><a href="/universities/rabindranath-tagore-university">Rabindranath Tagore University (RTU)</a></strong>: a state private university near Bhopal, established in 2010 (formerly AISECT University) and recognized by the UGC under Section 2(f).</li>
+<li><strong><a href="/universities/prist-deemed-university">PRIST Deemed University</a></strong>: Ponnaiyah Ramajayam Institute of Science and Technology, Thanjavur, a deemed-to-be university under Section 3 of the UGC Act since 2008.</li>
+<li><strong><a href="/universities/bharathidasan-university">Bharathidasan University</a></strong>: a state university in Tiruchirappalli, established in 1982, NAAC A+ accredited, running distance and online programmes through its own Centre for Distance and Online Education.</li>
+<li><strong><a href="/universities/marjon-university">Plymouth Marjon University</a></strong>: a UK university in Plymouth with roots going back to 1840 and full university status since 2013. Its degrees usually need AIU equivalence for Indian government posts.</li>
 </ol>
 <p>All partner universities issue genuine, verifiable degrees with online digital transcript verification.</p>
 <hr>

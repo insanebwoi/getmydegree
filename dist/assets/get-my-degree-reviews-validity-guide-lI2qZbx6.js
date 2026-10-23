@@ -28,7 +28,7 @@ var e=`<p>When students and working professionals consider restarting an interru
 </ul>
 </li>
 <li><strong>National Institutional Ranking Framework (NIRF) &amp; NAAC Ratings</strong>:<ul>
-<li>Partner universities such as Rabindranath Tagore University and PRIST Deemed University hold active NAAC accreditation and NIRF performance standings.</li>
+<li>Look the university up on the <a href="https://www.naac.gov.in/">NAAC</a> and <a href="https://www.nirfindia.org/">NIRF</a> sites yourself. A grade expires after its cycle, so check the date as well as the letter.</li>
 </ul>
 </li>
 </ol>

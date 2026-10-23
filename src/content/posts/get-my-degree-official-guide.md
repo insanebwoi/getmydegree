@@ -103,12 +103,12 @@ Get My Degree offers admissions across nine core undergraduate and postgraduate 
 
 ## Which universities partner with Get My Degree
 
-We maintain partnerships with leading institutions known for academic excellence, NAAC accreditation, and flexible examination frameworks:
+Four universities award the degrees we place students into. Each one's status can be checked on a public list:
 
-1. **Rabindranath Tagore University (RTU)**: Renowned UGC-approved university with NIRF recognition and comprehensive UG/PG programs.
-2. **PRIST Deemed University**: NAAC accredited deemed-to-be university with an industry-aligned curriculum and flexible study arrangements.
-3. **Bharathidasan University**: Esteemed state university in Tamil Nadu renowned for academic rigor and distance education excellence.
-4. **Plymouth Marjon University**: Prestigious UK institution offering globally recognized British master’s and bachelor’s degree frameworks.
+1. **[Rabindranath Tagore University (RTU)](/universities/rabindranath-tagore-university)**: a state private university near Bhopal, established in 2010 (formerly AISECT University) and recognized by the UGC under Section 2(f).
+2. **[PRIST Deemed University](/universities/prist-deemed-university)**: Ponnaiyah Ramajayam Institute of Science and Technology, Thanjavur, a deemed-to-be university under Section 3 of the UGC Act since 2008.
+3. **[Bharathidasan University](/universities/bharathidasan-university)**: a state university in Tiruchirappalli, established in 1982, NAAC A+ accredited, running distance and online programmes through its own Centre for Distance and Online Education.
+4. **[Plymouth Marjon University](/universities/marjon-university)**: a UK university in Plymouth with roots going back to 1840 and full university status since 2013. Its degrees usually need AIU equivalence for Indian government posts.
 
 All partner universities issue genuine, verifiable degrees with online digital transcript verification.
 
