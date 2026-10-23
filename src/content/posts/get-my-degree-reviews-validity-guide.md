@@ -1,9 +1,11 @@
 ---
 title: "Get My Degree Reviews & Legitimacy: Is a Degree from GetMyDegree UGC Valid?"
-seoTitle: "Get My Degree Reviews & Validity — Official UGC Verification Guide"
+seoTitle: "Get My Degree Reviews & Validity Guide"
 excerpt: "Is Get My Degree genuine and valid for government exams? An objective breakdown of UGC DEB recognition, university approvals, student experiences, and verification steps."
+description: "Is Get My Degree genuine? How to check its partner universities' UGC and DEB recognition, government job validity and verification steps."
 category: "Degree recognition"
 date: 2026-10-17
+updated: 2026-10-23
 author: "Get My Degree Academic Team"
 readingMinutes: 6
 keywords: "get my degree reviews, is get my degree fake, get my degree genuine, get my degree validity, getmydegreeedu reviews, get my degree complaints, get my degree ugc approval"
@@ -52,13 +54,12 @@ Every university associated with Get My Degree can be verified directly on offic
 
 One of the most frequent inquiries received at our Thrissur and Malappuram centres is whether these degrees are accepted by government testing bodies.
 
-The statutory law in India is clear and unambiguous:
+Under the [UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020](https://www.ugc.gov.in/), degrees earned through distance or online mode from a recognized university, with a valid [DEB](https://deb.ugc.ac.in/) entitlement for that programme, are treated as equivalent to campus degrees.
 
-According to the Ministry of Human Resource Development (now Ministry of Education) and UGC Notification No. F. 1-1/2020 (DEB-I):
-> *"The degrees/diplomas/certificates awarded for programmes conducted through the open and distance learning mode by the Higher Educational Institutions... are on par with degrees/diplomas/certificates issued through the conventional mode."*
+There is one important exception. Where a post's notification or Special Rules require a **regular course of study**, a distance degree does not qualify. The Kerala High Court applied this in January 2026 for the post of Librarian Grade IV (*Kerala PSC v. Vaisakh C.L.*, 2026:KER:6103). Always read the notification for the post you want.
 
-Thousands of our graduates have presented their credentials for:
-- **Kerala PSC (Kerala Public Service Commission)**: Valid for all Gazetted, Non-Gazetted, and Departmental qualification criteria.
+With that checked, degrees from our Indian partner universities are generally accepted for:
+- **Kerala PSC (Kerala Public Service Commission)**: posts that ask for a graduate degree, unless the rules require a regular course.
 - **UPSC Civil Services Examination**: Accepted for Preliminary, Mains, and Interview eligibility verification.
 - **Staff Selection Commission (SSC CGL & CHSL)**.
 - **Banking Recruitment**: Valid for IBPS, SBI, and RBI competitive selection.

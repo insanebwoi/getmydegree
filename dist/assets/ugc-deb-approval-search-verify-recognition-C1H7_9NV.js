@@ -24,5 +24,6 @@ var e=`<p>The single most expensive mistake in this field is paying for a degree
 </ul>
 <h2>If you would rather not do this alone</h2>
 <p>We run these checks before we place anyone, and we will run them on a programme you found yourself, whether or not we have anything to do with it. Send us the university and programme name and we will tell you what the records say.</p>
+<p>If you already studied part of a degree, see how <a href="/credit-transfer">credit transfer</a> lets you finish only what remains.</p>
 <p><strong>Official sources:</strong> <a href="https://www.ugc.gov.in/">UGC</a> · <a href="https://deb.ugc.ac.in/">UGC Distance Education Bureau</a></p>
 `;export{e as html};

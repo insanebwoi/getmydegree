@@ -2,6 +2,7 @@
 title: "Online or distance: which study mode suits you"
 seoTitle: "Online vs Distance Degree Modes Compared"
 excerpt: "ODL and online learning differ in delivery, assessment and pace. A practical comparison for people who work."
+description: "Online or distance (ODL) degree? How the two modes differ in delivery, assessment and pace, compared for people who work full time."
 category: Study advice
 date: 2026-10-09
 author: "GetMyDegree Academic Team"

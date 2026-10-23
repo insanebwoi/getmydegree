@@ -11,9 +11,13 @@ var e=`<p>This is the first question almost every applicant asks us, and it dese
 <blockquote>
 <p>Degrees awarded through open and distance learning or online mode by recognized universities are treated as equivalent to corresponding degrees awarded in conventional mode.</p>
 </blockquote>
-<p>In practice this means UPSC, the State Public Service Commissions (such as Kerala PSC), SSC, banking recruitment and the railways all accept these degrees for posts where a graduate qualification is the eligibility bar. What they check at document verification is the university and the programme, not the mode of study.</p>
+<p>In practice this means UPSC, the State Public Service Commissions (such as Kerala PSC), SSC, banking recruitment and the railways generally accept these degrees for posts where a graduate qualification is the eligibility bar. What they check at document verification is the university and the programme, with one important exception below.</p>
+<h2>The exception: posts that require a regular course</h2>
+<p>Equivalence has a limit, and it matters for Kerala PSC in particular. Some posts are governed by Special Rules or a notification that asks for a qualification earned through a <strong>regular course of study</strong>. For those posts, a distance degree does not qualify, however well recognized the university.</p>
+<p>In January 2026 the Kerala High Court applied exactly that rule. In <em>Kerala Public Service Commission v. Vaisakh C.L.</em> (2026:KER:6103), it held that a library science degree earned through distance education could not be accepted for the post of Librarian Grade IV, because the notification required a regular course. An equivalency certificate did not change that. (<a href="https://lawtrend.in/distance-education-degree-invalid-for-librarian-post-when-rules-mandate-regular-course-of-study-kerala-high-court-set-asides-tribunal-order/">Law Trend report</a> · <a href="https://indiankanoon.org/doc/118624959/">judgment</a>)</p>
+<p>So before you enrol with a particular post in mind, read its notification and Special Rules. If they say &quot;regular course&quot; or &quot;regular study&quot;, ask us before choosing a distance programme. If they only ask for a graduate degree, a recognized distance degree is generally accepted.</p>
 <h2>Where candidates actually get rejected</h2>
-<p>Rejections we have seen almost never turn on distance mode itself. They turn on three avoidable things: enrolling with an institution that lost its approval mid-course, a mismatch between the name on the marksheet and the name on the application, and missing migration or provisional certificates at verification.</p>
+<p>Outside those regular-course posts, rejections we have seen rarely turn on distance mode itself. They turn on three avoidable things: enrolling with an institution that lost its approval mid-course, a mismatch between the name on the marksheet and the name on the application, and missing migration or provisional certificates at verification.</p>
 <ul>
 <li><p>Confirm the DEB approval covers the year you enrol, not just an earlier year.</p>
 </li>

@@ -2,6 +2,7 @@
 title: "BCA or B.Sc: which undergraduate degree for a technology job"
 seoTitle: "BCA vs B.Sc IT for Tech Sector Jobs"
 excerpt: "What each degree covers, how employers read them, and which one fits someone already working in technology."
+description: "BCA or B.Sc for a tech career: what each degree covers, how employers read them, and which suits someone already working in IT."
 category: Study advice
 date: 2026-10-13
 author: "GetMyDegree Academic Team"

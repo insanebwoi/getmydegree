@@ -1,7 +1,8 @@
 ---
 title: "Degree options for defence and public sector employees"
-seoTitle: "Degrees for Defence & Public Sector Employees"
+seoTitle: "Degrees for Defence & Public Sector Staff"
 excerpt: "Promotion criteria, transfers and irregular postings shape which degree works. What to check before enrolling."
+description: "Promotion rules, transfers and irregular postings shape which degree works for defence and public sector staff. What to check before enrolling."
 category: Study advice
 date: 2026-10-05
 author: "GetMyDegree Academic Team"

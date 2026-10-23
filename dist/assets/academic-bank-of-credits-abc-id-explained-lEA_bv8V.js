@@ -19,5 +19,6 @@ var e=`<p>Applicants are now routinely asked for an Academic Bank of Credits ide
 <h2>If something is wrong</h2>
 <p>Credits missing from your account are corrected by the institution that awarded them, not by the register. Approach the university, with your marksheets, and ask them to deposit the record.</p>
 <p>We help students create the ID and match it against their existing records as part of admission, and we will walk you through it whether or not we are handling your enrolment.</p>
+<p>To see how your earlier credits could count toward a new degree, read about our <a href="/credit-transfer">credit transfer service</a>.</p>
 <p><strong>Official sources:</strong> <a href="https://www.abc.gov.in/">Academic Bank of Credits portal</a> · <a href="https://www.ugc.gov.in/">UGC</a> · <a href="https://deb.ugc.ac.in/">UGC Distance Education Bureau</a></p>
 `;export{e as html};

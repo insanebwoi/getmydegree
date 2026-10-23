@@ -2,6 +2,7 @@
 title: "What a degree actually costs, and how the instalments work"
 seoTitle: "What a Degree Costs & How Instalments Work"
 excerpt: "A plain breakdown of tuition, university, examination and certificate fees, which parts are often left out of the quoted figure, and how monthly payment plans are structured."
+description: "What a distance degree really costs: tuition, exam and certificate fees often left out of the quoted figure, and how monthly instalments work."
 category: Fees
 date: 2026-07-07
 updated: 2026-10-23

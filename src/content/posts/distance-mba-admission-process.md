@@ -1,7 +1,8 @@
 ---
 title: "How distance MBA admission works: eligibility, fees and process"
-seoTitle: "Distance MBA Admission — Eligibility & Process"
+seoTitle: "Distance MBA Admission: Eligibility & Process"
 excerpt: "A plain walkthrough of who qualifies, what it costs, which documents are needed and what happens after you apply."
+description: "Who qualifies for a distance MBA, what it costs, which documents you need and what happens after you apply, explained step by step."
 category: Admissions
 date: 2026-10-03
 author: "GetMyDegree Academic Team"

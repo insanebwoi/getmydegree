@@ -31,6 +31,8 @@ type PostMeta = {
   /** Optional shorter title for the <title> tag, where the headline runs long. */
   seoTitle?: string
   excerpt: string
+  /** Optional search snippet, when the excerpt is too short or long for one. */
+  description?: string
   category: string
   date: string
   /** Set in frontmatter when an article is revised; drives dateModified. */

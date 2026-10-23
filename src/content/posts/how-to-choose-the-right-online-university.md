@@ -2,6 +2,7 @@
 title: "How to choose an online university: a checklist for applicants"
 seoTitle: "How to Choose an Online University in India"
 excerpt: "Accreditation, examination system, support and total cost. What to compare, in the order that matters."
+description: "How to choose an online university in India: recognition, examination system, student support and total cost, compared in the order that matters."
 category: Admissions
 date: 2026-09-29
 author: "GetMyDegree Academic Team"

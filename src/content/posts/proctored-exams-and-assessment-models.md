@@ -1,7 +1,8 @@
 ---
 title: "How online degree examinations actually work"
-seoTitle: "Proctored Exams & Assessment Models Explained"
+seoTitle: "Online Degree Exams & Proctoring Explained"
 excerpt: "Remote proctoring, continuous assessment and end-of-semester papers: what each involves and how to prepare."
+description: "Remote proctoring, continuous assessment and end-of-semester papers: how online degree exams actually work and how to prepare for each."
 category: Study advice
 date: 2026-10-18
 author: "GetMyDegree Academic Team"

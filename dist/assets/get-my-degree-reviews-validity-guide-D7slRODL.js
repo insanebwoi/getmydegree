@@ -35,14 +35,11 @@ var e=`<p>When students and working professionals consider restarting an interru
 <hr>
 <h2>Are degrees valid for Kerala PSC, UPSC, SSC, and Central Government posts</h2>
 <p>One of the most frequent inquiries received at our Thrissur and Malappuram centres is whether these degrees are accepted by government testing bodies.</p>
-<p>The statutory law in India is clear and unambiguous:</p>
-<p>According to the Ministry of Human Resource Development (now Ministry of Education) and UGC Notification No. F. 1-1/2020 (DEB-I):</p>
-<blockquote>
-<p><em>&quot;The degrees/diplomas/certificates awarded for programmes conducted through the open and distance learning mode by the Higher Educational Institutions... are on par with degrees/diplomas/certificates issued through the conventional mode.&quot;</em></p>
-</blockquote>
-<p>Thousands of our graduates have presented their credentials for:</p>
+<p>Under the <a href="https://www.ugc.gov.in/">UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020</a>, degrees earned through distance or online mode from a recognized university, with a valid <a href="https://deb.ugc.ac.in/">DEB</a> entitlement for that programme, are treated as equivalent to campus degrees.</p>
+<p>There is one important exception. Where a post&#39;s notification or Special Rules require a <strong>regular course of study</strong>, a distance degree does not qualify. The Kerala High Court applied this in January 2026 for the post of Librarian Grade IV (<em>Kerala PSC v. Vaisakh C.L.</em>, 2026:KER:6103). Always read the notification for the post you want.</p>
+<p>With that checked, degrees from our Indian partner universities are generally accepted for:</p>
 <ul>
-<li><strong>Kerala PSC (Kerala Public Service Commission)</strong>: Valid for all Gazetted, Non-Gazetted, and Departmental qualification criteria.</li>
+<li><strong>Kerala PSC (Kerala Public Service Commission)</strong>: posts that ask for a graduate degree, unless the rules require a regular course.</li>
 <li><strong>UPSC Civil Services Examination</strong>: Accepted for Preliminary, Mains, and Interview eligibility verification.</li>
 <li><strong>Staff Selection Commission (SSC CGL &amp; CHSL)</strong>.</li>
 <li><strong>Banking Recruitment</strong>: Valid for IBPS, SBI, and RBI competitive selection.</li>

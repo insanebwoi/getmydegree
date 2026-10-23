@@ -2,6 +2,7 @@
 title: "The whole admission process, step by step"
 seoTitle: "Step-by-Step Degree Application Guide"
 excerpt: "From shortlisting a university to receiving your enrolment number and portal access, in the order it actually happens."
+description: "How a distance degree application works, step by step: from shortlisting a university to your enrolment number and student portal access."
 category: Admissions
 date: 2026-10-22
 author: "GetMyDegree Academic Team"

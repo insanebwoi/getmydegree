@@ -1,7 +1,8 @@
 ---
 title: "NRI and international applicants: studying for an Indian degree from abroad"
-seoTitle: "Indian Degrees for NRI & International Students"
+seoTitle: "Indian Degrees for NRIs & Overseas Students"
 excerpt: "Eligibility, document equivalence, examinations across time zones and attestation for use in another country."
+description: "How NRIs and international students study for an Indian degree: eligibility, document equivalence, exams across time zones and attestation."
 category: Admissions
 date: 2026-10-16
 author: "GetMyDegree Academic Team"

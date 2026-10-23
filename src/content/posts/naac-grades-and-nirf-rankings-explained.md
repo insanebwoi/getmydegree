@@ -2,6 +2,7 @@
 title: "What NAAC grades and NIRF rankings actually tell you"
 seoTitle: "NAAC Grades & NIRF Rankings Explained"
 excerpt: "Two different measures, often confused, and how much weight each deserves when you are choosing a university."
+description: "NAAC grades and NIRF rankings are different measures, often confused. What each tells you and how much weight to give them when choosing."
 category: Recognition
 date: 2026-10-01
 author: "GetMyDegree Academic Team"

@@ -32,30 +32,30 @@ export const pageMeta: Record<string, PageMeta> = {
   '/': {
     title: 'Get My Degree — UGC Approved Distance Degrees in Kerala',
     description:
-      'Complete your UGC recognized UG & PG degree with credit transfer. Counselling centres in Thrissur and Malappuram, Kerala, for working professionals and dropouts.',
+      'Complete your UGC recognized UG & PG degree with credit transfer. Centres in Thrissur and Malappuram, Kerala, for working professionals and dropouts.',
     path: '/',
     image: '/images/home/banner.webp',
     keywords:
       'get my degree, getmydegree, get my degree edu, getmydegreeedu, get my degree blog, degree completion, ugc approved online degree, distance degree kerala, credit transfer degree',
   },
   '/about': {
-    title: 'About Get My Degree — Academic Counselling & Degree Completion Since 2021',
+    title: 'About Get My Degree — Degree Counselling Since 2021',
     description:
-      'Guiding students through UGC recognized UG and PG admissions since 2021, with centres in Thrissur and Malappuram. How Get My Degree assesses eligibility and transfers credits.',
+      'Degree completion counselling since 2021, with centres in Thrissur and Malappuram. How Get My Degree checks eligibility and transfers your credits.',
     path: '/about',
     keywords: 'about get my degree, get my degree thrissur, get my degree malappuram, getmydegree counsellors',
   },
   '/courses': {
     title: 'Degree Programmes — B.Com, BBA, BCA, MBA | Get My Degree',
     description:
-      'UGC recognized UG and PG degree programmes for working professionals at Get My Degree: B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW. Compare eligibility and study formats.',
+      'Distance and online UG and PG degrees for working professionals: B.Com, BBA, BCA, BA, B.Sc, MBA, MCA, M.Com and MSW. Compare eligibility and formats.',
     path: '/courses',
     keywords: 'get my degree courses, get my degree bcom, get my degree mba, get my degree bba, online degree programs',
   },
   '/blog': {
-    title: 'Get My Degree Blog — Degree Guides, UGC Recognition & Admissions',
+    title: 'Get My Degree Blog — Distance Degree Guides',
     description:
-      'The official Get My Degree blog. Clear, expert guidance on academic credit transfer, UGC DEB degree recognition, government job validity, and flexible degree fees.',
+      'Plain guides on credit transfer, UGC and DEB recognition, government job validity and degree fees, from the Get My Degree counselling team in Kerala.',
     path: '/blog',
     image: '/images/blog/blog-banner.webp',
     imageAlt: 'Get My Degree Official Blog and Degree Guides',
@@ -63,23 +63,23 @@ export const pageMeta: Record<string, PageMeta> = {
       'get my degree blog, get my degree, getmydegree, get my degree edu, getmydegreeedu, ugc deb degree guide, credit transfer degree, online degree kerala',
   },
   '/universities': {
-    title: 'Partner Universities — UGC Recognized Institutions | Get My Degree',
+    title: 'Partner Universities | Get My Degree',
     description:
-      'The accredited universities Get My Degree places students into across India and the UK: RTU, PRIST, Bharathidasan, and Plymouth Marjon. UGC approval confirmed.',
+      'The universities that award your degree: Rabindranath Tagore University, PRIST and Bharathidasan in India, and Marjon University in the UK.',
     path: '/universities',
     keywords: 'get my degree partner universities, get my degree ugc universities, rtu bhopal, prist university',
   },
   '/contact': {
-    title: 'Contact Get My Degree — Book Free Degree Counselling in Kerala',
+    title: 'Contact Get My Degree — Thrissur & Malappuram',
     description:
       'Talk to an academic counsellor at Get My Degree about eligibility, credit transfer and university options. Physical centres in Thrissur and Malappuram, Kerala.',
     path: '/contact',
     keywords: 'contact get my degree, get my degree phone number, get my degree thrissur address, get my degree malappuram',
   },
   '/credit-transfer': {
-    title: 'Credit Transfer Degree in Kerala — Complete Your Discontinued Degree',
+    title: 'Credit Transfer Degree in Kerala | Get My Degree',
     description:
-      'Left a degree partway through? Transfer the semesters you passed to a UGC recognized university and finish only what remains. Free credit assessment in Thrissur and Malappuram.',
+      'Left a degree partway through? Carry the semesters you passed to a recognized university and finish only what remains. Free assessment in Thrissur.',
     path: '/credit-transfer',
     keywords: 'credit transfer degree kerala, complete discontinued degree, degree credit transfer, lateral entry degree kerala',
   },
@@ -102,8 +102,8 @@ export function metaFor(path: string): PageMeta {
     if (course) {
       const level = course.level === 'UG' ? 'Undergraduate' : 'Postgraduate'
       return {
-        title: `${course.code} Degree Online — ${course.name}`,
-        description: `${course.code} (${course.name}): a ${course.years} ${level.toLowerCase()} programme in ${course.field}, studied around full-time work. Eligibility, format and admission steps.`,
+        title: `Distance ${course.code} Degree in Kerala`,
+        description: `${course.code} (${course.name}) by distance or online: a ${course.years} ${level.toLowerCase()} programme you study around work. Eligibility and admission.`,
         path,
       }
     }
@@ -114,8 +114,11 @@ export function metaFor(path: string): PageMeta {
     const university = universities.find((u) => u.slug === slug)
     if (university) {
       return {
-        title: `${university.name} — Degrees & Admission`,
-        description: `${university.type} in ${university.location}. What it offers, who can apply, and the programmes GetMyDegree places students into. Recognition confirmed at counselling.`,
+        // The longest name runs the full title past 60 characters, so the
+        // qualifier is dropped when it would not fit.
+        title:
+          university.name.length > 25 ? `${university.name} Admission` : `${university.name} Distance Admission`,
+        description: `${university.name}, ${university.location}: what it offers, who can apply, and how to check its recognition for your programme before you enrol.`,
         path,
       }
     }
@@ -126,7 +129,7 @@ export function metaFor(path: string): PageMeta {
   if (post) {
     return {
       title: post.seoTitle ?? post.title,
-      description: post.excerpt,
+      description: post.description ?? post.excerpt,
       path,
       image: post.cover,
       imageAlt: post.coverAlt ?? post.title,

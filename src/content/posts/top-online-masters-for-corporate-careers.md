@@ -2,6 +2,7 @@
 title: "Which postgraduate degree fits a corporate career"
 seoTitle: "Online Master's Degrees for Corporate Careers"
 excerpt: "MBA, M.Com, MA in HR and data-focused M.Sc programmes, and the roles each one actually supports."
+description: "MBA, M.Com, MA in HR and data-focused M.Sc programmes compared: the corporate roles each online master's degree actually supports."
 category: Study advice
 date: 2026-10-07
 author: "GetMyDegree Academic Team"

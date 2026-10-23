@@ -78,7 +78,7 @@ export default function Course() {
           <Reveal className="relative mx-auto max-w-2xl">
             <span className="badge text-ink/80">{level} programme</span>
             <h1 className="t-h1 mt-4">
-              {course.code} <span className="text-navy">{course.name}</span>
+              Distance {course.code} <span className="text-navy">{course.name}</span>
             </h1>
             <p className="t-body mx-auto mt-4 max-w-xl text-ink/80">{course.body}</p>
 

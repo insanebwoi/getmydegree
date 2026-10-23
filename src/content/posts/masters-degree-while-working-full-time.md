@@ -2,6 +2,7 @@
 title: "How to complete a master's degree while working full-time"
 seoTitle: "Master's Degree While Working Full-Time"
 excerpt: "Eligibility, formats and the weekly hours a PG degree really takes when you already have a job."
+description: "How to complete a master's degree while working full time: eligibility, study formats and the weekly hours a PG programme really takes."
 category: Study advice
 date: 2026-09-27
 author: "GetMyDegree Academic Team"

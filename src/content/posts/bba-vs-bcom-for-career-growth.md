@@ -2,6 +2,7 @@
 title: "BBA or B.Com: which undergraduate degree fits your career"
 seoTitle: "BBA vs B.Com for Working Professionals"
 excerpt: "The two degrees are not interchangeable. What each one signals, where each one leads, and how to pick without guessing."
+description: "BBA or B.Com? What each degree signals to employers, where each one leads, and how working professionals in Kerala can choose without guessing."
 category: Study advice
 date: 2026-09-26
 author: "GetMyDegree Academic Team"

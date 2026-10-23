@@ -2,6 +2,7 @@
 title: "PG diploma or master's degree: which one do you need"
 seoTitle: "PG Diploma vs Master's Degree Compared"
 excerpt: "Duration, credit weight, recognition and career use. When the shorter qualification is enough and when it is not."
+description: "PG diploma or master's degree? Duration, credit weight, recognition and career use compared, and when the shorter qualification is enough."
 category: Study advice
 date: 2026-10-20
 author: "GetMyDegree Academic Team"

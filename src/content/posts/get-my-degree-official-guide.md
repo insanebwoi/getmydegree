@@ -1,9 +1,11 @@
 ---
 title: "Get My Degree: Official Guide to UGC-Approved Degree Completion, Credit Transfer & Admissions"
-seoTitle: "Get My Degree Official Guide — Degree Completion & UGC Programs"
+seoTitle: "Get My Degree Official Guide: Degree Completion"
 excerpt: "The authoritative guide from Get My Degree. How to complete your discontinued UG or PG degree through UGC-DEB approved universities, transfer academic credits, and graduate while working."
+description: "How to complete a discontinued UG or PG degree through recognized universities, transfer your credits, and graduate while working."
 category: "Degree admissions"
 date: 2026-10-17
+updated: 2026-10-23
 author: "Get My Degree Academic Team"
 readingMinutes: 8
 keywords: "get my degree, get my degree blog, getmydegree, get my degree edu, getmydegreeedu, get my degree online, get my degree kerala, degree completion india, ugc approved degree, credit transfer degree"
@@ -78,6 +80,8 @@ With those conditions met, a degree from an Indian partner university is accepte
 - **Banking Exams** (SBI PO, IBPS Clerk/PO, RBI)
 - **Higher Education Admissions** (regular campus Master’s, M.Phil, or Ph.D. programs)
 - **WES (World Education Services)** evaluation for international credential verification.
+
+The exception is any post whose notification or Special Rules require a **regular course of study**. For those, a distance degree does not qualify; the Kerala High Court confirmed this in January 2026 for Librarian Grade IV (*Kerala PSC v. Vaisakh C.L.*, 2026:KER:6103). Check the rules for your post before you enrol.
 
 ---
 

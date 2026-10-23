@@ -53,6 +53,7 @@ var e=`<p>When working professionals, degree dropouts, and career-switchers deci
 <li><strong>Higher Education Admissions</strong> (regular campus Master’s, M.Phil, or Ph.D. programs)</li>
 <li><strong>WES (World Education Services)</strong> evaluation for international credential verification.</li>
 </ul>
+<p>The exception is any post whose notification or Special Rules require a <strong>regular course of study</strong>. For those, a distance degree does not qualify; the Kerala High Court confirmed this in January 2026 for Librarian Grade IV (<em>Kerala PSC v. Vaisakh C.L.</em>, 2026:KER:6103). Check the rules for your post before you enrol.</p>
 <hr>
 <h2>What courses are available through Get My Degree</h2>
 <p>Get My Degree offers admissions across nine core undergraduate and postgraduate disciplines tailored for flexible schedules:</p>

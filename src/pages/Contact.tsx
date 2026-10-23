@@ -119,8 +119,8 @@ export default function Contact() {
       <PageHero
         image="contact-banner"
         badge="Contact us"
-        title="Let's start your degree journey"
-        intro="Tell us where you stopped or what program you aspire to complete. Our academic counselors will verify your eligibility, course fees, and fast-track timeline within 24 hours."
+        title="Contact our Thrissur and Malappuram centres"
+        intro="Tell us where you stopped or what program you aspire to complete. Our academic counselors will verify your eligibility, course fees and timeline within 24 hours."
       >
         <a href="#counseling-form" className="btn btn-primary">
           Book free counseling

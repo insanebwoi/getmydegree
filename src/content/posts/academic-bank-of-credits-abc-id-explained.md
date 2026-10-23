@@ -2,6 +2,7 @@
 title: "The Academic Bank of Credits ID, and why your university asks for it"
 seoTitle: "Academic Bank of Credits (ABC) ID Explained"
 excerpt: "What the ABC ID is, how to create one, and what it means for credits you earned at a previous institution."
+description: "What the Academic Bank of Credits (ABC) ID is, how to create one, and how it carries credits from a previous college into a new degree."
 category: Admissions
 date: 2026-10-06
 author: "GetMyDegree Academic Team"
@@ -40,5 +41,7 @@ Older credits, earned before the register existed, are not automatically in it. 
 Credits missing from your account are corrected by the institution that awarded them, not by the register. Approach the university, with your marksheets, and ask them to deposit the record.
 
 We help students create the ID and match it against their existing records as part of admission, and we will walk you through it whether or not we are handling your enrolment.
+
+To see how your earlier credits could count toward a new degree, read about our [credit transfer service](/credit-transfer).
 
 **Official sources:** [Academic Bank of Credits portal](https://www.abc.gov.in/) · [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

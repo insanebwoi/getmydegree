@@ -2,6 +2,7 @@
 title: "How to verify that an online or distance degree is actually recognized"
 seoTitle: "UGC DEB Approval Search — Verify a Degree"
 excerpt: "The checks that tell you whether a programme is genuinely approved, done in the right order, before any fee is paid."
+description: "How to verify UGC DEB approval for an online or distance degree: the checks to run, in the right order, before you pay any fee."
 category: Recognition
 date: 2026-09-24
 author: "GetMyDegree Academic Team"
@@ -48,5 +49,7 @@ A legitimate admission produces an enrolment number issued by the university, in
 ## If you would rather not do this alone
 
 We run these checks before we place anyone, and we will run them on a programme you found yourself, whether or not we have anything to do with it. Send us the university and programme name and we will tell you what the records say.
+
+If you already studied part of a degree, see how [credit transfer](/credit-transfer) lets you finish only what remains.
 
 **Official sources:** [UGC](https://www.ugc.gov.in/) · [UGC Distance Education Bureau](https://deb.ugc.ac.in/)

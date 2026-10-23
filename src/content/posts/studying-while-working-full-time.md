@@ -1,6 +1,8 @@
 ---
 title: "How to actually finish a degree while working full time"
+seoTitle: "How to Finish a Degree While Working Full Time"
 excerpt: "Flexible study only works if the plan survives a bad week at work. The scheduling, study and examination habits that separate the people who complete from the people who stall in semester two."
+description: "The scheduling, study and exam habits that separate working students who finish their degree from those who stall in semester two."
 category: Study advice
 date: 2026-07-21
 updated: 2026-10-23

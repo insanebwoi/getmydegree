@@ -2,6 +2,7 @@
 title: "Are online and campus degrees treated equally?"
 seoTitle: "Equivalence of Online and Campus Degrees"
 excerpt: "The established position on equivalence, what it depends on, and where it still does not decide the question for you."
+description: "Are online and distance degrees equal to campus degrees? The UGC position, what equivalence depends on, and where a job's own rules still decide."
 category: Recognition
 date: 2026-10-14
 author: "GetMyDegree Academic Team"

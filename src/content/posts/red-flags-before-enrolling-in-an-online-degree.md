@@ -2,6 +2,7 @@
 title: "Red flags to check before you pay for an online degree"
 seoTitle: "Red Flags Before Enrolling in an Online Degree"
 excerpt: "The specific claims and arrangements that indicate a degree will not hold up, and what to verify instead."
+description: "The claims and arrangements that show an online degree will not hold up, and what to verify with the university before you pay any fee."
 category: Recognition
 date: 2026-10-11
 author: "GetMyDegree Academic Team"

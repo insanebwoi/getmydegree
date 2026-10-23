@@ -2,6 +2,7 @@
 title: "July or January: choosing your admission cycle"
 seoTitle: "Degree Admission Cycles in India Explained"
 excerpt: "Distance and online programmes admit twice a year. What differs between the two windows, and how to plan around them."
+description: "Distance and online degrees admit twice a year, in July and January. What differs between the two windows, and how to plan your admission."
 category: Admissions
 date: 2026-10-08
 author: "GetMyDegree Academic Team"
