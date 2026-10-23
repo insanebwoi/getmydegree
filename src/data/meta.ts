@@ -118,7 +118,7 @@ export function metaFor(path: string): PageMeta {
         // qualifier is dropped when it would not fit.
         title:
           university.name.length > 25 ? `${university.name} Admission` : `${university.name} Distance Admission`,
-        description: `${university.name}, ${university.location}: what it offers, who can apply, and how to check its recognition for your programme before you enrol.`,
+        description: `${university.name}, ${university.address.locality}: what it offers, who can apply, and how to check its recognition for your programme before you enrol.`,
         path,
       }
     }
