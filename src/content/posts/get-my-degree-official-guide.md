@@ -69,7 +69,7 @@ Through the **Academic Bank of Credits (ABC ID)** and university lateral entry p
 
 ## Are degrees obtained through Get My Degree valid for government jobs and PSC
 
-**For the Indian partner universities, yes — with the usual conditions.** Each is recognized by the University Grants Commission, but not all in the same way: Bharathidasan University is a state university recognized under Sections 2(f) and 12(B) of the UGC Act, PRIST is a deemed-to-be university, and Rabindranath Tagore University is a state private university. Marjon University is in the United Kingdom, so the UGC does not recognize it; a UK degree usually needs [AIU equivalence](https://aiu.ac.in/) before it counts for Indian government posts.
+**For the Indian partner universities, yes — with the usual conditions.** Each is recognized by the University Grants Commission, but not all in the same way: Bharathidasan University is a state university recognized under Sections 2(f) and 12(B) of the UGC Act, PRIST is a deemed-to-be university, and Rabindranath Tagore University is a state private university. Marjon University is in the United Kingdom, so the UGC does not recognize it; a UK degree usually needs [UGC equivalence](https://aiu.ac.in/) before it counts for Indian government posts.
 
 The [UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020](https://www.ugc.gov.in/) treat distance and online degrees from recognized institutions as equivalent to campus degrees, provided the university held a valid [DEB](https://deb.ugc.ac.in/) entitlement for that programme in your admission year. Always check that entitlement before you enrol.
 
@@ -108,7 +108,7 @@ Four universities award the degrees we place students into. Each one's status ca
 1. **[Rabindranath Tagore University (RTU)](/universities/rabindranath-tagore-university)**: a state private university near Bhopal, established in 2010 (formerly AISECT University) and recognized by the UGC under Section 2(f).
 2. **[PRIST Deemed University](/universities/prist-deemed-university)**: Ponnaiyah Ramajayam Institute of Science and Technology, Thanjavur, a deemed-to-be university under Section 3 of the UGC Act since 2008.
 3. **[Bharathidasan University](/universities/bharathidasan-university)**: a state university in Tiruchirappalli, established in 1982, NAAC A+ accredited, running distance and online programmes through its own Centre for Distance and Online Education.
-4. **[Plymouth Marjon University](/universities/marjon-university)**: a UK university in Plymouth with roots going back to 1840 and full university status since 2013. Its degrees usually need AIU equivalence for Indian government posts.
+4. **[Plymouth Marjon University](/universities/marjon-university)**: a UK university in Plymouth with roots going back to 1840 and full university status since 2013. Its degrees usually need UGC equivalence for Indian government posts.
 
 All partner universities issue genuine, verifiable degrees with online digital transcript verification.
 

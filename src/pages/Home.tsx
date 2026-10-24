@@ -262,7 +262,7 @@ export default function Home() {
           <p className="mt-2 text-sm text-muted">
             Degrees awarded by UGC recognized universities in India, and by Marjon University in the
             United Kingdom. Check how each one applies to your goal: Indian government posts follow
-            each exam's notification, and a UK degree may need AIU equivalence.
+            each exam's notification, and a UK degree may need UGC equivalence.
           </p>
         </Reveal>
 

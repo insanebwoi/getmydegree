@@ -366,7 +366,7 @@ export default function Blog() {
                 </summary>
                 <div className="mt-3 text-sm leading-relaxed text-ink/80">
                   <p>
-                    For the Indian partner universities, yes: under the UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020, a distance or online degree from a recognized university, with a valid DEB entitlement for that programme, is treated as equivalent to a campus degree for UPSC, Kerala PSC, SSC and bank exams. Marjon University is a UK university, so its degrees usually need AIU equivalence for Indian government posts.
+                    For the Indian partner universities, yes: under the UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020, a distance or online degree from a recognized university, with a valid DEB entitlement for that programme, is treated as equivalent to a campus degree for UPSC, Kerala PSC, SSC and bank exams. Marjon University is a UK university, so its degrees usually need UGC equivalence for Indian government posts.
                   </p>
                 </div>
               </details>

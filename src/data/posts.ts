@@ -157,6 +157,18 @@ export async function loadBody(slug: string): Promise<string | undefined> {
   return html
 }
 
+/**
+ * Article bodies link to each other, and a link can point at an article that is
+ * scheduled but not yet out. Those links are written as plain text until their
+ * target is live, so a reader never lands on a 404; the daily rebuild turns them
+ * back into links on the morning the target publishes.
+ */
+export function withLiveLinks(html: string, now: number = Date.now()): string {
+  return html.replace(/<a href="\/blog\/([^"#?]+)"[^>]*>([\s\S]*?)<\/a>/g, (link, slug: string, text: string) =>
+    getPost(slug) && !isPublished(slug, now) ? text : link,
+  )
+}
+
 export function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-IN', {
     day: 'numeric',

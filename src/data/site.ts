@@ -140,7 +140,7 @@ export const universities: {
       address: { locality: 'Tiruchirappalli', region: 'Tamil Nadu', country: 'IN' },
       website: 'https://www.bdu.ac.in/',
       sources: [
-        { label: 'Centre for Distance and Online Education', url: 'https://sde.b-u.ac.in/' },
+        { label: 'Centre for Distance and Online Education', url: 'https://www.bdu.ac.in/cde/' },
         { label: 'UGC-DEB recognised institutions', url: 'https://deb.ugc.ac.in/' },
       ],
     },
@@ -148,9 +148,9 @@ export const universities: {
       name: 'Marjon University',
       slug: 'marjon-university',
       location: 'Plymouth, United Kingdom',
-      body: 'Plymouth Marjon University traces its history to St John\u2019s College, founded in London in 1840, and has held full university status since 2013. For Indian government posts, a UK degree usually needs AIU equivalence.',
+      body: 'Plymouth Marjon University traces its history to St John\u2019s College, founded in London in 1840, and has held full university status since 2013. For Indian government posts, a UK degree usually needs UGC equivalence.',
       badge: 'UK Recognized',
-      validity: 'UK Degree · AIU Equivalence for India',
+      validity: 'UK Degree · UGC Equivalence for India',
       type: 'UK university',
       offers: ['Undergraduate degrees', 'Postgraduate degrees'],
       highlights: [
@@ -162,7 +162,7 @@ export const universities: {
       website: 'https://www.marjon.ac.uk/',
       sources: [
         { label: 'History of Marjon (marjon.ac.uk)', url: 'https://www.marjon.ac.uk/about-marjon/history/' },
-        { label: 'AIU equivalence for foreign degrees', url: 'https://aiu.ac.in/' },
+        { label: 'UGC equivalence for foreign degrees (2025 regulations)', url: 'https://www.ugc.gov.in/' },
       ],
     },
   ]

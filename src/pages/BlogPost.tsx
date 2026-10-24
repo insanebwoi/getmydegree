@@ -10,7 +10,7 @@ import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
 import { BlogSearch } from '../components/BlogSearch'
 import { ShareArticle } from '../components/ShareArticle'
-import { formatDate, getBody, getPost, loadBody, relatedPosts } from '../data/posts'
+import { formatDate, getBody, getPost, loadBody, relatedPosts, withLiveLinks } from '../data/posts'
 import { useIsPublished } from '../data/usePublishedPosts'
 import NotFound from './NotFound'
 
@@ -209,7 +209,7 @@ export default function BlogPost() {
                   <div
                     className="prose mt-9"
                     // Content is authored in this repo and compiled at build time.
-                    dangerouslySetInnerHTML={{ __html: body }}
+                    dangerouslySetInnerHTML={{ __html: withLiveLinks(body) }}
                   />
                 ) : (
                   <div className="mt-9" aria-busy="true">

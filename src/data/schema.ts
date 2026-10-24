@@ -334,7 +334,7 @@ export const blogSchema: object = graph(
         name: 'Are degrees completed through Get My Degree UGC approved and valid for government jobs?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'For the Indian partner universities, yes, provided the university held a valid Distance Education Bureau (DEB) entitlement for the programme in your admission year; eligibility for a given post follows that exam\'s notification. Marjon University is a UK university, so its degrees usually need AIU equivalence for Indian government posts.',
+          text: 'For the Indian partner universities, yes, provided the university held a valid Distance Education Bureau (DEB) entitlement for the programme in your admission year; eligibility for a given post follows that exam\'s notification. Marjon University is a UK university, so its degrees usually need UGC equivalence for Indian government posts.',
         },
       },
       {
