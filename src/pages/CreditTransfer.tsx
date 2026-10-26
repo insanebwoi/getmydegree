@@ -75,6 +75,7 @@ export default function CreditTransfer() {
       <Seo {...pageMeta['/credit-transfer']} schema={creditTransferSchema} />
 
       <PageHero
+        image="credit-transfer-banner"
         badge="Credit transfer"
         title="Complete your discontinued degree with credit transfer"
         intro="Left a degree partway through? The semesters you passed usually still count. We map them to a recognized university so you finish the remaining papers instead of starting again, with counselling in Thrissur and Malappuram, Kerala."

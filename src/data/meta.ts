@@ -81,6 +81,8 @@ export const pageMeta: Record<string, PageMeta> = {
     description:
       'Left a degree partway through? Carry the semesters you passed to a recognized university and finish only what remains. Free assessment in Thrissur.',
     path: '/credit-transfer',
+    image: '/images/credit-transfer/credit-transfer-banner.webp',
+    imageAlt: 'Complete your discontinued degree with credit transfer — Get My Degree',
     keywords: 'credit transfer degree kerala, complete discontinued degree, degree credit transfer, lateral entry degree kerala',
   },
   '/privacy-policy': {

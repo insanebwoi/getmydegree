@@ -124,6 +124,13 @@ const declared = {
     width: 1672,
     height: 941,
   },
+  'credit-transfer-banner': {
+    src: '/images/credit-transfer/credit-transfer-banner.webp',
+    alt: 'Graduation cap on a stack of books in front of a university building, for completing a discontinued degree with credit transfer',
+    note: 'Credit transfer page header banner',
+    width: 1881,
+    height: 836,
+  },
 } satisfies Record<string, ImageSlot>
 
 export type ImageName = keyof typeof declared
