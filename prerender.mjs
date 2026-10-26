@@ -191,6 +191,8 @@ for (const path of prerenderPaths) {
 const retired = {
   '/blog/balancing-full-time-work-with-an-online-degree': '/blog/studying-while-working-full-time',
   '/blog/degree-fees-instalments-and-emi-options': '/blog/what-a-degree-costs-and-how-emi-works',
+  // The old WordPress site's About page, still linked from elsewhere.
+  '/about-2': '/about',
 }
 for (const [from, to] of Object.entries(retired)) {
   const url = `${site.url}${to}`
@@ -203,7 +205,7 @@ for (const [from, to] of Object.entries(retired)) {
     <meta http-equiv="refresh" content="0; url=${to}" />
     <script>location.replace(${JSON.stringify(to)})</script>
   </head>
-  <body><p>This guide has moved to <a href="${to}">${url}</a>.</p></body>
+  <body><p>This page has moved to <a href="${to}">${url}</a>.</p></body>
 </html>
 `
   for (const target of [`dist${from}.html`, `dist${from}/index.html`]) {
@@ -263,6 +265,7 @@ console.log(`sitemap    → dist/sitemap.xml (${prerenderPaths.length} urls)`)
     [`${site.url}/about`, `${site.url}/images/about/about-banner.webp`],
     [`${site.url}/courses`, `${site.url}/images/courses/courses-banner.webp`],
     [`${site.url}/universities`, `${site.url}/images/universities/universities-banner.webp`],
+    [`${site.url}/credit-transfer`, `${site.url}/images/credit-transfer/credit-transfer-banner.webp`],
   ]
   for (const [loc, img] of siteImages) imageEntries.push(entry(loc, img))
 

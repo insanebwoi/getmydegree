@@ -252,4 +252,10 @@
       <image:loc>https://getmydegreeedu.com/images/universities/universities-banner.webp</image:loc>
     </image:image>
   </url>
+  <url>
+    <loc>https://getmydegreeedu.com/credit-transfer</loc>
+    <image:image>
+      <image:loc>https://getmydegreeedu.com/images/credit-transfer/credit-transfer-banner.webp</image:loc>
+    </image:image>
+  </url>
 </urlset>
