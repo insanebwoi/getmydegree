@@ -81,6 +81,13 @@ export default function PrivacyPolicy() {
               </li>
             </ul>
 
+            <h2 id="images">Images on this site</h2>
+            <p>
+              Our logo, banners and article covers are owned by {site.legalName}. You may show one
+              with a link back to the page it appears on. For any other use, such as printing or
+              advertising, <Link to="/contact">ask us first</Link>.
+            </p>
+
             <h2>Contact</h2>
             <p>
               {site.legalName}

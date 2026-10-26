@@ -8,6 +8,7 @@ import { Reveal } from '../components/Reveal'
 import { PageHero } from '../components/PageHero'
 import { BlogSearch } from '../components/BlogSearch'
 import { Photo } from '../components/Photo'
+import { ImageRightsMeta } from '../components/ImageRightsMeta'
 import { categories, formatDate, PAGE_SIZE, type Post } from '../data/posts'
 import { usePublishedPosts } from '../data/usePublishedPosts'
 import { isPreviewing } from '../data/postSchedule'
@@ -35,6 +36,7 @@ function Card({ post, delay }: { post: Post; delay: number }) {
             />
             <meta itemProp="name" content={post.title} />
             <meta itemProp="caption" content={post.coverAlt ?? post.title} />
+            <ImageRightsMeta slug={post.slug} year={new Date(post.date).getFullYear()} />
           </figure>
           <div className="card-p flex flex-1 flex-col">
             <div className="flex flex-wrap items-center gap-2">
@@ -241,6 +243,7 @@ export default function Blog() {
                   />
                   <meta itemProp="name" content={lead.title} />
                   <meta itemProp="caption" content={lead.coverAlt ?? lead.title} />
+                  <ImageRightsMeta slug={lead.slug} year={new Date(lead.date).getFullYear()} />
                 </figure>
                 <div className="card-p flex flex-col justify-center lg:p-10">
                   <div className="flex flex-wrap items-center gap-2">

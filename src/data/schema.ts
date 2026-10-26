@@ -1,4 +1,6 @@
 import { centers, courses, site, universities } from './site'
+import { imageRights } from './imageRights'
+import { ogImageFor } from './images'
 import { allPosts, postsByDate } from './posts'
 import { courseSlug, eligibilityFor, studyFormat } from './courses'
 
@@ -21,10 +23,15 @@ const organization = {
   url: site.url,
   logo: {
     '@type': 'ImageObject',
+    '@id': `${site.url}/#logo`,
     url: `${site.url}/logo.webp`,
+    contentUrl: `${site.url}/logo.webp`,
+    width: 400,
+    height: 90,
     caption: 'Get My Degree Official Logo',
+    ...imageRights(),
   },
-  image: `${site.url}/logo.webp`,
+  image: { '@id': `${site.url}/#logo` },
   email: site.email,
   telephone: `+${site.phoneHref.replace(/\D/g, '')}`,
   contactPoint: centers.map((c) => ({
@@ -288,9 +295,11 @@ export const blogSchema: object = graph(
     image: {
       '@type': 'ImageObject',
       url: `${site.url}/images/blog/blog-banner.webp`,
-      width: 1672,
-      height: 941,
+      contentUrl: `${site.url}/images/blog/blog-banner.webp`,
+      width: 1600,
+      height: 901,
       caption: 'Get My Degree Degree Guides & Articles',
+      ...imageRights(),
     },
     isPartOf: { '@id': WEBSITE },
     publisher: { '@id': ORG },
@@ -308,7 +317,13 @@ export const blogSchema: object = graph(
         '@id': `${site.url}/blog/${post.slug}#article`,
         headline: post.title,
         description: post.description ?? post.excerpt,
-        image: coverUrl,
+        image: {
+          '@type': 'ImageObject',
+          url: coverUrl,
+          contentUrl: coverUrl,
+          caption: post.coverAlt ?? post.title,
+          ...imageRights(post.slug, new Date(post.date).getFullYear()),
+        },
         datePublished: post.publishedAt,
         dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
         author: { '@id': ORG },
@@ -369,7 +384,8 @@ export function postSchema(slug: string): object | undefined {
   const imageAlt = post.coverAlt ?? post.title
   const copyrightYear = new Date(post.date).getFullYear()
 
-  // Google Images Licensable metadata and Rich Results
+  // Google Images reads the rights fields to badge the image as licensable.
+  const size = ogImageFor(post.slug, coverUrl)
   const imageObject = {
     '@type': 'ImageObject',
     '@id': imageId,
@@ -378,31 +394,13 @@ export function postSchema(slug: string): object | undefined {
     caption: imageAlt,
     description: `${post.title} — ${post.excerpt}`,
     name: post.title,
-    width: 1400,
-    height: 787,
+    width: size.width ?? 1600,
+    height: size.height ?? 900,
     inLanguage: 'en-IN',
-    encodingFormat: 'image/webp',
+    encodingFormat: coverUrl.endsWith('.jpg') ? 'image/jpeg' : 'image/webp',
     representativeOfPage: true,
-    license: `${site.url}/about`,
-    acquireLicensePage: `${site.url}/contact`,
-    creditText: `${site.name} Academic Guides`,
-    creator: {
-      '@type': 'EducationalOrganization',
-      '@id': ORG,
-      name: site.name,
-      url: site.url,
-    },
-    copyrightNotice: `© ${copyrightYear} ${site.name}. All rights reserved.`,
-    thumbnail: {
-      '@type': 'ImageObject',
-      url: coverUrl,
-      width: 400,
-      height: 225,
-    },
+    ...imageRights(post.slug, copyrightYear),
   }
-
-  // Google recommends providing multiple high-resolution images in 16:9, 4:3, and 1:1
-  const imageAspects = [coverUrl, coverUrl, coverUrl]
 
   const blogPostingNode: Record<string, unknown> = {
     '@type': ['BlogPosting', 'Article'],
@@ -417,7 +415,7 @@ export function postSchema(slug: string): object | undefined {
     datePublished: post.publishedAt,
     dateModified: post.updated ? new Date(post.updated).toISOString() : post.publishedAt,
     timeRequired: `PT${post.readingMinutes}M`,
-    image: [imageObject, ...imageAspects],
+    image: { '@id': imageId },
     inLanguage: 'en-IN',
     isAccessibleForFree: true,
     copyrightYear,
@@ -430,12 +428,7 @@ export function postSchema(slug: string): object | undefined {
       '@id': ORG,
       name: site.name,
       url: site.url,
-      logo: {
-        '@type': 'ImageObject',
-        url: `${site.url}/logo.webp`,
-        width: 512,
-        height: 512,
-      },
+      logo: { '@id': `${site.url}/#logo` },
     },
     speakable: {
       '@type': 'SpeakableSpecification',

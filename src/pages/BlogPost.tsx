@@ -4,12 +4,13 @@ import { ArrowLeft, ArrowRight, ChevronDown, HelpCircle, CheckCircle2 } from 'lu
 import { Seo } from '../components/Seo'
 import { metaFor } from '../data/meta'
 import { courseSlug, guideCourses } from '../data/courses'
-import { courses, site } from '../data/site'
+import { courses } from '../data/site'
 import { postSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
 import { BlogSearch } from '../components/BlogSearch'
 import { ShareArticle } from '../components/ShareArticle'
+import { ImageRightsMeta } from '../components/ImageRightsMeta'
 import { formatDate, getBody, getPost, loadBody, relatedPosts, withLiveLinks } from '../data/posts'
 import { useIsPublished } from '../data/usePublishedPosts'
 import NotFound from './NotFound'
@@ -180,11 +181,7 @@ export default function BlogPost() {
                   <meta itemProp="name" content={post.title} />
                   <meta itemProp="caption" content={post.coverAlt ?? post.title} />
                   <meta itemProp="description" content={post.excerpt} />
-                  <meta itemProp="license" content={`${site.url}/about`} />
-                  <meta itemProp="acquireLicensePage" content={`${site.url}/contact`} />
-                  <meta itemProp="creditText" content="GetMyDegree Academic Guides" />
-                  <meta itemProp="width" content="1400" />
-                  <meta itemProp="height" content="787" />
+                  <ImageRightsMeta slug={post.slug} year={new Date(post.date).getFullYear()} />
                 </figure>
 
                 {/* Key Guide Takeaways block for Google Featured Snippets and instant reader orientation */}
