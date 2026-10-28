@@ -6,9 +6,6 @@
  */
 export const stockCovers = new Set<string>([
   'credit-transfer-degree-kerala',
-  'complete-discontinued-degree-kerala',
-  'distance-education-thrissur',
-  'distance-education-malappuram',
   'bharathidasan-university-distance-education',
   'prist-university-online-degree',
   'rabindranath-tagore-university-distance-degree',
