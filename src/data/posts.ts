@@ -82,7 +82,10 @@ export const allPosts: Post[] = Object.entries(metaModules)
       ...meta,
       slug,
       date: row?.date ?? meta.date,
-      cover: row?.image ?? imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`),
+      // A cover we host goes through the image manifest, which versions its URL.
+      cover: row?.image?.startsWith('/images/')
+        ? imageSrc(row.image.replace(/^.*\//, '').replace(/\.[^.]+$/, ''), row.image)
+        : (row?.image ?? imageSrc(slug, meta.cover ?? `/images/blog/${slug}.svg`)),
       coverAlt: row?.alt ?? defaultAltMap[slug] ?? meta.title,
       publishedAt: row ? releaseIso(row.date) : new Date(meta.date).toISOString(),
     }

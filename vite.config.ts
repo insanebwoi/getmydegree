@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync } from 'node:fs'
 import { extname, join, basename } from 'node:path'
 import { defineConfig, type Plugin } from 'vite'
@@ -130,6 +131,22 @@ function imageSize(file: string): { width: number; height: number } | undefined 
 
 type OgImage = { src: string; width: number; height: number }
 
+/**
+ * Appends a short hash of the file's bytes, `?v=1a2b3c4d`. The server tells
+ * browsers to keep images for 30 days without asking again, so a cover
+ * replaced under the same name would otherwise stay stale for a month, in
+ * browsers and in WhatsApp and Facebook previews alike. A new file is a new
+ * hash, which is a new URL.
+ */
+function versioned(src: string) {
+  try {
+    const bytes = readFileSync(join(process.cwd(), 'public', src.replace(/^\//, '')))
+    return `${src}?v=${createHash('sha1').update(bytes).digest('hex').slice(0, 8)}`
+  } catch {
+    return src
+  }
+}
+
 function imageManifest(): Plugin {
   const virtualId = 'virtual:image-manifest'
   const resolvedId = '\0' + virtualId
@@ -137,6 +154,7 @@ function imageManifest(): Plugin {
   const build = () => {
     const manifest: Record<string, string> = {}
     scanImages(imagesDir, '/images', manifest)
+    for (const name of Object.keys(manifest)) manifest[name] = versioned(manifest[name])
     return manifest
   }
   const buildOgManifest = () => {
@@ -145,7 +163,7 @@ function imageManifest(): Plugin {
     const manifest: Record<string, OgImage> = {}
     for (const [name, src] of Object.entries(paths)) {
       const size = imageSize(join(process.cwd(), 'public', src.replace(/^\//, '')))
-      if (size) manifest[name] = { src, ...size }
+      if (size) manifest[name] = { src: versioned(src), ...size }
     }
     return manifest
   }
