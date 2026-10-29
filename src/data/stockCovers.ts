@@ -8,11 +8,5 @@ export const stockCovers = new Set<string>([
   'credit-transfer-degree-kerala',
   'distance-msw-kerala',
   'distance-ba-kerala-psc',
-  'online-vs-regular-mba',
   'government-jobs-distance-degree-kerala',
-  'degree-for-gulf-returnees',
-  'degree-for-housewives-kerala',
-  'degree-for-kerala-government-employees',
-  'dropout-to-graduate-success-story',
-  'distance-degree-faq-kerala',
 ])

@@ -306,7 +306,7 @@ export const schedule: ScheduledPost[] = [
     slug: 'prist-university-online-degree',
     date: '2026-10-29',
     image: cover('prist-university-online-degree'),
-    alt: 'Get My Degree cover: PRIST University online degree — is it valid? Courses, recognition and admission 2026, with the PRIST University gate',
+    alt: 'Get My Degree cover: PRIST University online degree — is it valid? Courses and admission, with the PRIST deemed-to-be university building',
   },
   {
     day: 39,
@@ -425,7 +425,7 @@ export const schedule: ScheduledPost[] = [
     slug: 'online-vs-regular-mba',
     date: '2026-11-15',
     image: cover('online-vs-regular-mba'),
-    alt: 'Group of people at a table in front of a projector screen, comparing online and regular MBA',
+    alt: 'Get My Degree cover: online MBA vs regular MBA for Kerala professionals — comparing flexibility, cost, campus experience and networking',
   },
   {
     day: 56,
@@ -446,35 +446,35 @@ export const schedule: ScheduledPost[] = [
     slug: 'degree-for-gulf-returnees',
     date: '2026-11-18',
     image: cover('degree-for-gulf-returnees'),
-    alt: 'Small house in a green forest, a Gulf returnee restarting a career in Kerala with a degree',
+    alt: 'Get My Degree cover: a degree for Gulf returnees — restart your career in Kerala, a returnee at the airport arrivals gate',
   },
   {
     day: 59,
     slug: 'degree-for-housewives-kerala',
     date: '2026-11-19',
     image: cover('degree-for-housewives-kerala'),
-    alt: 'Person holding a book, a homemaker finishing a degree after a career break',
+    alt: 'Get My Degree cover: degree completion for homemakers and women returning after a career break, studying from home in Kerala',
   },
   {
     day: 60,
     slug: 'degree-for-kerala-government-employees',
     date: '2026-11-20',
     image: cover('degree-for-kerala-government-employees'),
-    alt: 'Bus on a road, for a degree promotion guide for police, KSRTC and Kerala government employees',
+    alt: 'Get My Degree cover: a degree for police, KSRTC and Kerala government employees — promotion guide, with staff outside the Secretariat',
   },
   {
     day: 61,
     slug: 'dropout-to-graduate-success-story',
     date: '2026-11-21',
     image: cover('dropout-to-graduate-success-story'),
-    alt: 'Man holding his graduation cap after completing a degree he once dropped out of',
+    alt: 'Get My Degree cover: from dropout to graduate — the same student before, stressed after dropping out, and after, holding a degree',
   },
   {
     day: 62,
     slug: 'distance-degree-faq-kerala',
     date: '2026-11-22',
     image: cover('distance-degree-faq-kerala'),
-    alt: 'Two women talking on a couch, answering common questions about distance degrees in Kerala',
+    alt: 'Get My Degree cover: 25 questions Kerala students ask about distance degrees — validity, UGC approved universities, fees, studying while working and government jobs',
   },
 ]
 
