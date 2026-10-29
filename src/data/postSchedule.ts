@@ -306,7 +306,7 @@ export const schedule: ScheduledPost[] = [
     slug: 'prist-university-online-degree',
     date: '2026-10-29',
     image: cover('prist-university-online-degree'),
-    alt: 'Woman studying on a laptop at a table for a PRIST University online degree',
+    alt: 'Get My Degree cover: PRIST University online degree — is it valid? Courses, recognition and admission 2026, with the PRIST University gate',
   },
   {
     day: 39,
