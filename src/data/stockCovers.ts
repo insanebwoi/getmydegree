@@ -5,8 +5,6 @@
  * and it picks up the full rights metadata.
  */
 export const stockCovers = new Set<string>([
-  'credit-transfer-degree-kerala',
-  'distance-msw-kerala',
   'distance-ba-kerala-psc',
   'government-jobs-distance-degree-kerala',
 ])

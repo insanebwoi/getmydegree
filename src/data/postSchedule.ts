@@ -271,7 +271,7 @@ export const schedule: ScheduledPost[] = [
     slug: 'credit-transfer-degree-kerala',
     date: '2026-10-24',
     image: cover('credit-transfer-degree-kerala'),
-    alt: 'Laptop and notes on a wooden desk while planning a degree credit transfer in Kerala',
+    alt: 'Get My Degree cover: degree credit transfer in Kerala, the complete 2026 guide — eligibility and rules, required documents, transfer process and colleges in Kerala',
   },
   {
     day: 34,
@@ -348,7 +348,7 @@ export const schedule: ScheduledPost[] = [
     slug: 'distance-msw-kerala',
     date: '2026-11-04',
     image: cover('distance-msw-kerala'),
-    alt: 'Group of women sitting together, for a guide to the distance MSW and social work careers',
+    alt: 'Get My Degree cover: distance MSW in Kerala, is it valid for social work jobs — UGC-DEB recognition, fieldwork, NGO and social sector jobs, employer rules',
   },
   {
     day: 45,
