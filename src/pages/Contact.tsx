@@ -16,6 +16,7 @@ import { pageMeta } from '../data/meta'
 import { contactSchema } from '../data/schema'
 import { counsellingRequest, href } from '../data/whatsapp'
 import { Reveal } from '../components/Reveal'
+import { GuideLinks } from '../components/GuideLinks'
 import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { centers, courses, site, stats } from '../data/site'
@@ -552,6 +553,11 @@ export default function Contact() {
             </div>
           </div>
         </Reveal>
+      </div>
+
+      <div className="shell pb-12 sm:pb-16 lg:pb-20">
+        <h2 className="t-h3 font-display font-medium text-ink">Guides for students in Thrissur and Malappuram</h2>
+        <GuideLinks path="/contact" className="mt-5" />
       </div>
     </>
   )

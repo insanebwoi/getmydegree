@@ -5,6 +5,7 @@ import { metaFor } from '../data/meta'
 import { universitySchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
 import { Section } from '../components/Section'
+import { GuideLinks } from '../components/GuideLinks'
 import { courses, universities } from '../data/site'
 import { courseSlug } from '../data/courses'
 import NotFound from './NotFound'
@@ -164,6 +165,10 @@ export default function UniversityPage() {
             </Reveal>
           ))}
         </ul>
+      </Section>
+
+      <Section align="left" title={`Guides on ${university.name}`}>
+        <GuideLinks path={`/universities/${slug}`} />
       </Section>
 
       <Section align="left" title="Other partner universities">

@@ -184,6 +184,126 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
     label: 'Programmes to start an application with',
   },
+  'credit-transfer-degree-kerala': {
+    codes: ['B.Com', 'BBA', 'BCA', 'BA'],
+    label: 'Degrees students most often resume with transferred credits',
+  },
+  'complete-discontinued-degree-kerala': {
+    codes: ['B.Com', 'BBA', 'BA', 'B.Sc'],
+    label: 'Degrees people most often return to finish',
+  },
+  'distance-education-thrissur': {
+    codes: ['B.Com', 'BBA', 'BA', 'MBA'],
+    label: 'Programmes students in Thrissur most often ask about',
+  },
+  'distance-education-malappuram': {
+    codes: ['B.Com', 'BA', 'BBA', 'MBA'],
+    label: 'Programmes students in Malappuram most often ask about',
+  },
+  'bharathidasan-university-distance-education': {
+    codes: ['BA', 'B.Com', 'MBA', 'M.Com'],
+    label: 'Programmes to compare before you apply',
+  },
+  'prist-university-online-degree': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes to compare before you apply',
+  },
+  'rabindranath-tagore-university-distance-degree': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes to compare before you apply',
+  },
+  'marjon-university-uk-mba-kerala': {
+    codes: ['MBA', 'M.Com'],
+    label: 'Indian postgraduate programmes to compare it with',
+  },
+  'online-mba-kerala-working-professionals': {
+    codes: ['MBA', 'M.Com', 'MCA'],
+    label: 'Postgraduate programmes built around working hours',
+  },
+  'distance-bcom-kerala': {
+    codes: ['B.Com', 'BBA', 'M.Com', 'MBA'],
+    label: 'The degree, and where it continues',
+  },
+  'online-bca-kerala': {
+    codes: ['BCA', 'B.Sc', 'MCA'],
+    label: 'The degree, and where it continues',
+  },
+  'distance-msw-kerala': {
+    codes: ['MSW', 'BA'],
+    label: 'The degree, and the route to it',
+  },
+  'distance-ba-kerala-psc': {
+    codes: ['BA', 'B.Com', 'B.Sc'],
+    label: 'Bachelor’s degrees that meet the graduate eligibility bar',
+  },
+  'distance-degree-valid-kerala-psc': {
+    codes: ['BA', 'B.Com', 'B.Sc', 'BBA'],
+    label: 'Bachelor’s degrees that meet the graduate eligibility bar',
+  },
+  'online-degree-valid-gulf-jobs': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes Gulf applicants most often ask about',
+  },
+  'degree-attestation-gulf': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes Gulf applicants most often ask about',
+  },
+  'lateral-entry-degree': {
+    codes: ['B.Com', 'BBA', 'BCA', 'B.Sc'],
+    label: 'Degrees people most often join partway',
+  },
+  'degree-with-supplementary-papers': {
+    codes: ['B.Com', 'BBA', 'BA', 'B.Sc'],
+    label: 'Degrees people most often return to finish',
+  },
+  'degree-after-long-gap': {
+    codes: ['B.Com', 'BBA', 'BA', 'MBA'],
+    label: 'Programmes that fit a return after years away',
+  },
+  'degree-after-plus-two-working': {
+    codes: ['B.Com', 'BBA', 'BCA', 'BA'],
+    label: 'Bachelor’s degrees to start from Plus Two',
+  },
+  'spot-fake-degree-provider': {
+    codes: ['BA', 'B.Com', 'BBA', 'MBA'],
+    label: 'Programmes we place students into, at recognized universities',
+  },
+  'credit-transfer-vs-lateral-entry': {
+    codes: ['B.Com', 'BBA', 'BCA', 'BA'],
+    label: 'Degrees students most often resume',
+  },
+  'online-vs-regular-mba': {
+    codes: ['MBA', 'M.Com'],
+    label: 'Postgraduate programmes built around working hours',
+  },
+  'mcom-vs-mba': {
+    codes: ['M.Com', 'MBA'],
+    label: 'The two programmes compared here',
+  },
+  'government-jobs-distance-degree-kerala': {
+    codes: ['BA', 'B.Com', 'B.Sc', 'BBA'],
+    label: 'Bachelor’s degrees that meet the graduate eligibility bar',
+  },
+  'degree-for-gulf-returnees': {
+    codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
+    label: 'Programmes returnees most often ask about',
+  },
+  'degree-for-housewives-kerala': {
+    codes: ['BA', 'B.Com', 'MSW', 'BBA'],
+    label: 'Programmes that fit around home and family',
+  },
+  'degree-for-kerala-government-employees': {
+    codes: ['BA', 'B.Com', 'MBA', 'MSW'],
+    label: 'Programmes to check against your service rules',
+  },
+  'dropout-to-graduate-success-story': {
+    codes: ['B.Com', 'BBA', 'BA', 'BCA'],
+    label: 'Degrees people most often return to finish',
+  },
+  'distance-degree-faq-kerala': {
+    codes: ['BA', 'B.Com', 'BBA', 'MBA'],
+    label: 'Programmes we place students into, at recognized universities',
+  },
 }
 
 /**

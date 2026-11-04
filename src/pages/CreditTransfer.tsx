@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Check, X } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { PageHero } from '../components/PageHero'
+import { GuideLinks } from '../components/GuideLinks'
 import { Section } from '../components/Section'
 import { Reveal } from '../components/Reveal'
 import { pageMeta } from '../data/meta'
@@ -199,6 +200,10 @@ export default function CreditTransfer() {
           </a>
           .
         </p>
+      </Section>
+
+      <Section badge="Guides" title="Read more on completing a degree">
+        <GuideLinks path="/credit-transfer" />
       </Section>
     </>
   )

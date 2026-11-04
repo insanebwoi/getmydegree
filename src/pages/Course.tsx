@@ -16,11 +16,8 @@ import {
   relatedCourses,
   studyFormat,
 } from '../data/courses'
-import { posts } from '../data/posts'
+import { GuideLinks } from '../components/GuideLinks'
 import NotFound from './NotFound'
-
-/** The two guides every programme page should hand a reader next. */
-const GUIDE_SLUGS = ['credit-transfer-explained', 'studying-while-working-full-time']
 
 export default function Course() {
   const { slug = '' } = useParams()
@@ -37,7 +34,6 @@ export default function Course() {
     { icon: Layers, label: 'Field', value: course.field },
     { icon: BadgeCheck, label: 'Study format', value: 'Distance / online, no attendance' },
   ]
-  const guides = posts.filter((p) => GUIDE_SLUGS.includes(p.slug))
 
   return (
     <>
@@ -238,18 +234,7 @@ export default function Course() {
           ))}
         </ul>
 
-        <div className="mt-8 grid gap-3 sm:grid-cols-2">
-          {guides.map((g) => (
-            <Link
-              key={g.slug}
-              to={`/blog/${g.slug}`}
-              className="card card-p card-hover flex items-start gap-3"
-            >
-              <Check size={16} className="mt-0.5 shrink-0 text-navy" aria-hidden="true" />
-              <span className="text-sm leading-snug text-ink">{g.title}</span>
-            </Link>
-          ))}
-        </div>
+        <GuideLinks path={`/courses/${slug}`} className="mt-8" />
 
         {/*
           The page ends on an action rather than a list. A reader who has come
