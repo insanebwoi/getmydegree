@@ -193,6 +193,8 @@ const retired = {
   '/blog/degree-fees-instalments-and-emi-options': '/blog/what-a-degree-costs-and-how-emi-works',
   // The old WordPress site's About page, still linked from elsewhere.
   '/about-2': '/about',
+  '/hello-world': '/blog',
+  '/feed': '/blog',
 }
 for (const [from, to] of Object.entries(retired)) {
   const url = `${site.url}${to}`
