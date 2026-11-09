@@ -14,6 +14,7 @@ import {
 } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { courseSlug } from '../data/courses'
+import { BtechPromo } from '../components/BtechPromo'
 import { pageMeta } from '../data/meta'
 import { homeSchema } from '../data/schema'
 import { Reveal } from '../components/Reveal'
@@ -37,7 +38,7 @@ import {
   type Course,
 } from '../data/site'
 
-const featured = courses.filter((c) => ['BBA', 'BCA', 'MBA', 'MCA'].includes(c.code))
+const featured = courses.filter((c) => ['B.Tech', 'BBA', 'BCA', 'MBA'].includes(c.code))
 
 const perks = [
   {
@@ -373,7 +374,7 @@ export default function Home() {
       <Section
         badge="Programs"
         title="Recognized UG and PG degrees"
-        intro="Nine programs across commerce, management, technology, humanities and social work."
+        intro="Ten programs across engineering, commerce, management, technology, humanities and social work."
       >
         <div className="grid gap-4 lg:grid-cols-12">
           <div className="grid gap-4 sm:grid-cols-2 lg:col-span-8">
@@ -414,7 +415,7 @@ export default function Home() {
               <div>
                 <span className="badge badge-dark">All programs</span>
                 <h3 className="mt-5 font-display text-2xl font-medium">
-                  Five undergraduate and four postgraduate degrees
+                  Six undergraduate and four postgraduate degrees
                 </h3>
                 <p className="mt-4 text-base leading-relaxed text-white/65 md:text-sm">
                   Each is awarded by a recognized university partner, studied around your job and
@@ -437,7 +438,7 @@ export default function Home() {
                     className="absolute inset-x-0 bottom-0 h-2/5 bg-[linear-gradient(to_top,rgba(5,18,41,0.55),transparent)]"
                   />
                   <Link to="/courses" className="btn btn-gold absolute bottom-4 left-4">
-                    See all nine
+                    See all ten
                   </Link>
                 </div>
               </div>
@@ -445,6 +446,8 @@ export default function Home() {
           </Reveal>
         </div>
       </Section>
+
+      <BtechPromo className="pb-12 sm:pb-16" />
 
       {/* Situations */}
       <Section

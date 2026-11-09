@@ -74,7 +74,7 @@ export function reportPhoneConversion(url?: string): boolean {
   if (typeof window !== 'undefined' && typeof window.gtag_report_conversion === 'function') {
     return window.gtag_report_conversion(url)
   }
-  trackConversion('phone_call', { phone_number: '9207677828' })
+  trackConversion('phone_call', { phone_number: '9497777222' })
   return true
 }
 

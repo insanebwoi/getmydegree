@@ -78,7 +78,7 @@ The centre is at Labba Building, 1st Floor, Beach Road, Vadanappally, Thrissur 6
 
 - From Chavakkad, Guruvayur, Triprayar or Kodungallur, buses along the coastal highway stop at Vadanappally.
 
-- If you are unsure, call 92076 77828 before you set out and we will guide you.
+- If you are unsure, call 94977 77222 before you set out and we will guide you.
 
 Office hours are Monday to Saturday, 9am to 7pm. Saturday is the busiest day, so a weekday visit usually means less waiting.
 

@@ -9,8 +9,8 @@ export const site = {
   description:
     'Get My Degree offers flexible, UGC recognized UG & PG degree programs and academic credit transfer for working professionals, dropouts and gap-year students across India.',
   email: 'getmydegreeedu@gmail.com',
-  phone: '+91 92076 77828',
-  phoneHref: '+919207677828',
+  phone: '+91 94977 77222',
+  phoneHref: '+919497777222',
   officeHours: 'Mon–Sat · 9am to 7pm',
   established: 2021,
   social: {
@@ -24,6 +24,7 @@ export const nav = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Courses', to: '/courses' },
+  { label: 'B.Tech', to: '/courses/btech' },
   { label: 'Credit transfer', to: '/credit-transfer' },
   { label: 'Blog', to: '/blog' },
   { label: 'Contact', to: '/contact' },
@@ -33,8 +34,8 @@ export const centers = [
   {
     city: 'Thrissur',
     address: 'Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur',
-    phone: '92076 77828',
-    phoneHref: '+919207677828',
+    phone: '94977 77222',
+    phoneHref: '+919497777222',
     locality: 'Vadanappally',
     postalCode: '680614',
     map: 'https://www.google.com/maps/search/?api=1&query=Labba+Building+Beach+Road+Vadanappally+Thrissur+680614',
@@ -260,9 +261,39 @@ export type Course = {
   body: string
   level: 'UG' | 'PG'
   years: string
+  /**
+   * Set only where a programme is not taken by distance or online. Every other
+   * course page says "Distance", "no attendance" and "UGC recognized"; an
+   * engineering degree cannot honestly say any of those, so it carries its
+   * own words for each.
+   */
+  delivery?: {
+    /** Follows the code in the H1, in place of the "Distance" lead-in. */
+    headline: string
+    /** Short format label, for the fact card and the hero chip. */
+    format: string
+    /** Recognition line on the listing card, in place of "UGC recognized". */
+    recognition: string
+    /** schema.org CourseInstance courseMode. */
+    courseMode: 'online' | 'onsite' | 'blended'
+  }
 }
 
 export const courses: Course[] = [
+  {
+    code: 'B.Tech',
+    name: 'Bachelor of Technology',
+    field: 'Engineering & Technology',
+    body: 'An AICTE-approved engineering degree for working professionals, with classes outside working hours and lateral entry to the second year for diploma holders.',
+    level: 'UG',
+    years: '4 years (3 by lateral entry)',
+    delivery: {
+      headline: 'for Working Professionals',
+      format: 'Evening / weekend classes',
+      recognition: 'AICTE approved',
+      courseMode: 'onsite',
+    },
+  },
   {
     code: 'B.Com',
     name: 'Bachelor of Commerce',

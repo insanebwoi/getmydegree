@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, Phone } from 'lucide-react'
 import { nav, site } from '../data/site'
 import { reportPhoneConversion } from '../data/tracking'
@@ -7,6 +7,11 @@ import { ApplyDialog } from './ApplyDialog'
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
+  const { pathname } = useLocation()
+  /* B.Tech has its own entry, so on its page the Courses entry stays quiet
+     rather than both lighting up. */
+  const active = (to: string, isActive: boolean) =>
+    isActive && !(to === '/courses' && pathname.startsWith('/courses/btech'))
   const [scrolled, setScrolled] = useState(false)
   const [booking, setBooking] = useState(false)
   const close = () => setOpen(false)
@@ -60,12 +65,17 @@ export function Navbar() {
                   to={item.to}
                   end={item.to === '/'}
                   className={({ isActive }) =>
-                    `rounded-full px-4 py-2 text-[0.9375rem] font-medium whitespace-nowrap transition-colors lg:px-3 xl:px-4 ${
-                      isActive ? 'bg-navy-50 text-navy' : 'text-muted hover:text-ink'
+                    `rounded-full px-4 py-2 text-[0.9375rem] font-medium whitespace-nowrap transition-colors lg:px-2.5 xl:px-3 2xl:px-4 ${
+                      active(item.to, isActive) ? 'bg-navy-50 text-navy' : 'text-muted hover:text-ink'
                     }`
                   }
                 >
                   {item.label}
+                  {item.to === '/courses/btech' && (
+                    <span className="ml-1.5 hidden rounded-full bg-gold xl:inline px-1.5 py-0.5 align-middle text-[0.625rem] font-semibold tracking-wide text-navy-950 uppercase">
+                      New
+                    </span>
+                  )}
                 </NavLink>
               ))}
             </nav>
@@ -83,7 +93,7 @@ export function Navbar() {
                 type="button"
                 onClick={() => setBooking(true)}
                 aria-haspopup="dialog"
-                className="btn btn-primary hidden cursor-pointer text-sm sm:inline-flex"
+                className="btn btn-primary hidden shrink-0 cursor-pointer text-sm whitespace-nowrap sm:inline-flex"
               >
                 Book a call
               </button>
@@ -110,11 +120,16 @@ export function Navbar() {
                   onClick={close}
                   className={({ isActive }) =>
                     `rounded-2xl px-4 py-3.5 font-display text-lg font-medium ${
-                      isActive ? 'bg-navy-50 text-navy' : 'text-ink'
+                      active(item.to, isActive) ? 'bg-navy-50 text-navy' : 'text-ink'
                     }`
                   }
                 >
                   {item.label}
+                  {item.to === '/courses/btech' && (
+                    <span className="ml-1.5 rounded-full bg-gold px-1.5 py-0.5 align-middle text-[0.625rem] font-semibold tracking-wide text-navy-950 uppercase">
+                      New
+                    </span>
+                  )}
                 </NavLink>
               ))}
               <button

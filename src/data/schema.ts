@@ -2,7 +2,7 @@ import { centers, courses, site, universities } from './site'
 import { imageRights } from './imageRights'
 import { ogImageFor } from './images'
 import { allPosts, postsByDate } from './posts'
-import { courseSlug, eligibilityFor, studyFormat } from './courses'
+import { courseFaqs, courseSlug, eligibilityFor, studyFormatFor } from './courses'
 
 /**
  * JSON-LD structured data. Every node is anchored with an @id so pages can
@@ -167,11 +167,25 @@ export function courseSchema(slug: string): object | undefined {
       coursePrerequisites: eligibilityFor(course),
       hasCourseInstance: {
         '@type': 'CourseInstance',
-        courseMode: 'online',
+        courseMode: course.delivery?.courseMode ?? 'online',
         courseWorkload: `P${years}Y`,
-        description: studyFormat,
+        description: studyFormatFor(course),
       },
     },
+    ...(courseFaqs[course.code]
+      ? [
+          {
+            '@type': 'FAQPage',
+            '@id': `${url}#faq`,
+            url,
+            mainEntity: courseFaqs[course.code].map((f) => ({
+              '@type': 'Question',
+              name: f.question,
+              acceptedAnswer: { '@type': 'Answer', text: f.answer },
+            })),
+          },
+        ]
+      : []),
     breadcrumb([
       { name: 'Courses', path: '/courses' },
       { name: course.code, path: `/courses/${slug}` },

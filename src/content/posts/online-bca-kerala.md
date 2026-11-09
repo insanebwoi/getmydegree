@@ -64,7 +64,7 @@ What it does not do:
 
 - **It does not override campus hiring patterns.** Many large firms recruit freshers mainly through college placement drives. Online students usually apply through off-campus routes, which are more competitive.
 
-- **It is not the same as an engineering degree** for roles that specifically ask for a B.Tech or BE.
+- **It is not the same as an engineering degree** for roles that specifically ask for a B.Tech or BE. If you need the B.Tech itself, read [why a distance B.Tech is not valid, and the working-professional route that is](/blog/distance-btech-kerala).
 
 ## Realistic career paths
 

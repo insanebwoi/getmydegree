@@ -30,7 +30,7 @@ It is not the same as:
 
 There is no single national rule, so the following are patterns, not promises.
 
-- **Diploma holders.** A polytechnic or similar diploma in a related field is the classic route. A diploma in computer applications or engineering, for example, may be accepted for entry into the second year of a related bachelor's programme at some universities. A diploma in an unrelated field usually is not.
+- **Diploma holders.** A polytechnic or similar diploma in a related field is the classic route. A diploma in computer applications or engineering, for example, may be accepted for entry into the second year of a related bachelor's programme at some universities. A diploma in an unrelated field usually is not. For engineering diploma holders who are working, lateral entry into the second year of an AICTE-approved [B.Tech for working professionals](/blog/distance-btech-kerala) is the valid alternative to a distance B.Tech, which is not recognized.
 
 - **Students who completed one or two years of a degree.** Some universities admit them directly into a later year if the subjects match closely enough. Others prefer to treat the case as credit transfer.
 

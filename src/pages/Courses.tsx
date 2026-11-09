@@ -22,6 +22,7 @@ import { BlogSearch } from '../components/BlogSearch'
 import { ApplyDialog } from '../components/ApplyDialog'
 import { courseHighlights, courses, eligibility, type Course } from '../data/site'
 import { courseSlug } from '../data/courses'
+import { BtechPromo } from '../components/BtechPromo'
 
 /** The mark drawn beside each outcome. */
 const HIGHLIGHT_ICONS: Record<string, typeof Check> = {
@@ -76,7 +77,7 @@ function CourseCard({
         <div className="mt-auto flex flex-wrap items-center justify-between gap-x-2 gap-y-1 pt-4">
           <span className="inline-flex items-center gap-1 text-[0.6875rem] font-medium text-muted">
             <BadgeCheck size={13} className="text-navy" aria-hidden="true" />
-            UGC recognized
+            {course.delivery?.recognition ?? 'UGC recognized'}
           </span>
           <button
             type="button"
@@ -125,16 +126,18 @@ export default function Courses() {
       <PageHero
         image="courses-banner"
         badge="Recognized degrees"
-        title="UG and PG degree programmes: B.Com, BBA, BCA, MBA and more"
-        intro="Five undergraduate and four postgraduate programs, built with flexible schedules for working professionals, gap-year students and career upgraders."
+        title="UG and PG degree programmes: B.Tech, B.Com, BBA, BCA, MBA and more"
+        intro="Six undergraduate and four postgraduate programs, including a B.Tech for working professionals, built with flexible schedules for working professionals, gap-year students and career upgraders."
       >
         <Link to="/contact" className="btn btn-primary">
           Get free counseling
         </Link>
         <a href="#all-programs" className="btn btn-ghost">
-          View all 9 programs
+          View all 10 programs
         </a>
       </PageHero>
+
+      <BtechPromo className="pb-10 sm:pb-12" />
 
       {/* Search and categories share one row; the chips scroll when they outgrow it. */}
       <div id="all-programs" className="shell pb-8">

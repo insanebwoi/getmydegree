@@ -26,6 +26,8 @@ export function relatedCourses(slug: string, count = 4) {
 
 /** Who a programme is open to. Kept at the level the site can stand behind. */
 export function eligibilityFor(course: Course) {
+  if (course.code === 'B.Tech')
+    return 'A three-year diploma in engineering for lateral entry to the second year, or Plus Two with Physics and Mathematics for the first year — and, for the working-professional route, current employment. The work-experience and distance-from-workplace conditions are set by AICTE and the institution, and are checked at counselling.'
   return course.level === 'UG'
     ? 'Class 12 (or an equivalent recognized qualification). Students who left an earlier degree partway may be eligible for credit transfer into a later year.'
     : 'A completed bachelor’s degree from a recognized university. The relevant discipline depends on the programme and the university.'
@@ -33,6 +35,50 @@ export function eligibilityFor(course: Course) {
 
 export const studyFormat =
   'Distance and online learning, with no attendance requirement and no fixed class hours, so the programme runs alongside full-time work.'
+
+/** How a given programme is studied. Engineering is the exception: the UGC
+ *  does not permit it by distance or online, so it is taught in person,
+ *  outside working hours. */
+export function studyFormatFor(course: Course) {
+  if (course.code === 'B.Tech')
+    return 'Classroom and laboratory sessions held in the evenings and at weekends at an AICTE-approved institution, so you keep your job while you study. Engineering is not offered by distance or online mode, because the practical work has to be done in a lab.'
+  return studyFormat
+}
+
+/**
+ * Questions answered on a programme's own page, and marked up as FAQPage.
+ * Written for the searches people actually make   "distance B.Tech Kerala" is
+ * one of them, and the honest answer is the useful one.
+ */
+export const courseFaqs: Record<string, { question: string; answer: string }[]> = {
+  'B.Tech': [
+    {
+      question: 'Is a distance B.Tech valid in Kerala?',
+      answer:
+        'No. The UGC does not permit engineering degrees by distance or online mode, and in 2017 the Supreme Court held distance engineering degrees awarded without AICTE approval to be invalid. Kerala PSC, government departments and most employers will not accept one. The valid route for someone who is working is an AICTE-approved B.Tech for working professionals.',
+    },
+    {
+      question: 'What is a B.Tech for working professionals?',
+      answer:
+        'A regular, AICTE-approved B.Tech in which classes are scheduled in the evenings and at weekends so that employed students can attend. It leads to the same B.Tech degree as the full-time programme, with the same labs, examinations and credits.',
+    },
+    {
+      question: 'Can I join B.Tech directly in the second year after a diploma?',
+      answer:
+        'Yes. Holders of a three-year diploma in engineering can join the second year through lateral entry and finish the B.Tech in three years instead of four, usually in the same or a related branch.',
+    },
+    {
+      question: 'Which B.Tech branches are available for working professionals?',
+      answer:
+        'It depends on the institution and the year. Civil, mechanical, electrical, electronics and computer science are the branches most often offered. Your counsellor confirms which branches are open near your workplace for the current intake.',
+    },
+    {
+      question: 'Is a working-professional B.Tech valid for government jobs and the Gulf?',
+      answer:
+        'An AICTE-approved B.Tech from a recognized university is a regular engineering degree, so it is accepted wherever a B.Tech is the requirement, including Kerala PSC and attestation for Gulf jobs. Check the approval of the specific institution before you enrol; we show you where to verify it.',
+    },
+  ],
+}
 
 /** Shown as the admission sequence on every course page. */
 export const admissionForCourse = [
@@ -149,7 +195,7 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     label: 'Programmes at universities we have verified',
   },
   'bsc-vs-bca-for-tech-jobs': {
-    codes: ['BCA', 'B.Sc', 'MCA', 'MBA'],
+    codes: ['BCA', 'B.Sc', 'B.Tech', 'MCA'],
     label: 'The two pathways, and where each one continues',
   },
   'equivalence-of-online-and-campus-degrees': {
@@ -248,8 +294,12 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
     label: 'Programmes Gulf applicants most often ask about',
   },
+  'distance-btech-kerala': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid engineering route, and the alternatives by distance',
+  },
   'lateral-entry-degree': {
-    codes: ['B.Com', 'BBA', 'BCA', 'B.Sc'],
+    codes: ['B.Tech', 'B.Com', 'BBA', 'BCA'],
     label: 'Degrees people most often join partway',
   },
   'degree-with-supplementary-papers': {
@@ -320,6 +370,25 @@ export const courseDetail: Record<
   string,
   { subjects: string[]; careers: string[]; suits: string }
 > = {
+  'B.Tech': {
+    subjects: [
+      'Engineering mathematics',
+      'Engineering physics and chemistry',
+      'Branch core: civil, mechanical, electrical, electronics or computer science',
+      'Laboratory and workshop practice',
+      'Engineering design and drawing',
+      'Final-year project',
+    ],
+    careers: [
+      'Engineer grade in your current company',
+      'Kerala PSC and central government engineering posts',
+      'Site, design and maintenance engineer roles',
+      'Gulf engineering jobs, after attestation',
+      'Further study: M.Tech, MBA',
+    ],
+    suits:
+      'Diploma holders and technicians already working in engineering who need the B.Tech to move from a technician or supervisor grade into an engineer grade.',
+  },
   'B.Com': {
     subjects: [
       'Financial accounting',

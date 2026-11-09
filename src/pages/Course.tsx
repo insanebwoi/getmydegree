@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { ArrowRight, BadgeCheck, CalendarDays, Check, GraduationCap, Layers } from 'lucide-react'
+import { ArrowRight, BadgeCheck, CalendarDays, Check, GraduationCap, Layers, TriangleAlert } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { metaFor } from '../data/meta'
 import { courseSchema } from '../data/schema'
@@ -10,11 +10,12 @@ import { ApplyDialog } from '../components/ApplyDialog'
 import {
   admissionForCourse,
   courseDetail,
+  courseFaqs,
   courseSlug,
   eligibilityFor,
   getCourse,
   relatedCourses,
-  studyFormat,
+  studyFormatFor,
 } from '../data/courses'
 import { GuideLinks } from '../components/GuideLinks'
 import NotFound from './NotFound'
@@ -28,11 +29,14 @@ export default function Course() {
 
   const level = course.level === 'UG' ? 'Undergraduate' : 'Postgraduate'
   const detail = courseDetail[course.code]
+  const faqs = courseFaqs[course.code]
+  const isBtech = course.code === 'B.Tech'
+  const format = course.delivery?.format ?? 'Distance / online, no attendance'
   const facts = [
     { icon: GraduationCap, label: 'Level', value: `${level} (${course.level})` },
     { icon: CalendarDays, label: 'Duration', value: course.years },
     { icon: Layers, label: 'Field', value: course.field },
-    { icon: BadgeCheck, label: 'Study format', value: 'Distance / online, no attendance' },
+    { icon: BadgeCheck, label: 'Study format', value: format },
   ]
 
   return (
@@ -74,13 +78,22 @@ export default function Course() {
           <Reveal className="relative mx-auto max-w-2xl">
             <span className="badge text-ink/80">{level} programme</span>
             <h1 className="t-h1 mt-4">
-              Distance {course.code} <span className="text-navy">{course.name}</span>
+              {course.delivery ? (
+                <>
+                  {course.code} {course.delivery.headline}{' '}
+                  <span className="text-navy">in Kerala</span>
+                </>
+              ) : (
+                <>
+                  Distance {course.code} <span className="text-navy">{course.name}</span>
+                </>
+              )}
             </h1>
             <p className="t-body mx-auto mt-4 max-w-xl text-ink/80">{course.body}</p>
 
             {/* The three facts a reader checks before anything else. */}
             <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-medium text-ink/75 sm:text-sm">
-              {[course.years, course.field, 'No attendance'].map((fact) => (
+              {[course.years, course.field, course.delivery ? course.delivery.recognition : 'No attendance'].map((fact) => (
                 <li
                   key={fact}
                   className="rounded-full border border-navy/10 bg-white/70 px-3 py-1.5 backdrop-blur-sm"
@@ -108,6 +121,34 @@ export default function Course() {
         </div>
       </section>
 
+      {/*
+        The search that brings most people here is "distance B.Tech", and the
+        answer to it is the most useful thing on the page, so it comes first.
+      */}
+      {isBtech && (
+        <div className="shell pb-10 sm:pb-14">
+          <Reveal>
+            <div className="card card-p flex flex-col gap-4 border-gold/60 bg-gold/10 sm:flex-row sm:items-start">
+              <TriangleAlert size={22} className="shrink-0 text-gold-700" aria-hidden="true" />
+              <div>
+                <h2 className="t-h3">Looking for a distance B.Tech in Kerala? Read this first</h2>
+                <p className="mt-2 text-sm leading-relaxed text-ink/80">
+                  A B.Tech by distance or online mode is not valid in India: the UGC does not permit
+                  engineering in those modes, and Kerala PSC and most employers reject such degrees.
+                  The legitimate way to earn a B.Tech while you keep your job is an{' '}
+                  <strong>AICTE-approved B.Tech for working professionals</strong>, with classes in
+                  the evenings and at weekends, and lateral entry to the second year if you hold a
+                  diploma. That is the programme we counsel and place you into.
+                </p>
+                <Link to="/blog/distance-btech-kerala" className="link-navy mt-3 inline-block text-sm font-medium">
+                  The full guide: distance B.Tech in Kerala, and the valid route
+                </Link>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      )}
+
       <Section align="left" title={`What the ${course.code} covers`}>
         <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {facts.map((f) => (
@@ -126,17 +167,29 @@ export default function Course() {
             <h2 className="t-h3">Who can apply</h2>
             <p className="mt-3 text-sm leading-relaxed text-muted">{eligibilityFor(course)}</p>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              If you left an earlier degree partway, read{' '}
-              <Link to="/blog/credit-transfer-explained" className="link-navy">
-                how credit transfer works for completed semesters
-              </Link>
-              .
+              {isBtech ? (
+                <>
+                  Holding a polytechnic diploma? Read{' '}
+                  <Link to="/blog/lateral-entry-degree" className="link-navy">
+                    how lateral entry to the second year works
+                  </Link>
+                  .
+                </>
+              ) : (
+                <>
+                  If you left an earlier degree partway, read{' '}
+                  <Link to="/blog/credit-transfer-explained" className="link-navy">
+                    how credit transfer works for completed semesters
+                  </Link>
+                  .
+                </>
+              )}
             </p>
           </div>
 
           <div className="card card-p">
             <h2 className="t-h3">How you study</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted">{studyFormat}</p>
+            <p className="mt-3 text-sm leading-relaxed text-muted">{studyFormatFor(course)}</p>
             <p className="mt-3 text-sm leading-relaxed text-muted">
               For a realistic picture of the weekly hours, see{' '}
               <Link to="/blog/studying-while-working-full-time" className="link-navy">
@@ -207,6 +260,21 @@ export default function Course() {
           </p>
         </div>
       </Section>
+
+      {faqs && (
+        <Section align="left" title={`${course.code} questions, answered`}>
+          <div className="grid gap-3">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="card card-p group">
+                <summary className="cursor-pointer list-none font-display text-base font-medium text-ink marker:hidden">
+                  <h3 className="inline">{faq.question}</h3>
+                </summary>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </Section>
+      )}
 
       <Section
         align="left"

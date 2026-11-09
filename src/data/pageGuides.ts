@@ -7,9 +7,10 @@ import { posts } from './posts'
  * everywhere. A slug not yet released is skipped until the daily rebuild.
  */
 const pageGuides: Record<string, string[]> = {
+  '/courses/btech': ['distance-btech-kerala', 'lateral-entry-degree', 'bsc-vs-bca-for-tech-jobs', 'online-bca-kerala'],
   '/courses/bcom': ['distance-bcom-kerala', 'bba-vs-bcom-for-career-growth', 'degree-after-plus-two-working', 'credit-transfer-degree-kerala'],
   '/courses/bba': ['bba-vs-bcom-for-career-growth', 'degree-after-plus-two-working', 'best-degree-options-for-working-professionals', 'credit-transfer-degree-kerala'],
-  '/courses/bca': ['online-bca-kerala', 'bsc-vs-bca-for-tech-jobs', 'kerala-online-mca-msc-it-programs', 'credit-transfer-degree-kerala'],
+  '/courses/bca': ['online-bca-kerala', 'distance-btech-kerala', 'bsc-vs-bca-for-tech-jobs', 'kerala-online-mca-msc-it-programs', 'credit-transfer-degree-kerala'],
   '/courses/ba': ['distance-ba-kerala-psc', 'distance-degree-valid-kerala-psc', 'government-jobs-distance-degree-kerala', 'credit-transfer-degree-kerala'],
   '/courses/bsc': ['bsc-vs-bca-for-tech-jobs', 'lateral-entry-degree', 'degree-with-supplementary-papers', 'credit-transfer-degree-kerala'],
   '/courses/mba': ['online-mba-kerala-working-professionals', 'online-vs-regular-mba', 'mcom-vs-mba', 'marjon-university-uk-mba-kerala'],

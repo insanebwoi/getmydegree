@@ -14,7 +14,7 @@ export default function NotFound() {
           <span className="badge">Error 404</span>
           <h1 className="mt-5 text-4xl sm:text-5xl">This page doesn't exist</h1>
           <p className="mt-4 max-w-md text-muted">
-            The link may be outdated. The nine programs and the counseling form are both still where
+            The link may be outdated. The ten programs and the counseling form are both still where
             you left them.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

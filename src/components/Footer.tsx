@@ -29,7 +29,7 @@ const heading = 'text-[0.6875rem] font-semibold tracking-[0.16em] text-white/45 
 const PAGE_LINKS = [
   { to: '/', label: 'Home', hint: 'How finishing your degree works', Icon: Home },
   { to: '/about', label: 'About', hint: 'Who we are, and the record', Icon: Info },
-  { to: '/courses', label: 'Courses', hint: 'Nine UG and PG programmes', Icon: GraduationCap },
+  { to: '/courses', label: 'Courses', hint: 'Ten UG and PG programmes, B.Tech included', Icon: GraduationCap },
   {
     to: '/universities',
     label: 'Universities',

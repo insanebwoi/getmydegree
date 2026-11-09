@@ -101,6 +101,16 @@ export function metaFor(path: string): PageMeta {
   if (path.startsWith('/courses/')) {
     const slug = path.replace('/courses/', '')
     const course = courses.find((c) => courseSlug(c) === slug)
+    if (course?.code === 'B.Tech') {
+      return {
+        title: 'Distance B.Tech in Kerala — Working Professional B.Tech',
+        description:
+          'Looking for a distance B.Tech in Kerala? The valid route is an AICTE-approved B.Tech for working professionals, with evening classes and diploma lateral entry.',
+        path,
+        keywords:
+          'distance btech kerala, btech distance education kerala, btech for working professionals kerala, part time btech kerala, btech lateral entry diploma holders, evening btech kerala, get my degree btech',
+      }
+    }
     if (course) {
       const level = course.level === 'UG' ? 'Undergraduate' : 'Postgraduate'
       return {

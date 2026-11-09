@@ -57,6 +57,8 @@ export type Post = PostMeta & {
 const slugOf = (path: string) => path.replace(/^.*\/(.+)\.md(\?.*)?$/, '$1')
 
 const defaultAltMap: Record<string, string> = {
+  'distance-btech-kerala':
+    'Get My Degree cover: is a distance B.Tech valid in Kerala — the AICTE-approved B.Tech for working professionals, with evening and weekend classes and lateral entry for diploma holders',
   'is-a-distance-degree-valid-for-government-jobs':
     'Checking the validity and recognition of UGC approved distance education degrees for government jobs, SSC and UPSC in India — GetMyDegree verification guide',
   'credit-transfer-explained':

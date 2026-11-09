@@ -181,7 +181,7 @@ export default function Universities() {
         align="left"
         badge="Programmes"
         title="What you can study"
-        intro="Nine UG and PG degrees. Which are open at a given university in a given intake is confirmed at counselling."
+        intro="Ten UG and PG degrees. Which are open at a given university in a given intake is confirmed at counselling."
       >
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {courses.map((course, i) => (

@@ -8,15 +8,16 @@ Get My Degree was established in 2021 and operates physical counselling centres 
 
 - [Home](https://getmydegreeedu.com/): Overview of the admission process, the four typical student situations (discontinued degree, working professional, long education gap, career upgrade), and programme fee ranges.
 - [About](https://getmydegreeedu.com/about): Who GetMyDegree is, its 2021 founding, its Thrissur and Malappuram centres, and how it assesses eligibility and transfers credit.
-- [Courses](https://getmydegreeedu.com/courses): All nine UG and PG programmes it places students into, filterable by level, with duration, eligibility and study format for each.
+- [Courses](https://getmydegreeedu.com/courses): All ten UG and PG programmes it places students into, filterable by level, with duration, eligibility and study format for each.
 - [Universities](https://getmydegreeedu.com/universities): The partner universities that actually award the degrees, in India and the United Kingdom, with how each institution's recognition is confirmed.
 - [Contact](https://getmydegreeedu.com/contact): How to book free academic counselling; phone, email and both physical centre addresses.
 - [Blog](https://getmydegreeedu.com/blog): Plain-language guides on credit transfer, degree recognition for government jobs, and how programme fees and instalments work.
 
 ## Degree programmes offered
 
-Nine programmes across commerce, management, technology, humanities, science and social work, each with continuous assessment (no final-exam hall) and monthly instalment fee plans:
+Ten programmes across engineering, commerce, management, technology, humanities, science and social work. The B.Tech is an AICTE-approved programme for working professionals with evening and weekend classes (engineering cannot be studied by distance in India); the other nine are distance or online, with continuous assessment and monthly instalment fee plans:
 
+- [B.Tech — Bachelor of Technology for working professionals](https://getmydegreeedu.com/courses/btech) (lateral entry to the second year for engineering diploma holders)
 - [B.Com — Bachelor of Commerce](https://getmydegreeedu.com/courses/bcom)
 - [BBA — Bachelor of Business Administration](https://getmydegreeedu.com/courses/bba)
 - [BCA — Bachelor of Computer Applications](https://getmydegreeedu.com/courses/bca)
@@ -43,7 +44,7 @@ Nine programmes across commerce, management, technology, humanities, science and
 
 ## Contact
 
-- Phone / WhatsApp: +91 92076 77828 (Mon–Sat, 9am–7pm IST)
+- Phone / WhatsApp: +91 94977 77222 (Mon–Sat, 9am–7pm IST)
 - Email: getmydegreeedu@gmail.com
 - Thrissur centre: Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur, Kerala, India
 - Malappuram centre: Near Tirur Bus Stand, Forza Mall, Malappuram, Kerala, India
