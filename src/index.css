@@ -1381,3 +1381,19 @@
     transform: none !important;
   }
 }
+
+/* Call picker: a short rise into place, skipped for reduced motion. */
+.call-menu {
+  animation: call-menu-in 160ms ease-out;
+}
+@keyframes call-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-menu {
+    animation: none;
+  }
+}

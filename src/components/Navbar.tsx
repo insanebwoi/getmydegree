@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, Phone } from 'lucide-react'
 import { nav, site } from '../data/site'
-import { reportPhoneConversion } from '../data/tracking'
+import { CallMenu } from './CallMenu'
 import { ApplyDialog } from './ApplyDialog'
 
 export function Navbar() {
@@ -81,14 +81,10 @@ export function Navbar() {
             </nav>
 
             <div className="flex items-center gap-2">
-              <a
-                href={`tel:${site.phoneHref}`}
-                onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
-                className="action hidden gap-2 rounded-full px-3 text-sm font-medium whitespace-nowrap text-ink md:inline-flex lg:hidden xl:inline-flex"
-              >
+              <CallMenu className="action hidden gap-2 rounded-full px-3 text-sm font-medium whitespace-nowrap text-ink md:inline-flex lg:hidden xl:inline-flex">
                 <Phone size={15} className="text-navy" aria-hidden="true" />
-                {site.phone}
-              </a>
+                {site.callLabel}
+              </CallMenu>
               <button
                 type="button"
                 onClick={() => setBooking(true)}

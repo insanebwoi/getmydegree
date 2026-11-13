@@ -130,9 +130,9 @@ Get My Degree structures all tuition fees transparently:
 Taking the first step toward finishing your degree is simple:
 
 1. **Online Consultation**: Visit **[Contact Page](/contact)** and submit your details. A senior academic advisor will review your previous marksheets and explain your eligible credits within 24 hours.
-2. **Call or WhatsApp Directly**: You can contact our central counseling desk at **+91 94977 77222** for immediate support.
+2. **Call or WhatsApp Directly**: You can contact our central counseling desk at **+91 90744 11277** for immediate support.
 3. **Visit Our Kerala Centres**:
-   - **Thrissur Centre**: Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur, Kerala. Phone: 94977 77222.
+   - **Thrissur Centre**: Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur, Kerala. Phone: 90744 11277.
    - **Malappuram Centre**: Near Tirur Bus Stand, Forza Mall, Malappuram, Kerala. Phone: 73566 44343.
 
 ---

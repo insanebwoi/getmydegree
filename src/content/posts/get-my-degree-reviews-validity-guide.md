@@ -97,7 +97,7 @@ At **Get My Degree**, every admission is processed strictly in accordance with s
 If you prefer face-to-face interaction, you are welcome to visit our counseling centres in Kerala where you can examine sample university documents, review regulatory circulars, and meet our academic counselors in person:
 
 - **Official Website**: [Get My Degree](/)
-- **Central Phone / WhatsApp Desk**: +91 94977 77222
+- **Central Phone / WhatsApp Desk**: +91 90744 11277
 - **Thrissur Centre**: Beach Road, Labba Building, 1st Floor, Vadanappilly, Thrissur.
 - **Malappuram Centre**: Near Tirur Bus Stand, Forza Mall, Malappuram.
 

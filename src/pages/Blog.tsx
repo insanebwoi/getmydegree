@@ -397,7 +397,7 @@ export default function Blog() {
                 </summary>
                 <div className="mt-3 text-sm leading-relaxed text-ink/80">
                   <p>
-                    Get My Degree maintains full-service academic counseling centres in Kerala at <strong>Thrissur</strong> (Vadanappilly Centre, Beach Road, Labba Building, 1st Floor; Ph: 94977 77222) and <strong>Malappuram</strong> (Near Tirur Bus Stand, Forza Mall; Ph: 73566 44343). We also provide end-to-end digital admissions for students across India.
+                    Get My Degree maintains full-service academic counseling centres in Kerala at <strong>Thrissur</strong> (Vadanappilly Centre, Beach Road, Labba Building, 1st Floor; Ph: 90744 11277) and <strong>Malappuram</strong> (Near Tirur Bus Stand, Forza Mall; Ph: 73566 44343). We also provide end-to-end digital admissions for students across India.
                   </p>
                 </div>
               </details>

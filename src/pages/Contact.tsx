@@ -18,6 +18,7 @@ import { counsellingRequest, href } from '../data/whatsapp'
 import { Reveal } from '../components/Reveal'
 import { GuideLinks } from '../components/GuideLinks'
 import { PageHero } from '../components/PageHero'
+import { CallMenu } from '../components/CallMenu'
 import { Photo } from '../components/Photo'
 import { centers, courses, site, stats } from '../data/site'
 import { FacebookIcon, InstagramIcon, ThreadsIcon } from '../components/SocialIcons'
@@ -90,7 +91,7 @@ export default function Contact() {
     {
       Icon: Phone,
       label: 'Call Direct',
-      value: site.phone,
+      value: site.callLabel,
       sub: 'Speak with an academic counselor',
       href: `tel:${site.phoneHref}`,
       highlight: true,
@@ -126,13 +127,10 @@ export default function Contact() {
         <a href="#counseling-form" className="btn btn-primary">
           Book free counseling
         </a>
-        <a
-          href={`tel:${site.phoneHref}`}
-          onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
-          className="btn btn-ghost"
-        >
-          Call {site.phone}
-        </a>
+        <CallMenu className="btn btn-ghost">
+          <Phone size={16} aria-hidden="true" />
+          {site.callLabel}
+        </CallMenu>
       </PageHero>
 
       {/* Quick Contact Cards */}
@@ -152,14 +150,13 @@ export default function Contact() {
                   <span className="text-xs font-semibold tracking-wider text-muted uppercase">
                     {q.label}
                   </span>
-                  {q.href ? (
+                  {q.href?.startsWith('tel:') ? (
+                    <CallMenu className="action mt-0.5 block truncate text-base font-medium text-navy hover:underline">
+                      {q.value}
+                    </CallMenu>
+                  ) : q.href ? (
                     <a
                       href={q.href}
-                      onClick={
-                        q.href.startsWith('tel:')
-                          ? () => reportPhoneConversion(q.href)
-                          : undefined
-                      }
                       className="action mt-0.5 block truncate text-base font-medium text-navy hover:underline"
                     >
                       {q.value}

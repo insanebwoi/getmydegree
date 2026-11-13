@@ -9,8 +9,11 @@ export const site = {
   description:
     'Get My Degree offers flexible, UGC recognized UG & PG degree programs and academic credit transfer for working professionals, dropouts and gap-year students across India.',
   email: 'getmydegreeedu@gmail.com',
-  phone: '+91 94977 77222',
-  phoneHref: '+919497777222',
+  phone: '+91 90744 11277',
+  phoneHref: '+919074411277',
+  /** Text on every call button. The numbers appear in the branch picker the
+   *  button opens, so the button itself does not carry one. */
+  callLabel: 'Call us now',
   officeHours: 'Mon–Sat · 9am to 7pm',
   established: 2021,
   social: {
@@ -33,17 +36,20 @@ export const nav = [
 export const centers = [
   {
     city: 'Thrissur',
+    /** What callers call the branch, used in the call picker. */
+    branch: 'Thrissur',
     address: 'Vadanappilly Centre, Beach Road, Labba Building, 1st Floor, Thrissur',
-    phone: '94977 77222',
-    phoneHref: '+919497777222',
+    phone: '90744 11277',
+    phoneHref: '+919074411277',
     locality: 'Vadanappally',
     postalCode: '680614',
     map: 'https://www.google.com/maps/search/?api=1&query=Labba+Building+Beach+Road+Vadanappally+Thrissur+680614',
   },
   {
     city: 'Malappuram',
+    branch: 'Tirur',
     address: 'Near Tirur Bus Stand, Forza Mall, Malappuram',
-    phone: '7356644343',
+    phone: '73566 44343',
     phoneHref: '+917356644343',
     locality: 'Tirur',
     postalCode: '676101',

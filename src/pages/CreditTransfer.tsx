@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Check, X } from 'lucide-react'
+import { Check, Phone, X } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { PageHero } from '../components/PageHero'
+import { CallMenu } from '../components/CallMenu'
 import { GuideLinks } from '../components/GuideLinks'
 import { Section } from '../components/Section'
 import { Reveal } from '../components/Reveal'
@@ -84,9 +85,10 @@ export default function CreditTransfer() {
         <Link to="/contact" className="btn btn-primary">
           Get a free credit assessment
         </Link>
-        <a href={`tel:${site.phoneHref}`} className="btn btn-ghost">
-          Call {site.phone}
-        </a>
+        <CallMenu className="btn btn-ghost">
+          <Phone size={16} aria-hidden="true" />
+          {site.callLabel}
+        </CallMenu>
       </PageHero>
 
       <Section

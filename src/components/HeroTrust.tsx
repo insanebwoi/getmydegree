@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { Headphones, Users } from 'lucide-react'
 import { site, universities } from '../data/site'
-import { reportPhoneConversion } from '../data/tracking'
+import { CallMenu } from './CallMenu'
 
 /**
  * Institutions, the graduate count and a way to talk to someone.
@@ -92,13 +92,9 @@ export function HeroTrust({ heading = false }: { heading?: boolean }) {
         </span>
         <span>
           <span className="block text-sm font-medium">Counseling, free</span>
-          <a
-            href={`tel:${site.phoneHref}`}
-            onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
-            className="action font-display text-[1.0625rem] font-semibold text-navy underline-offset-4 hover:underline"
-          >
-            {site.phone}
-          </a>
+          <CallMenu className="action font-display text-[1.0625rem] font-semibold text-navy underline-offset-4 hover:underline">
+            {site.callLabel}
+          </CallMenu>
           <span className="block text-xs text-muted">Mon–Sat · 9am to 7pm</span>
         </span>
       </div>

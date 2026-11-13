@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check } from 'lucide-react'
+import { ArrowRight, Check, Phone } from 'lucide-react'
 import { Seo } from '../components/Seo'
 import { pageMeta } from '../data/meta'
 import { aboutSchema } from '../data/schema'
@@ -9,7 +9,7 @@ import { PageHero } from '../components/PageHero'
 import { Photo } from '../components/Photo'
 import { Stats } from '../components/Stats'
 import { site, stats, trustPoints, validity } from '../data/site'
-import { reportPhoneConversion } from '../data/tracking'
+import { CallMenu } from '../components/CallMenu'
 
 export default function About() {
   return (
@@ -168,13 +168,10 @@ export default function About() {
               <Link to="/contact" className="btn btn-gold">
                 Book a free consultation
               </Link>
-              <a
-                href={`tel:${site.phoneHref}`}
-                onClick={() => reportPhoneConversion(`tel:${site.phoneHref}`)}
-                className="btn btn-ghost-dark"
-              >
-                {site.phone}
-              </a>
+              <CallMenu className="btn btn-ghost-dark">
+                <Phone size={16} aria-hidden="true" />
+                {site.callLabel}
+              </CallMenu>
             </div>
           </div>
         </Reveal>

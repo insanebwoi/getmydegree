@@ -74,7 +74,7 @@ export function reportPhoneConversion(url?: string): boolean {
   if (typeof window !== 'undefined' && typeof window.gtag_report_conversion === 'function') {
     return window.gtag_report_conversion(url)
   }
-  trackConversion('phone_call', { phone_number: '9497777222' })
+  trackConversion('phone_call', { phone_number: '9074411277' })
   return true
 }
 
@@ -90,6 +90,9 @@ export function trackedLinkFromEvent(target: EventTarget | null): ConversionEven
   /* A share link points at the reader's own contacts, not at us. Counting it
      would teach a Maximize Conversions campaign to buy shares. */
   if (link.dataset.share === 'true') return undefined
+  /* The call picker's trigger only opens the branch list; the call is the tap
+     on a branch inside it, which is counted on its own. */
+  if (link.dataset.callChooser === 'true') return undefined
   const href = link.getAttribute('href') ?? ''
   if (href.startsWith('tel:')) return 'phone_call'
   if (href.includes('wa.me/') || href.includes('api.whatsapp.com')) return 'whatsapp'
