@@ -21,6 +21,9 @@ const FORMAT_PRIORITY = ['.avif', '.webp', '.jpg', '.jpeg', '.png', '.svg']
  */
 const OG_FORMAT_PRIORITY = ['.jpg', '.jpeg', '.png', '.webp', '.avif', '.svg']
 
+/** A width variant's base name: `cover.w480` for `cover.w480.webp`. */
+const VARIANT = /\.w(\d+)$/
+
 function scanImages(
   dir: string,
   urlPrefix: string,
@@ -43,6 +46,9 @@ function scanImages(
     const rank = formatPriority.indexOf(ext)
     if (rank === -1) continue
     const name = basename(entry.name, ext)
+    // `cover.w480.webp` is a smaller copy of `cover`, not an image of its own;
+    // it reaches the page through `imageVariants` instead.
+    if (VARIANT.test(name)) continue
     const existing = out[name]
     if (existing && formatPriority.indexOf(extname(existing).toLowerCase()) <= rank) continue
     out[name] = `${urlPrefix}/${entry.name}`
@@ -147,6 +153,41 @@ function versioned(src: string) {
   }
 }
 
+/**
+ * Every image that has smaller copies beside it, keyed by the full-size file's
+ * URL path, listing each copy (and the full size itself) with its pixel width.
+ * `Photo` turns this into a srcset, so a blog card or a phone downloads the
+ * 480 or 960 wide copy instead of the 1600 wide original.
+ */
+type Variant = { src: string; width: number }
+
+function scanVariants(dir: string, urlPrefix: string, out: Record<string, Variant[]>) {
+  let entries: import('node:fs').Dirent[]
+  try {
+    entries = readdirSync(dir, { withFileTypes: true })
+  } catch {
+    return
+  }
+  for (const entry of entries) {
+    if (entry.isDirectory()) {
+      if (entry.name !== 'gallery') scanVariants(join(dir, entry.name), `${urlPrefix}/${entry.name}`, out)
+      continue
+    }
+    const match = entry.name.match(/^(.+)\.w(\d+)\.webp$/)
+    if (!match) continue
+    const full = `${urlPrefix}/${match[1]}.webp`
+    const list = (out[full] ??= [])
+    list.push({ src: versioned(`${urlPrefix}/${entry.name}`), width: Number(match[2]) })
+  }
+  // The full-size file joins its own list, at its real width.
+  for (const [full, list] of Object.entries(out)) {
+    if (list.some((v) => v.src.split('?')[0] === full)) continue
+    const size = imageSize(join(process.cwd(), 'public', full.replace(/^\//, '')))
+    if (size) list.push({ src: versioned(full), width: size.width })
+    list.sort((a, b) => a.width - b.width)
+  }
+}
+
 function imageManifest(): Plugin {
   const virtualId = 'virtual:image-manifest'
   const resolvedId = '\0' + virtualId
@@ -167,6 +208,11 @@ function imageManifest(): Plugin {
     }
     return manifest
   }
+  const buildVariants = () => {
+    const variants: Record<string, Variant[]> = {}
+    scanVariants(imagesDir, '/images', variants)
+    return variants
+  }
   return {
     name: 'image-manifest',
     resolveId: (id) => (id === virtualId ? resolvedId : undefined),
@@ -174,7 +220,8 @@ function imageManifest(): Plugin {
       id === resolvedId
         ? `export const imageManifest = ${JSON.stringify(build())};\n` +
           `export const ogImageManifest = ${JSON.stringify(buildOgManifest())};\n` +
-          `export const galleryImages = ${JSON.stringify(scanGallery(join(process.cwd(), 'public/images/gallery')))};`
+          `export const galleryImages = ${JSON.stringify(scanGallery(join(process.cwd(), 'public/images/gallery')))};\n` +
+          `export const imageVariants = ${JSON.stringify(buildVariants())};`
         : undefined,
     // Picking up a newly added photograph should not need a restart.
     configureServer(server) {
@@ -211,54 +258,58 @@ function markdownPosts(): Plugin {
 
       if (query === 'meta') {
         const words = content.split(/\s+/).filter(Boolean).length
-
-        // Extract FAQs from H2 sections for Google Search FAQ Rich Snippets
-        const lines = content.split('\n')
-        const faqs: { question: string; answer: string }[] = []
-        let currentHeading = ''
-        let currentAnswer: string[] = []
-
-        for (const line of lines) {
-          const trimmed = line.trim()
-          if (trimmed.startsWith('## ')) {
-            if (currentHeading && currentAnswer.length > 0) {
-              const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
-              if (ansText.length > 25) {
-                faqs.push({ question: currentHeading, answer: ansText })
-              }
-            }
-            let headingText = trimmed.replace(/^##\s+/, '').trim()
-            if (!headingText.endsWith('?') && !headingText.match(/^(what|how|why|is|can|does|where|when|which)/i)) {
-              headingText = `${headingText} — ${data.title ?? ''}`.trim()
-            } else if (!headingText.endsWith('?')) {
-              headingText = `${headingText}?`
-            }
-            currentHeading = headingText
-            currentAnswer = []
-          } else if (currentHeading && trimmed && !trimmed.startsWith('#')) {
-            if (currentAnswer.length < 3) {
-              currentAnswer.push(trimmed)
-            }
-          }
-        }
-        if (currentHeading && currentAnswer.length > 0) {
-          const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
-          if (ansText.length > 25) {
-            faqs.push({ question: currentHeading, answer: ansText })
-          }
-        }
-
+        // FAQs travel with the article body, not here: this module is in the
+        // bundle every page loads, and FAQ text for every article would make
+        // it grow with each post published.
         const meta = {
           ...data,
           readingMinutes: Math.max(1, Math.round(words / 200)),
           wordCount: words,
-          faqs: faqs.slice(0, 6),
         }
         return { code: `export const meta = ${JSON.stringify(meta)};`, map: null }
       }
 
+      // Extract FAQs from H2 sections for Google Search FAQ Rich Snippets
+      const lines = content.split('\n')
+      const faqs: { question: string; answer: string }[] = []
+      let currentHeading = ''
+      let currentAnswer: string[] = []
+
+      for (const line of lines) {
+        const trimmed = line.trim()
+        if (trimmed.startsWith('## ')) {
+          if (currentHeading && currentAnswer.length > 0) {
+            const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
+            if (ansText.length > 25) {
+              faqs.push({ question: currentHeading, answer: ansText })
+            }
+          }
+          let headingText = trimmed.replace(/^##\s+/, '').trim()
+          if (!headingText.endsWith('?') && !headingText.match(/^(what|how|why|is|can|does|where|when|which)/i)) {
+            headingText = `${headingText} — ${data.title ?? ''}`.trim()
+          } else if (!headingText.endsWith('?')) {
+            headingText = `${headingText}?`
+          }
+          currentHeading = headingText
+          currentAnswer = []
+        } else if (currentHeading && trimmed && !trimmed.startsWith('#')) {
+          if (currentAnswer.length < 3) {
+            currentAnswer.push(trimmed)
+          }
+        }
+      }
+      if (currentHeading && currentAnswer.length > 0) {
+        const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
+        if (ansText.length > 25) {
+          faqs.push({ question: currentHeading, answer: ansText })
+        }
+      }
+
       const html = await marked.parse(content, { async: true, gfm: true })
-      return { code: `export const html = ${JSON.stringify(html)};`, map: null }
+      return {
+        code: `export const html = ${JSON.stringify(html)};\nexport const faqs = ${JSON.stringify(faqs.slice(0, 6))};`,
+        map: null,
+      }
     },
   }
 }

@@ -30,6 +30,7 @@ function Card({ post, delay }: { post: Post; delay: number }) {
               src={post.cover}
               alt={post.coverAlt ?? post.title}
               title={post.coverAlt ?? post.title}
+              sizes="(min-width: 1440px) 440px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
               ratio="16/9"
               rounded="none"
               itemProp="contentUrl"
@@ -236,6 +237,7 @@ export default function Blog() {
                     src={lead.cover}
                     alt={lead.coverAlt ?? lead.title}
                     title={lead.coverAlt ?? lead.title}
+                    sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 92vw"
                     ratio="16/9"
                     rounded="none"
                     priority

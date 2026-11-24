@@ -1,7 +1,7 @@
 import { centers, courses, site, universities } from './site'
 import { imageRights } from './imageRights'
 import { ogImageFor } from './images'
-import { allPosts, postsByDate } from './posts'
+import { allPosts, getFaqs, postsByDate } from './posts'
 import { courseFaqs, courseSlug, eligibilityFor, studyFormatFor } from './courses'
 
 /**
@@ -486,12 +486,13 @@ export function postSchema(slug: string): object | undefined {
   ]
 
   // Add FAQPage structured data if the post has FAQs
-  if (post.faqs && post.faqs.length >= 2) {
+  const faqs = getFaqs(post.slug)
+  if (faqs.length >= 2) {
     nodes.push({
       '@type': 'FAQPage',
       '@id': `${url}#faq`,
       isPartOf: { '@id': url },
-      mainEntity: post.faqs.map((f) => ({
+      mainEntity: faqs.map((f) => ({
         '@type': 'Question',
         name: f.question,
         acceptedAnswer: {

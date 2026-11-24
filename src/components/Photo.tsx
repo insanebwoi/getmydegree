@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { images, type ImageName } from '../data/images'
+import { images, imageVariants, type ImageName } from '../data/images'
 
 type Props = {
   /** A registry slot, or pass `src`/`alt` for content-owned images. */
@@ -16,6 +16,12 @@ type Props = {
   rounded?: 'card' | 'panel' | 'none'
   /** Opt out of the fade, for images that are already part of a moving set. */
   animate?: boolean
+  /**
+   * How wide the image is drawn, for choosing among its smaller copies, e.g.
+   * "(min-width: 1024px) 30vw, 92vw". Only matters for images that have
+   * copies (the blog covers); without it the browser assumes full width.
+   */
+  sizes?: string
 }
 
 /**
@@ -39,6 +45,7 @@ export function Photo({
   priority = false,
   rounded = 'card',
   animate = true,
+  sizes,
 }: Props) {
   const registered = name ? images[name] : undefined
   let explicitWidth = registered?.width
@@ -62,6 +69,11 @@ export function Photo({
     width: explicitWidth ?? 1600,
     height: explicitHeight ?? 900,
   }
+
+  // Smaller copies of this file, when it has them: the browser then picks the
+  // smallest one that is still sharp at the size it is drawn.
+  const variants = imageVariants[image.src.split('?')[0]]
+  const srcSet = variants && variants.length > 1 ? variants.map((v) => `${v.src} ${v.width}w`).join(', ') : undefined
 
   const ref = useRef<HTMLImageElement>(null)
   const [loaded, setLoaded] = useState(false)
@@ -89,6 +101,8 @@ export function Photo({
     <img
       ref={ref}
       src={image.src}
+      srcSet={srcSet}
+      sizes={srcSet ? (sizes ?? '100vw') : undefined}
       alt={image.alt}
       title={image.title}
       width={image.width}

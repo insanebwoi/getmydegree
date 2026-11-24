@@ -17,9 +17,10 @@ const metaModules = import.meta.glob('../content/posts/*.md', {
   import: 'meta',
 }) as Record<string, PostMeta>
 
-const bodyModules = import.meta.glob('../content/posts/*.md', {
-  import: 'html',
-}) as Record<string, () => Promise<string>>
+/** An article body: its HTML, and the FAQs drawn from its headings. */
+export type Body = { html: string; faqs: FAQItem[] }
+
+const bodyModules = import.meta.glob('../content/posts/*.md') as Record<string, () => Promise<Body>>
 
 export type FAQItem = {
   question: string
@@ -42,7 +43,6 @@ type PostMeta = {
   readingMinutes: number
   keywords?: string
   wordCount?: number
-  faqs?: FAQItem[]
 }
 
 export type Post = PostMeta & {
@@ -139,26 +139,35 @@ export function relatedPosts(slug: string, count = 3, now: number = Date.now()) 
   return [...sameTopic, ...rest].slice(0, count)
 }
 
-const bodyCache = new Map<string, string>()
+const bodyCache = new Map<string, Body>()
 
 /** Server-side seeding, called once by `postBodies.ssr.ts` during prerender. */
-export function seedBodies(bodies: Record<string, string>) {
-  for (const [slug, html] of Object.entries(bodies)) bodyCache.set(slug, html)
+export function seedBodies(bodies: Record<string, Body>) {
+  for (const [slug, body] of Object.entries(bodies)) bodyCache.set(slug, body)
 }
 
 /** Synchronous body   populated during prerender, and after `loadBody` runs. */
 export function getBody(slug: string): string | undefined {
-  return bodyCache.get(slug)
+  return bodyCache.get(slug)?.html
+}
+
+/**
+ * The article's FAQs, once its body has loaded. They ship with the body rather
+ * than the listing metadata, so no page downloads FAQ text for articles it is
+ * not showing.
+ */
+export function getFaqs(slug: string): FAQItem[] {
+  return bodyCache.get(slug)?.faqs ?? []
 }
 
 /** Fetches one article's chunk and caches it. */
 export async function loadBody(slug: string): Promise<string | undefined> {
   const cached = bodyCache.get(slug)
-  if (cached) return cached
+  if (cached) return cached.html
   const load = bodyModules[`../content/posts/${slug}.md`]
   if (!load) return undefined
-  const html = await load()
-  bodyCache.set(slug, html)
+  const { html, faqs } = await load()
+  bodyCache.set(slug, { html, faqs })
   return html
 }
 

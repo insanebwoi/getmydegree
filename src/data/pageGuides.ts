@@ -7,7 +7,7 @@ import { posts } from './posts'
  * everywhere. A slug not yet released is skipped until the daily rebuild.
  */
 const pageGuides: Record<string, string[]> = {
-  '/courses/btech': ['distance-btech-kerala', 'lateral-entry-degree', 'bsc-vs-bca-for-tech-jobs', 'online-bca-kerala'],
+  '/courses/btech': ['btech-working-professionals-kerala', 'distance-btech-kerala', 'kerala-btech-lateral-entry-let', 'aicte-working-professional-btech-rules', 'best-btech-branch-2026', 'btech-working-professionals-faq'],
   '/courses/bcom': ['distance-bcom-kerala', 'bba-vs-bcom-for-career-growth', 'degree-after-plus-two-working', 'credit-transfer-degree-kerala'],
   '/courses/bba': ['bba-vs-bcom-for-career-growth', 'degree-after-plus-two-working', 'best-degree-options-for-working-professionals', 'credit-transfer-degree-kerala'],
   '/courses/bca': ['online-bca-kerala', 'distance-btech-kerala', 'bsc-vs-bca-for-tech-jobs', 'kerala-online-mca-msc-it-programs', 'credit-transfer-degree-kerala'],

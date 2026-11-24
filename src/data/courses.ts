@@ -294,6 +294,126 @@ export const guideCourses: Record<string, { codes: string[]; label: string }> = 
     codes: ['B.Com', 'BBA', 'BCA', 'MBA'],
     label: 'Programmes Gulf applicants most often ask about',
   },
+  'btech-working-professionals-kerala': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'kerala-btech-lateral-entry-let': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'aicte-working-professional-btech-rules': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'online-btech-valid-india': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'supreme-court-distance-engineering-ruling': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'diploma-vs-btech-salary-promotion': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'diploma-holder-btech-while-working': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'part-time-btech-kerala': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-ai-data-science-scope': {
+    codes: ['B.Tech', 'BCA', 'MCA', 'B.Sc'],
+    label: 'Engineering, and the IT routes you can study at a distance',
+  },
+  'best-btech-branch-2026': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-civil-engineering-kerala-scope': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-mechanical-ev-scope': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-electrical-solar-ev-jobs': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'vlsi-semiconductor-careers-btech': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'kerala-psc-assistant-engineer-btech': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'amie-vs-btech': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'saudi-council-of-engineers-btech': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-gulf-engineer-jobs': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'nba-accreditation-washington-accord': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'fake-btech-certificate-agents': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-dropout-complete-kerala': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-gate-psu-jobs': {
+    codes: ['B.Tech', 'MCA', 'MBA'],
+    label: 'The B.Tech, and where engineers go next',
+  },
+  'mtech-working-professionals-kerala': {
+    codes: ['B.Tech', 'MCA', 'MBA'],
+    label: 'The B.Tech, and postgraduate routes alongside it',
+  },
+  'btech-mba-engineers': {
+    codes: ['MBA', 'B.Tech', 'MCA'],
+    label: 'The MBA, and the engineering degree before it',
+  },
+  'engineering-skills-2026-employers': {
+    codes: ['B.Tech', 'MCA', 'BCA', 'MBA'],
+    label: 'Degrees that carry these skills',
+  },
+  'women-engineers-career-break-kerala': {
+    codes: ['B.Tech', 'BCA', 'MCA', 'MBA'],
+    label: 'Programmes that fit a return to work',
+  },
+  'btech-fees-kerala-working-professionals': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-vs-bca-mca-it-jobs': {
+    codes: ['B.Tech', 'BCA', 'MCA'],
+    label: 'The two routes compared here',
+  },
+  'kerala-engineering-jobs-2026': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
+  'btech-working-professionals-faq': {
+    codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
+    label: 'The valid B.Tech route, and degrees you can take by distance',
+  },
   'distance-btech-kerala': {
     codes: ['B.Tech', 'BCA', 'B.Sc', 'MCA'],
     label: 'The valid engineering route, and the alternatives by distance',

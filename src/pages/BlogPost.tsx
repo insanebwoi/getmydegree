@@ -11,7 +11,7 @@ import { Photo } from '../components/Photo'
 import { BlogSearch } from '../components/BlogSearch'
 import { ShareArticle } from '../components/ShareArticle'
 import { ImageRightsMeta } from '../components/ImageRightsMeta'
-import { formatDate, getBody, getPost, loadBody, relatedPosts, withLiveLinks } from '../data/posts'
+import { formatDate, getBody, getFaqs, getPost, loadBody, relatedPosts, withLiveLinks } from '../data/posts'
 import { useIsPublished } from '../data/usePublishedPosts'
 import NotFound from './NotFound'
 
@@ -24,6 +24,8 @@ export default function BlogPost() {
   // is already populated on first render; the effect only covers client-side
   // navigation from the listing.
   const [body, setBody] = useState(() => (slug ? getBody(slug) : undefined))
+  // Loaded with the body, so they appear together.
+  const faqs = body && slug ? getFaqs(slug) : []
 
   useEffect(() => {
     if (!slug || body) return
@@ -172,6 +174,7 @@ export default function BlogPost() {
                     src={post.cover}
                     alt={post.coverAlt ?? post.title}
                     title={post.coverAlt ?? post.title}
+                    sizes="(min-width: 1024px) 720px, 92vw"
                     ratio="16/9"
                     rounded="card"
                     priority
@@ -222,7 +225,7 @@ export default function BlogPost() {
                 )}
 
                 {/* Visible FAQ Accordion Section for Google Rich FAQ Snippets */}
-                {post.faqs && post.faqs.length > 0 && (
+                {faqs.length > 0 && (
                   <section
                     className="mt-12 border-t border-line pt-10"
                     aria-label="Frequently Asked Questions"
@@ -238,7 +241,7 @@ export default function BlogPost() {
                       guidelines.
                     </p>
                     <div className="mt-6 divide-y divide-line rounded-2xl border border-line bg-wash/40">
-                      {post.faqs.map((faq, i) => (
+                      {faqs.map((faq, i) => (
                         <details
                           key={i}
                           className="group p-5 first:rounded-t-2xl last:rounded-b-2xl [&_summary::-webkit-details-marker]:hidden"
@@ -331,7 +334,7 @@ export default function BlogPost() {
                         className="flex gap-3 rounded-2xl p-2 transition-colors hover:bg-wash"
                       >
                         <span className="w-16 shrink-0">
-                          <Photo src={p.cover} alt={p.coverAlt ?? p.title} ratio="1/1" />
+                          <Photo src={p.cover} alt={p.coverAlt ?? p.title} ratio="1/1" sizes="64px" />
                         </span>
                         <span className="flex min-w-0 flex-1 flex-col justify-center">
                           <span className="text-xs font-medium text-gold-700">{p.category}</span>

@@ -6,7 +6,9 @@
  * to whichever file exists, preferring real formats over the .svg placeholder,
  * so no code change is needed. Cropping is handled by the layout.
  */
-import { imageManifest, ogImageManifest } from 'virtual:image-manifest'
+import { imageManifest, imageVariants, ogImageManifest } from 'virtual:image-manifest'
+
+export { imageVariants }
 
 export type ImageSlot = {
   /** Placeholder path; overridden by any real file of the same base name. */
