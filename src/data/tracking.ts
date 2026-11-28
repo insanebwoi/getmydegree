@@ -47,6 +47,15 @@ declare global {
 let lastCall = 0
 let lastEvent = ''
 
+/**
+ * A plain analytics event that is not a conversion, such as a prompt being
+ * shown or closed. Visible in Google Ads and Tag Assistant as a named event,
+ * so the call prompt's reach can be compared with the calls it brings.
+ */
+export function trackEvent(name: string, params: Record<string, unknown> = {}) {
+  window.gtag?.('event', name, params)
+}
+
 /** Report one conversion moment. Safe before gtag.js has loaded, and safe
  *  where an ad blocker removed it entirely. */
 export function trackConversion(event: ConversionEvent, params: Record<string, unknown> = {}) {

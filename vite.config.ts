@@ -247,6 +247,18 @@ function imageManifest(): Plugin {
  * import of the frontmatter would pull every article body into the main chunk,
  * because Rollup does not split a module that is also imported statically.
  */
+/**
+ * Markdown to plain text for FAQ answers. A link keeps its words and loses its
+ * address: stripping only the brackets left "degree(/blog/lateral-entry-degree)"
+ * in the visible FAQ and in the FAQPage markup, and that unbreakable string was
+ * wide enough to push the article sideways on a phone.
+ */
+function plainText(markdown: string) {
+  return markdown
+    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/[*_#`[\]>]/g, '')
+}
+
 function markdownPosts(): Plugin {
   return {
     name: 'markdown-posts',
@@ -279,7 +291,7 @@ function markdownPosts(): Plugin {
         const trimmed = line.trim()
         if (trimmed.startsWith('## ')) {
           if (currentHeading && currentAnswer.length > 0) {
-            const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
+            const ansText = plainText(currentAnswer.join(' ')).replace(/\s+/g, ' ').trim()
             if (ansText.length > 25) {
               faqs.push({ question: currentHeading, answer: ansText })
             }
@@ -299,7 +311,7 @@ function markdownPosts(): Plugin {
         }
       }
       if (currentHeading && currentAnswer.length > 0) {
-        const ansText = currentAnswer.join(' ').replace(/[*_#`[\]>]/g, '').replace(/\s+/g, ' ').trim()
+        const ansText = plainText(currentAnswer.join(' ')).replace(/\s+/g, ' ').trim()
         if (ansText.length > 25) {
           faqs.push({ question: currentHeading, answer: ansText })
         }

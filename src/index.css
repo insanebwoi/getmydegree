@@ -420,7 +420,12 @@
     flex: none;
   }
 
-  /* Compiled markdown from src/content/posts. */
+  /* Compiled markdown from src/content/posts. Long unbroken strings, such as
+     a web address written as text, wrap rather than widening the page. */
+  .prose {
+    overflow-wrap: break-word;
+  }
+
   .prose > * + * {
     margin-top: 1.25rem;
   }
@@ -1096,11 +1101,14 @@
     opacity: 0.35;
     cursor: default;
   }
+  /* Inside the edge on phones too: the gallery runs edge to edge there, so a
+     negative offset put half of each arrow off screen and the right one
+     made the whole home page scroll sideways. */
   .gallery-nav-prev {
-    left: -0.5rem;
+    left: 0.25rem;
   }
   .gallery-nav-next {
-    right: -0.5rem;
+    right: 0.25rem;
   }
   @media (min-width: 640px) {
     .gallery-nav-prev {
@@ -1394,6 +1402,22 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .call-menu {
+    animation: none;
+  }
+}
+
+/* Call prompt on articles: rises into place once the reader has stayed. */
+.call-prompt {
+  animation: call-prompt-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes call-prompt-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-prompt {
     animation: none;
   }
 }

@@ -10,6 +10,7 @@ import { Reveal } from '../components/Reveal'
 import { Photo } from '../components/Photo'
 import { BlogSearch } from '../components/BlogSearch'
 import { ShareArticle } from '../components/ShareArticle'
+import { CallPrompt } from '../components/CallPrompt'
 import { ImageRightsMeta } from '../components/ImageRightsMeta'
 import { formatDate, getBody, getFaqs, getPost, loadBody, relatedPosts, withLiveLinks } from '../data/posts'
 import { useIsPublished } from '../data/usePublishedPosts'
@@ -56,6 +57,8 @@ export default function BlogPost() {
   return (
     <>
       <Seo {...metaFor(`/blog/${post.slug}`)} schema={postSchema(post.slug)} />
+      {/* Keyed by article, so opening another one restarts the reading timer. */}
+      <CallPrompt key={post.slug} topic={post.title} slug={post.slug} />
 
       <nav aria-label="Breadcrumb" className="shell pt-6">
         <ol
@@ -160,7 +163,11 @@ export default function BlogPost() {
               on the site, rather than directly on the page wash. Its children
               share one measure so the text and CTA align.
             */}
-            <div className="lg:col-span-8">
+            {/* min-w-0: a grid column otherwise refuses to be narrower than its
+                widest content, so a three-column table in an article widened
+                the whole page past the screen on a phone. The table scrolls
+                inside its own box instead. */}
+            <div className="min-w-0 lg:col-span-8">
               <div className="panel card-p sm:p-8 lg:p-10 [&>*]:mx-auto [&>*]:max-w-[68ch]">
                 {/* The cover opens the article itself, on the same surface and
                     the same measure as the text, rather than floating above it
@@ -253,7 +260,7 @@ export default function BlogPost() {
                               <ChevronDown size={14} aria-hidden="true" />
                             </span>
                           </summary>
-                          <div className="mt-3 text-sm leading-relaxed text-ink/80">
+                          <div className="mt-3 text-sm leading-relaxed break-words text-ink/80">
                             <p>{faq.answer}</p>
                           </div>
                         </details>
@@ -323,7 +330,7 @@ export default function BlogPost() {
             </div>
 
             {/* Related reading, in its own panel alongside the article */}
-            <aside className="lg:col-span-4">
+            <aside className="min-w-0 lg:col-span-4">
               <div className="panel p-4 sm:p-5 lg:sticky lg:top-28">
                 <h2 className="font-display text-lg font-medium">More from the blog</h2>
                 <ul className="mt-4 grid gap-1.5">
